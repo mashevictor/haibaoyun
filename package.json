@@ -1,0 +1,15 @@
+{
+  "name": "powerverse-chain-website",
+  "version": "1.0.0",
+  "description": "PowerVerse Chain Website Automation Testing",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:performance": "playwright test tests/performance.spec.js --config=playwright.config.performance.js",
+    "compress": "python compress_media.py"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}

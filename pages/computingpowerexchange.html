@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="scenarios.computingexchange.title">算力交易 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .scenario-content {
+            padding: 5rem 0;
+        }
+
+        .scenario-card-large {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 102, 255, 0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 24px;
+            padding: 0;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .scenario-image {
+            width: 100%;
+            min-height: 300px;
+            max-height: 600px;
+            background: var(--bg-darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        .scenario-image img {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            max-height: 600px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 1200px) {
+            .scenario-image {
+                max-height: 550px;
+                padding: 1.5rem;
+            }
+            .scenario-image img {
+                max-height: 500px;
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .scenario-image {
+                max-height: 400px;
+                padding: 1rem;
+            }
+            .scenario-image img {
+                max-height: 350px;
+                max-width: 100%;
+            }
+        }
+
+        .scenario-content-section {
+            padding: 3.5rem;
+        }
+
+        .scenario-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 2rem 0;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-stat {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            border-right: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-stat:last-child {
+            border-right: none;
+        }
+
+        .scenario-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .scenario-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .scenario-details h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 2rem 0 1.5rem 0;
+            font-weight: 600;
+        }
+
+        .scenario-details ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .scenario-details li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .scenario-details li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .scenario-stats {
+                grid-template-columns: 1fr;
+            }
+            .scenario-stat {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="scenarios.computingexchange.title">算力交易</h1>
+            <p class="section-description" data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
+            <div style="margin-top: 2rem;">
+                <a href="market.html" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <span>💱</span>
+                    <span data-i18n="scenarios.computingexchange.goToTrade">前往交易市场</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="scenario-content">
+            <div class="scenario-card-large">
+                <div class="scenario-image">
+                    <img src="../images/svg/算力交易.svg" alt="算力交易" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(0,102,255,0.15) 100%); align-items:center; justify-content:center; font-size:5rem; color:var(--primary-color); opacity:0.6;">💱</div>
+                </div>
+
+                <div class="scenario-content-section">
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">1000+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.providers">算力提供方</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">10K+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.transactions">交易订单</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">99.9%</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.successRate">交易成功率</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.computingexchange.workflow.title">完整链路闭环</h4>
+                        <ul>
+                            <li data-i18n="scenarios.computingexchange.workflow.step1">算力提供方注册：GPU/CPU资源提供方在PowerVerse Market注册，发布算力资源信息</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step2">资源上架：设置算力规格、价格、可用时间等参数，资源信息上链存证</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step3">需求方发布：算力需求方发布需求订单，指定算力类型、数量、时长、预算</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step4">智能匹配：PowerVerse Market智能合约自动匹配供需双方，或提供方主动接单</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step5">订单确认：双方确认订单，需求方支付PowerVerse代币（PEC）作为保证金</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step6">资源分配：PowerVerse Infra根据订单自动分配算力资源，启动虚拟机</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step7">任务执行：需求方提交计算任务，系统自动执行并返回结果</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step8">实时监控：双方可实时查看算力使用情况、任务进度、资源状态</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step9">自动结算：任务完成后，智能合约根据实际使用时长自动结算，释放保证金</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step10">评价反馈：交易双方互评，评价计入信誉体系，影响后续交易优先级</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step11">资源回收：算力资源自动释放回资源池，供其他订单使用</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.computingexchange.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item1">去中心化交易：无需第三方中介，买卖双方直接交易，降低交易成本</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item2">智能合约保障：交易全程由智能合约执行，自动结算，安全可靠</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item3">透明定价：市场价格公开透明，供需双方自由议价</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item4">灵活交易：支持按小时、按天、按月等多种计费方式</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item5">信誉体系：基于区块链的信誉评价系统，保障交易安全</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.computingexchange.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item1">AI训练算力租赁：为AI公司提供GPU算力，支持模型训练</li>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item2">渲染算力交易：为影视公司提供渲染算力，加速项目制作</li>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item3">科学计算资源：为科研机构提供高性能计算资源</li>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item4">闲置资源变现：个人或企业闲置GPU/CPU资源可上架交易，获得收益</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.computingexchange.links.title">相关链接</h4>
+                        <ul>
+                            <li>
+                                <a href="market.html" data-i18n="scenarios.computingexchange.links.market" style="color: var(--primary-color); text-decoration: none;">前往PowerVerse Market交易市场 →</a>
+                            </li>
+                            <li>
+                                <a href="infra.html" data-i18n="scenarios.computingexchange.links.infra" style="color: var(--primary-color); text-decoration: none;">了解PowerVerse Infra基础设施 →</a>
+                            </li>
+                            <li>
+                                <a href="token.html" data-i18n="scenarios.computingexchange.links.token" style="color: var(--primary-color); text-decoration: none;">查看PowerVerse代币（PEC）信息 →</a>
+                            </li>
+                            <li>
+                                <a href="workflow.html" data-i18n="scenarios.computingexchange.links.workflow" style="color: var(--primary-color); text-decoration: none;">查看全链路场景流程图 →</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="home.title">PowerVerse Chain - 去中心化计算网络</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="#home">
+                        <div class="logo-icon">P</div>
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="pages/chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="pages/infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                            <a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="pages/scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="pages/cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="pages/computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="pages/rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="pages/workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="pages/developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="pages/token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="pages/hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="pages/research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页Hero区域 -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <div class="particles"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line" data-i18n="home.title">PowerVerse Chain</span>
+                    <span class="title-line highlight" data-i18n="home.subtitle">去中心化计算网络</span>
+                </h1>
+                <p class="hero-description" data-i18n="home.description">
+                    构建下一代分布式计算基础设施，让全球计算资源高效共享，赋能Web3生态发展
+                </p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary" data-i18n="home.ios" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span data-i18n="home.ios">iOS</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L12 7H17L13 10L15 15L10 12L5 15L7 10L3 7H8L10 2Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-secondary" data-i18n="home.android" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span data-i18n="home.android">Android</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L12 7H17L13 10L15 15L10 12L5 15L7 10L3 7H8L10 2Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- 技术架构 -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-main" data-i18n="architecture.title">技术框架</span>
+                    <span class="title-sub" data-i18n="architecture.subtitle">Architecture</span>
+                </h2>
+            </div>
+            <div class="architecture-content">
+                <!-- 应用层 -->
+                <div class="architecture-diagram">
+                    <div class="diagram-node center-node">
+                        <div class="node-icon">📱</div>
+                        <div class="node-label" data-i18n="architecture.dapp">DApp应用</div>
+                    </div>
+                    <div class="diagram-node left-node">
+                        <div class="node-icon">🔌</div>
+                        <div class="node-label" data-i18n="architecture.api">API接口</div>
+                    </div>
+                    <div class="diagram-node right-node">
+                        <div class="node-icon">⚡</div>
+                        <div class="node-label" data-i18n="architecture.rpc">RPC服务</div>
+                    </div>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                </div>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h3 class="layer-title" data-i18n="architecture.appLayer">应用层</h3>
+                        <ul class="layer-list">
+                            <li data-i18n="architecture.dapp">DApp应用</li>
+                            <li data-i18n="architecture.api">API接口</li>
+                            <li data-i18n="architecture.rpc">RPC服务</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="architecture-content">
+                <!-- 协议层 -->
+                <div class="architecture-diagram">
+                    <div class="diagram-node center-node">
+                        <div class="node-icon">🤝</div>
+                        <div class="node-label" data-i18n="architecture.consensus">共识机制</div>
+                    </div>
+                    <div class="diagram-node left-node">
+                        <div class="node-icon">📜</div>
+                        <div class="node-label" data-i18n="architecture.smartContract">智能合约</div>
+                    </div>
+                    <div class="diagram-node right-node">
+                        <div class="node-icon">🔗</div>
+                        <div class="node-label" data-i18n="architecture.crossChain">跨链协议</div>
+                    </div>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                </div>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h3 class="layer-title" data-i18n="architecture.protocolLayer">协议层</h3>
+                        <ul class="layer-list">
+                            <li data-i18n="architecture.consensus">共识机制</li>
+                            <li data-i18n="architecture.smartContract">智能合约</li>
+                            <li data-i18n="architecture.crossChain">跨链协议</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="architecture-content">
+                <!-- 网络层 -->
+                <div class="architecture-diagram">
+                    <div class="diagram-node center-node">
+                        <div class="node-icon">🌐</div>
+                        <div class="node-label" data-i18n="architecture.p2p">P2P网络</div>
+                    </div>
+                    <div class="diagram-node left-node">
+                        <div class="node-icon">⚙️</div>
+                        <div class="node-label" data-i18n="architecture.nodeManagement">节点管理</div>
+                    </div>
+                    <div class="diagram-node right-node">
+                        <div class="node-icon">💾</div>
+                        <div class="node-label" data-i18n="architecture.dataStorage">数据存储</div>
+                    </div>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                </div>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h3 class="layer-title" data-i18n="architecture.networkLayer">网络层</h3>
+                        <ul class="layer-list">
+                            <li data-i18n="architecture.p2p">P2P网络</li>
+                            <li data-i18n="architecture.nodeManagement">节点管理</li>
+                            <li data-i18n="architecture.dataStorage">数据存储</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品介绍 -->
+    <section id="product" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="products.title">产品生态</h2>
+                <p class="section-description" data-i18n="products.description">构建完整的去中心化计算生态系统</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">🔗</div>
+                    <h3 class="product-name" data-i18n="products.chain.name">PowerVerse Chain</h3>
+                    <p class="product-description" data-i18n="products.chain.description">高性能区块链底层网络，支持大规模分布式计算任务处理</p>
+                    <a href="pages/chain.html" class="product-link" data-i18n="products.chain.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🏗️</div>
+                    <h3 class="product-name" data-i18n="products.infra.name">PowerVerse Infra</h3>
+                    <p class="product-description" data-i18n="products.infra.description">基础设施服务，提供稳定可靠的计算资源调度与管理</p>
+                    <a href="pages/infra.html" class="product-link" data-i18n="products.infra.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🛒</div>
+                    <h3 class="product-name" data-i18n="products.market.name">PowerVerse Market</h3>
+                    <p class="product-description" data-i18n="products.market.description">去中心化市场，连接计算资源供需双方，实现价值流转</p>
+                    <a href="pages/market.html" class="product-link" data-i18n="products.market.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🗳️</div>
+                    <h3 class="product-name" data-i18n="products.dao.name">PowerVerse DAO</h3>
+                    <p class="product-description" data-i18n="products.dao.description">去中心化自治组织，社区治理与生态发展决策平台</p>
+                    <a href="pages/dao.html" class="product-link" data-i18n="products.dao.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">☁️</div>
+                    <h3 class="product-name" data-i18n="products.decloud.name">DeCloud</h3>
+                    <p class="product-description" data-i18n="products.decloud.description">去中心化云服务，提供安全、隐私、高效的计算云解决方案</p>
+                    <a href="pages/decloud.html" class="product-link" data-i18n="products.decloud.learnMore">了解更多 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用场景 -->
+    <section id="scenario" class="scenarios">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="scenarios.title">应用场景</h2>
+                <p class="section-description" data-i18n="scenarios.description">PowerVerse Chain赋能多元化的应用场景</p>
+            </div>
+            <div class="scenarios-grid">
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/cloudgaming.html'">
+                    <div class="scenario-number">01</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.cloudgaming">云游戏场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.cloudgaming.description">基于PowerVerse Chain的去中心化云游戏平台，提供低延迟、高质量的游戏体验</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/computingpowerexchange.html'">
+                    <div class="scenario-number">02</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.computingexchange">算力交易场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/rwa.html'">
+                    <div class="scenario-number">03</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.rwa">RWA钱包场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/workflow.html'">
+                    <div class="scenario-number">04</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.workflow">全链路场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.workflow.description">PowerVerse Chain生态系统中的云游戏、算力交易和代币支付的完整闭环流程</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">05</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.ai.title">AI模型训练</h3>
+                    <p class="scenario-description" data-i18n="scenarios.ai.description">分布式GPU资源池，支持大规模AI模型训练与推理，降低计算成本</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">05</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.science.title">科学计算</h3>
+                    <p class="scenario-description" data-i18n="scenarios.science.description">高性能计算集群，为科研机构提供强大的计算能力支持</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">06</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.render.title">渲染服务</h3>
+                    <p class="scenario-description" data-i18n="scenarios.render.description">分布式渲染网络，加速3D动画、影视特效等渲染任务</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">07</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.edge.title">边缘计算</h3>
+                    <p class="scenario-description" data-i18n="scenarios.edge.description">边缘节点网络，提供低延迟、高可用的边缘计算服务</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发者中心 -->
+    <section id="developer" class="developer">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="developer.title">开发者中心</h2>
+                <p class="section-description" data-i18n="developer.description">丰富的开发工具和文档，助力开发者快速构建应用</p>
+            </div>
+            <div class="developer-content">
+                <div class="developer-resources">
+                    <div class="resource-card">
+                        <div class="resource-icon">📚</div>
+                        <h3 data-i18n="developer.docs.title">技术文档</h3>
+                        <p data-i18n="developer.docs.description">完整的技术文档和API参考，帮助开发者快速上手</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.docs.link">查看文档 →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">💻</div>
+                        <h3 data-i18n="developer.sdk.title">SDK工具包</h3>
+                        <p data-i18n="developer.sdk.description">多语言SDK支持，简化开发流程，提高开发效率</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.sdk.link">下载SDK →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">🔧</div>
+                        <h3 data-i18n="developer.tools.title">开发工具</h3>
+                        <p data-i18n="developer.tools.description">测试网络、调试工具、部署脚本等一站式开发工具</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.tools.link">使用工具 →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">👥</div>
+                        <h3 data-i18n="developer.community.title">社区支持</h3>
+                        <p data-i18n="developer.community.description">活跃的开发者社区，技术交流与问题解答</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.community.link">加入社区 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 代币经济 -->
+    <section id="token" class="token">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="token.title">代币经济</h2>
+                <p class="section-description" data-i18n="token.description">构建可持续的生态经济模型</p>
+            </div>
+            <div class="token-content">
+                <div class="token-info">
+                    <div class="token-card">
+                        <h3 data-i18n="token.usage.title">代币用途</h3>
+                        <ul>
+                            <li data-i18n="token.usage.items.0">支付计算资源费用</li>
+                            <li data-i18n="token.usage.items.1">参与网络治理投票</li>
+                            <li data-i18n="token.usage.items.2">节点质押与奖励</li>
+                            <li data-i18n="token.usage.items.3">生态应用内支付</li>
+                        </ul>
+                    </div>
+                    <div class="token-card">
+                        <h3 data-i18n="token.distribution.title">分配机制</h3>
+                        <ul>
+                            <li data-i18n="token.distribution.items.0">社区激励：40%</li>
+                            <li data-i18n="token.distribution.items.1">团队与顾问：20%</li>
+                            <li data-i18n="token.distribution.items.2">生态发展：20%</li>
+                            <li data-i18n="token.distribution.items.3">投资者：15%</li>
+                            <li data-i18n="token.distribution.items.4">储备金：5%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="pages/chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="pages/infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="pages/whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="pages/developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="pages/about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="pages/about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="pages/about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/languages.js"></script>
+    <script src="script.js"></script>
+    <!-- 测试系统 -->
+    <script>
+        // 快捷键打开测试 (Ctrl+Shift+T)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                window.open('test_complete.html', '_blank');
+            }
+        });
+    </script>
+</body>
+</html>

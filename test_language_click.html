@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言切换点击测试</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .test-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .test-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .test-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .test-button {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .test-log {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+        .log-entry {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .log-entry.success {
+            color: #4ade80;
+        }
+        .log-entry.error {
+            color: #f87171;
+        }
+        .log-entry.info {
+            color: var(--primary-color);
+        }
+        .test-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-left: 1rem;
+        }
+        .test-status.passing {
+            background: #4ade80;
+            color: #000;
+        }
+        .test-status.failing {
+            background: #f87171;
+            color: #fff;
+        }
+        .test-status.pending {
+            background: #fbbf24;
+            color: #000;
+        }
+        .mouse-move-area {
+            background: var(--bg-darker);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            cursor: crosshair;
+        }
+        .mouse-move-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 212, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-icon">P</div>
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#product" data-i18n="nav.product">产品</a></li>
+                    <li><a href="pages/scenarios.html" data-i18n="nav.scenario">应用场景</a></li>
+                    <li><a href="pages/developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="pages/token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">简体中文</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="test-container" style="padding-top: 100px;">
+        <div class="test-section">
+            <h1 class="test-title">语言切换按钮点击测试</h1>
+            <p class="test-description">
+                此测试用于验证语言切换按钮在各种场景下的点击响应情况。
+                测试将模拟鼠标移动、滚动、点击导航等操作，然后尝试点击语言切换按钮。
+            </p>
+            
+            <div class="test-section">
+                <h2 class="test-title">测试场景</h2>
+                <button class="test-button" onclick="runTest1()">测试1: 鼠标移动后点击语言按钮</button>
+                <button class="test-button" onclick="runTest2()">测试2: 滚动页面后点击语言按钮</button>
+                <button class="test-button" onclick="runTest3()">测试3: 点击导航后立即点击语言按钮</button>
+                <button class="test-button" onclick="runTest4()">测试4: 快速连续点击语言按钮</button>
+                <button class="test-button" onclick="runTest5()">测试5: 鼠标移动+滚动+点击导航后点击语言按钮</button>
+                <button class="test-button" onclick="runAllTests()">运行所有测试</button>
+                <button class="test-button" onclick="clearLog()">清空日志</button>
+            </div>
+
+            <div class="mouse-move-area" id="mouseMoveArea">
+                <p>在此区域移动鼠标以模拟鼠标移动操作</p>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 1rem;">
+                    鼠标移动次数: <span id="mouseMoveCount">0</span>
+                </p>
+            </div>
+
+            <div class="test-section">
+                <h2 class="test-title">测试日志</h2>
+                <div class="test-log" id="testLog"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/languages.js"></script>
+    <script src="script.js"></script>
+    <script>
+        let mouseMoveCount = 0;
+        let testResults = {
+            test1: { passed: 0, failed: 0 },
+            test2: { passed: 0, failed: 0 },
+            test3: { passed: 0, failed: 0 },
+            test4: { passed: 0, failed: 0 },
+            test5: { passed: 0, failed: 0 }
+        };
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('testLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            entry.textContent = `[${timestamp}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function clearLog() {
+            document.getElementById('testLog').innerHTML = '';
+            mouseMoveCount = 0;
+            document.getElementById('mouseMoveCount').textContent = '0';
+        }
+
+        // 监听鼠标移动
+        const mouseMoveArea = document.getElementById('mouseMoveArea');
+        mouseMoveArea.addEventListener('mousemove', () => {
+            mouseMoveCount++;
+            document.getElementById('mouseMoveCount').textContent = mouseMoveCount;
+        });
+
+        async function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function clickLanguageButton() {
+            const btn = document.querySelector('.lang-switch');
+            if (!btn) {
+                log('错误: 语言按钮未找到', 'error');
+                return false;
+            }
+
+            // 检查按钮是否可见和可点击
+            const rect = btn.getBoundingClientRect();
+            const isVisible = rect.width > 0 && rect.height > 0;
+            const isInViewport = rect.top >= 0 && rect.left >= 0 && 
+                                rect.bottom <= window.innerHeight && 
+                                rect.right <= window.innerWidth;
+
+            if (!isVisible) {
+                log('错误: 语言按钮不可见', 'error');
+                return false;
+            }
+
+            if (!isInViewport) {
+                log('警告: 语言按钮不在视口内', 'error');
+                btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                await sleep(500);
+            }
+
+            // 尝试多种点击方式
+            let clicked = false;
+            
+            // 方式1: 直接点击
+            try {
+                btn.click();
+                clicked = true;
+                log('使用 click() 方法点击语言按钮', 'info');
+            } catch (e) {
+                log(`click() 方法失败: ${e.message}`, 'error');
+            }
+
+            // 方式2: 创建鼠标事件
+            if (!clicked) {
+                try {
+                    const event = new MouseEvent('click', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+                    btn.dispatchEvent(event);
+                    clicked = true;
+                    log('使用 MouseEvent 点击语言按钮', 'info');
+                } catch (e) {
+                    log(`MouseEvent 失败: ${e.message}`, 'error');
+                }
+            }
+
+            // 方式3: 使用 mousedown + mouseup
+            if (!clicked) {
+                try {
+                    btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+                    await sleep(50);
+                    btn.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+                    clicked = true;
+                    log('使用 mousedown/mouseup 点击语言按钮', 'info');
+                } catch (e) {
+                    log(`mousedown/mouseup 失败: ${e.message}`, 'error');
+                }
+            }
+
+            await sleep(300);
+            
+            // 检查菜单是否显示
+            const menu = document.getElementById('language-menu');
+            const menuVisible = menu && menu.style.display === 'block';
+            
+            if (menuVisible) {
+                log('✓ 语言菜单已显示', 'success');
+                // 关闭菜单
+                menu.style.display = 'none';
+                return true;
+            } else {
+                log('✗ 语言菜单未显示', 'error');
+                return false;
+            }
+        }
+
+        async function runTest1() {
+            log('=== 测试1: 鼠标移动后点击语言按钮 ===', 'info');
+            clearLog();
+            
+            // 模拟鼠标移动
+            log('模拟鼠标移动...', 'info');
+            for (let i = 0; i < 10; i++) {
+                const event = new MouseEvent('mousemove', {
+                    clientX: Math.random() * window.innerWidth,
+                    clientY: Math.random() * window.innerHeight,
+                    bubbles: true
+                });
+                document.dispatchEvent(event);
+                await sleep(50);
+            }
+            log('鼠标移动完成', 'info');
+            
+            await sleep(200);
+            
+            // 尝试点击语言按钮
+            const result = await clickLanguageButton();
+            if (result) {
+                testResults.test1.passed++;
+                log('✓ 测试1通过', 'success');
+            } else {
+                testResults.test1.failed++;
+                log('✗ 测试1失败', 'error');
+            }
+        }
+
+        async function runTest2() {
+            log('=== 测试2: 滚动页面后点击语言按钮 ===', 'info');
+            clearLog();
+            
+            // 滚动页面
+            log('滚动页面...', 'info');
+            window.scrollTo({ top: 500, behavior: 'smooth' });
+            await sleep(800);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            await sleep(800);
+            log('滚动完成', 'info');
+            
+            await sleep(200);
+            
+            // 尝试点击语言按钮
+            const result = await clickLanguageButton();
+            if (result) {
+                testResults.test2.passed++;
+                log('✓ 测试2通过', 'success');
+            } else {
+                testResults.test2.failed++;
+                log('✗ 测试2失败', 'error');
+            }
+        }
+
+        async function runTest3() {
+            log('=== 测试3: 点击导航后立即点击语言按钮 ===', 'info');
+            clearLog();
+            
+            // 点击导航链接
+            const navLink = document.querySelector('.nav-menu a');
+            if (navLink) {
+                log('点击导航链接...', 'info');
+                navLink.click();
+                await sleep(100);
+                log('导航链接已点击', 'info');
+            }
+            
+            // 立即点击语言按钮
+            await sleep(50);
+            const result = await clickLanguageButton();
+            if (result) {
+                testResults.test3.passed++;
+                log('✓ 测试3通过', 'success');
+            } else {
+                testResults.test3.failed++;
+                log('✗ 测试3失败', 'error');
+            }
+        }
+
+        async function runTest4() {
+            log('=== 测试4: 快速连续点击语言按钮 ===', 'info');
+            clearLog();
+            
+            const btn = document.querySelector('.lang-switch');
+            if (!btn) {
+                log('错误: 语言按钮未找到', 'error');
+                return;
+            }
+            
+            log('快速连续点击语言按钮...', 'info');
+            for (let i = 0; i < 5; i++) {
+                btn.click();
+                await sleep(100);
+            }
+            
+            await sleep(300);
+            
+            const menu = document.getElementById('language-menu');
+            const menuVisible = menu && menu.style.display === 'block';
+            
+            if (menuVisible) {
+                testResults.test4.passed++;
+                log('✓ 测试4通过 - 菜单正常显示', 'success');
+                menu.style.display = 'none';
+            } else {
+                testResults.test4.failed++;
+                log('✗ 测试4失败 - 菜单未显示', 'error');
+            }
+        }
+
+        async function runTest5() {
+            log('=== 测试5: 鼠标移动+滚动+点击导航后点击语言按钮 ===', 'info');
+            clearLog();
+            
+            // 1. 鼠标移动
+            log('步骤1: 模拟鼠标移动...', 'info');
+            for (let i = 0; i < 5; i++) {
+                const event = new MouseEvent('mousemove', {
+                    clientX: Math.random() * window.innerWidth,
+                    clientY: Math.random() * window.innerHeight,
+                    bubbles: true
+                });
+                document.dispatchEvent(event);
+                await sleep(50);
+            }
+            
+            // 2. 滚动
+            log('步骤2: 滚动页面...', 'info');
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+            await sleep(500);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            await sleep(500);
+            
+            // 3. 点击导航
+            log('步骤3: 点击导航链接...', 'info');
+            const navLink = document.querySelector('.nav-menu a');
+            if (navLink) {
+                navLink.click();
+                await sleep(100);
+            }
+            
+            // 4. 点击语言按钮
+            log('步骤4: 点击语言按钮...', 'info');
+            await sleep(200);
+            const result = await clickLanguageButton();
+            
+            if (result) {
+                testResults.test5.passed++;
+                log('✓ 测试5通过', 'success');
+            } else {
+                testResults.test5.failed++;
+                log('✗ 测试5失败', 'error');
+            }
+        }
+
+        async function runAllTests() {
+            log('=== 开始运行所有测试 ===', 'info');
+            clearLog();
+            
+            await runTest1();
+            await sleep(1000);
+            
+            await runTest2();
+            await sleep(1000);
+            
+            await runTest3();
+            await sleep(1000);
+            
+            await runTest4();
+            await sleep(1000);
+            
+            await runTest5();
+            
+            log('=== 所有测试完成 ===', 'info');
+            log(`测试结果: 通过 ${Object.values(testResults).reduce((sum, t) => sum + t.passed, 0)} / 失败 ${Object.values(testResults).reduce((sum, t) => sum + t.failed, 0)}`, 'info');
+        }
+
+        // 监听语言切换事件
+        document.addEventListener('languageChanged', (e) => {
+            log(`语言已切换为: ${e.detail.language}`, 'success');
+        });
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            log('测试页面已加载', 'info');
+            log('等待语言管理器初始化...', 'info');
+            setTimeout(() => {
+                if (window.languageManager) {
+                    log('语言管理器已初始化', 'success');
+                } else {
+                    log('警告: 语言管理器未找到', 'error');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

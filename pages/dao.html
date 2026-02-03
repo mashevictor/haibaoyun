@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="products.dao.pageTitle">PowerVerse DAO - 去中心化自治组织</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=decentralized%20autonomous%20organization%20%28DAO%29%2C%20community%20governance%20and%20voting%20system%2C%20futuristic%20decentralized%20decision%20making%2C%20blue%20and%20purple%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .product-hero .subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+        .product-hero .slogan {
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-style: italic;
+        }
+        .product-hero p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+        .product-content {
+            padding: 5rem 0;
+        }
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        .workflow-timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin: 3rem 0;
+        }
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-3);
+        }
+        .workflow-step {
+            position: relative;
+            padding-left: 5rem;
+            margin-bottom: 3rem;
+        }
+        .workflow-step:last-child {
+            margin-bottom: 0;
+        }
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            left: 1.25rem;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--gradient-3);
+            border-radius: 50%;
+            border: 4px solid var(--bg-dark);
+            z-index: 1;
+        }
+        .workflow-step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .workflow-step-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .workflow-step-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .workflow-step-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .workflow-step-card ul {
+            list-style: none;
+            margin: 1rem 0 0 0;
+            padding: 0;
+        }
+        .workflow-step-card li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        .workflow-step-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .feature-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .feature-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .feature-card li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        .feature-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .highlight-text {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .product-hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .workflow-timeline::before {
+                left: 1rem;
+            }
+            .workflow-step {
+                padding-left: 3.5rem;
+            }
+            .workflow-step::before {
+                left: 0.25rem;
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="product-hero">
+                <div class="product-icon">🗳️</div>
+                <h1 data-i18n="products.dao.name">PowerVerse DAO</h1>
+                <div class="subtitle" data-i18n="products.dao.subtitle">去中心化自治组织</div>
+                <div class="slogan" data-i18n="products.dao.slogan">共建、共治、共享——PowerVerse 生态的治理核心</div>
+                <p data-i18n="products.dao.intro">PowerVerse DAO 是基于 PowerVerse Chain 构建的去中心化自治组织，旨在通过社区集体决策与治理，推动 PowerVerse 生态的公平、透明与可持续发展。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="product-content">
+            <!-- 一、DAO 工作流程 -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.dao.section1.title">一、DAO 工作流程</h2>
+                
+                <div class="workflow-timeline">
+                    <div class="workflow-step">
+                        <div class="workflow-step-card">
+                            <h4 data-i18n="products.dao.section1.step1.title">1. 提案与发起</h4>
+                            <p><strong data-i18n="products.dao.section1.step1.memberProposal.label">成员提案：</strong><span data-i18n="products.dao.section1.step1.memberProposal.desc">任何社区成员均可提交发展提案（技术改进、市场活动、合作机会等），需包含背景、目标、计划、预算等详细信息。</span></p>
+                            <p><strong data-i18n="products.dao.section1.step1.review.label">提案审核：</strong><span data-i18n="products.dao.section1.step1.review.desc">由社区选举产生的审核委员会评估提案可行性、创新性及生态价值，通过后进入投票环节。</span></p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-step-card">
+                            <h4 data-i18n="products.dao.section1.step2.title">2. 社区投票决策</h4>
+                            <p><strong data-i18n="products.dao.section1.step2.votingStart.label">投票启动：</strong><span data-i18n="products.dao.section1.step2.votingStart.desc">通过审核的提案进入社区投票。代币持有者可在规定期限内投票表决。</span></p>
+                            <p><strong data-i18n="products.dao.section1.step2.execution.label">结果执行：</strong><span data-i18n="products.dao.section1.step2.execution.desc">达到设定赞成比例后提案通过，由项目执行团队按计划推动实施，并定期向社区汇报进度。</span></p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-step-card">
+                            <h4 data-i18n="products.dao.section1.step3.title">3. 实施与监督</h4>
+                            <ul>
+                                <li><strong data-i18n="products.dao.section1.step3.teamBuilding.label">团队组建：</strong><span data-i18n="products.dao.section1.step3.teamBuilding.desc">通过自愿或招聘组建项目执行团队，负责任务分配、进度跟踪与质量控制。</span></li>
+                                <li><strong data-i18n="products.dao.section1.step3.supervision.label">监督评估：</strong><span data-i18n="products.dao.section1.step3.supervision.desc">社区可实时通过链上信息监督进展。项目监督小组定期检查，确保符合提案标准，必要时可提出整改或暂停建议。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-step-card">
+                            <h4 data-i18n="products.dao.section1.step4.title">4. 成果与反馈</h4>
+                            <ul>
+                                <li><strong data-i18n="products.dao.section1.step4.acceptance.label">验收与分享：</strong><span data-i18n="products.dao.section1.step4.acceptance.desc">项目完成后由监督小组验收，成果向社区公示（经济效益、技术创新等）。</span></li>
+                                <li><strong data-i18n="products.dao.section1.step4.summary.label">经验总结：</strong><span data-i18n="products.dao.section1.step4.summary.desc">总结项目经验并反馈至社区，用于优化 DAO 发展战略与运营机制。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 二、核心特点 -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.dao.section2.title">二、核心特点</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h4 data-i18n="products.dao.section2.feature1.title">1. 去中心化治理</h4>
+                        <ul>
+                            <li><strong data-i18n="products.dao.section2.feature1.decentralization.label">权力下放：</strong><span data-i18n="products.dao.section2.feature1.decentralization.desc">通过链上投票，社区成员直接参与重大决策（方向、资金、规则等），实现民主治理。</span></li>
+                            <li><strong data-i18n="products.dao.section2.feature1.transparency.label">透明可追溯：</strong><span data-i18n="products.dao.section2.feature1.transparency.desc">所有决策与交易记录于区块链，完全公开可查，增强信任与监督。</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h4 data-i18n="products.dao.section2.feature2.title">2. 社区驱动发展</h4>
+                        <ul>
+                            <li><strong data-i18n="products.dao.section2.feature2.participation.label">广泛参与：</strong><span data-i18n="products.dao.section2.feature2.participation.desc">鼓励成员参与技术、市场、运营等活动，通过代币奖励、荣誉表彰等机制激发贡献。</span></li>
+                            <li><strong data-i18n="products.dao.section2.feature2.diversity.label">成员多元化：</strong><span data-i18n="products.dao.section2.feature2.diversity.desc">汇聚技术专家、行业从业者、投资者、法律等多领域人才，为生态提供全方位支持。</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4 data-i18n="products.dao.section2.feature3.title">3. 创新经济模型</h4>
+                        <ul>
+                            <li><strong data-i18n="products.dao.section2.feature3.tokenEconomy.label">代币经济：</strong><span data-i18n="products.dao.section2.feature3.tokenEconomy.desc">以 PowerVerse Coin 作为治理与激励工具，持有者通过参与治理获得奖励，实现利益与生态绑定。</span></li>
+                            <li><strong data-i18n="products.dao.section2.feature3.valueSharing.label">价值共享：</strong><span data-i18n="products.dao.section2.feature3.valueSharing.desc">生态成长带来的价值通过代币捕获与分配，使持有者共享发展红利，增强代币吸引力与生态基础。</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

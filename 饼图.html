@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerVerse Coin 经济模型 - 交互式饼图</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid #4a6fa5;
+            padding-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .chart-wrapper {
+            flex: 1;
+            min-width: 350px;
+            position: relative;
+            height: 450px;
+        }
+        
+        .details-panel {
+            flex: 1;
+            min-width: 350px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 4px solid #4a6fa5;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+        
+        .allocation-list {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+        
+        .allocation-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+        
+        .allocation-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .allocation-item.active {
+            border-left-color: #4a6fa5;
+            background-color: #eef5ff;
+            font-weight: 600;
+        }
+        
+        .percentage {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .amount {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        
+        .info-box {
+            background-color: #eef5ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .info-box h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .info-box p {
+            color: #5a6c7d;
+        }
+        
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .highlight {
+            color: #4a6fa5;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background-color 0.2s;
+        }
+        
+        .control-btn:hover {
+            background-color: #3a5a8a;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                flex-direction: column;
+            }
+            
+            .chart-wrapper, .details-panel {
+                min-width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .chart-wrapper {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PowerVerse Coin 经济模型</h1>
+        <p class="subtitle">总发行量: 1,400,000,000 枚 (14亿)</p>
+        
+        <div class="chart-container">
+            <div class="chart-wrapper">
+                <canvas id="allocationChart"></canvas>
+            </div>
+            
+            <div class="details-panel">
+                <h2 class="section-title">分配详情</h2>
+                <ul class="allocation-list" id="allocationList">
+                    <!-- 列表项将通过JavaScript动态生成 -->
+                </ul>
+                
+                <div class="total-amount">
+                    总发行量: <span class="highlight">1,400,000,000</span> 枚
+                </div>
+                
+                <div class="info-box">
+                    <h3>关于月度分红机制</h3>
+                    <p>每月末，基金会将为在PowerVerse Market上架算力资源的用户进行分红。分红来源于区块链奖励分成（每个区块奖励的3%）及其他成员或组织的捐款。</p>
+                </div>
+                
+                <div class="controls">
+                    <button class="control-btn" id="toggleLabels">切换标签显示</button>
+                    <button class="control-btn" id="toggleLegend">切换图例显示</button>
+                    <button class="control-btn" id="resetChart">重置图表</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 注册datalabels插件
+        Chart.register(ChartDataLabels);
+        
+        // 分配数据
+        const allocationData = [
+            { 
+                label: "区块奖励", 
+                shortLabel: "区块奖励",
+                percentage: 20, 
+                amount: 280000000, 
+                color: "#4a6fa5", 
+                description: "上CEX交易所后30天后开始挖矿，区块奖励每5年减半" 
+            },
+            { 
+                label: "种子轮/天使轮/A轮", 
+                shortLabel: "投资轮",
+                percentage: 30, 
+                amount: 420000000, 
+                color: "#5da0d6", 
+                description: "每轮占比10%，分配140,000,000枚，上CEX交易所后60天开始分10个月解锁，每次解锁10%" 
+            },
+            { 
+                label: "预售/公售轮", 
+                shortLabel: "预售/公售",
+                percentage: 5, 
+                amount: 70000000, 
+                color: "#6dc5b8", 
+                description: "40%无锁仓，剩下的5月31号开始分6个月解锁，每个月解锁10%" 
+            },
+            { 
+                label: "社区空投", 
+                shortLabel: "社区空投",
+                percentage: 2, 
+                amount: 28000000, 
+                color: "#9ad46c", 
+                description: "社区成员向指定地址发送2USDT并登记相关信息后获得500HBC空投" 
+            },
+            { 
+                label: "团队", 
+                shortLabel: "团队",
+                percentage: 15, 
+                amount: 210000000, 
+                color: "#f5a623", 
+                description: "上CEX交易所60天后解锁5%，剩余则锁仓3年，之后分10个月释放" 
+            },
+            { 
+                label: "合规顾问", 
+                shortLabel: "合规顾问",
+                percentage: 3, 
+                amount: 42000000, 
+                color: "#ff6b6b", 
+                description: "协助项目适应多个国家的法律法规，上线交易所30天后分4年解锁" 
+            },
+            { 
+                label: "运营顾问", 
+                shortLabel: "运营顾问",
+                percentage: 5, 
+                amount: 70000000, 
+                color: "#c56cf0", 
+                description: "协助上线头部交易所及运营、布道、讲课，上CEX交易所后30天后分4年解锁" 
+            },
+            { 
+                label: "基金会", 
+                shortLabel: "基金会",
+                percentage: 20, 
+                amount: 280000000, 
+                color: "#36d1dc", 
+                description: "上线CEX交易所后60天分4年解锁" 
+            }
+        ];
+
+        // 初始化图表
+        let chart;
+        let showLabels = true;
+        let showLegend = true;
+        
+        function initChart() {
+            const ctx = document.getElementById('allocationChart').getContext('2d');
+            
+            chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: allocationData.map(item => item.label),
+                    datasets: [{
+                        data: allocationData.map(item => item.percentage),
+                        backgroundColor: allocationData.map(item => item.color),
+                        borderColor: '#fff',
+                        borderWidth: 2,
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                font: {
+                                    size: 13
+                                },
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    if (data.labels.length && data.datasets.length) {
+                                        return data.labels.map((label, i) => {
+                                            const dataset = data.datasets[0];
+                                            const value = dataset.data[i];
+                                            const amount = allocationData[i].amount.toLocaleString();
+                                            const color = dataset.backgroundColor[i];
+                                            
+                                            return {
+                                                text: `${label} (${value}%)`,
+                                                fillStyle: color,
+                                                hidden: false,
+                                                index: i
+                                            };
+                                        });
+                                    }
+                                    return [];
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const percentage = context.raw || 0;
+                                    const item = allocationData.find(d => d.label === label);
+                                    const amount = item ? item.amount.toLocaleString() : '0';
+                                    return `${label}: ${percentage}% (${amount} 枚)`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: showLabels,
+                            color: function(context) {
+                                // 根据背景色调整文字颜色，确保可读性
+                                const backgroundColor = context.dataset.backgroundColor[context.dataIndex];
+                                // 简单判断是否为深色背景
+                                const rgb = backgroundColor.replace('#', '').match(/.{2}/g);
+                                const brightness = (parseInt(rgb[0], 16) * 0.299 + 
+                                                  parseInt(rgb[1], 16) * 0.587 + 
+                                                  parseInt(rgb[2], 16) * 0.114);
+                                return brightness > 150 ? '#333' : 'white';
+                            },
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            formatter: function(value, context) {
+                                // 显示百分比和短标签
+                                const item = allocationData[context.dataIndex];
+                                const shortLabel = item.shortLabel || item.label.substring(0, 10);
+                                return `${shortLabel}\n${value}%`;
+                            },
+                            padding: 6,
+                            borderRadius: 4,
+                            backgroundColor: function(context) {
+                                // 添加半透明背景提高可读性
+                                return 'rgba(255, 255, 255, 0.7)';
+                            }
+                        }
+                    },
+                    onClick: function(evt, elements) {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            highlightAllocationItem(index);
+                        }
+                    }
+                }
+            });
+        }
+
+        // 生成分配列表
+        function generateAllocationList() {
+            const listContainer = document.getElementById('allocationList');
+            listContainer.innerHTML = '';
+            
+            allocationData.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'allocation-item';
+                listItem.dataset.index = index;
+                
+                listItem.innerHTML = `
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 12px; height: 12px; background-color: ${item.color}; border-radius: 50%;"></div>
+                            <span>${item.label}</span>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d; margin-top: 3px;">${item.description}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="percentage">${item.percentage}%</div>
+                        <div class="amount">${item.amount.toLocaleString()} 枚</div>
+                    </div>
+                `;
+                
+                listItem.addEventListener('click', () => {
+                    highlightAllocationItem(index);
+                });
+                
+                listContainer.appendChild(listItem);
+            });
+        }
+
+        // 高亮分配项
+        function highlightAllocationItem(index) {
+            // 移除所有active类
+            document.querySelectorAll('.allocation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 为选中的项添加active类
+            const selectedItem = document.querySelector(`.allocation-item[data-index="${index}"]`);
+            if (selectedItem) {
+                selectedItem.classList.add('active');
+                selectedItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            // 高亮图表对应的部分
+            if (chart) {
+                // 暂时突出显示选中的扇区
+                const meta = chart.getDatasetMeta(0);
+                meta.data.forEach((arc, i) => {
+                    arc.options.offset = i === index ? 15 : 0;
+                });
+                chart.update();
+            }
+        }
+
+        // 切换标签显示
+        function toggleLabels() {
+            showLabels = !showLabels;
+            if (chart) {
+                chart.options.plugins.datalabels.display = showLabels;
+                chart.update();
+            }
+            document.getElementById('toggleLabels').textContent = 
+                showLabels ? '隐藏饼图标签' : '显示饼图标签';
+        }
+
+        // 切换图例显示
+        function toggleLegend() {
+            showLegend = !showLegend;
+            if (chart) {
+                chart.options.plugins.legend.display = showLegend;
+                chart.update();
+            }
+            document.getElementById('toggleLegend').textContent = 
+                showLegend ? '隐藏图例' : '显示图例';
+        }
+
+        // 重置图表
+        function resetChart() {
+            if (chart) {
+                // 重置所有扇区的偏移
+                const meta = chart.getDatasetMeta(0);
+                meta.data.forEach(arc => {
+                    arc.options.offset = 0;
+                });
+                chart.update();
+            }
+            
+            // 移除所有高亮
+            document.querySelectorAll('.allocation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initChart();
+            generateAllocationList();
+            
+            // 绑定按钮事件
+            document.getElementById('toggleLabels').addEventListener('click', toggleLabels);
+            document.getElementById('toggleLegend').addEventListener('click', toggleLegend);
+            document.getElementById('resetChart').addEventListener('click', resetChart);
+            
+            // 默认高亮第一项
+            setTimeout(() => highlightAllocationItem(0), 500);
+        });
+    </script>
+</body>
+</html>

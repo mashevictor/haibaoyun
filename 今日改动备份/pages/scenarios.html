@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="nav.scenario.title">应用场景 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .scenario-detail {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .scenario-card-large {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 102, 255, 0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 24px;
+            padding: 0;
+            margin-bottom: 5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scenario-card-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-3);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .scenario-card-large::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .scenario-card-large:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
+        }
+
+        .scenario-card-large:hover::before {
+            transform: scaleX(1);
+        }
+
+        .scenario-card-large:hover::after {
+            opacity: 1;
+        }
+
+        .scenario-header-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            padding: 3rem 3.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            position: relative;
+        }
+
+        .scenario-icon-large {
+            font-size: 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .scenario-icon-large::before {
+            content: attr(data-icon);
+            font-size: 4.5rem;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .scenario-icon-large::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .scenario-card-large:hover .scenario-icon-large::before {
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 35px rgba(0, 212, 255, 1));
+        }
+
+        .scenario-card-large:hover .scenario-icon-large::after {
+            opacity: 1;
+            width: 140px;
+            height: 140px;
+        }
+
+        .scenario-header-content {
+            flex: 1;
+        }
+
+        .scenario-content {
+            padding: 3.5rem;
+        }
+
+        .scenario-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            line-height: 1.2;
+        }
+
+        .scenario-header-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            margin: 0;
+        }
+
+        .scenario-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 0;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-feature {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            padding: 2rem 1.5rem;
+            border-radius: 0;
+            border-right: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scenario-feature:last-child {
+            border-right: none;
+        }
+
+        .scenario-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .scenario-feature:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-feature:hover::before {
+            left: 100%;
+        }
+
+        .scenario-feature h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .scenario-feature p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .scenario-image {
+            width: 100%;
+            min-height: 400px;
+            max-height: 900px;
+            background: var(--bg-darker);
+            border-radius: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .scenario-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .scenario-card-large:hover .scenario-image::before {
+            opacity: 0.3;
+        }
+
+        .scenario-image img {
+            width: 100%;
+            max-width: 1400px;
+            height: auto;
+            max-height: 850px;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 0;
+            display: block;
+        }
+        
+        .scenario-image video {
+            width: 100%;
+            max-width: 1400px;
+            height: auto;
+            max-height: 850px;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 0;
+            display: block;
+            background: #000;
+        }
+
+        .scenario-card-large:hover .scenario-image img {
+            transform: scale(1.05);
+        }
+
+        .scenario-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary-color);
+            opacity: 0.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scenario-details {
+            margin-top: 0;
+            padding: 3rem 3.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02) 0%, rgba(0, 102, 255, 0.02) 100%);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-details h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 0 0 1.5rem 0;
+            font-weight: 600;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .scenario-details h4::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 1.5rem;
+            background: var(--gradient-3);
+            border-radius: 2px;
+        }
+
+        .scenario-details h4:first-child {
+            margin-top: 0;
+        }
+
+        .scenario-details ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .scenario-details li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
+            transition: all 0.2s ease;
+        }
+
+        .scenario-details li:hover {
+            color: var(--text-primary);
+            padding-left: 2.5rem;
+        }
+
+        .scenario-details li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            transition: transform 0.2s ease;
+        }
+
+        .scenario-details li:hover::before {
+            transform: translateX(3px);
+        }
+
+        .scenario-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 0;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-stat {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            border-radius: 0;
+            border-right: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scenario-stat:last-child {
+            border-right: none;
+        }
+
+        .scenario-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scenario-stat:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .scenario-stat:hover::before {
+            opacity: 1;
+        }
+
+        .scenario-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scenario-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .scenario-card-large {
+                flex-direction: column;
+            }
+
+            .scenario-header-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .scenario-icon-large {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto 1.5rem;
+            }
+
+            .scenario-header-content h2 {
+                font-size: 2rem;
+            }
+
+            .scenario-content {
+                padding: 2rem;
+            }
+
+            .scenario-icon-large::before {
+                font-size: 4rem;
+            }
+
+            .scenario-icon-large::after {
+                width: 100px;
+                height: 100px;
+            }
+
+            .scenario-content h2 {
+                font-size: 1.75rem;
+            }
+
+            .scenario-image {
+                min-height: 300px;
+                max-height: 500px;
+                padding: 1rem;
+            }
+            
+            .scenario-image img,
+            .scenario-image video {
+                max-height: 450px;
+            }
+
+            .scenario-stats {
+                grid-template-columns: 1fr;
+                border-top: 1px solid rgba(0, 212, 255, 0.2);
+            }
+
+            .scenario-stat {
+                padding: 1.5rem 1rem;
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            }
+
+            .scenario-stat:last-child {
+                border-bottom: none;
+            }
+
+            .scenario-stat-value {
+                font-size: 2rem;
+            }
+
+            .scenario-features {
+                grid-template-columns: 1fr;
+                border-top: 1px solid rgba(0, 212, 255, 0.2);
+            }
+
+            .scenario-feature {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            }
+
+            .scenario-feature:last-child {
+                border-bottom: none;
+            }
+
+            .scenario-details {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html">
+                        <div class="logo-icon">P</div>
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">钱包RWA</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="scenarios.title">应用场景</h1>
+            <p class="section-description" data-i18n="scenarios.description">PowerVerse Chain赋能多元化的应用场景</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 新增场景快速入口 -->
+        <section class="scenarios" style="padding: 3rem 0;">
+            <div class="scenarios-grid">
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='cloudgaming.html'">
+                    <div class="scenario-number">01</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.cloudgaming">云游戏场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.cloudgaming.description">基于PowerVerse Chain的去中心化云游戏平台，提供低延迟、高质量的游戏体验</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='computingpowerexchange.html'">
+                    <div class="scenario-number">02</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.computingexchange">算力交易场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='rwa.html'">
+                    <div class="scenario-number">03</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.rwa">RWA钱包场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='workflow.html'">
+                    <div class="scenario-number">04</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.workflow">全链路场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.workflow.description">PowerVerse Chain生态系统中的云游戏、算力交易和代币支付的完整闭环流程</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="scenario-detail">
+            <!-- 云游戏详细卡片 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="🎮"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.cloudgaming.title">云游戏</h2>
+                        <p data-i18n="scenarios.cloudgaming.description">基于PowerVerse Chain的去中心化云游戏平台，提供低延迟、高质量的游戏体验</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <video width="100%" height="100%" controls autoplay muted loop style="object-fit: cover;">
+                            <source src="../video/视频1.mp4" type="video/mp4">
+                            <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
+                        </video>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">&lt;20ms</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.lowLatency">超低延迟</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">4K/8K</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.hdSupport">高清支持</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">24/7</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.availability">全天候服务</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.cloudgaming.workflow.title">完整链路闭环</h4>
+                        <ul>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step1">用户注册登录：通过PowerVerse Chain钱包连接，实现去中心化身份认证</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step2">游戏选择：浏览游戏库，选择想要游玩的游戏</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step3">资源分配：PowerVerse Infra智能调度边缘计算节点，就近分配GPU资源</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step4">游戏启动：游戏在云端GPU上运行，通过低延迟流媒体传输到用户设备</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step5">实时交互：用户操作实时上传，游戏画面实时渲染并流式传输</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step6">支付结算：使用PowerVerse代币（PVT）按使用时长付费，智能合约自动结算</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step7">资源释放：游戏结束后，GPU资源自动释放回资源池，供其他用户使用</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.cloudgaming.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item1">去中心化架构：无需中心化服务器，利用全球分布式GPU资源</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item2">低延迟体验：边缘计算节点就近服务，延迟低至20ms以下</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item3">成本优势：按需付费，无需购买昂贵硬件，降低游戏门槛</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item4">高质量渲染：支持4K/8K超高清画质，流畅游戏体验</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item5">跨平台支持：支持PC、手机、平板等多种设备，随时随地畅玩</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.cloudgaming.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item1">3A大作云游戏：无需下载，即开即玩，享受顶级游戏体验</li>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item2">移动云游戏：手机端畅玩PC游戏，突破设备性能限制</li>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item3">VR/AR游戏：支持虚拟现实和增强现实游戏，沉浸式体验</li>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item4">游戏直播：低延迟游戏直播，实时互动体验</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.cloudgaming.features.lowLatency.title">超低延迟</h4>
+                            <p data-i18n="scenarios.cloudgaming.features.lowLatency.desc">边缘节点就近服务，延迟低至20ms</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.cloudgaming.features.hdQuality.title">高清画质</h4>
+                            <p data-i18n="scenarios.cloudgaming.features.hdQuality.desc">支持4K/8K超高清渲染</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.cloudgaming.features.costEffective.title">成本优势</h4>
+                            <p data-i18n="scenarios.cloudgaming.features.costEffective.desc">按需付费，无需购买硬件</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 算力交易详细卡片 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="💱"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.computingexchange.title">算力交易</h2>
+                        <p data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/demov2.png" alt="算力交易" 
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">💱</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">1000+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.providers">算力提供方</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">10K+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.transactions">交易订单</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">99.9%</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.successRate">交易成功率</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.computingexchange.workflow.title">完整链路闭环</h4>
+                        <ul>
+                            <li data-i18n="scenarios.computingexchange.workflow.step1">算力提供方注册：GPU/CPU资源提供方在PowerVerse Market注册，发布算力资源信息</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step2">资源上架：设置算力规格、价格、可用时间等参数，资源信息上链存证</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step3">需求方发布：算力需求方发布需求订单，指定算力类型、数量、时长、预算</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step4">智能匹配：PowerVerse Market智能合约自动匹配供需双方，或提供方主动接单</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step5">订单确认：双方确认订单，需求方支付PowerVerse代币（PVT）作为保证金</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step6">资源分配：PowerVerse Infra根据订单自动分配算力资源，启动虚拟机</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step7">任务执行：需求方提交计算任务，系统自动执行并返回结果</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step8">实时监控：双方可实时查看算力使用情况、任务进度、资源状态</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step9">自动结算：任务完成后，智能合约根据实际使用时长自动结算，释放保证金</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step10">评价反馈：交易双方互评，评价计入信誉体系，影响后续交易优先级</li>
+                            <li data-i18n="scenarios.computingexchange.workflow.step11">资源回收：算力资源自动释放回资源池，供其他订单使用</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.computingexchange.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item1">去中心化交易：无需第三方中介，买卖双方直接交易，降低交易成本</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item2">智能合约保障：交易全程由智能合约执行，自动结算，安全可靠</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item3">透明定价：市场价格公开透明，供需双方自由议价</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item4">灵活交易：支持按小时、按天、按月等多种计费方式</li>
+                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item5">信誉体系：基于区块链的信誉评价系统，保障交易安全</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.computingexchange.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item1">AI训练算力租赁：为AI公司提供GPU算力，支持模型训练</li>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item2">渲染算力交易：为影视公司提供渲染算力，加速项目制作</li>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item3">科学计算资源：为科研机构提供高性能计算资源</li>
+                            <li data-i18n="scenarios.computingexchange.scenarios.item4">闲置资源变现：个人或企业闲置GPU/CPU资源可上架交易，获得收益</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.computingexchange.features.decentralized.title">去中心化</h4>
+                            <p data-i18n="scenarios.computingexchange.features.decentralized.desc">无需中介，直接交易</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.computingexchange.features.smartContract.title">智能合约</h4>
+                            <p data-i18n="scenarios.computingexchange.features.smartContract.desc">自动执行，安全可靠</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.computingexchange.features.transparent.title">透明定价</h4>
+                            <p data-i18n="scenarios.computingexchange.features.transparent.desc">市场价格公开透明</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 钱包RWA详细卡片 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="💼"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.rwa.title">RWA钱包</h2>
+                        <p data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/walletrwa.png" alt="钱包RWA" 
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">💼</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">50+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.rwa.stats.mines">矿场数量</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">10w+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.rwa.stats.gpuCount">GPU数量</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">100%</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.rwa.stats.tokenized">代币化率</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.rwa.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.rwa.coreAdvantages.item1">合规先行，安全可信：深度集成ERC-3643标准，将KYC/AML等全球监管要求内置于智能合约。确保资产发行与流转全程合法合规，为机构资金入场扫清障碍，奠定坚实信任基石。</li>
+                            <li data-i18n="scenarios.rwa.coreAdvantages.item2">实体锚定，真实透明：每一份链上算力通证，均对应全国分布式矿场中真实的高性能GPU硬件。资产来源清晰、权属可验证，杜绝虚拟炒作，实现实体价值的精准映射。</li>
+                            <li data-i18n="scenarios.rwa.coreAdvantages.item3">链上管理，降本增效：基于PowerVerse区块链网络，实现算力资产的自动化发行、确权与交易结算。大幅提升资产管理效率，降低运营与信任成本，释放流动性潜能。</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.rwa.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.rwa.scenarios.item1">合规化算力资产交易：为合格投资者与机构提供标准化、合规化的算力资产认购与二级市场交易服务，开启算力投资新范式。</li>
+                            <li data-i18n="scenarios.rwa.scenarios.item2">去中心化算力金融(DeFi)：作为底层优质合规资产，可应用于抵押借贷、收益权质押等链上金融场景，构建丰富的算力DeFi生态。</li>
+                            <li data-i18n="scenarios.rwa.scenarios.item3">企业级算力服务市场：为AI训练、云渲染、科研计算等需求方，提供可即时结算、权属清晰的弹性算力租赁与采购解决方案。</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.rwa.features.decentralized.title">合规先行</h4>
+                            <p data-i18n="scenarios.rwa.features.decentralized.desc">ERC-3643标准，确保合法合规</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.rwa.features.tokenized.title">实体锚定</h4>
+                            <p data-i18n="scenarios.rwa.features.tokenized.desc">真实GPU硬件，权属可验证</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.rwa.features.transparent.title">链上管理</h4>
+                            <p data-i18n="scenarios.rwa.features.transparent.desc">自动化发行确权，降本增效</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 全链路场景详细卡片 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="🔄"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.workflow.title">全链路场景</h2>
+                        <p data-i18n="scenarios.workflow.description">PowerVerse Chain生态系统中的云游戏、算力交易和代币支付的完整闭环流程</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <video controls autoplay muted loop>
+                            <source src="../video/视频4.mp4" type="video/mp4">
+                            <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
+                        </video>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.workflow.flowchartTitle">云游戏与算力交易全链路流程图</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;" data-i18n="scenarios.workflow.description">PowerVerse Chain生态系统中的云游戏、算力交易和代币支付的完整闭环流程</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                            <div style="background: var(--bg-darker); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;" data-i18n="scenarios.workflow.cloudgamingCard.title">云游戏场景</h4>
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="scenarios.workflow.cloudgamingCard.description">用户通过PowerVerse Chain钱包登录云游戏平台，选择游戏，系统通过PowerVerse Infra智能调度边缘GPU资源，游戏在云端运行并通过低延迟流媒体传输。用户使用PVT代币按时长支付，智能合约自动结算，游戏结束后资源释放。</p>
+                                <a href="cloudgaming.html" style="color: var(--primary-color); text-decoration: none;" data-i18n="scenarios.workflow.cloudgamingCard.link">查看云游戏详情 →</a>
+                            </div>
+                            
+                            <div style="background: var(--bg-darker); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;" data-i18n="scenarios.workflow.computingexchangeCard.title">算力交易场景</h4>
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="scenarios.workflow.computingexchangeCard.description">算力提供方在PowerVerse Market注册并上架GPU/CPU资源，需求方发布订单。智能合约自动匹配并执行交易，需求方支付PVT代币作为保证金。PowerVerse Infra分配资源，任务执行，实时监控，自动结算，双方互评，资源回收。</p>
+                                <a href="computingpowerexchange.html" style="color: var(--primary-color); text-decoration: none;" data-i18n="scenarios.workflow.computingexchangeCard.link">查看算力交易详情 →</a>
+                            </div>
+                            
+                            <div style="background: var(--bg-darker); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;" data-i18n="scenarios.workflow.tokenPaymentCard.title">PVT代币支付</h4>
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="scenarios.workflow.tokenPaymentCard.description">PowerVerse Token (PVT) 作为生态核心资产，用于支付云游戏时长、算力租赁费用、参与DAO治理和节点质押奖励。智能合约确保所有交易透明、安全、高效。</p>
+                                <a href="token.html" style="color: var(--primary-color); text-decoration: none;" data-i18n="scenarios.workflow.tokenPaymentCard.link">了解PVT代币 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI模型训练详细卡片 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="🤖"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.ai.title">AI模型训练</h2>
+                        <p data-i18n="scenarios.ai.description">分布式GPU资源池，支持大规模AI模型训练与推理，降低计算成本</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/scenario-ai.png" alt="AI模型训练"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">🤖</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">60%+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.ai.stats.costReduction">成本降低</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">1000+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.ai.stats.gpuNodes">GPU节点</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">24/7</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.ai.stats.availability">全天候服务</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.ai.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.ai.coreAdvantages.item1">分布式GPU资源池：整合全球闲置GPU资源，形成强大的分布式计算集群</li>
+                            <li data-i18n="scenarios.ai.coreAdvantages.item2">智能任务调度：AI算法自动匹配最优计算节点，最大化资源利用率</li>
+                            <li data-i18n="scenarios.ai.coreAdvantages.item3">模型训练加速：支持PyTorch、TensorFlow等主流框架，训练速度提升3-5倍</li>
+                            <li data-i18n="scenarios.ai.coreAdvantages.item4">推理服务优化：低延迟推理服务，支持实时AI应用部署</li>
+                            <li data-i18n="scenarios.ai.coreAdvantages.item5">成本透明化：按需付费，无隐藏费用，相比传统云服务节省60%以上成本</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.ai.cases.title">应用案例</h4>
+                        <ul>
+                            <li data-i18n="scenarios.ai.cases.item1">大语言模型训练：支持GPT、BERT等大规模语言模型的分布式训练</li>
+                            <li data-i18n="scenarios.ai.cases.item2">计算机视觉：图像识别、目标检测、语义分割等CV任务加速</li>
+                            <li data-i18n="scenarios.ai.cases.item3">自然语言处理：文本分类、情感分析、机器翻译等NLP应用</li>
+                            <li data-i18n="scenarios.ai.cases.item4">推荐系统：个性化推荐算法训练与实时推理</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.ai.features.gpuCluster.title">GPU集群</h4>
+                            <p data-i18n="scenarios.ai.features.gpuCluster.desc">整合全球GPU资源，提供强大的计算能力</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.ai.features.costOptimization.title">成本优化</h4>
+                            <p data-i18n="scenarios.ai.features.costOptimization.desc">相比传统云服务，成本降低60%以上</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.ai.features.elasticScaling.title">弹性扩展</h4>
+                            <p data-i18n="scenarios.ai.features.elasticScaling.desc">根据需求动态调整计算资源</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="🔬"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.science.title">科学计算</h2>
+                        <p data-i18n="scenarios.science.description">高性能计算集群，为科研机构提供强大的计算能力支持</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/scenario-science.png" alt="科学计算"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">🔬</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">100+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.science.stats.researchInstitutes">科研机构</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value" data-i18n="scenarios.science.stats.dataProcessingValue">PB级</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.science.stats.dataProcessing">数据处理</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">99.9%</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.science.stats.availability">可用性</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.science.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.science.coreAdvantages.item1">高性能计算集群：提供超算级别的计算能力，支持大规模并行计算</li>
+                            <li data-i18n="scenarios.science.coreAdvantages.item2">多学科支持：覆盖物理、化学、生物、天文、气象等多个科学领域</li>
+                            <li data-i18n="scenarios.science.coreAdvantages.item3">数据安全保障：端到端加密，符合科研数据安全标准</li>
+                            <li data-i18n="scenarios.science.coreAdvantages.item4">协作研究平台：支持多机构协同研究，数据共享与协作</li>
+                            <li data-i18n="scenarios.science.coreAdvantages.item5">成本效益：按需使用，无需巨额硬件投资，降低科研成本</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.science.fields.title">应用领域</h4>
+                        <ul>
+                            <li data-i18n="scenarios.science.fields.item1">分子动力学模拟：蛋白质折叠、药物分子设计等生物化学计算</li>
+                            <li data-i18n="scenarios.science.fields.item2">气候模拟：全球气候模型、极端天气预测等气象学研究</li>
+                            <li data-i18n="scenarios.science.fields.item3">天体物理：宇宙模拟、星系演化、黑洞研究等天文计算</li>
+                            <li data-i18n="scenarios.science.fields.item4">材料科学：新材料设计、性能预测、量子计算等</li>
+                            <li data-i18n="scenarios.science.fields.item5">基因研究：基因组分析、蛋白质结构预测、精准医疗</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.science.features.hpc.title">高性能计算</h4>
+                            <p data-i18n="scenarios.science.features.hpc.desc">支持大规模科学计算任务</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.science.features.dataSecurity.title">数据安全</h4>
+                            <p data-i18n="scenarios.science.features.dataSecurity.desc">多重加密保护，确保数据安全</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.science.features.professionalSupport.title">专业支持</h4>
+                            <p data-i18n="scenarios.science.features.professionalSupport.desc">为科研机构提供专业的技术支持</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="🎬"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.render.title">渲染服务</h2>
+                        <p data-i18n="scenarios.render.description">分布式渲染网络，加速3D动画、影视特效等渲染任务</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/scenario-render.png" alt="渲染服务"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">🎬</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">10x</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.render.stats.speedup">渲染加速</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">4K/8K</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.render.stats.hdSupport">高清支持</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">50%</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.render.stats.costSaving">成本节省</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.render.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.render.coreAdvantages.item1">分布式渲染架构：将渲染任务分配到多个节点并行处理，大幅缩短渲染时间</li>
+                            <li data-i18n="scenarios.render.coreAdvantages.item2">多格式支持：支持Blender、Maya、3ds Max、Cinema 4D等主流3D软件</li>
+                            <li data-i18n="scenarios.render.coreAdvantages.item3">高质量输出：支持4K、8K超高清渲染，满足影视级制作需求</li>
+                            <li data-i18n="scenarios.render.coreAdvantages.item4">实时预览：提供实时渲染预览功能，快速迭代优化</li>
+                            <li data-i18n="scenarios.render.coreAdvantages.item5">智能调度：自动分配最优渲染节点，最大化渲染效率</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.render.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.render.scenarios.item1">影视特效：电影、电视剧的CG特效渲染，大幅缩短制作周期</li>
+                            <li data-i18n="scenarios.render.scenarios.item2">动画制作：3D动画片、游戏过场动画等批量渲染任务</li>
+                            <li data-i18n="scenarios.render.scenarios.item3">建筑可视化：建筑效果图、室内设计渲染、VR场景制作</li>
+                            <li data-i18n="scenarios.render.scenarios.item4">产品设计：产品渲染图、广告宣传片、电商展示图</li>
+                            <li data-i18n="scenarios.render.scenarios.item5">游戏开发：游戏场景渲染、角色建模、材质贴图处理</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.render.features.fastRendering.title">快速渲染</h4>
+                            <p data-i18n="scenarios.render.features.fastRendering.desc">分布式渲染大幅缩短渲染时间</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.render.features.quality.title">质量保证</h4>
+                            <p data-i18n="scenarios.render.features.quality.desc">保证渲染质量和一致性</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.render.features.costSaving.title">成本节约</h4>
+                            <p data-i18n="scenarios.render.features.costSaving.desc">降低渲染成本，提高效率</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="🌐"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.edge.title">边缘计算</h2>
+                        <p data-i18n="scenarios.edge.description">边缘节点网络，提供低延迟、高可用的边缘计算服务</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/scenario-edge.png" alt="边缘计算"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">🌐</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">&lt;10ms</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.edge.stats.lowLatency">超低延迟</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">100+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.edge.stats.edgeNodes">边缘节点</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">99.99%</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.edge.stats.availability">可用性</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.edge.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.edge.coreAdvantages.item1">全球边缘节点：在主要城市部署边缘计算节点，就近提供服务</li>
+                            <li data-i18n="scenarios.edge.coreAdvantages.item2">超低延迟：数据处理在边缘完成，延迟低至10ms以下</li>
+                            <li data-i18n="scenarios.edge.coreAdvantages.item3">高可用架构：多节点冗余，自动故障转移，保证服务连续性</li>
+                            <li data-i18n="scenarios.edge.coreAdvantages.item4">数据本地化：敏感数据可在本地处理，满足数据合规要求</li>
+                            <li data-i18n="scenarios.edge.coreAdvantages.item5">弹性扩展：根据流量自动扩展边缘节点，应对突发需求</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.edge.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.edge.scenarios.item1">实时游戏：云游戏、AR/VR应用，需要极低延迟的交互体验</li>
+                            <li data-i18n="scenarios.edge.scenarios.item2">IoT设备：智能家居、工业物联网设备的实时数据处理</li>
+                            <li data-i18n="scenarios.edge.scenarios.item3">视频直播：直播推流、实时转码、CDN加速等流媒体服务</li>
+                            <li data-i18n="scenarios.edge.scenarios.item4">自动驾驶：车辆边缘计算、路侧设备数据处理、实时决策</li>
+                            <li data-i18n="scenarios.edge.scenarios.item5">金融交易：高频交易、实时风控、支付处理等金融应用</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-features">
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.edge.features.lowLatency.title">低延迟</h4>
+                            <p data-i18n="scenarios.edge.features.lowLatency.desc">边缘节点就近处理，延迟低至毫秒级</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.edge.features.highAvailability.title">高可用</h4>
+                            <p data-i18n="scenarios.edge.features.highAvailability.desc">分布式架构保证服务高可用性</p>
+                        </div>
+                        <div class="scenario-feature">
+                            <h4 data-i18n="scenarios.edge.features.globalCoverage.title">全球覆盖</h4>
+                            <p data-i18n="scenarios.edge.features.globalCoverage.desc">边缘节点覆盖全球主要地区</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 新增应用场景：区块链应用 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="⛓️"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.blockchain.title">区块链应用</h2>
+                        <p data-i18n="scenarios.blockchain.description">为Web3应用提供强大的去中心化计算基础设施，支持DApp开发和智能合约执行</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/scenario-blockchain.png" alt="区块链应用"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">⛓️</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">1000+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.blockchain.stats.dapps">DApp应用</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">10K+</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.blockchain.stats.tps">TPS处理</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">$0.001</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.blockchain.stats.transactionCost">交易成本</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.blockchain.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.blockchain.coreAdvantages.item1">高性能区块链：采用创新的共识机制，支持高TPS交易处理</li>
+                            <li data-i18n="scenarios.blockchain.coreAdvantages.item2">智能合约平台：支持Solidity、Rust等多种智能合约语言</li>
+                            <li data-i18n="scenarios.blockchain.coreAdvantages.item3">跨链互操作：支持与其他主流区块链网络的跨链交互</li>
+                            <li data-i18n="scenarios.blockchain.coreAdvantages.item4">开发者友好：完善的开发工具和文档，降低DApp开发门槛</li>
+                            <li data-i18n="scenarios.blockchain.coreAdvantages.item5">低Gas费用：优化的网络架构，大幅降低交易成本</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.blockchain.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.blockchain.scenarios.item1">DeFi应用：去中心化交易所、借贷协议、流动性挖矿等</li>
+                            <li data-i18n="scenarios.blockchain.scenarios.item2">NFT市场：数字艺术品交易、游戏道具、收藏品等NFT应用</li>
+                            <li data-i18n="scenarios.blockchain.scenarios.item3">GameFi：区块链游戏、Play-to-Earn、元宇宙应用</li>
+                            <li data-i18n="scenarios.blockchain.scenarios.item4">DAO治理：去中心化自治组织、社区投票、提案执行</li>
+                            <li data-i18n="scenarios.blockchain.scenarios.item5">供应链溯源：商品溯源、防伪验证、物流追踪等</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 新增应用场景：大数据分析 -->
+            <div class="scenario-card-large">
+                <div class="scenario-header-section">
+                    <div class="scenario-icon-large" data-icon="📊"></div>
+                    <div class="scenario-header-content">
+                        <h2 data-i18n="scenarios.bigdata.title">大数据分析</h2>
+                        <p data-i18n="scenarios.bigdata.description">分布式大数据处理平台，支持海量数据的存储、分析和挖掘</p>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <div class="scenario-image">
+                        <img src="../images/scenarios/scenario-bigdata.png" alt="大数据分析"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="scenario-image-placeholder" style="display:none;">📊</div>
+                    </div>
+
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value" data-i18n="scenarios.bigdata.stats.dataStorageValue">EB级</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.bigdata.stats.dataStorage">数据存储</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value" data-i18n="scenarios.bigdata.stats.streamProcessingValue">实时</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.bigdata.stats.streamProcessing">流式处理</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value" data-i18n="scenarios.bigdata.stats.processingCapacityValue">PB/天</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.bigdata.stats.processingCapacity">处理能力</div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.bigdata.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.bigdata.coreAdvantages.item1">分布式存储：去中心化存储网络，数据安全可靠</li>
+                            <li data-i18n="scenarios.bigdata.coreAdvantages.item2">实时分析：支持流式数据处理，实时分析业务数据</li>
+                            <li data-i18n="scenarios.bigdata.coreAdvantages.item3">机器学习：集成ML算法库，支持数据挖掘和预测分析</li>
+                            <li data-i18n="scenarios.bigdata.coreAdvantages.item4">可视化平台：提供丰富的数据可视化工具和报表</li>
+                            <li data-i18n="scenarios.bigdata.coreAdvantages.item5">弹性扩展：根据数据量自动扩展计算资源</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.bigdata.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.bigdata.scenarios.item1">商业智能：企业数据分析、报表生成、决策支持</li>
+                            <li data-i18n="scenarios.bigdata.scenarios.item2">用户画像：用户行为分析、精准营销、个性化推荐</li>
+                            <li data-i18n="scenarios.bigdata.scenarios.item3">风险控制：金融风控、欺诈检测、异常监控</li>
+                            <li data-i18n="scenarios.bigdata.scenarios.item4">物联网分析：IoT设备数据采集、实时监控、预测维护</li>
+                            <li data-i18n="scenarios.bigdata.scenarios.item5">日志分析：系统日志分析、安全审计、性能优化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

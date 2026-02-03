@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="nav.about">关于我们 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: var(--bg-darker);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20corporate%20business%20environment%20with%20global%20vision%2C%20abstract%20business%20symbols%2C%20blue%20and%20purple%20hue%2C%20clean%20composition%2C%20no%20people%2C%203D%20rendering%2C%20high%20quality%2C%20corporate%20business%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-description {
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .about-content {
+            padding: 4rem 0;
+        }
+        .about-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        .about-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .about-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+        .about-section ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .about-section li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.6;
+        }
+        .about-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .team-member {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-3);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        .team-member h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .team-role {
+            color: var(--primary-color);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .team-bio {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        .team-cert {
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            line-height: 1.4;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="about.title">关于我们</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="about-content">
+            <div class="about-section" id="about">
+                <h2 data-i18n="about.vision.title">愿景</h2>
+                <p data-i18n="about.vision.content">PowerVerse Chain致力于构建全球最大的去中心化计算网络，让计算资源像水电一样触手可及，为Web3生态提供强大的基础设施支撑。</p>
+            </div>
+
+            <div class="about-section" id="mission">
+                <h2 data-i18n="about.mission.title">使命</h2>
+                <p data-i18n="about.mission.content">通过区块链技术整合全球闲置计算资源，降低计算成本，提高资源利用效率，推动分布式计算技术的普及与应用。</p>
+            </div>
+
+            <div class="about-section" id="values">
+                <h2 data-i18n="about.values.title">核心价值</h2>
+                <ul>
+                    <li data-i18n="about.values.items.0">去中心化：无需中心化机构，用户直接参与网络治理</li>
+                    <li data-i18n="about.values.items.1">高效透明：区块链技术保证交易透明，智能合约自动执行</li>
+                    <li data-i18n="about.values.items.2">开放生态：支持多种应用场景，构建繁荣的开发者生态</li>
+                    <li data-i18n="about.values.items.3">安全可靠：多重安全机制，保障网络与数据安全</li>
+                </ul>
+            </div>
+
+            <div class="about-section" id="team">
+                <h2 data-i18n="about.team.title">团队介绍</h2>
+                <p data-i18n="about.team.intro">创始团队成员拥有多次成功创业经验，曾打造过行业领先的服务器集群，具有多项国家专利技术。由多名拥有公司上市经验成员加入初始团队。其他员工中有许多博士及教授，在web3领域具有丰富经验，参与多个大型项目。</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar">01</div>
+                        <h4 data-i18n="about.team.members.member1.name">Harvey</h4>
+                        <div class="team-role" data-i18n="about.team.members.member1.role">创始人 & CEO</div>
+                        <div class="team-bio" data-i18n="about.team.members.member1.bio">毕业于英国伯明翰大学，区块链技术专家，深耕加密货币领域多年</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar">02</div>
+                        <h4 data-i18n="about.team.members.member2.name">Solomon</h4>
+                        <div class="team-role" data-i18n="about.team.members.member2.role">联合创始人 & CTO</div>
+                        <div class="team-bio" data-i18n="about.team.members.member2.bio">毕业于英国曼彻斯特大学，分布式系统专家，区块链技术顾问</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar">03</div>
+                        <h4 data-i18n="about.team.members.member3.name">Jane</h4>
+                        <div class="team-role" data-i18n="about.team.members.member3.role">联合创始人 & COO</div>
+                        <div class="team-bio" data-i18n="about.team.members.member3.bio">毕业于加拿大维多利亚大学，生态系统建设专家，加密资产管理专家</div>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; color: var(--text-secondary); line-height: 1.8;" data-i18n="about.team.others">其他员工中有许多博士及教授，在web3领域具有丰富经验，参与多个大型项目。</p>
+            </div>
+
+            <div class="about-section" id="contact">
+                <h2 data-i18n="about.contact.title">联系我们</h2>
+                <p data-i18n="about.contact.intro">如果您对我们的项目感兴趣，或者有任何问题，欢迎通过以下方式联系我们：</p>
+                <ul style="display: grid; gap: 1rem;">
+                    <li>
+                        <a href="https://x.com/PowerVerseChain" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); text-decoration: none;" data-i18n="about.contact.twitter">Twitter：@PowerVerseChain</a>
+                    </li>
+                    <li>
+                        <a href="https://t.me/PowerVerseChain_Offical" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); text-decoration: none;" data-i18n="about.contact.telegram">Telegram：@PowerVerseChain_Offical</a>
+                    </li>
+                    <li>
+                        <a href="mailto:hiabacloud@gmail.com" style="color: var(--text-secondary); text-decoration: none;" data-i18n="about.contact.email">邮箱：hiabacloud@gmail.com</a>
+                    </li>
+                    <li>
+                        <span data-i18n="about.contact.address">地址：112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE 068902</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

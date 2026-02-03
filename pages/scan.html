@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="products.scan.pageTitle">Scan - 区块链浏览器</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=blockchain%20explorer%20with%20transaction%20data%20and%20block%20visualization%2C%20futuristic%20blockchain%20scan%20interface%2C%20blue%20and%20green%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .product-hero .subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+        .product-hero p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+        .product-content {
+            padding: 5rem 0;
+        }
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="product-hero">
+                <div class="product-icon">🔍</div>
+                <h1 data-i18n="products.scan.name">Scan</h1>
+                <div class="subtitle" data-i18n="products.scan.subtitle">区块链浏览器</div>
+                <p data-i18n="products.scan.intro">PowerVerse Scan 是 PowerVerse Chain 的官方区块链浏览器，提供完整的链上数据查询与分析服务，让用户轻松追踪交易、查看区块、分析地址，实现链上活动的透明化。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="product-content">
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.scan.section1.title">一、核心功能</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.section1.feature1.title">1. 区块查询</h3>
+                        <p data-i18n="products.scan.section1.feature1.desc">实时查看最新区块信息，包括区块高度、时间戳、交易数量、Gas 使用等详细数据。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.section1.feature2.title">2. 交易追踪</h3>
+                        <p data-i18n="products.scan.section1.feature2.desc">通过交易哈希快速查询交易详情，包括发送方、接收方、金额、Gas 费用、交易状态等。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.section1.feature3.title">3. 地址分析</h3>
+                        <p data-i18n="products.scan.section1.feature3.desc">查看任意地址的余额、交易历史、代币持有情况、合约交互记录等，全面了解地址活动。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.section1.feature4.title">4. 智能合约查询</h3>
+                        <p data-i18n="products.scan.section1.feature4.desc">查看智能合约的代码、ABI、调用记录、事件日志等，便于开发者调试和用户验证。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.scan.features.title">Core Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.features.item1">Real-Time Data</h3>
+                        <p data-i18n="products.scan.features.item1Desc">Real-time synchronization of on-chain data ensuring accuracy and timeliness</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.features.item2">Transaction Tracking</h3>
+                        <p data-i18n="products.scan.features.item2Desc">Complete transaction history with multi-dimensional queries and filtering</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.features.item3">Address Analysis</h3>
+                        <p data-i18n="products.scan.features.item3Desc">In-depth address activity analysis with visualized data presentation</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.scan.features.item4">Contract Query</h3>
+                        <p data-i18n="products.scan.features.item4Desc">Complete smart contract information supporting code verification and call analysis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{
+  "total_test_time": 0.27205824851989746,
+  "pages": {
+    "首页": {
+      "load_time": 0.027515649795532227,
+      "status_code": 200,
+      "page_size": 25.84765625,
+      "resources": {
+        "images": 1,
+        "scripts": 3,
+        "stylesheets": 2,
+        "links": 48
+      },
+      "image_load_times": [
+        {
+          "url": "http://localhost:8000/images/logo/logo/1.png",
+          "load_time": 0.0048601627349853516,
+          "size": 39.6904296875
+        }
+      ]
+    },
+    "关于我们": {
+      "load_time": 0.029665708541870117,
+      "status_code": 200,
+      "page_size": 14.0458984375,
+      "resources": {
+        "images": 1,
+        "scripts": 2,
+        "stylesheets": 2,
+        "links": 40
+      },
+      "image_load_times": [
+        {
+          "url": "http://localhost:8000/images/logo/logo/1.png",
+          "load_time": 0.0029680728912353516,
+          "size": 39.6904296875
+        }
+      ]
+    },
+    "产品页面": {
+      "load_time": 0.036726951599121094,
+      "status_code": 200,
+      "page_size": 13.310546875,
+      "resources": {
+        "images": 1,
+        "scripts": 2,
+        "stylesheets": 2,
+        "links": 31
+      },
+      "image_load_times": [
+        {
+          "url": "http://localhost:8000/images/logo/logo/1.png",
+          "load_time": 0.0036127567291259766,
+          "size": 39.6904296875
+        }
+      ]
+    },
+    "应用场景": {
+      "load_time": 0.03807401657104492,
+      "status_code": 200,
+      "page_size": 73.6904296875,
+      "resources": {
+        "images": 9,
+        "scripts": 2,
+        "stylesheets": 2,
+        "links": 40
+      },
+      "image_load_times": [
+        {
+          "url": "http://localhost:8000/images/logo/logo/1.png",
+          "load_time": 0.003252744674682617,
+          "size": 39.6904296875
+        },
+        {
+          "url": "http://localhost:8000/images/scenarios/demov2.png",
+          "load_time": 0.004969120025634766,
+          "size": 691.6201171875
+        },
+        {
+          "url": "http://localhost:8000/images/scenarios/walletrwa.png",
+          "load_time": 0.03264951705932617,
+          "size": 5413.439453125
+        },
+        {
+          "url": "http://localhost:8000/images/scenarios/scenario-ai.png",
+          "load_time": 0.00533604621887207,
+          "size": 281.22265625
+        },
+        {
+          "url": "http://localhost:8000/images/scenarios/scenario-science.png",
+          "load_time": 0.004586219787597656,
+          "size": 273.611328125
+        }
+      ]
+    },
+    "开发者中心": {
+      "load_time": 0.03658103942871094,
+      "status_code": 200,
+      "page_size": 14.1708984375,
+      "resources": {
+        "images": 1,
+        "scripts": 2,
+        "stylesheets": 2,
+        "links": 40
+      },
+      "image_load_times": [
+        {
+          "url": "http://localhost:8000/images/logo/logo/1.png",
+          "load_time": 0.003324270248413086,
+          "size": 39.6904296875
+        }
+      ]
+    }
+  }
+}

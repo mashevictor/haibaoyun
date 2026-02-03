@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>语言按钮测试</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 50px;
+            background: #0a0e27;
+            color: #fff;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+        .test-button {
+            padding: 10px 20px;
+            margin: 10px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .test-button:hover {
+            background: rgba(0, 212, 255, 0.2);
+        }
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>语言切换按钮测试页面</h1>
+    
+    <div class="test-section">
+        <h2>测试步骤：</h2>
+        <ol>
+            <li>点击右上角语言按钮，应该看到菜单弹出</li>
+            <li>鼠标悬浮在按钮上，应该有视觉反馈（颜色变化、阴影）</li>
+            <li>点击按钮，应该有按下效果</li>
+            <li>选择一种语言（如繁體中文）</li>
+            <li>再次点击语言按钮，应该仍然能正常打开菜单</li>
+            <li>重复步骤4-5，测试所有语言</li>
+            <li>检查控制台日志，确认事件正常触发</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试按钮：</h2>
+        <button class="test-button" onclick="testClick()">模拟点击语言按钮</button>
+        <button class="test-button" onclick="testLanguage('zh-CN')">切换到简体中文</button>
+        <button class="test-button" onclick="testLanguage('zh-TW')">切换到繁體中文</button>
+        <button class="test-button" onclick="testLanguage('en')">切换到English</button>
+        <button class="test-button" onclick="testLanguage('ja')">切换到日本語</button>
+        <button class="test-button" onclick="testLanguage('ko')">切换到한국어</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试日志：</h2>
+        <div id="log" class="log"></div>
+    </div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${time}] ${message}<br>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        function testClick() {
+            const btn = document.querySelector('.lang-switch');
+            if (btn) {
+                log('找到语言按钮，模拟点击...');
+                btn.click();
+            } else {
+                log('错误：未找到语言按钮');
+            }
+        }
+        
+        function testLanguage(lang) {
+            if (window.languageManager) {
+                log(`切换到语言: ${lang}`);
+                window.languageManager.updateLanguage(lang);
+                setTimeout(() => {
+                    const btn = document.querySelector('.lang-switch');
+                    if (btn) {
+                        log(`语言切换后，按钮文本: ${btn.textContent}`);
+                        log('尝试再次点击按钮...');
+                        btn.click();
+                    }
+                }, 200);
+            } else {
+                log('错误：语言管理器未初始化');
+            }
+        }
+        
+        // 监听语言变化事件
+        document.addEventListener('languageChanged', (e) => {
+            log(`语言已切换为: ${e.detail.language}`);
+        });
+        
+        // 监听按钮点击
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('lang-switch')) {
+                log('语言按钮被点击（事件委托）');
+            }
+        }, true);
+        
+        log('测试页面已加载');
+    </script>
+</body>
+</html>

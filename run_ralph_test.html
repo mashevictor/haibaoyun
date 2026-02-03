@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ralph Loop 全量测试</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 400px;
+            max-height: 80vh;
+            background: rgba(10, 14, 39, 0.95);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 10000;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        .test-panel h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        .test-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .test-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            color: #00d4ff;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .test-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .test-log {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        .log-entry {
+            margin: 3px 0;
+            padding: 3px;
+        }
+        .log-entry.pass { color: #00ff00; }
+        .log-entry.fail { color: #ff0000; }
+        .log-entry.warning { color: #ffaa00; }
+        .log-entry.info { color: #00d4ff; }
+        .test-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .stat-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 测试面板 -->
+    <div class="test-panel" id="testPanel">
+        <h3>🧪 Ralph Loop 测试面板</h3>
+        
+        <div class="test-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="statPassed">0</div>
+                <div class="stat-label">通过</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statFailed">0</div>
+                <div class="stat-label">失败</div>
+            </div>
+        </div>
+        
+        <div class="test-controls">
+            <button class="test-btn" onclick="startRalphTest()">🚀 开始全量测试</button>
+            <button class="test-btn" onclick="testLanguageCycle()">🔄 循环测试语言切换</button>
+            <button class="test-btn" onclick="testButtonClick()">🔘 测试按钮点击</button>
+            <button class="test-btn" onclick="clearTestLog()">🗑️ 清空日志</button>
+        </div>
+        
+        <div class="test-log" id="testLog"></div>
+    </div>
+    
+    <!-- 加载语言管理器和测试脚本 -->
+    <script src="js/languages.js"></script>
+    <script src="ralph_loop_test.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        let testLog = [];
+        
+        function updateTestLog(entry) {
+            testLog.push(entry);
+            const logDiv = document.getElementById('testLog');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${entry.type}`;
+            logEntry.textContent = `[${entry.time}] ${entry.message}`;
+            logDiv.appendChild(logEntry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            
+            // 更新统计
+            const passed = testLog.filter(e => e.type === 'pass').length;
+            const failed = testLog.filter(e => e.type === 'fail').length;
+            document.getElementById('statPassed').textContent = passed;
+            document.getElementById('statFailed').textContent = failed;
+        }
+        
+        window.updateTestLog = updateTestLog;
+        
+        function clearTestLog() {
+            testLog = [];
+            document.getElementById('testLog').innerHTML = '';
+            document.getElementById('statPassed').textContent = '0';
+            document.getElementById('statFailed').textContent = '0';
+        }
+        
+        async function startRalphTest() {
+            clearTestLog();
+            if (window.ralphTester) {
+                const results = await window.ralphTester.runAllTests();
+                updateTestLog({
+                    time: new Date().toLocaleTimeString(),
+                    message: `测试完成！通过: ${results.passed}, 失败: ${results.failed}`,
+                    type: results.failed === 0 ? 'pass' : 'fail'
+                });
+            } else {
+                updateTestLog({
+                    time: new Date().toLocaleTimeString(),
+                    message: '错误：测试器未初始化',
+                    type: 'fail'
+                });
+            }
+        }
+        
+        async function testLanguageCycle() {
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '开始循环测试语言切换...',
+                type: 'info'
+            });
+            
+            const languages = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko'];
+            
+            for (let round = 1; round <= 5; round++) {
+                updateTestLog({
+                    time: new Date().toLocaleTimeString(),
+                    message: `--- 第 ${round} 轮循环测试 ---`,
+                    type: 'info'
+                });
+                
+                for (const lang of languages) {
+                    if (window.languageManager) {
+                        window.languageManager.updateLanguage(lang);
+                        await sleep(300);
+                        
+                        const currentLang = window.languageManager.getCurrentLanguage();
+                        if (currentLang === lang) {
+                            updateTestLog({
+                                time: new Date().toLocaleTimeString(),
+                                message: `✓ 切换到 ${lang} 成功`,
+                                type: 'pass'
+                            });
+                            
+                            // 测试按钮
+                            await sleep(100);
+                            const btn = document.querySelector('.lang-switch');
+                            if (btn) {
+                                try {
+                                    btn.click();
+                                    await sleep(200);
+                                    const menu = document.getElementById('language-menu');
+                                    if (menu && menu.style.display === 'block') {
+                                        updateTestLog({
+                                            time: new Date().toLocaleTimeString(),
+                                            message: `✓ 按钮可点击 (${lang})`,
+                                            type: 'pass'
+                                        });
+                                        menu.style.display = 'none';
+                                    } else {
+                                        updateTestLog({
+                                            time: new Date().toLocaleTimeString(),
+                                            message: `✗ 按钮点击后菜单未显示 (${lang})`,
+                                            type: 'fail'
+                                        });
+                                    }
+                                } catch (e) {
+                                    updateTestLog({
+                                        time: new Date().toLocaleTimeString(),
+                                        message: `✗ 按钮点击出错 (${lang}): ${e.message}`,
+                                        type: 'fail'
+                                    });
+                                }
+                            }
+                        } else {
+                            updateTestLog({
+                                time: new Date().toLocaleTimeString(),
+                                message: `✗ 切换到 ${lang} 失败`,
+                                type: 'fail'
+                            });
+                        }
+                    }
+                }
+            }
+            
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '循环测试完成',
+                type: 'info'
+            });
+        }
+        
+        async function testButtonClick() {
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '测试按钮点击功能...',
+                type: 'info'
+            });
+            
+            const btn = document.querySelector('.lang-switch');
+            if (!btn) {
+                updateTestLog({
+                    time: new Date().toLocaleTimeString(),
+                    message: '✗ 未找到语言按钮',
+                    type: 'fail'
+                });
+                return;
+            }
+            
+            // 测试10次点击
+            for (let i = 1; i <= 10; i++) {
+                updateTestLog({
+                    time: new Date().toLocaleTimeString(),
+                    message: `测试点击 #${i}...`,
+                    type: 'info'
+                });
+                
+                try {
+                    btn.click();
+                    await sleep(200);
+                    
+                    const menu = document.getElementById('language-menu');
+                    if (menu) {
+                        if (menu.style.display === 'block') {
+                            updateTestLog({
+                                time: new Date().toLocaleTimeString(),
+                                message: `✓ 点击 #${i} 成功，菜单已显示`,
+                                type: 'pass'
+                            });
+                            menu.style.display = 'none';
+                        } else {
+                            updateTestLog({
+                                time: new Date().toLocaleTimeString(),
+                                message: `✗ 点击 #${i} 失败，菜单未显示`,
+                                type: 'fail'
+                            });
+                        }
+                    } else {
+                        updateTestLog({
+                            time: new Date().toLocaleTimeString(),
+                            message: `✗ 点击 #${i} 失败，菜单元素不存在`,
+                            type: 'fail'
+                        });
+                    }
+                } catch (e) {
+                    updateTestLog({
+                        time: new Date().toLocaleTimeString(),
+                        message: `✗ 点击 #${i} 出错: ${e.message}`,
+                        type: 'fail'
+                    });
+                }
+                
+                await sleep(300);
+            }
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '测试面板已加载，等待语言管理器初始化...',
+                type: 'info'
+            });
+            
+            setTimeout(() => {
+                if (window.languageManager) {
+                    updateTestLog({
+                        time: new Date().toLocaleTimeString(),
+                        message: '✓ 语言管理器已初始化',
+                        type: 'pass'
+                    });
+                } else {
+                    updateTestLog({
+                        time: new Date().toLocaleTimeString(),
+                        message: '✗ 语言管理器未初始化',
+                        type: 'fail'
+                    });
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

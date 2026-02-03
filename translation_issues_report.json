@@ -1,0 +1,54 @@
+{
+  "pages_with_issues": 3,
+  "total_issues": 7,
+  "details": {
+    "pages/scenarios.html": [
+      {
+        "line": 667,
+        "text": "PB级",
+        "tag": "div",
+        "full_line": "<div class=\"scenario-stat-value\">PB级</div>"
+      },
+      {
+        "line": 918,
+        "text": "EB级",
+        "tag": "div",
+        "full_line": "<div class=\"scenario-stat-value\">EB级</div>"
+      },
+      {
+        "line": 922,
+        "text": "实时",
+        "tag": "div",
+        "full_line": "<div class=\"scenario-stat-value\">实时</div>"
+      },
+      {
+        "line": 926,
+        "text": "PB/天",
+        "tag": "div",
+        "full_line": "<div class=\"scenario-stat-value\">PB/天</div>"
+      }
+    ],
+    "pages/hardware-factory.html": [
+      {
+        "line": 6,
+        "text": "硬件工厂 - PowerVerse Chain",
+        "tag": "title",
+        "full_line": "<title>硬件工厂 - PowerVerse Chain</title>"
+      }
+    ],
+    "pages/research-strength.html": [
+      {
+        "line": 6,
+        "text": "研发实力 - PowerVerse Chain",
+        "tag": "title",
+        "full_line": "<title>研发实力 - PowerVerse Chain</title>"
+      },
+      {
+        "line": 285,
+        "text": "10年+",
+        "tag": "div",
+        "full_line": "<div class=\"stat-value\">10年+</div>"
+      }
+    ]
+  }
+}

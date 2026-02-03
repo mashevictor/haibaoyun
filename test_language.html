@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>语言切换测试</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>语言切换功能测试</h1>
+    
+    <div class="test-section">
+        <h2>测试步骤：</h2>
+        <ol>
+            <li>点击右上角语言按钮</li>
+            <li>选择"繁體中文"</li>
+            <li>再次点击语言按钮，应该能正常打开菜单</li>
+            <li>切换到其他语言测试</li>
+            <li>检查页面内容是否正确翻译</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试按钮：</h2>
+        <button onclick="testLanguage('zh-CN')">简体中文</button>
+        <button onclick="testLanguage('zh-TW')">繁體中文</button>
+        <button onclick="testLanguage('en')">English</button>
+        <button onclick="testLanguage('ja')">日本語</button>
+        <button onclick="testLanguage('ko')">한국어</button>
+    </div>
+    
+    <script>
+        function testLanguage(lang) {
+            if (window.languageManager) {
+                window.languageManager.updateLanguage(lang);
+                console.log('切换到:', lang);
+            } else {
+                alert('语言管理器未初始化');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="scenarios.cloudgaming.title">云游戏 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 保留原页面所有原有样式，仅修改【游戏图片轮播样式】部分，以下是修改后的完整样式 */
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .scenario-content {
+            padding: 3rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+        
+        @media (max-width: 1600px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding: 0 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .scenario-content {
+                padding: 2rem 0;
+            }
+        }
+
+        .scenario-card-large {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 102, 255, 0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 24px;
+            padding: 0;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .scenario-image {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+            max-height: 600px;
+            background: var(--bg-darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .scenario-image video {
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            background: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .scenario-image {
+                aspect-ratio: 16/9;
+                max-height: 400px;
+                min-height: 250px;
+            }
+            .scenario-image video {
+                max-height: 400px;
+            }
+        }
+
+        .scenario-content-section {
+            padding: 3.5rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .scenario-content-section {
+                padding: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .scenario-content-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .scenario-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 2rem 0;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-stat {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            border-right: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-stat:last-child {
+            border-right: none;
+        }
+
+        .scenario-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .scenario-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .scenario-details h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 2rem 0 1.5rem 0;
+            font-weight: 600;
+        }
+
+        .scenario-details ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .scenario-details li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .scenario-details li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+        }
+
+        .video-section {
+            margin: 3rem 0;
+        }
+
+        .video-section h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .video-item {
+            background: var(--bg-darker);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .video-item {
+            aspect-ratio: 16/9;
+        }
+        
+        .video-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+        }
+
+        .video-item-title {
+            padding: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* ✅ 按要求修改后的游戏图片轮播样式：3行布局+856*400等比显示+隐藏游戏名称+无缝滚动 */
+        .game-img-container {
+            max-width: 100%;
+            margin: 3rem auto;
+            overflow: hidden;
+            position: relative;
+            padding: 0 0.5rem;
+        }
+        /* 轮播容器：改为3行网格布局，保留flex实现滚动，gap控制间距 */
+        .game-img-slider {
+            display: flex;
+            gap: 15px; /* 图片之间的间距 */
+            animation: scroll 60s linear infinite; /* 放慢滚动速度，适配3行布局 */
+            will-change: transform;
+        }
+        /* 图片容器：3行网格+856*400固定比例（核心：aspect-ratio: 856/400），禁止压缩 */
+        .game-img-item {
+            display: grid;
+            grid-template-rows: repeat(3, 1fr); /* 强制3行布局 */
+            gap: 15px; /* 行之间的间距，与列间距一致 */
+            min-width: calc((100% / 6) - 10px); /* 适配桌面端显示数量，可根据需要调整 */
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        /* 图片包裹层：单独控制每个图片，保证等比 */
+        .game-img-item .img-wrap {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            aspect-ratio: 856/400; /* 严格保持856*400原比例 */
+        }
+        /* 图片：等比率自适应显示，不拉伸、不全尺寸，覆盖容器 */
+        .game-img-item img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important; /* 等比覆盖，保持856*400比例 */
+            display: block !important;
+            transition: transform 0.3s ease;
+        }
+        /* 隐藏游戏名称：直接移除相关样式，HTML中也已删除 */
+        /* 悬浮交互：保留原效果，适配3行布局 */
+        .game-img-item .img-wrap:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0, 212, 255, 0.3);
+            border-color: rgba(0, 212, 255, 0.8) !important;
+        }
+        .game-img-item .img-wrap:hover img {
+            transform: scale(1.03); /* 轻微放大，不溢出，适配等比布局 */
+        }
+        /* 无缝滚动动画：计算正确偏移距离，适配3行布局 */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% - 15px));
+            }
+        }
+        /* 移动端响应式：适配小屏幕，调整列数和间距 */
+        @media (max-width: 768px) {
+            .game-img-item {
+                min-width: calc((100% / 3) - 8px); /* 移动端显示3列，适配小屏幕 */
+                gap: 10px; /* 移动端缩小行间距 */
+            }
+            .game-img-slider {
+                gap: 10px; /* 移动端缩小列间距 */
+            }
+            /* 移动端动画偏移适配新间距 */
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-100% - 10px));
+                }
+            }
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .image-item {
+            background: var(--bg-darker);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .image-item-caption {
+            padding: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .scenario-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .scenario-stat {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            }
+            
+            .scenario-stat-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">钱包RWA</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="scenarios.cloudgaming.title">云游戏</h1>
+            <p class="section-description" data-i18n="scenarios.cloudgaming.description">基于PowerVerse Chain的去中心化云游戏平台，提供低延迟、高质量的游戏体验</p>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="../games/嗨豹云游戏 Setup 1.3.11.exe" class="btn btn-primary" download style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <span>📥</span>
+                    <span data-i18n="scenarios.cloudgaming.download">下载客户端</span>
+                </a>
+                <a href="#" class="btn btn-secondary" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <span>🎮</span>
+                    <span data-i18n="scenarios.cloudgaming.startPlaying">立即开始</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="scenario-content">
+            <div class="scenario-card-large">
+                <div class="scenario-image">
+                    <video controls autoplay muted loop>
+                        <source src="../video/compressed/视频1.mp4" type="video/mp4">
+                        <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
+                    </video>
+                </div>
+
+                <div class="scenario-content-section">
+                    <div class="scenario-stats">
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">&lt;20ms</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.lowLatency">超低延迟</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">4K/8K</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.hdSupport">高清支持</div>
+                        </div>
+                        <div class="scenario-stat">
+                            <div class="scenario-stat-value">24/7</div>
+                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.availability">全天候服务</div>
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <h4 data-i18n="scenarios.cloudgaming.videos.title">产品演示视频</h4>
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <video controls>
+                                    <source src="../video/compressed/视频2.mp4" type="video/mp4">
+                                    <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
+                                </video>
+                                <div class="video-item-title" data-i18n="scenarios.cloudgaming.videos.video1">云游戏平台演示</div>
+                            </div>
+                            <div class="video-item">
+                                <video controls>
+                                    <source src="../video/compressed/视频3.mp4" type="video/mp4">
+                                    <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
+                                </video>
+                                <div class="video-item-title" data-i18n="scenarios.cloudgaming.videos.video2">游戏体验展示</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ✅ 修改后的游戏图片轮播HTML：3行布局+等比显示+移除游戏名称+无缝滚动 -->
+                    <div class="game-image-section">
+                        <h4 data-i18n="scenarios.cloudgaming.gameImages.title">游戏图片展示</h4>
+                        <div class="game-img-container">
+                            <div class="game-img-slider">
+                                <!-- 第一组：19张游戏图片 - 3行布局，新增.img-wrap包裹层保证等比 -->
+                                <div class="game-img-item" data-href="https://xxx.com/game1">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.png" alt="游戏封面1"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.13.png" alt="游戏封面2"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.14.png" alt="游戏封面3"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game4">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.15.png" alt="游戏封面4"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.1.png" alt="游戏封面5"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.2.png" alt="游戏封面6"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game7">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.3.png" alt="游戏封面7"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.4.png" alt="游戏封面8"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.5.png" alt="游戏封面9"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game10">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.6.png" alt="游戏封面10"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.7.png" alt="游戏封面11"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.8.png" alt="游戏封面12"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game13">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.9.png" alt="游戏封面13"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.10.png" alt="游戏封面14"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.11.png" alt="游戏封面15"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game16">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.12.png" alt="游戏封面16"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.13.png" alt="游戏封面17"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.14.png" alt="游戏封面18"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game19">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.15.png" alt="游戏封面19"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.png" alt="游戏封面1"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.13.png" alt="游戏封面2"></div>
+                                </div>
+
+                                <!-- 无缝滚动：复制第一组内容，保证滚动无断层 -->
+                                <div class="game-img-item" data-href="https://xxx.com/game1">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.png" alt="游戏封面1"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.13.png" alt="游戏封面2"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.14.png" alt="游戏封面3"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game4">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.15.png" alt="游戏封面4"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.1.png" alt="游戏封面5"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.2.png" alt="游戏封面6"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game7">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.3.png" alt="游戏封面7"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.4.png" alt="游戏封面8"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.5.png" alt="游戏封面9"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game10">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.6.png" alt="游戏封面10"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.7.png" alt="游戏封面11"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.8.png" alt="游戏封面12"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game13">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.9.png" alt="游戏封面13"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.10.png" alt="游戏封面14"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.11.png" alt="游戏封面15"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game16">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.12.png" alt="游戏封面16"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.13.png" alt="游戏封面17"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.14.png" alt="游戏封面18"></div>
+                                </div>
+                                <div class="game-img-item" data-href="https://xxx.com/game19">
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/2.15.png" alt="游戏封面19"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.png" alt="游戏封面1"></div>
+                                    <div class="img-wrap"><img src="../images/云游戏/19pic/1.13.png" alt="游戏封面2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-details">
+                        <h4 data-i18n="scenarios.cloudgaming.images.title">功能特性展示</h4>
+                        <div class="image-gallery">
+                            <div class="image-item">
+                                <img src="https://image.hibaocloud.com/powerversechain-web/images/game/1.png" alt="低延迟体验" 
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%230066ff%22 width=%22250%22 height=%22200%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E低延迟体验%3C/text%3E%3C/svg%3E';">
+                                <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item1">超低延迟，延迟低至20ms</div>
+                            </div>
+                            <div class="image-item">
+                                <img src="https://image.hibaocloud.com/powerversechain-web/images/game/2.png" alt="4K高清画质" 
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%230066ff%22 width=%22250%22 height=%22200%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E4K高清画质%3C/text%3E%3C/svg%3E';">
+                                <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item2">支持4K/8K超高清渲染</div>
+                            </div>
+                            <div class="image-item">
+                                <img src="https://image.hibaocloud.com/powerversechain-web/images/game/3.png" alt="多平台支持" 
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%230066ff%22 width=%22250%22 height=%22200%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E多平台支持%3C/text%3E%3C/svg%3E';">
+                                <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item3">支持PC、手机、平板等多种设备</div>
+                            </div>
+                            <div class="image-item">
+                                <img src="https://image.hibaocloud.com/powerversechain-web/images/game/1.13.png" alt="游戏库" 
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%230066ff%22 width=%22250%22 height=%22200%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E丰富游戏库%3C/text%3E%3C/svg%3E';">
+                                <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item4">丰富的游戏库，即开即玩</div>
+                            </div>
+                            <div class="image-item">
+                                <img src="https://image.hibaocloud.com/powerversechain-web/images/game/1.14.png" alt="去中心化架构" 
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%230066ff%22 width=%22250%22 height=%22200%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E去中心化架构%3C/text%3E%3C/svg%3E';">
+                                <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item5">去中心化架构，安全可靠</div>
+                            </div>
+                            <div class="image-item">
+                                <img src="https://image.hibaocloud.com/powerversechain-web/images/game/1.15.png" alt="智能调度" 
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22200%22%3E%3Crect fill=%22%230066ff%22 width=%22250%22 height=%22200%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E智能调度%3C/text%3E%3C/svg%3E';">
+                                <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item6">智能资源调度，优化体验</div>
+                            </div>
+                        </div>
+
+                        <h4 data-i18n="scenarios.cloudgaming.workflow.title">完整链路闭环</h4>
+                        <ul>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step1">用户注册登录：通过PowerVerse Chain钱包连接，实现去中心化身份认证</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step2">游戏选择：浏览游戏库，选择想要游玩的游戏</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step3">资源分配：PowerVerse Infra智能调度边缘计算节点，就近分配GPU资源</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step4">游戏启动：游戏在云端GPU上运行，通过低延迟流媒体传输到用户设备</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step5">实时交互：用户操作实时上传，游戏画面实时渲染并流式传输</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step6">支付结算：使用PowerVerse代币（PEC）按使用时长付费，智能合约自动结算</li>
+                            <li data-i18n="scenarios.cloudgaming.workflow.step7">资源释放：游戏结束后，GPU资源自动释放回资源池，供其他用户使用</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.cloudgaming.coreAdvantages.title">核心优势</h4>
+                        <ul>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item1">去中心化架构：无需中心化服务器，利用全球分布式GPU资源</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item2">低延迟体验：边缘计算节点就近服务，延迟低至20ms以下</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item3">成本优势：按需付费，无需购买昂贵硬件，降低游戏门槛</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item4">高质量渲染：支持4K/8K超高清画质，流畅游戏体验</li>
+                            <li data-i18n="scenarios.cloudgaming.coreAdvantages.item5">跨平台支持：支持PC、手机、平板等多种设备，随时随地畅玩</li>
+                        </ul>
+
+                        <h4 data-i18n="scenarios.cloudgaming.scenarios.title">应用场景</h4>
+                        <ul>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item1">3A大作云游戏：无需下载，即开即玩，享受顶级游戏体验</li>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item2">移动云游戏：手机端畅玩PC游戏，突破设备性能限制</li>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item3">VR/AR游戏：支持虚拟现实和增强现实游戏，沉浸式体验</li>
+                            <li data-i18n="scenarios.cloudgaming.scenarios.item4">游戏直播：低延迟游戏直播，实时互动体验</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+    
+    <!-- 保留原点击跳转JS，无需改动 -->
+    <script>
+        const gameItems = document.querySelectorAll('.game-img-item');
+        gameItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const href = item.dataset.href;
+                if (href) {
+                    window.open(href, '_blank');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

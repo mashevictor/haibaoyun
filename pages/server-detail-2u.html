@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2U标准服务器 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .server-detail {
+            padding: 2rem 0;
+        }
+        
+        /* 主图区域 - 突出显示 */
+        .server-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 20px 2rem;
+            background-color: inherit;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .server-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .server-main-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+        
+        .server-main-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .server-main-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .server-description {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        /* 规格区域 - 垂直对齐优化 */
+        .specifications-section {
+            margin-bottom: 4rem;
+        }
+        
+        .specifications-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* 规格容器 - 确保垂直对齐 */
+        .spec-container {
+            display: flex;
+            gap: 2.5rem;
+            align-items: stretch;
+            margin-bottom: 3rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .spec-container.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        /* 内容区域 - 自适应高度 */
+        .spec-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .spec-content h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 600;
+        }
+        
+        /* 图片区域 - 固定比例，垂直居中 */
+        .spec-image {
+            flex: 0 0 400px;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+        
+        .spec-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .spec-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 表格样式优化 */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            flex: 1;
+        }
+        
+        .spec-table th,
+        .spec-table td {
+            padding: 0.85rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+        
+        .spec-table th {
+            font-weight: 600;
+            color: var(--text-primary);
+            width: 30%;
+            background-color: var(--light-bg);
+        }
+        
+        .spec-table td {
+            color: var(--text-secondary);
+        }
+        
+        .spec-table tr:last-child td,
+        .spec-table tr:last-child th {
+            border-bottom: none;
+        }
+        
+        /* 返回按钮 */
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.85rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .back-link:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 992px) {
+            .spec-container {
+                flex-direction: column;
+            }
+            
+            .spec-container.reverse {
+                flex-direction: column;
+            }
+            
+            .spec-image {
+                width: 100%;
+                flex: none;
+                height: 250px;
+            }
+            
+            .server-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .specifications-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .server-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .server-main-image {
+                max-width: 100%;
+            }
+            
+            .spec-container {
+                padding: 1.5rem;
+            }
+            
+            .spec-table th, 
+            .spec-table td {
+                padding: 0.7rem 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <section class="server-detail">
+            <!-- 主图和服务器介绍 -->
+            <div class="server-header">
+                <h1>2U标准服务器</h1>
+                <div class="server-main-image">
+                    <img src="../images/切图/服务器/2U/6.png" alt="2U标准服务器">
+                </div>
+                <p class="server-description">
+                    通用型算力，适配多场景。2U标准机架式设计，兼顾性能、扩展性与性价比，专为企业通用IT需求打造，可作为Web服务器、数据库服务器、虚拟化主机、文件服务器使用，是中小企业IT架构的核心算力载体。
+                </p>
+            </div>
+
+            <!-- 技术规格 -->
+            <div class="specifications-section">
+                <h2>技术规格</h2>
+                
+                <!-- 基本配置 -->
+                <div class="spec-container">
+                    <div class="spec-content">
+                        <h3>基本配置</h3>
+                        <table class="spec-table">
+                            <tr>
+                                <th>技术规格项</th>
+                                <td>规格详情</td>
+                            </tr>
+                            <tr>
+                                <th>机箱规格</th>
+                                <td>2U标准机架式（高度88.9mm），兼容19英寸机柜，净重12kg，支持热插拔硬盘</td>
+                            </tr>
+                            <tr>
+                                <th>处理器支持</th>
+                                <td>双路Intel Xeon 2/3/4代（如Xeon4314）；AMD EPYC7004系列（如EPYC7313）</td>
+                            </tr>
+                            <tr>
+                                <th>内存扩展</th>
+                                <td>24×DDR4插槽，支持RDIMM/LRDIMM内存，最大支持4TB DDR4-3200，支持内存ECC校验</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="spec-image">
+                        <img src="../images/切图/服务器/2U/6.1.png" alt="基本配置">
+                    </div>
+                </div>
+                
+                <!-- 存储和网络 -->
+                <div class="spec-container reverse">
+                    <div class="spec-image">
+                        <img src="../images/切图/服务器/2U/6.3.png" alt="存储和网络">
+                    </div>
+                    <div class="spec-content">
+                        <h3>存储和网络</h3>
+                        <table class="spec-table">
+                            <tr>
+                                <th>技术规格项</th>
+                                <td>规格详情</td>
+                            </tr>
+                            <tr>
+                                <th>存储扩展</th>
+                                <td>8×3.5英寸SATA/SAS3.0热插拔盘位，支持RAID 0/1/5/10/50/60（硬件RAID卡）；可选2×NVMe U.2缓存盘</td>
+                            </tr>
+                            <tr>
+                                <th>网络接口</th>
+                                <td>2×10GBASE-T网口（Intel X710）+1×1GBASE-T管理网口，支持链路聚合、VLAN划分</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 扩展和电源 -->
+                <div class="spec-container">
+                    <div class="spec-content">
+                        <h3>扩展和电源</h3>
+                        <table class="spec-table">
+                            <tr>
+                                <th>技术规格项</th>
+                                <td>规格详情</td>
+                            </tr>
+                            <tr>
+                                <th>扩展槽</th>
+                                <td>6×PCle4.0插槽（2×x16、2×x8、2×x4），支持显卡、万兆网卡、光纤卡扩展</td>
+                            </tr>
+                            <tr>
+                                <th>电源系统</th>
+                                <td>2×800W 80+白金认证冗余电源，支持热插拔，转换效率≥94%</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="spec-image">
+                        <img src="../images/切图/服务器/2U/6，2.png" alt="扩展和电源">
+                    </div>
+                </div>
+                
+                <!-- 管理和散热 -->
+                <div class="spec-container reverse">
+                    <div class="spec-image">
+                        <img src="../images/切图/服务器/2U/6.png" alt="管理和散热">
+                    </div>
+                    <div class="spec-content">
+                        <h3>管理和散热</h3>
+                        <table class="spec-table">
+                            <tr>
+                                <th>技术规格项</th>
+                                <td>规格详情</td>
+                            </tr>
+                            <tr>
+                                <th>管理功能</th>
+                                <td>集成iDRAC9（戴尔远程管理）/iLO6（惠普远程管理），支持远程开关机、硬件诊断、固件更新</td>
+                            </tr>
+                            <tr>
+                                <th>散热系统</th>
+                                <td>4×80mm智能温控风扇，支持按CPU/硬盘温度动态调节风速，运行噪音≤55dB</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="hardware-factory.html" class="back-link">返回硬件工厂</a>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="products.wallet.pageTitle">Wallet - 数字资产钱包</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=digital%20asset%20wallet%20with%20cryptocurrency%20coins%20and%20blockchain%20security%2C%20futuristic%20wallet%20interface%2C%20blue%20and%20gold%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .product-hero .subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+        .product-hero p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+        .product-content {
+            padding: 5rem 0;
+        }
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+        }
+        .info-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .info-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        .info-box ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
+        .info-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+        }
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="product-hero">
+                <div class="product-icon">💼</div>
+                <h1 data-i18n="products.wallet.name">Wallet</h1>
+                <div class="subtitle" data-i18n="products.wallet.subtitle">数字资产钱包</div>
+                <p data-i18n="products.wallet.intro">PowerVerse Wallet 是一款安全、易用的多链数字资产钱包，支持 PowerVerse Chain 及主流公链，为用户提供资产管理、DeFi 交互、NFT 收藏等全方位服务。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="product-content">
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section1.title">一、核心功能</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.section1.feature1.title">1. 多链资产管理</h3>
+                        <p data-i18n="products.wallet.section1.feature1.desc">支持 PowerVerse Chain、Ethereum、BSC 等多条公链，统一管理各类数字资产，包括 PEC、ETH、BNB 等主流代币。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.section1.feature2.title">2. 安全存储</h3>
+                        <p data-i18n="products.wallet.section1.feature2.desc">采用硬件加密和多重签名技术，私钥本地加密存储，支持助记词备份，确保资产安全。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.section1.feature3.title">3. DeFi 交互</h3>
+                        <p data-i18n="products.wallet.section1.feature3.desc">内置 DApp 浏览器，支持一键连接 DeFi 协议，便捷进行流动性挖矿、质押、借贷等操作。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.section1.feature4.title">4. NFT 管理</h3>
+                        <p data-i18n="products.wallet.section1.feature4.desc">支持 NFT 的查看、转账、展示，轻松管理您的数字收藏品。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section2.title">二、全球支付功能</h2>
+                
+                <div class="info-box">
+                    <h4 data-i18n="products.wallet.section2.globalPayment.title">全球支付能力</h4>
+                    <p data-i18n="products.wallet.section2.globalPayment.desc">PowerVerse Wallet 支持全球范围内的数字资产支付，无论您身在何处，都能快速、安全地完成跨境支付。支持多种支付方式，包括扫码支付、NFC 近场支付、在线支付等，让数字资产真正成为全球通用的支付工具。</p>
+                    <ul>
+                        <li data-i18n="products.wallet.section2.globalPayment.item1">支持全球 200+ 国家和地区的支付网络</li>
+                        <li data-i18n="products.wallet.section2.globalPayment.item2">实时汇率转换，自动计算最优支付路径</li>
+                        <li data-i18n="products.wallet.section2.globalPayment.item3">低手续费，相比传统跨境支付节省 80% 以上成本</li>
+                        <li data-i18n="products.wallet.section2.globalPayment.item4">秒级到账，无需等待银行工作日</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section3.title">三、DEX 交易功能</h2>
+                
+                <div class="info-box">
+                    <h4 data-i18n="products.wallet.section3.dexTrading.title">去中心化交易所集成</h4>
+                    <p data-i18n="products.wallet.section3.dexTrading.desc">PowerVerse Wallet 内置去中心化交易所（DEX）功能，无需离开钱包即可完成代币交易。支持多种交易对，提供最优价格路由，确保用户获得最佳交易体验。</p>
+                    <ul>
+                        <li data-i18n="products.wallet.section3.dexTrading.item1">集成多个主流 DEX，自动寻找最优价格</li>
+                        <li data-i18n="products.wallet.section3.dexTrading.item2">支持限价单、市价单等多种订单类型</li>
+                        <li data-i18n="products.wallet.section3.dexTrading.item3">实时价格监控和交易提醒</li>
+                        <li data-i18n="products.wallet.section3.dexTrading.item4">交易历史记录和收益分析</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section4.title">四、云游戏全场景贯通</h2>
+                
+                <div class="info-box">
+                    <h4 data-i18n="products.wallet.section4.cloudGaming.title">无缝游戏体验</h4>
+                    <p data-i18n="products.wallet.section4.cloudGaming.desc">PowerVerse Wallet 深度集成云游戏生态，实现游戏内资产、道具、NFT 的统一管理。玩家可以使用钱包直接登录游戏，使用代币购买游戏道具，交易游戏内 NFT，真正实现 Web3 游戏的全场景贯通。</p>
+                    <ul>
+                        <li data-i18n="products.wallet.section4.cloudGaming.item1">一键登录云游戏平台，无需重复注册</li>
+                        <li data-i18n="products.wallet.section4.cloudGaming.item2">游戏内资产实时同步，支持跨游戏资产转移</li>
+                        <li data-i18n="products.wallet.section4.cloudGaming.item3">游戏道具 NFT 化，可在二级市场自由交易</li>
+                        <li data-i18n="products.wallet.section4.cloudGaming.item4">游戏收益自动结算到钱包，支持提现和再投资</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.features.title">Core Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.features.item1">Multi-Chain Support</h3>
+                        <p data-i18n="products.wallet.features.item1Desc">Support for PowerVerse Chain, Ethereum, BSC and other mainstream public chains</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.features.item2">Secure and Reliable</h3>
+                        <p data-i18n="products.wallet.features.item2Desc">Hardware encryption, multi-signature, mnemonic backup for comprehensive asset security</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.features.item3">DeFi Integration</h3>
+                        <p data-i18n="products.wallet.features.item3Desc">Built-in DApp browser for seamless connection to DeFi ecosystem</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.wallet.features.item4">NFT Management</h3>
+                        <p data-i18n="products.wallet.features.item4Desc">Complete NFT viewing, transfer, and display functionality</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

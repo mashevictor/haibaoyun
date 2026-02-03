@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频压缩效果对比 - PowerVerse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .info-box h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-box li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .info-box li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .video-header h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .video-header .stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .video-container {
+            position: relative;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        
+        video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .loading-indicator.show {
+            opacity: 1;
+        }
+        
+        .video-info {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .badge-original {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .badge-compressed {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 视频压缩效果对比测试</h1>
+        
+        <div class="info-box">
+            <h2>压缩优化说明</h2>
+            <ul>
+                <li>保持原始视频尺寸（分辨率不变）</li>
+                <li>使用 H.264 编码，兼容所有浏览器</li>
+                <li>启用 faststart，支持边下载边播放</li>
+                <li>优化码率，大幅减小文件体积</li>
+                <li>适合网站快速加载和预加载</li>
+            </ul>
+        </div>
+        
+        <div id="videoComparisons"></div>
+    </div>
+    
+    <script>
+        // 视频列表
+        const videos = [
+            { name: '视频1', original: 'video/视频1.mp4', compressed: 'video/视频1_web.mp4' },
+            { name: '视频2', original: 'video/视频2.mp4', compressed: 'video/视频2_web.mp4' },
+            { name: '视频3', original: 'video/视频3.mp4', compressed: 'video/视频3_web.mp4' },
+            { name: '视频4', original: 'video/视频4.mp4', compressed: 'video/视频4_web.mp4' }
+        ];
+        
+        // 格式化文件大小
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+        
+        // 获取文件大小
+        async function getFileSize(url) {
+            try {
+                const response = await fetch(url, { method: 'HEAD' });
+                const size = response.headers.get('content-length');
+                return size ? parseInt(size) : 0;
+            } catch (error) {
+                console.error('获取文件大小失败:', error);
+                return 0;
+            }
+        }
+        
+        // 创建视频对比卡片
+        async function createVideoCard(videoData) {
+            const container = document.getElementById('videoComparisons');
+            
+            // 检查压缩版本是否存在
+            try {
+                const response = await fetch(videoData.compressed, { method: 'HEAD' });
+                if (!response.ok) {
+                    console.log(`压缩版本不存在: ${videoData.compressed}`);
+                    return;
+                }
+            } catch (error) {
+                console.log(`无法访问: ${videoData.compressed}`);
+                return;
+            }
+            
+            // 获取文件大小
+            const [originalSize, compressedSize] = await Promise.all([
+                getFileSize(videoData.original),
+                getFileSize(videoData.compressed)
+            ]);
+            
+            const compressionRatio = originalSize > 0 
+                ? ((1 - compressedSize / originalSize) * 100).toFixed(1)
+                : 0;
+            
+            const comparisonDiv = document.createElement('div');
+            comparisonDiv.className = 'comparison-grid';
+            comparisonDiv.innerHTML = `
+                <div class="video-card">
+                    <div class="video-header">
+                        <h3>${videoData.name} <span class="badge badge-original">原始版本</span></h3>
+                        <div class="stats">
+                            <span>文件大小: ${formatBytes(originalSize)}</span>
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="${videoData.original}" type="video/mp4">
+                            您的浏览器不支持视频标签。
+                        </video>
+                        <div class="loading-indicator" id="loading-original-${videoData.name}">
+                            加载中...
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="info-item">
+                            <span class="info-label">文件大小</span>
+                            <span class="info-value">${formatBytes(originalSize)}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">加载时间</span>
+                            <span class="info-value" id="load-time-original-${videoData.name}">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-header">
+                        <h3>${videoData.name} <span class="badge badge-compressed">压缩版本</span></h3>
+                        <div class="stats">
+                            <span>文件大小: ${formatBytes(compressedSize)}</span>
+                            <span>压缩率: ${compressionRatio}%</span>
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="${videoData.compressed}" type="video/mp4">
+                            您的浏览器不支持视频标签。
+                        </video>
+                        <div class="loading-indicator" id="loading-compressed-${videoData.name}">
+                            加载中...
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="info-item">
+                            <span class="info-label">文件大小</span>
+                            <span class="info-value">${formatBytes(compressedSize)}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">加载时间</span>
+                            <span class="info-value" id="load-time-compressed-${videoData.name}">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">压缩比例</span>
+                            <span class="info-value" style="color: #4CAF50;">${compressionRatio}%</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(comparisonDiv);
+            
+            // 监听视频加载
+            const videos = comparisonDiv.querySelectorAll('video');
+            videos.forEach((video, index) => {
+                const type = index === 0 ? 'original' : 'compressed';
+                const loadingIndicator = document.getElementById(`loading-${type}-${videoData.name}`);
+                const loadTimeSpan = document.getElementById(`load-time-${type}-${videoData.name}`);
+                
+                let startTime;
+                
+                video.addEventListener('loadstart', () => {
+                    startTime = performance.now();
+                    loadingIndicator.classList.add('show');
+                });
+                
+                video.addEventListener('canplay', () => {
+                    const loadTime = ((performance.now() - startTime) / 1000).toFixed(2);
+                    loadTimeSpan.textContent = loadTime + ' 秒';
+                    loadingIndicator.classList.remove('show');
+                });
+            });
+        }
+        
+        // 初始化
+        async function init() {
+            for (const video of videos) {
+                await createVideoCard(video);
+            }
+        }
+        
+        // 页面加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>

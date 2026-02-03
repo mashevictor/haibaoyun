@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerVerse Chain - 全站自动化测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00d4ff;
+        }
+        .test-controls {
+            background: #1a1e3a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .test-results {
+            background: #1a1e3a;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .test-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #00d4ff;
+            background: #0f1329;
+        }
+        .test-item.success {
+            border-left-color: #00ff88;
+        }
+        .test-item.error {
+            border-left-color: #ff4444;
+        }
+        .test-item.warning {
+            border-left-color: #ffaa00;
+        }
+        .test-item h3 {
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+        .test-item.error h3 {
+            color: #ff4444;
+        }
+        .test-item.success h3 {
+            color: #00ff88;
+        }
+        .test-item.warning h3 {
+            color: #ffaa00;
+        }
+        .test-details {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .progress {
+            margin-bottom: 20px;
+            background: #0f1329;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff 0%, #0066ff 100%);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #1a1e3a;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 24px;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+        .stat-card p {
+            color: #999;
+            font-size: 14px;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 PowerVerse Chain 全站自动化测试</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="totalPages">0</h3>
+                <p>总页面数</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="testedPages">0</h3>
+                <p>已测试</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="successPages">0</h3>
+                <p>成功</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="errorPages">0</h3>
+                <p>错误</p>
+            </div>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 0%">0%</div>
+        </div>
+        
+        <div class="test-controls">
+            <button onclick="startTest()">开始测试</button>
+            <button onclick="stopTest()">停止测试</button>
+            <button onclick="clearResults()">清空结果</button>
+            <button onclick="exportReport()">导出报告</button>
+        </div>
+        
+        <div class="test-results" id="testResults"></div>
+    </div>
+
+    <script>
+        const pages = [
+            { name: '首页', path: 'index.html' },
+            { name: '应用场景', path: 'pages/scenarios.html' },
+            { name: '代币页面', path: 'pages/token.html' },
+            { name: '硬件工厂', path: 'pages/hardware-factory.html' },
+            { name: '研发实力', path: 'pages/research-strength.html' },
+            { name: '开发者中心', path: 'pages/developer.html' },
+            { name: '关于我们', path: 'pages/about.html' },
+            { name: 'PowerVerse Chain', path: 'pages/chain.html' },
+            { name: 'PowerVerse Infra', path: 'pages/infra.html' },
+            { name: 'PowerVerse Market', path: 'pages/market.html' },
+            { name: 'PowerVerse DAO', path: 'pages/dao.html' },
+            { name: 'DeCloud', path: 'pages/decloud.html' },
+        ];
+
+        let testResults = [];
+        let isRunning = false;
+        let currentTestIndex = 0;
+
+        // 中文字符检测
+        const chineseRegex = /[\u4e00-\u9fa5]/;
+
+        function updateStats() {
+            document.getElementById('totalPages').textContent = pages.length;
+            document.getElementById('testedPages').textContent = testResults.length;
+            document.getElementById('successPages').textContent = testResults.filter(r => r.status === 'success').length;
+            document.getElementById('errorPages').textContent = testResults.filter(r => r.status === 'error').length;
+            
+            const progress = (testResults.length / pages.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = Math.round(progress) + '%';
+        }
+
+        async function testPage(pageInfo) {
+            return new Promise((resolve) => {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = pageInfo.path;
+                
+                iframe.onload = async () => {
+                    try {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        
+                        // 等待页面加载
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        
+                        // 切换到英文
+                        const langButton = iframeDoc.querySelector('.lang-switch');
+                        if (langButton) {
+                            // 模拟鼠标悬停
+                            const mouseEnterEvent = new MouseEvent('mouseenter', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            });
+                            langButton.dispatchEvent(mouseEnterEvent);
+                            
+                            await new Promise(resolve => setTimeout(resolve, 500));
+                            
+                            // 查找英文选项并点击
+                            const languageMenu = iframeDoc.querySelector('.language-menu');
+                            if (languageMenu) {
+                                const options = languageMenu.querySelectorAll('.language-option');
+                                // 通常英文是第二个选项（索引1）
+                                if (options.length >= 2) {
+                                    options[1].click();
+                                    await new Promise(resolve => setTimeout(resolve, 1000));
+                                }
+                            }
+                        }
+                        
+                        // 检查中文
+                        const bodyText = iframeDoc.body.textContent || '';
+                        const chineseChars = bodyText.match(chineseRegex);
+                        
+                        // 检查空链接
+                        const links = iframeDoc.querySelectorAll('a');
+                        const emptyLinks = [];
+                        links.forEach(link => {
+                            const href = link.getAttribute('href');
+                            const isVisible = link.offsetParent !== null;
+                            if (isVisible && (!href || href === '#' || href.trim() === '')) {
+                                emptyLinks.push({
+                                    text: link.textContent?.trim() || '无文本',
+                                    href: href || '空'
+                                });
+                            }
+                        });
+                        
+                        // 模拟滚动
+                        iframe.contentWindow.scrollTo(0, 500);
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        iframe.contentWindow.scrollTo(0, 1000);
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        iframe.contentWindow.scrollTo(0, 0);
+                        
+                        // 检查语言按钮是否仍然可用
+                        const langButtonAfterScroll = iframeDoc.querySelector('.lang-switch');
+                        const langButtonVisible = langButtonAfterScroll && 
+                            window.getComputedStyle(langButtonAfterScroll).display !== 'none';
+                        
+                        const result = {
+                            page: pageInfo.name,
+                            path: pageInfo.path,
+                            status: chineseChars && chineseChars.length > 0 ? 'error' : 'success',
+                            chineseChars: chineseChars ? [...new Set(chineseChars)].slice(0, 10).join('') : '',
+                            emptyLinks: emptyLinks,
+                            langButtonWorking: langButtonVisible,
+                            details: []
+                        };
+                        
+                        if (chineseChars && chineseChars.length > 0) {
+                            result.details.push(`发现 ${chineseChars.length} 个中文字符: ${result.chineseChars}`);
+                        }
+                        
+                        if (emptyLinks.length > 0) {
+                            result.details.push(`发现 ${emptyLinks.length} 个空链接`);
+                            result.status = result.status === 'success' ? 'warning' : 'error';
+                        }
+                        
+                        if (!langButtonVisible) {
+                            result.details.push('语言按钮不可见或不可用');
+                            result.status = 'warning';
+                        }
+                        
+                        resolve(result);
+                    } catch (error) {
+                        resolve({
+                            page: pageInfo.name,
+                            path: pageInfo.path,
+                            status: 'error',
+                            error: error.message,
+                            details: [`测试出错: ${error.message}`]
+                        });
+                    } finally {
+                        document.body.removeChild(iframe);
+                    }
+                };
+                
+                iframe.onerror = () => {
+                    resolve({
+                        page: pageInfo.name,
+                        path: pageInfo.path,
+                        status: 'error',
+                        error: '页面加载失败',
+                        details: ['无法加载页面']
+                    });
+                    document.body.removeChild(iframe);
+                };
+                
+                document.body.appendChild(iframe);
+            });
+        }
+
+        function addResult(result) {
+            testResults.push(result);
+            updateStats();
+            
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-item ${result.status}`;
+            
+            const statusIcon = result.status === 'success' ? '✅' : 
+                              result.status === 'error' ? '❌' : '⚠️';
+            
+            resultDiv.innerHTML = `
+                <h3>${statusIcon} ${result.page}</h3>
+                <p>路径: ${result.path}</p>
+                ${result.details.length > 0 ? `
+                    <div class="test-details">
+                        ${result.details.map(d => `<div>• ${d}</div>`).join('')}
+                        ${result.emptyLinks && result.emptyLinks.length > 0 ? `
+                            <div style="margin-top: 10px;">
+                                <strong>空链接:</strong>
+                                ${result.emptyLinks.slice(0, 5).map(link => 
+                                    `<div>  - "${link.text}" -> ${link.href}</div>`
+                                ).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
+            `;
+            
+            document.getElementById('testResults').appendChild(resultDiv);
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function startTest() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            document.getElementById('testResults').innerHTML = '';
+            testResults = [];
+            updateStats();
+            
+            for (let i = 0; i < pages.length; i++) {
+                if (!isRunning) break;
+                
+                currentTestIndex = i;
+                const result = await testPage(pages[i]);
+                addResult(result);
+                
+                // 延迟以避免过快
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            isRunning = false;
+            
+            // 显示总结
+            const summary = document.createElement('div');
+            summary.className = 'test-item';
+            summary.style.marginTop = '20px';
+            summary.innerHTML = `
+                <h3>📊 测试总结</h3>
+                <div class="test-details">
+                    <div>总页面数: ${pages.length}</div>
+                    <div>成功: ${testResults.filter(r => r.status === 'success').length}</div>
+                    <div>错误: ${testResults.filter(r => r.status === 'error').length}</div>
+                    <div>警告: ${testResults.filter(r => r.status === 'warning').length}</div>
+                </div>
+            `;
+            document.getElementById('testResults').appendChild(summary);
+        }
+
+        function stopTest() {
+            isRunning = false;
+        }
+
+        function clearResults() {
+            document.getElementById('testResults').innerHTML = '';
+            testResults = [];
+            updateStats();
+        }
+
+        function exportReport() {
+            const report = {
+                timestamp: new Date().toISOString(),
+                totalPages: pages.length,
+                results: testResults,
+                summary: {
+                    success: testResults.filter(r => r.status === 'success').length,
+                    error: testResults.filter(r => r.status === 'error').length,
+                    warning: testResults.filter(r => r.status === 'warning').length
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `test-report-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // 初始化
+        updateStats();
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "P PowerVerse Chain" [ref=e6] [cursor=pointer]:
+        - /url: ../index.html
+        - generic [ref=e7]: P
+        - generic [ref=e8]: PowerVerse Chain
+      - list [ref=e9]:
+        - listitem [ref=e10]:
+          - link "产品" [ref=e11] [cursor=pointer]:
+            - /url: ../index.html#product
+        - listitem [ref=e12]:
+          - link "应用场景" [ref=e13] [cursor=pointer]:
+            - /url: scenarios.html
+        - listitem [ref=e14]:
+          - link "开发者中心" [ref=e15] [cursor=pointer]:
+            - /url: developer.html
+        - listitem [ref=e16]:
+          - link "代币" [ref=e17] [cursor=pointer]:
+            - /url: token.html
+        - listitem [ref=e18]:
+          - link "硬件工厂" [ref=e19] [cursor=pointer]:
+            - /url: hardware-factory.html
+        - listitem [ref=e20]:
+          - link "研发实力" [ref=e21] [cursor=pointer]:
+            - /url: research-strength.html
+        - listitem [ref=e22]:
+          - link "关于我们" [ref=e23] [cursor=pointer]:
+            - /url: about.html
+      - button "简体中文" [active] [ref=e25] [cursor=pointer]
+  - generic [ref=e28]:
+    - generic [ref=e29]: 🪙
+    - heading "RWA代币 XAI" [level=1] [ref=e30]
+    - generic [ref=e31]: 生态核心通证
+    - paragraph [ref=e32]: XAI 是 XRWA AI 生态内的核心功能通证与价值储备代币，基于 ERC-3643 标准开发，承担生态价值流转媒介、收益分配工具、服务支付凭证三大核心职能。
+  - generic [ref=e34]:
+    - generic [ref=e35]:
+      - heading "一、核心职能" [level=2] [ref=e36]
+      - generic [ref=e37]:
+        - heading "1. 生态收益分配的唯一支付工具" [level=3] [ref=e38]
+        - paragraph [ref=e39]: GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放，这一设计将资产与 XAI 价值深度绑定，确保代币持有者获得算力资产产生的收益分红。
+        - generic [ref=e40]:
+          - paragraph [ref=e41]: GNFT 是 XRWA 生态中物理 GPU 资产的链上唯一确权凭证，基于 ERC-721 标准开发，具备不可分割、不可替代、唯一标识的技术属性。每一枚 GNFT 对应现实世界中一台经过硬件验证、性能测评的 GPU 设备，实现物理资产与链上资产的 1:1 锚定。
+          - paragraph [ref=e42]: GUnit 是基于 GNFT 拆分生成通证，遵循 ERC-3643 标准，具备可分割、可替代、标准化的技术属性，同时也集成了 KYC/AML 相关信息。每一枚 GUnit 对应 GNFT 底层 GPU 资产的单位算力份额。
+          - paragraph [ref=e43]: XAI 作为收益分配的唯一支付工具，将 GNFT 和 GUnit 持有者的收益与 XAI 价值深度绑定，形成稳定的价值循环。
+      - generic [ref=e44]:
+        - heading "2. AI生态服务的强制支付凭证" [level=3] [ref=e45]
+        - paragraph [ref=e46]: 在 XRWA 的 AI 应用生态中，XAI 是唯一的服务支付工具，覆盖所有算力与 AI 相关服务场景，构建了 XAI 的刚性需求，推动代币价值提升。
+        - generic [ref=e47]:
+          - paragraph [ref=e48]: XAI 覆盖 XRWA 生态的 AI 全场景交互，是连接资产端与应用端的价值桥梁。在算力港（XAI Center）平台中，所有算力服务、模型训练、推理服务、数据存储等服务的支付均使用 XAI 代币，形成刚性的支付需求。
+          - paragraph [ref=e49]: 这一"强制支付"机制构建了 XAI 的刚性需求，XAI 的使用场景与需求量将同步增长，进而推动代币价值提升。随着生态规模的扩大，XAI 的支付场景将不断扩展，包括：
+          - list [ref=e50]:
+            - listitem [ref=e51]:
+              - generic [ref=e52]: •
+              - text: 算力租赁与购买服务
+            - listitem [ref=e53]:
+              - generic [ref=e54]: •
+              - text: AI 模型训练与推理服务
+            - listitem [ref=e55]:
+              - generic [ref=e56]: •
+              - text: 数据存储与管理服务
+            - listitem [ref=e57]:
+              - generic [ref=e58]: •
+              - text: Agent 应用开发与部署服务
+      - generic [ref=e59]:
+        - heading "3. 生态治理与节点激励的核心代币" [level=3] [ref=e60]
+        - paragraph [ref=e61]: XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，核心角色需质押 XAI 获得节点资格，通过质押惩罚机制保障生态节点的合规性与可靠性。
+        - generic [ref=e62]:
+          - heading "治理参与" [level=4] [ref=e63]
+          - paragraph [ref=e64]: XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，包括：
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - generic [ref=e67]: •
+              - text: 协议升级与功能改进提案
+            - listitem [ref=e68]:
+              - generic [ref=e69]: •
+              - text: 资产配置与运营策略调整
+            - listitem [ref=e70]:
+              - generic [ref=e71]: •
+              - text: 收益分配机制优化
+            - listitem [ref=e72]:
+              - generic [ref=e73]: •
+              - text: 生态合作伙伴选择
+          - heading "节点质押" [level=4] [ref=e74]
+          - paragraph [ref=e75]: XRWA 生态的核心角色，需质押一定数量的 XAI 方可获得节点资格，并通过"质押惩罚"机制保障生态节点的合规性与可靠性。质押机制包括：
+          - list [ref=e76]:
+            - listitem [ref=e77]:
+              - generic [ref=e78]: •
+              - text: 最低质押要求：成为验证者需要质押最低数量的 XAI
+            - listitem [ref=e79]:
+              - generic [ref=e80]: •
+              - text: 质押奖励：验证者根据质押量和在线时间获得区块奖励和交易费用
+            - listitem [ref=e81]:
+              - generic [ref=e82]: •
+              - text: 惩罚机制：恶意行为（如双重签名、长时间离线）将导致部分或全部质押代币被罚没
+    - generic [ref=e83]:
+      - heading "二、经济模型" [level=2] [ref=e84]
+      - generic [ref=e85]:
+        - heading "发行机制" [level=3] [ref=e86]
+        - paragraph [ref=e87]: XAI 的发行采用"创世发行+生态挖矿"结合的方式：
+        - generic [ref=e88]:
+          - heading "创世发行" [level=4] [ref=e89]
+          - paragraph [ref=e90]: 创世发行部分用于项目启动、团队激励、机构投资，确保项目初期有足够的资金和资源支持。
+          - heading "生态挖矿" [level=4] [ref=e91]
+          - paragraph [ref=e92]: 生态挖矿部分通过以下方式逐步释放：
+          - list [ref=e93]:
+            - listitem [ref=e94]:
+              - generic [ref=e95]: •
+              - text: GNFT/GUnit 持有挖矿：持有算力资产通证的用户可获得 XAI 挖矿奖励
+            - listitem [ref=e96]:
+              - generic [ref=e97]: •
+              - text: AI 服务使用挖矿：使用算力港平台服务的用户可获得 XAI 奖励
+            - listitem [ref=e98]:
+              - generic [ref=e99]: •
+              - text: 节点验证挖矿：参与网络验证的节点可获得 XAI 奖励
+          - paragraph [ref=e100]: 这一机制确保代币流通量与生态发展进度匹配，避免过度通胀，保持代币价值的稳定性。
+      - generic [ref=e101]:
+        - heading "价值锚定体系" [level=3] [ref=e102]
+        - paragraph [ref=e103]: GNFT、GUnit、XAI 在 XRWA 生态中并非独立存在，而是形成"资产确权-拆分流通-价值交互"的协同体系：
+        - generic [ref=e104]:
+          - heading "基础层：GNFT 的资产锚定" [level=4] [ref=e105]
+          - paragraph [ref=e106]: GNFT 将物理 GPU 资产转化为链上确权资产，为生态提供"价值基础"。若没有 GNFT 的资产锚定，GUnit 的拆分将失去底层资产支撑，XAI 的收益分配也将缺乏价值来源。
+          - heading "流通层：GUnit 的小额化赋能" [level=4] [ref=e107]
+          - paragraph [ref=e108]: GUnit 通过拆分 GNFT，将高价值资产转化为可小额交易的通证，提升生态资产的流动性与普惠性，吸引更多用户参与，为生态带来增量资金与算力需求，进而扩大 XAI 的支付场景。
+          - heading "价值层：XAI 的生态串联" [level=4] [ref=e109]
+          - paragraph [ref=e110]: XAI 作为收益分配工具，连接资产持有者与生态贡献者，通过收益分配激励资产持有者提供更多算力，通过支付需求激励 AI 用户使用生态服务，反向推动 GNFT 的上链规模与 GUnit 的流通活跃度。
+    - generic [ref=e111]:
+      - heading "核心特性" [level=2] [ref=e112]
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - heading "收益分配" [level=3] [ref=e115]
+          - paragraph [ref=e116]: GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放
+        - generic [ref=e117]:
+          - heading "服务支付" [level=3] [ref=e118]
+          - paragraph [ref=e119]: AI 生态服务的强制支付凭证，覆盖所有算力与 AI 相关服务场景
+        - generic [ref=e120]:
+          - heading "生态治理" [level=3] [ref=e121]
+          - paragraph [ref=e122]: 持有者具备生态治理权，可通过链上投票参与关键决策
+        - generic [ref=e123]:
+          - heading "价值锚定" [level=3] [ref=e124]
+          - paragraph [ref=e125]: 与实体算力资产深度绑定，确保代币价值的稳定性
+  - contentinfo [ref=e126]:
+    - generic [ref=e127]:
+      - generic [ref=e129]:
+        - heading "产品" [level=4] [ref=e130]
+        - list [ref=e131]:
+          - listitem [ref=e132]:
+            - link "PowerVerse Chain" [ref=e133] [cursor=pointer]:
+              - /url: chain.html
+          - listitem [ref=e134]:
+            - link "PowerVerse Infra" [ref=e135] [cursor=pointer]:
+              - /url: infra.html
+          - listitem [ref=e136]:
+            - link "PowerVerse Market" [ref=e137] [cursor=pointer]:
+              - /url: market.html
+          - listitem [ref=e138]:
+            - link "PowerVerse DAO" [ref=e139] [cursor=pointer]:
+              - /url: dao.html
+          - listitem [ref=e140]:
+            - link "PowerVerse Wallet" [ref=e141] [cursor=pointer]:
+              - /url: wallet.html
+          - listitem [ref=e142]:
+            - link "PowerVerse Scan" [ref=e143] [cursor=pointer]:
+              - /url: scan.html
+          - listitem [ref=e144]:
+            - link "RWA代币 XAI" [ref=e145] [cursor=pointer]:
+              - /url: xai-token.html
+          - listitem [ref=e146]:
+            - link "DeCloud" [ref=e147] [cursor=pointer]:
+              - /url: decloud.html
+          - listitem [ref=e148]:
+            - link "算力港" [ref=e149] [cursor=pointer]:
+              - /url: computing-port.html
+      - paragraph [ref=e152]: © 2024 PowerVerse Chain. All rights reserved.
+  - generic [ref=e153]:
+    - generic [ref=e154] [cursor=pointer]:
+      - generic [ref=e155]: 🇨🇳
+      - generic [ref=e156]: 简体中文
+    - generic [ref=e157] [cursor=pointer]:
+      - generic [ref=e158]: 🇹🇼
+      - generic [ref=e159]: 繁體中文
+    - generic [ref=e160] [cursor=pointer]:
+      - generic [ref=e161]: 🇺🇸
+      - generic [ref=e162]: English
+    - generic [ref=e163] [cursor=pointer]:
+      - generic [ref=e164]: 🇯🇵
+      - generic [ref=e165]: 日本語
+    - generic [ref=e166] [cursor=pointer]:
+      - generic [ref=e167]: 🇰🇷
+      - generic [ref=e168]: 한국어
+```

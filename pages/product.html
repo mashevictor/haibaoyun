@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="nav.product">产品 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 120px 0 60px;
+            text-align: center;
+            background: var(--bg-darker);
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .product-detail {
+            padding: 4rem 0;
+        }
+        .product-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        .product-hero.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+        .product-hero.reverse .product-image {
+            order: 2;
+        }
+        .product-hero.reverse .product-info {
+            order: 1;
+        }
+        .product-image {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            font-size: 5rem;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        .product-info p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        .product-features {
+            margin: 3rem 0;
+        }
+        .product-features h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+        .product-features ul {
+            list-style: none;
+        }
+        .product-features li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="products.title">产品生态</h1>
+            <p class="section-description" data-i18n="products.description">构建完整的去中心化计算生态系统</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="product-detail">
+            <div class="product-hero">
+                <div class="product-image">🔗</div>
+                <div class="product-info">
+                    <h2 data-i18n="products.chain.name">PowerVerse Chain</h2>
+                    <p data-i18n="products.chain.description">高性能区块链底层网络，支持大规模分布式计算任务处理</p>
+                    <div class="product-features">
+                        <h3 data-i18n="products.chain.features.title">Core Features</h3>
+                        <ul>
+                            <li data-i18n="products.chain.features.item1">High-performance consensus mechanism supporting high TPS</li>
+                            <li data-i18n="products.chain.features.item2">Automatic smart contract execution</li>
+                            <li data-i18n="products.chain.features.item3">Cross-chain interoperability</li>
+                            <li data-i18n="products.chain.features.item4">Comprehensive node management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-hero reverse">
+                <div class="product-image">🏗️</div>
+                <div class="product-info">
+                    <h2 data-i18n="products.infra.name">PowerVerse Infra</h2>
+                    <p data-i18n="products.infra.description">基础设施服务，提供稳定可靠的计算资源调度与管理</p>
+                    <div class="product-features">
+                        <h3 data-i18n="products.infra.features.title">Core Features</h3>
+                        <ul>
+                            <li data-i18n="products.infra.features.item1">Intelligent resource scheduling algorithm</li>
+                            <li data-i18n="products.infra.features.item2">Real-time monitoring and alerts</li>
+                            <li data-i18n="products.infra.features.item3">Elastic scaling capability</li>
+                            <li data-i18n="products.infra.features.item4">Multi-region deployment support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-hero">
+                <div class="product-image">🛒</div>
+                <div class="product-info">
+                    <h2 data-i18n="products.market.name">PowerVerse Market</h2>
+                    <p data-i18n="products.market.description">去中心化市场，连接计算资源供需双方，实现价值流转</p>
+                    <div class="product-features">
+                        <h3 data-i18n="products.market.features.title">Core Features</h3>
+                        <ul>
+                            <li data-i18n="products.market.features.item1">Decentralized transaction matching</li>
+                            <li data-i18n="products.market.features.item2">Intelligent pricing mechanism</li>
+                            <li data-i18n="products.market.features.item3">Secure payment guarantee</li>
+                            <li data-i18n="products.market.features.item4">Traceable transaction history</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-hero reverse">
+                <div class="product-image">🗳️</div>
+                <div class="product-info">
+                    <h2 data-i18n="products.dao.name">PowerVerse DAO</h2>
+                    <p data-i18n="products.dao.description">去中心化自治组织，社区治理与生态发展决策平台</p>
+                    <div class="product-features">
+                        <h3 data-i18n="products.dao.features.title">Core Features</h3>
+                        <ul>
+                            <li data-i18n="products.dao.features.item1">Proposal and voting mechanism</li>
+                            <li data-i18n="products.dao.features.item2">Transparent governance process</li>
+                            <li data-i18n="products.dao.features.item3">Community incentive system</li>
+                            <li data-i18n="products.dao.features.item4">Multi-dimensional decision support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-hero">
+                <div class="product-image">☁️</div>
+                <div class="product-info">
+                    <h2 data-i18n="products.decloud.name">DeCloud</h2>
+                    <p data-i18n="products.decloud.description">去中心化云服务，提供安全、隐私、高效的计算云解决方案</p>
+                    <div class="product-features">
+                        <h3 data-i18n="products.decloud.features.title">Core Features</h3>
+                        <ul>
+                            <li data-i18n="products.decloud.features.item1">Distributed Storage System</li>
+                            <li data-i18n="products.decloud.features.item2">Data Encryption Protection</li>
+                            <li data-i18n="products.decloud.features.item3">Edge Computing Support</li>
+                            <li data-i18n="products.decloud.features.item4">Rich API Interfaces</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

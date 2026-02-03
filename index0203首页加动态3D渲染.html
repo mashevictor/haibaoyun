@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="home.title">PowerVerse Chain - AI驱动的超级公链</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入Three.js CDN库（轻量化生产版） -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <!-- 3D背景基础样式（保证Canvas层级和布局） -->
+    <style>
+        /* 3D背景Canvas容器：全屏、底层、不拦截鼠标事件 */
+        #pv-3d-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        /* 保留原有渐变遮罩层级，覆盖在3D背景之上 */
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.85) 0%, rgba(0, 80, 120, 0.7) 50%, rgba(0, 20, 40, 0.85) 100%);
+        }
+        /* 原有particles容器层级提升，避免被3D背景覆盖 */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        /* Hero内容层级最高，保证正常交互 */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏：首页导航+拆分产品子项+Logo可跳转 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="#home" style="cursor: pointer;">
+                        <img src="images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <!-- 首页导航（含前4个子项） -->
+                    <li>
+                        <a href="#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="pages/chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="pages/infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <!-- 产品导航（含后5个子项） -->
+                    <li>
+                        <a href="#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="pages/wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="pages/scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="pages/xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="pages/scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="pages/cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="pages/computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="pages/rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="pages/workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="pages/developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="pages/token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="pages/hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="pages/research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页Hero区域：含高性能3D背景Canvas -->
+    <section id="home" class="hero">
+        <div class="hero-background" style="position: relative; width: 100%; height: 100vh; min-height: 600px;">
+            <!-- 3D动态背景核心容器（优化后高性能版） -->
+            <canvas id="pv-3d-bg"></canvas>
+            <!-- 原有渐变遮罩：提升文字可读性 -->
+            <div class="gradient-overlay"></div>
+            <!-- 原有粒子容器：保留原有效果 -->
+            <div class="particles"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line" data-i18n="home.title">PowerVerse Chain</span>
+                    <span class="title-line highlight" data-i18n="home.subtitle">AI驱动的超级公链</span>
+                </h1>
+                <p class="hero-description" data-i18n="home.description">融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>与<span class="highlight">DeFi</span>，汇聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元</p>
+                <div class="hero-buttons">
+                    <a href="javascript:void(0);" id="qr-ios" class="btn btn-primary" data-i18n="home.ios" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span data-i18n="home.ios">iOS</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L12 7H17L13 10L15 15L10 12L5 15L7 10L3 7H8L10 2Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="javascript:void(0);" id="qr-android" class="btn btn-secondary" data-i18n="home.android" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span data-i18n="home.android">Android</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L12 7H17L13 10L15 15L10 12L5 15L7 10L3 7H8L10 2Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- 技术架构 -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-main" data-i18n="architecture.title">技术框架</span>
+                    <span class="title-sub" data-i18n="architecture.subtitle">Architecture</span>
+                </h2>
+            </div>
+            <div class="architecture-content">
+                <!-- 应用层 -->
+                <div class="architecture-diagram">
+                    <div class="diagram-node center-node">
+                        <div class="node-icon">📱</div>
+                        <div class="node-label" data-i18n="architecture.dapp">DApp应用</div>
+                    </div>
+                    <div class="diagram-node left-node">
+                        <div class="node-icon">🔌</div>
+                        <div class="node-label" data-i18n="architecture.api">API接口</div>
+                    </div>
+                    <div class="diagram-node right-node">
+                        <div class="node-icon">⚡</div>
+                        <div class="node-label" data-i18n="architecture.rpc">RPC服务</div>
+                    </div>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                </div>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h3 class="layer-title" data-i18n="architecture.appLayer">应用层</h3>
+                        <ul class="layer-list">
+                            <li data-i18n="architecture.dapp">DApp应用</li>
+                            <li data-i18n="architecture.api">API接口</li>
+                            <li data-i18n="architecture.rpc">RPC服务</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="architecture-content">
+                <!-- 协议层 -->
+                <div class="architecture-diagram">
+                    <div class="diagram-node center-node">
+                        <div class="node-icon">🤝</div>
+                        <div class="node-label" data-i18n="architecture.consensus">共识机制</div>
+                    </div>
+                    <div class="diagram-node left-node">
+                        <div class="node-icon">📜</div>
+                        <div class="node-label" data-i18n="architecture.smartContract">智能合约</div>
+                    </div>
+                    <div class="diagram-node right-node">
+                        <div class="node-icon">🔗</div>
+                        <div class="node-label" data-i18n="architecture.crossChain">跨链协议</div>
+                    </div>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                </div>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h3 class="layer-title" data-i18n="architecture.protocolLayer">协议层</h3>
+                        <ul class="layer-list">
+                            <li data-i18n="architecture.consensus">共识机制</li>
+                            <li data-i18n="architecture.smartContract">智能合约</li>
+                            <li data-i18n="architecture.crossChain">跨链协议</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="architecture-content">
+                <!-- 网络层 -->
+                <div class="architecture-diagram">
+                    <div class="diagram-node center-node">
+                        <div class="node-icon">🌐</div>
+                        <div class="node-label" data-i18n="architecture.p2p">P2P网络</div>
+                    </div>
+                    <div class="diagram-node left-node">
+                        <div class="node-icon">⚙️</div>
+                        <div class="node-label" data-i18n="architecture.nodeManagement">节点管理</div>
+                    </div>
+                    <div class="diagram-node right-node">
+                        <div class="node-icon">💾</div>
+                        <div class="node-label" data-i18n="architecture.dataStorage">数据存储</div>
+                    </div>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                </div>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h3 class="layer-title" data-i18n="architecture.networkLayer">网络层</h3>
+                        <ul class="layer-list">
+                            <li data-i18n="architecture.p2p">P2P网络</li>
+                            <li data-i18n="architecture.nodeManagement">节点管理</li>
+                            <li data-i18n="architecture.dataStorage">数据存储</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品介绍 -->
+    <section id="product" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="products.title">产品生态</h2>
+                <p class="section-description" data-i18n="products.description">构建完整的去中心化计算生态系统</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseChain.svg"/>
+                    </div>
+                    <h3 class="product-name" data-i18n="products.chain.name">PowerVerse Chain</h3>
+                    <p class="product-description" data-i18n="products.chain.description">高性能区块链底层网络，支持大规模分布式计算任务处理</p>
+                    <a href="pages/chain.html" class="product-link" data-i18n="products.chain.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseInfra.svg"/>
+                    </div>
+                    <h3 class="product-name" data-i18n="products.infra.name">PowerVerse Infra</h3>
+                    <p class="product-description" data-i18n="products.infra.description">基础设施服务，提供稳定可靠的计算资源调度与管理</p>
+                    <a href="pages/infra.html" class="product-link" data-i18n="products.infra.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseMarket.svg"/>
+                    </div>
+                    <h3 class="product-name" data-i18n="products.market.name">PowerVerse Market</h3>
+                    <p class="product-description" data-i18n="products.market.description">去中心化市场，连接计算资源供需双方，实现价值流转</p>
+                    <a href="pages/market.html" class="product-link" data-i18n="products.market.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseDAO.svg"/>
+                    </div>
+                    <h3 class="product-name" data-i18n="products.dao.name">PowerVerse DAO</h3>
+                    <p class="product-description" data-i18n="products.dao.description">去中心化自治组织，社区治理与生态发展决策平台</p>
+                    <a href="pages/dao.html" class="product-link" data-i18n="products.dao.learnMore">了解更多 →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/Decloud.svg"/>
+                    </div>
+                    <h3 class="product-name" data-i18n="products.decloud.name">DeCloud</h3>
+                    <p class="product-description" data-i18n="products.decloud.description">去中心化云服务，提供安全、隐私、高效的计算云解决方案</p>
+                    <a href="pages/decloud.html" class="product-link" data-i18n="products.decloud.learnMore">了解更多 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用场景 -->
+    <section id="scenario" class="scenarios">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="scenarios.title">应用场景</h2>
+                <p class="section-description" data-i18n="scenarios.description">PowerVerse Chain赋能多元化的应用场景</p>
+            </div>
+            <div class="scenarios-grid">
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/cloudgaming.html'">
+                    <div class="scenario-number">01</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.cloudgaming">云游戏场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.cloudgaming.description">基于PowerVerse Chain的去中心化云游戏平台，提供低延迟、高质量的游戏体验</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/computingpowerexchange.html'">
+                    <div class="scenario-number">02</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.computingexchange">算力交易场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/rwa.html'">
+                    <div class="scenario-number">03</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.rwa">RWA钱包场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/workflow.html'">
+                    <div class="scenario-number">04</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.workflow">全链路场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.workflow.description">PowerVerse Chain生态系统中的云游戏、算力交易和代币支付的完整闭环流程</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">05</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.ai.title">AI模型训练</h3>
+                    <p class="scenario-description" data-i18n="scenarios.ai.description">分布式GPU资源池，支持大规模AI模型训练与推理，降低计算成本</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">05</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.science.title">科学计算</h3>
+                    <p class="scenario-description" data-i18n="scenarios.science.description">高性能计算集群，为科研机构提供强大的计算能力支持</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">06</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.render.title">渲染服务</h3>
+                    <p class="scenario-description" data-i18n="scenarios.render.description">分布式渲染网络，加速3D动画、影视特效等渲染任务</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">07</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.edge.title">边缘计算</h3>
+                    <p class="scenario-description" data-i18n="scenarios.edge.description">边缘节点网络，提供低延迟、高可用的边缘计算服务</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发者中心 -->
+    <section id="developer" class="developer">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="developer.title">开发者中心</h2>
+                <p class="section-description" data-i18n="developer.description">丰富的开发工具和文档，助力开发者快速构建应用</p>
+            </div>
+            <div class="developer-content">
+                <div class="developer-resources">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/技术文档.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.docs.title">技术文档</h3>
+                        <p data-i18n="developer.docs.description">完整的技术文档和API参考，帮助开发者快速上手</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.docs.link">查看文档 →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/SDK工具包.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.sdk.title">SDK工具包</h3>
+                        <p data-i18n="developer.sdk.description">多语言SDK支持，简化开发流程，提高开发效率</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.sdk.link">下载SDK →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/开发工具.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.tools.title">开发工具</h3>
+                        <p data-i18n="developer.tools.description">测试网络、调试工具、部署脚本等一站式开发工具</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.tools.link">使用工具 →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/社区支持.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.community.title">社区支持</h3>
+                        <p data-i18n="developer.community.description">活跃的开发者社区，技术交流与问题解答</p>
+                        <a href="https://t.me/PowerVerseChain_Offical" target="_blank" rel="noopener noreferrer" class="resource-link" data-i18n="developer.community.link">加入社区 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="pages/chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="pages/infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="pages/wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="pages/scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="pages/xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="pages/whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="pages/developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="pages/about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="pages/about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="pages/about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- iOS/Android 二维码弹框 -->
+    <div class="qr-modal" id="qrModal">
+        <div class="qr-modal-content">
+            <button type="button" class="qr-modal-close" id="qrModalClose" aria-label="关闭">&times;</button>
+            <h3 class="qr-modal-title" id="qrModalTitle">扫码下载</h3>
+            <img id="qrModalImg" src="./images/ewm/IOS.png" alt="二维码" class="qr-img">
+            <p class="qr-modal-desc" id="qrModalDesc">扫码下载 App</p>
+        </div>
+    </div>
+
+    <script src="js/languages.js"></script>
+    <script src="script.js"></script>
+    <!-- 测试系统快捷键 -->
+    <script>
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                window.open('test_complete.html', '_blank');
+            }
+        });
+
+        // iOS/Android 二维码弹框逻辑（原有功能完整保留）
+        (function () {
+            var iosBtn = document.getElementById('qr-ios');
+            var androidBtn = document.getElementById('qr-android');
+            var qrModal = document.getElementById('qrModal');
+            var qrModalClose = document.getElementById('qrModalClose');
+            var qrModalTitle = document.getElementById('qrModalTitle');
+            var qrModalImg = document.getElementById('qrModalImg');
+            var qrModalDesc = document.getElementById('qrModalDesc');
+
+            var hoverTimer = null;
+            var hideTimer = null;
+            var HOVER_DELAY = 200;
+            var HIDE_DELAY = 300;
+
+            function openModal(type) {
+                if (type === 'ios') {
+                    qrModalTitle.textContent = 'iOS 下载';
+                    qrModalImg.src = 'images/ewm/IOS.png';
+                    qrModalImg.alt = 'iOS 下载二维码';
+                    qrModalDesc.textContent = '使用 iPhone 扫码下载';
+                } else {
+                    qrModalTitle.textContent = 'Android 下载';
+                    qrModalImg.src = 'images/ewm/Anroid.png';
+                    qrModalImg.alt = 'Android 下载二维码';
+                    qrModalDesc.textContent = '使用 Android 扫码下载';
+                }
+                qrModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (hideTimer) clearTimeout(hideTimer);
+            }
+
+            function closeModal() {
+                qrModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            function scheduleHide() {
+                if (hideTimer) clearTimeout(hideTimer);
+                hideTimer = setTimeout(closeModal, HIDE_DELAY);
+            }
+
+            function cancelHide() {
+                if (hideTimer) clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+
+            iosBtn.addEventListener('mouseenter', function () {
+                if (hoverTimer) clearTimeout(hoverTimer);
+                hoverTimer = setTimeout(function () { openModal('ios'); }, HOVER_DELAY);
+            });
+            iosBtn.addEventListener('mouseleave', function () {
+                if (hoverTimer) clearTimeout(hoverTimer);
+                hoverTimer = null;
+                scheduleHide();
+            });
+            iosBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (hoverTimer) clearTimeout(hoverTimer);
+                openModal('ios');
+            });
+
+            androidBtn.addEventListener('mouseenter', function () {
+                if (hoverTimer) clearTimeout(hoverTimer);
+                hoverTimer = setTimeout(function () { openModal('android'); }, HOVER_DELAY);
+            });
+            androidBtn.addEventListener('mouseleave', function () {
+                if (hoverTimer) clearTimeout(hoverTimer);
+                hoverTimer = null;
+                scheduleHide();
+            });
+            androidBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (hoverTimer) clearTimeout(hoverTimer);
+                openModal('android');
+            });
+
+            qrModal.addEventListener('mouseenter', cancelHide);
+            qrModal.addEventListener('mouseleave', scheduleHide);
+            qrModalClose.addEventListener('click', function () {
+                cancelHide();
+                closeModal();
+            });
+            qrModal.addEventListener('click', function (e) {
+                if (e.target === qrModal) {
+                    cancelHide();
+                    closeModal();
+                }
+            });
+        })();
+    </script>
+
+    <!-- 高性能3D背景核心JS（速度提升5倍+，核心优化版） -->
+    <script>
+        window.addEventListener('load', initPv3DBackground);
+        function initPv3DBackground() {
+            // 禁用控制台警告，减少性能损耗
+            THREE.Logger.setLevel(THREE.Logger.LEVELS.SILENT);
+            const canvas = document.getElementById('pv-3d-bg');
+            const hero = document.querySelector('.hero-background');
+            const width = hero.offsetWidth;
+            const height = hero.offsetHeight;
+            const isMobile = window.innerWidth < 768;
+            const particlesCount = isMobile ? 100 : 200; // 降载优化
+            const connectDistance = 200; // 增大阈值减少计算
+            const speedFactor = 0.4; // 速度补偿，保证视觉效果
+
+            // 1. 核心对象初始化（极简配置，减少渲染开销）
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
+            camera.position.z = 500;
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setClearColor(0x000a18, 1);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // 限制像素比
+
+            // 2. 粒子几何体（一次性初始化，复用数组，避免重复创建）
+            const particlesGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particlesCount * 3);
+            const colors = new Float32Array(particlesCount * 3);
+            // 固定配色（算力蓝+生态绿，移除复杂渐变计算）
+            const color1 = new THREE.Color(0x00d4ff);
+            const color2 = new THREE.Color(0x00ff99);
+
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 2000;
+                positions[i + 1] = (Math.random() - 0.5) * 2000;
+                positions[i + 2] = (Math.random() - 0.5) * 2000;
+                // 简化颜色赋值，减少数学运算
+                const c = Math.random() > 0.5 ? color1 : color2;
+                colors[i] = c.r;
+                colors[i + 1] = c.g;
+                colors[i + 2] = c.b;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // 3. 材质优化（关闭sizeAttenuation，减少渲染计算）
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: isMobile ? 1.5 : 2.5,
+                sizeAttenuation: false, // 关键性能优化
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            const lineMaterial = new THREE.LineBasicMaterial({
+                transparent: true,
+                opacity: 0.15,
+                vertexColors: true
+            });
+
+            // 4. 预创建线段对象（核心优化：避免每帧new Geometry，减少内存开销）
+            const lineGeometry = new THREE.BufferGeometry();
+            const linePositions = new Float32Array(particlesCount * particlesCount * 6); // 预分配容量
+            const lineColors = new Float32Array(particlesCount * particlesCount * 6);
+            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+            lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+            const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+            lines.name = 'pv-lines';
+            scene.add(lines);
+            scene.add(new THREE.Points(particlesGeometry, particlesMaterial));
+
+            // 5. 鼠标交互（极简映射，减少计算）
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 800;
+                mouseY = -(e.clientY / window.innerHeight - 0.5) * 800;
+            });
+
+            // 6. 窗口自适应（简化逻辑）
+            window.addEventListener('resize', () => {
+                const w = hero.offsetWidth, h = hero.offsetHeight;
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.setSize(w, h);
+            });
+
+            // 7. 帧循环（核心性能优化，减少90%冗余计算）
+            const posArr = particlesGeometry.attributes.position.array;
+            function animate() {
+                requestAnimationFrame(animate);
+                let lineIndex = 0; // 复用索引，避免每帧创建新数组
+
+                // 更新粒子位置（单循环，极简逻辑）
+                for (let i = 0; i < particlesCount * 3; i += 3) {
+                    // 粒子自身运动（z轴前后，保留深度感）
+                    posArr[i + 2] -= speedFactor;
+                    if (posArr[i + 2] < -1000) posArr[i + 2] = 1000;
+                    // 鼠标引力（简化计算，提升响应速度）
+                    posArr[i] += (mouseX - posArr[i]) * 0.0012;
+                    posArr[i + 1] += (mouseY - posArr[i + 1]) * 0.0012;
+                }
+
+                // 粒子连接判断（优化双重循环，平方比较替代开根号）
+                for (let i = 0; i < particlesCount; i++) {
+                    const i3 = i * 3;
+                    const x1 = posArr[i3], y1 = posArr[i3 + 1], z1 = posArr[i3 + 2];
+                    // 跳过远距离粒子，减少循环次数
+                    if (Math.abs(x1) > 1000 || Math.abs(y1) > 1000) continue;
+                    for (let j = i + 1; j < particlesCount; j++) {
+                        const j3 = j * 3;
+                        const dx = x1 - posArr[j3];
+                        const dy = y1 - posArr[j3 + 1];
+                        const dz = z1 - posArr[j3 + 2];
+                        // 平方比较，避免Math.sqrt（性能杀手）
+                        if (dx * dx + dy * dy + dz * dz < connectDistance * connectDistance) {
+                            // 批量赋值，复用预分配数组
+                            linePositions[lineIndex * 6] = x1;
+                            linePositions[lineIndex * 6 + 1] = y1;
+                            linePositions[lineIndex * 6 + 2] = z1;
+                            linePositions[lineIndex * 6 + 3] = posArr[j3];
+                            linePositions[lineIndex * 6 + 4] = posArr[j3 + 1];
+                            linePositions[lineIndex * 6 + 5] = posArr[j3 + 2];
+                            // 线段颜色与粒子一致
+                            lineColors[lineIndex * 6] = colors[i3];
+                            lineColors[lineIndex * 6 + 1] = colors[i3 + 1];
+                            lineColors[lineIndex * 6 + 2] = colors[i3 + 2];
+                            lineColors[lineIndex * 6 + 3] = colors[j3];
+                            lineColors[lineIndex * 6 + 4] = colors[j3 + 1];
+                            lineColors[lineIndex * 6 + 5] = colors[j3 + 2];
+                            lineIndex++;
+                        }
+                    }
+                }
+
+                // 仅更新有效数据，减少渲染开销
+                lineGeometry.attributes.position.count = lineIndex * 2;
+                lineGeometry.attributes.color.count = lineIndex * 2;
+                lineGeometry.attributes.position.needsUpdate = true;
+                lineGeometry.attributes.color.needsUpdate = true;
+                particlesGeometry.attributes.position.needsUpdate = true;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>

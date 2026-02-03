@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="nav.developer">开发者中心 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: var(--bg-darker);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=developer%20center%20with%20code%20snippets%20and%20technology%20documentation%2C%20programming%20interface%2C%20digital%20code%20flow%2C%20blue%20and%20cyan%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20professional%20tech%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-description {
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .developer-content {
+            padding: 4rem 0;
+        }
+        .resource-detail {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s;
+        }
+        .resource-detail:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+        .resource-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .resource-icon-large {
+            font-size: 4rem;
+        }
+        .resource-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        .resource-body p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+        .resource-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .resource-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        .code-example {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        .code-example pre {
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            margin: 0;
+        }
+        /* Coming Soon Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-title {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .modal-message {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="developer.title">开发者中心</h1>
+            <p class="section-description" data-i18n="developer.description">丰富的开发工具和文档，助力开发者快速构建应用</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="developer-content">
+            <div class="resource-detail">
+                <div class="resource-header">
+                    <div class="resource-icon-large">📚</div>
+                    <h2 data-i18n="developer.docs.title">技术文档</h2>
+                </div>
+                <div class="resource-body">
+                    <p data-i18n="developer.docs.description">完整的技术文档和API参考，帮助开发者快速上手</p>
+                    <div class="code-example">
+                        <pre>// API示例
+const api = new PowerVerseAPI({
+    endpoint: 'https://api.powerverse.io',
+    apiKey: 'your-api-key'
+});
+
+// 获取计算资源
+const resources = await api.getResources();</pre>
+                    </div>
+                    <a href="whitepaper.html" class="resource-link-btn" data-i18n="developer.docs.link">查看文档 →</a>
+                </div>
+            </div>
+
+            <div class="resource-detail">
+                <div class="resource-header">
+                    <div class="resource-icon-large">💻</div>
+                    <h2 data-i18n="developer.sdk.title">SDK工具包</h2>
+                </div>
+                <div class="resource-body">
+                    <p data-i18n="developer.sdk.description">多语言SDK支持，简化开发流程，提高开发效率</p>
+                    <div class="code-example">
+                        <pre># Python SDK
+pip install powerverse-sdk
+
+from powerverse import Client
+
+client = Client(api_key='your-key')
+resources = client.list_resources()</pre>
+                    </div>
+                    <button class="resource-link-btn" onclick="showComingSoonModal()" data-i18n="developer.sdk.link">下载SDK →</button>
+                </div>
+            </div>
+
+            <div class="resource-detail" id="tools">
+                <div class="resource-header">
+                    <div class="resource-icon-large">🔧</div>
+                    <h2 data-i18n="developer.tools.title">开发工具</h2>
+                </div>
+                <div class="resource-body">
+                    <p data-i18n="developer.tools.description">测试网络、调试工具、部署脚本等一站式开发工具</p>
+                    <ul style="list-style: none; margin: 1.5rem 0;">
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-color);">▸</span>
+                            <span data-i18n="developer.tools.feature1">测试网络：提供完整的测试环境</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-color);">▸</span>
+                            <span data-i18n="developer.tools.feature2">调试工具：强大的调试和监控功能</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-color);">▸</span>
+                            <span data-i18n="developer.tools.feature3">部署脚本：一键部署到生产环境</span>
+                        </li>
+                    </ul>
+                    <button class="resource-link-btn" onclick="showComingSoonModal()" data-i18n="developer.tools.link">使用工具 →</button>
+                </div>
+            </div>
+
+            <div class="resource-detail" id="community">
+                <div class="resource-header">
+                    <div class="resource-icon-large">👥</div>
+                    <h2 data-i18n="developer.community.title">社区支持</h2>
+                </div>
+                <div class="resource-body">
+                    <p data-i18n="developer.community.description">活跃的开发者社区，技术交流与问题解答</p>
+                    <ul style="list-style: none; margin: 1.5rem 0;">
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-color);">▸</span>
+                            <span data-i18n="developer.community.feature1">Discord社区：实时技术交流</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-color);">▸</span>
+                            <span data-i18n="developer.community.feature2">GitHub：开源代码和问题追踪</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-color);">▸</span>
+                            <span data-i18n="developer.community.feature3">技术论坛：深度技术讨论</span>
+                        </li>
+                    </ul>
+                    <a href="https://t.me/PowerVerseChain_Offical" target="_blank" rel="noopener noreferrer" class="resource-link-btn" data-i18n="developer.community.link">加入社区 →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Coming Soon Modal -->
+    <div class="modal-overlay" id="comingSoonModal">
+        <div class="modal-content">
+            <div class="modal-icon">🚀</div>
+            <h3 class="modal-title">Coming Soon</h3>
+            <p class="modal-message">此功能正在开发中，敬请期待！</p>
+            <button class="modal-btn" onclick="hideComingSoonModal()">确定</button>
+        </div>
+    </div>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        // 显示Coming Soon弹框
+        function showComingSoonModal() {
+            const modal = document.getElementById('comingSoonModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 隐藏Coming Soon弹框
+        function hideComingSoonModal() {
+            const modal = document.getElementById('comingSoonModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 点击弹框外部关闭
+        document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideComingSoonModal();
+            }
+        });
+
+        // 按ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideComingSoonModal();
+            }
+        });
+    </script>
+</body>
+</html>

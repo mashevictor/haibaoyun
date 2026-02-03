@@ -1,0 +1,174 @@
+/**
+ * 导航交互增强 - 三种可选方案
+ * 选择其一后，将对应方案内的样式合并到 styles.css 的导航相关位置，或通过 link 引入并去掉另外两个方案的注释。
+ */
+
+/* ==================== 方案一：渐变点亮 + 滑入弹性 ====================
+ * 效果：导航项悬浮时文字渐变高亮，下划线滑入；下拉框带弹性出现。
+ * 风格：清爽、现代，动效柔和。
+ */
+/*
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.35s ease, transform 0.25s ease;
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+}
+.nav-menu a:hover {
+    color: transparent;
+    background: linear-gradient(90deg, #7dd3fc, #00d4ff 50%, #38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    transform: scale(1.02);
+}
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00d4ff, #38bdf8);
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-menu a:hover::after {
+    width: 100%;
+}
+.product-dropdown {
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s, box-shadow 0.3s;
+}
+.nav-menu li:hover .product-dropdown {
+    transform: translateY(0) scale(1.02);
+    box-shadow: 0 12px 48px rgba(0, 212, 255, 0.35);
+}
+.product-dropdown a {
+    transition: all 0.25s ease;
+}
+.product-dropdown a:hover {
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), rgba(0, 212, 255, 0.05));
+    padding-left: 1.75rem;
+}
+*/
+
+/* ==================== 方案二：光晕呼吸 + 子项依次出现 ====================
+ * 效果：主项悬浮有柔和光晕呼吸；下拉子项逐个淡入下移（错峰动画）。
+ * 风格：有节奏感、偏科技感。
+ */
+/*
+@keyframes nav-glow-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.2); }
+    50%  { box-shadow: 0 0 20px 4px rgba(0, 212, 255, 0.4); }
+}
+.nav-menu > li > a {
+    position: relative;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+    transition: color 0.3s, box-shadow 0.4s;
+}
+.nav-menu > li:hover > a {
+    color: var(--primary-color);
+    animation: nav-glow-pulse 2s ease-in-out infinite;
+}
+.nav-menu a::after {
+    transition: width 0.3s ease;
+}
+.product-dropdown {
+    transition: opacity 0.25s ease, transform 0.35s ease, border-color 0.3s, box-shadow 0.3s;
+}
+.product-dropdown a {
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: dropdown-item-in 0.4s ease forwards;
+}
+.product-dropdown a:nth-child(1) { animation-delay: 0.02s; }
+.product-dropdown a:nth-child(2) { animation-delay: 0.05s; }
+.product-dropdown a:nth-child(3) { animation-delay: 0.08s; }
+.product-dropdown a:nth-child(4) { animation-delay: 0.11s; }
+.product-dropdown a:nth-child(5) { animation-delay: 0.14s; }
+.product-dropdown a:nth-child(6) { animation-delay: 0.17s; }
+.product-dropdown a:nth-child(7) { animation-delay: 0.20s; }
+.product-dropdown a:nth-child(8) { animation-delay: 0.23s; }
+.product-dropdown a:nth-child(9) { animation-delay: 0.26s; }
+@keyframes dropdown-item-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.nav-menu li:hover .product-dropdown a {
+    opacity: 1;
+    transform: translateY(0);
+}
+.product-dropdown a:hover {
+    background: rgba(0, 212, 255, 0.12);
+    color: #00d4ff;
+}
+*/
+
+/* ==================== 方案三：霓虹描边 + 左侧高亮条 ====================
+ * 效果：主项悬浮底部霓虹发光线；下拉框边框发光，子项悬浮左侧青色条滑入。
+ * 风格：赛博/霓虹感，辨识度高。
+ */
+/*
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, text-shadow 0.3s, box-shadow 0.3s;
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+}
+.nav-menu a:hover {
+    color: #00d4ff;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+}
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
+    transition: width 0.3s ease;
+}
+.nav-menu a:hover::after {
+    width: 100%;
+}
+.product-dropdown {
+    border: 2px solid rgba(0, 212, 255, 0.5);
+    transition: all 0.3s ease;
+}
+.nav-menu li:hover .product-dropdown {
+    border-color: rgba(0, 212, 255, 0.9);
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.25), inset 0 0 20px rgba(0, 212, 255, 0.03);
+}
+.product-dropdown a {
+    position: relative;
+    padding-left: 1.5rem;
+    transition: color 0.25s, padding-left 0.25s ease;
+    overflow: hidden;
+}
+.product-dropdown a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.25), transparent);
+    transition: width 0.25s ease;
+}
+.product-dropdown a:hover {
+    color: #00d4ff;
+    padding-left: 1.75rem;
+}
+.product-dropdown a:hover::before {
+    width: 4px;
+}
+*/

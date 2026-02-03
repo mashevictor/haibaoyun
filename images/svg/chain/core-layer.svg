@@ -1,0 +1,35 @@
+<svg width="400" height="280" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-core" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(0,212,255,0.08)"/>
+      <stop offset="100%" stop-color="rgba(25,100,254,0.08)"/>
+    </linearGradient>
+    <linearGradient id="line-core" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#1964fe"/>
+    </linearGradient>
+    <filter id="glow-core">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="280" rx="16" fill="url(#bg-core)"/>
+  <!-- Blockchain blocks -->
+  <rect x="60" y="100" width="70" height="80" rx="8" fill="none" stroke="url(#line-core)" stroke-width="2" filter="url(#glow-core)"/>
+  <rect x="165" y="80" width="70" height="80" rx="8" fill="none" stroke="url(#line-core)" stroke-width="2" filter="url(#glow-core)"/>
+  <rect x="270" y="100" width="70" height="80" rx="8" fill="none" stroke="url(#line-core)" stroke-width="2" filter="url(#glow-core)"/>
+  <!-- Block links -->
+  <path d="M130 140 L165 120" stroke="url(#line-core)" stroke-width="2" opacity="0.8"/>
+  <path d="M235 120 L270 140" stroke="url(#line-core)" stroke-width="2" opacity="0.8"/>
+  <!-- Ledger line -->
+  <line x1="95" y1="125" x2="115" y2="125" stroke="url(#line-core)" stroke-width="1.5" opacity="0.9"/>
+  <line x1="95" y1="138" x2="125" y2="138" stroke="url(#line-core)" stroke-width="1.5" opacity="0.7"/>
+  <line x1="200" y1="105" x2="220" y2="105" stroke="url(#line-core)" stroke-width="1.5" opacity="0.9"/>
+  <line x1="200" y1="118" x2="230" y2="118" stroke="url(#line-core)" stroke-width="1.5" opacity="0.7"/>
+  <!-- Smart contract icon in center block -->
+  <path d="M185 135 L200 120 L215 135 L200 150 Z" fill="url(#line-core)" opacity="0.5"/>
+  <circle cx="200" cy="165" r="12" fill="none" stroke="url(#line-core)" stroke-width="1.5"/>
+</svg>

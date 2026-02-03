@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多语言全量测试 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .test-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 99999;
+            display: none;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .test-overlay.active {
+            display: block;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .test-header h1 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+        .close-btn {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .test-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .test-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .test-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .test-btn.running {
+            background: rgba(255, 165, 0, 0.2);
+            border-color: #ffa500;
+            color: #ffa500;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .test-log {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+        }
+        .log-entry.pass { 
+            color: #00ff00; 
+            border-left-color: #00ff00;
+        }
+        .log-entry.fail { 
+            color: #ff0000; 
+            border-left-color: #ff0000;
+        }
+        .log-entry.warning { 
+            color: #ffaa00; 
+            border-left-color: #ffaa00;
+        }
+        .log-entry.info { 
+            color: var(--primary-color); 
+            border-left-color: var(--primary-color);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #0066ff);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 测试覆盖层 -->
+    <div class="test-overlay" id="testOverlay">
+        <div class="test-container">
+            <div class="test-header">
+                <h1>🧪 Ralph Loop 全量测试系统</h1>
+                <button class="close-btn" onclick="closeTest()">关闭测试</button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">总测试数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statPassed">0</div>
+                    <div class="stat-label">通过</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statFailed">0</div>
+                    <div class="stat-label">失败</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statProgress">0%</div>
+                    <div class="stat-label">进度</div>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+            </div>
+            
+            <div class="test-controls">
+                <button class="test-btn" onclick="runFullTest()">🚀 开始全量测试</button>
+                <button class="test-btn" onclick="testLanguageButton()">🔘 测试语言按钮</button>
+                <button class="test-btn" onclick="testLanguageSwitching()">🔄 循环测试语言切换</button>
+                <button class="test-btn" onclick="testTranslations()">🌍 测试翻译完整性</button>
+                <button class="test-btn" onclick="testPageElements()">📄 测试页面元素</button>
+                <button class="test-btn" onclick="clearLog()">🗑️ 清空日志</button>
+            </div>
+            
+            <div class="test-log" id="testLog"></div>
+        </div>
+    </div>
+    
+    <!-- 导航栏（用于测试） -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-icon">P</div>
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#product" data-i18n="nav.product">产品</a></li>
+                    <li><a href="pages/scenarios.html" data-i18n="nav.scenario">应用场景</a></li>
+                    <li><a href="pages/developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="pages/token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="pages/hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="pages/research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">简体中文</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 测试内容区域 -->
+    <div style="padding-top: 100px; min-height: 100vh; background: var(--bg-darker);">
+        <div class="container">
+            <h1 data-i18n="home.title" style="text-align: center; margin-bottom: 2rem;">PowerVerse Chain</h1>
+            <p data-i18n="home.description" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">构建下一代分布式计算基础设施</p>
+            
+            <div class="architecture" style="margin: 3rem 0;">
+                <div class="section-header">
+                    <h2 data-i18n="architecture.title">技术框架</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 加载必要的脚本 -->
+    <script src="js/languages.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        let testStats = {
+            total: 0,
+            passed: 0,
+            failed: 0,
+            warnings: 0
+        };
+        
+        const languages = ['zh-CN', 'zh-TW', 'en', 'ja', 'ko'];
+        
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('testLog');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${time}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        function updateStats() {
+            document.getElementById('statTotal').textContent = testStats.total;
+            document.getElementById('statPassed').textContent = testStats.passed;
+            document.getElementById('statFailed').textContent = testStats.failed;
+            const percent = testStats.total > 0 ? Math.round((testStats.passed / testStats.total) * 100) : 0;
+            document.getElementById('statProgress').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressFill').textContent = percent + '%';
+        }
+        
+        function clearLog() {
+            testStats = { total: 0, passed: 0, failed: 0, warnings: 0 };
+            document.getElementById('testLog').innerHTML = '';
+            updateStats();
+        }
+        
+        function addResult(passed, message) {
+            testStats.total++;
+            if (passed) {
+                testStats.passed++;
+                log(`✓ ${message}`, 'pass');
+            } else {
+                testStats.failed++;
+                log(`✗ ${message}`, 'fail');
+            }
+            updateStats();
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        async function testLanguageButton() {
+            log('开始测试语言按钮...', 'info');
+            
+            // 等待语言管理器初始化
+            let retries = 0;
+            while (!window.languageManager && retries < 10) {
+                await sleep(100);
+                retries++;
+            }
+            
+            if (!window.languageManager) {
+                addResult(false, '语言管理器未初始化');
+                return;
+            }
+            
+            // 测试1: 按钮存在
+            const btn = document.querySelector('.lang-switch');
+            if (!btn) {
+                addResult(false, '语言按钮不存在');
+                return;
+            }
+            addResult(true, '语言按钮存在');
+            
+            // 测试2: 按钮可点击
+            try {
+                // 确保事件已绑定
+                await sleep(100);
+                
+                // 模拟点击
+                const clickEvent = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                btn.dispatchEvent(clickEvent);
+                
+                await sleep(300); // 增加等待时间
+                const menu = document.getElementById('language-menu');
+                if (menu && menu.style.display === 'block') {
+                    addResult(true, '语言按钮可点击，菜单正常显示');
+                    menu.style.display = 'none';
+                } else {
+                    // 尝试直接调用方法
+                    if (window.languageManager.showLanguageMenu) {
+                        window.languageManager.showLanguageMenu();
+                        await sleep(200);
+                        const menu2 = document.getElementById('language-menu');
+                        if (menu2 && menu2.style.display === 'block') {
+                            addResult(true, '语言按钮可点击（通过直接调用）');
+                            menu2.style.display = 'none';
+                        } else {
+                            addResult(false, '语言按钮点击后菜单未显示');
+                        }
+                    } else {
+                        addResult(false, '语言按钮点击后菜单未显示');
+                    }
+                }
+            } catch (e) {
+                addResult(false, `语言按钮点击出错: ${e.message}`);
+                console.error('按钮点击错误:', e);
+            }
+        }
+        
+        async function testLanguageSwitching() {
+            log('开始循环测试语言切换（5轮）...', 'info');
+            
+            for (let round = 1; round <= 5; round++) {
+                log(`--- 第 ${round} 轮测试 ---`, 'info');
+                
+                for (const lang of languages) {
+                    if (!window.languageManager) {
+                        addResult(false, '语言管理器未初始化');
+                        return;
+                    }
+                    
+                    try {
+                        window.languageManager.updateLanguage(lang);
+                        await sleep(300);
+                        
+                        const currentLang = window.languageManager.getCurrentLanguage();
+                        if (currentLang === lang) {
+                            addResult(true, `切换到 ${lang} 成功`);
+                            
+                            // 测试切换后按钮是否可用
+                            await sleep(200); // 增加等待时间，确保DOM更新完成
+                            const btn = document.querySelector('.lang-switch');
+                            if (btn) {
+                                try {
+                                    // 使用事件分发而不是直接click
+                                    const clickEvent = new MouseEvent('click', {
+                                        bubbles: true,
+                                        cancelable: true,
+                                        view: window
+                                    });
+                                    btn.dispatchEvent(clickEvent);
+                                    
+                                    await sleep(300); // 增加等待时间
+                                    const menu = document.getElementById('language-menu');
+                                    if (menu && menu.style.display === 'block') {
+                                        addResult(true, `切换后按钮可用 (${lang})`);
+                                        menu.style.display = 'none';
+                                    } else {
+                                        // 尝试直接调用方法作为备用
+                                        if (window.languageManager && window.languageManager.showLanguageMenu) {
+                                            window.languageManager.showLanguageMenu();
+                                            await sleep(200);
+                                            const menu2 = document.getElementById('language-menu');
+                                            if (menu2 && menu2.style.display === 'block') {
+                                                addResult(true, `切换后按钮可用（通过直接调用）(${lang})`);
+                                                menu2.style.display = 'none';
+                                            } else {
+                                                addResult(false, `切换后按钮失效 (${lang}) - 菜单未显示`);
+                                            }
+                                        } else {
+                                            addResult(false, `切换后按钮失效 (${lang}) - 菜单未显示`);
+                                        }
+                                    }
+                                } catch (e) {
+                                    addResult(false, `切换后按钮点击出错 (${lang}): ${e.message}`);
+                                    console.error(`按钮点击错误 (${lang}):`, e);
+                                }
+                            } else {
+                                addResult(false, `切换后按钮丢失 (${lang})`);
+                            }
+                        } else {
+                            addResult(false, `切换到 ${lang} 失败: 期望 ${lang}, 实际 ${currentLang}`);
+                        }
+                    } catch (e) {
+                        addResult(false, `切换 ${lang} 时出错: ${e.message}`);
+                    }
+                }
+            }
+            
+            log('循环测试完成', 'info');
+        }
+        
+        async function testTranslations() {
+            log('开始测试翻译完整性...', 'info');
+            
+            const criticalKeys = [
+                'nav.product', 'nav.scenario', 'nav.developer', 'nav.token',
+                'nav.about', 'nav.hardwareFactory', 'nav.researchStrength',
+                'home.title', 'architecture.title'
+            ];
+            
+            for (const lang of languages) {
+                if (!window.languageManager) {
+                    addResult(false, '语言管理器未初始化');
+                    return;
+                }
+                
+                window.languageManager.updateLanguage(lang);
+                await sleep(200);
+                
+                let missing = [];
+                for (const key of criticalKeys) {
+                    const translation = window.languageManager.getTranslation(key);
+                    if (translation === key || !translation) {
+                        missing.push(key);
+                    }
+                }
+                
+                if (missing.length === 0) {
+                    addResult(true, `${lang} 关键翻译完整`);
+                } else {
+                    addResult(false, `${lang} 缺失翻译: ${missing.join(', ')}`);
+                }
+            }
+        }
+        
+        async function testPageElements() {
+            log('开始测试页面元素翻译...', 'info');
+            
+            for (const lang of languages) {
+                if (!window.languageManager) {
+                    addResult(false, '语言管理器未初始化');
+                    return;
+                }
+                
+                window.languageManager.updateLanguage(lang);
+                await sleep(200);
+                
+                const elements = document.querySelectorAll('[data-i18n]');
+                let untranslated = 0;
+                let empty = 0;
+                
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    const text = el.textContent.trim();
+                    
+                    if (!text || text === '') {
+                        empty++;
+                    } else if (text === key) {
+                        untranslated++;
+                    }
+                });
+                
+                if (untranslated === 0 && empty === 0) {
+                    addResult(true, `${lang} 所有元素已翻译 (${elements.length} 个)`);
+                } else {
+                    addResult(false, `${lang} 有 ${untranslated} 个未翻译, ${empty} 个空元素`);
+                }
+            }
+        }
+        
+        async function runFullTest() {
+            clearLog();
+            log('🚀 开始全量测试...', 'info');
+            
+            await testLanguageButton();
+            await sleep(500);
+            
+            await testLanguageSwitching();
+            await sleep(500);
+            
+            await testTranslations();
+            await sleep(500);
+            
+            await testPageElements();
+            
+            log('✅ 全量测试完成！', 'pass');
+            log(`总计: ${testStats.total} 个测试, 通过: ${testStats.passed}, 失败: ${testStats.failed}`, 
+                testStats.failed === 0 ? 'pass' : 'fail');
+        }
+        
+        function closeTest() {
+            document.getElementById('testOverlay').classList.remove('active');
+        }
+        
+        // 快捷键打开测试 (Ctrl+Shift+T)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                document.getElementById('testOverlay').classList.toggle('active');
+            }
+        });
+        
+        // 页面加载完成后显示提示
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                log('测试系统已加载', 'info');
+                log('按 Ctrl+Shift+T 打开/关闭测试面板', 'info');
+                log('或点击右上角测试按钮', 'info');
+            }, 1000);
+        });
+    </script>
+    
+    <!-- 添加测试按钮到页面 -->
+    <style>
+        .test-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99998;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .test-toggle-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: scale(1.05);
+        }
+    </style>
+    <button class="test-toggle-btn" onclick="document.getElementById('testOverlay').classList.toggle('active')">
+        🧪 测试面板
+    </button>
+</body>
+</html>

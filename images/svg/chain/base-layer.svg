@@ -1,0 +1,36 @@
+<svg width="400" height="280" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-base" x1="0%" y1="0%" x2="100%" y2="100%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(0,212,255,0.08)"/>
+      <stop offset="100%" stop-color="rgba(25,100,254,0.08)"/>
+    </linearGradient>
+    <linearGradient id="line-base" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#1964fe"/>
+    </linearGradient>
+    <filter id="glow-base">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="280" rx="16" fill="url(#bg-base)"/>
+  <!-- P2P nodes -->
+  <circle cx="80" cy="80" r="20" fill="none" stroke="url(#line-base)" stroke-width="2" filter="url(#glow-base)"/>
+  <circle cx="200" cy="60" r="20" fill="none" stroke="url(#line-base)" stroke-width="2" filter="url(#glow-base)"/>
+  <circle cx="320" cy="80" r="20" fill="none" stroke="url(#line-base)" stroke-width="2" filter="url(#glow-base)"/>
+  <circle cx="120" cy="180" r="20" fill="none" stroke="url(#line-base)" stroke-width="2" filter="url(#glow-base)"/>
+  <circle cx="280" cy="180" r="20" fill="none" stroke="url(#line-base)" stroke-width="2" filter="url(#glow-base)"/>
+  <circle cx="200" cy="220" r="20" fill="none" stroke="url(#line-base)" stroke-width="2" filter="url(#glow-base)"/>
+  <!-- Connection lines -->
+  <line x1="100" y1="80" x2="180" y2="68" stroke="url(#line-base)" stroke-width="1.5" opacity="0.7"/>
+  <line x1="220" y1="68" x2="300" y2="80" stroke="url(#line-base)" stroke-width="1.5" opacity="0.7"/>
+  <line x1="96" y1="98" x2="128" y2="162" stroke="url(#line-base)" stroke-width="1.5" opacity="0.7"/>
+  <line x1="272" y1="162" x2="304" y2="98" stroke="url(#line-base)" stroke-width="1.5" opacity="0.7"/>
+  <line x1="200" y1="80" x2="200" y2="200" stroke="url(#line-base)" stroke-width="1.5" opacity="0.7"/>
+  <!-- Center node (database) -->
+  <circle cx="200" cy="140" r="28" fill="none" stroke="url(#line-base)" stroke-width="2.5" filter="url(#glow-base)"/>
+  <path d="M185 140 L200 125 L215 140 L200 155 Z" fill="url(#line-base)" opacity="0.6"/>
+</svg>

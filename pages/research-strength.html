@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="researchStrength.pageTitle">研发实力 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: var(--bg-darker);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=research%20and%20development%20laboratory%20with%20advanced%20technology%20and%20algorithm%20visualization%2C%20scientific%20innovation%20scene%2C%20blue%20and%20cyan%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20futuristic%20tech%20research%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-description {
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .research-content {
+            padding: 4rem 0;
+        }
+        .research-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s;
+        }
+        .research-section:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        .research-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .research-section h2::before {
+            content: '🔬';
+            font-size: 2.5rem;
+        }
+        .research-section h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+        }
+        .research-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+        .research-section ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .research-section li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+        }
+        .research-section li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+        }
+        .feature-card h4 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .research-section {
+                padding: 2rem 1.5rem;
+            }
+            .feature-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="researchStrength.title">研发实力</h1>
+            <p class="section-description" data-i18n="researchStrength.description">全产业链自研自产，掌握核心硬件技术</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="research-content">
+            <!-- 核心优势 -->
+            <div class="research-section">
+                <h2 data-i18n="researchStrength.fullChain">全产业链自研自产</h2>
+                <p data-i18n="researchStrength.fullChainDesc">PowerVerse全产业链高度垂直整合，持续创新，推动云游戏产品更快落地。我们掌握从硬件到软件、从网络到生态的完整产业链，构建"端到端的算力基础设施生态闭环"。</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.hardwareRnd">硬件研发</h4>
+                        <p data-i18n="researchStrength.hardwareRndDesc">自研GPU硬件，近10年硬件研发经验，负责GPU硬件研发与生产管理，保障算力供应。构建"端到端的算力基础设施生态闭环"，优化性价比。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.softwareArch">软件架构</h4>
+                        <p data-i18n="researchStrength.softwareArchDesc">自研架构，突破游戏引擎与云原生架构的适配鸿沟，突破实时渲染与编码的技术瓶颈。云端数据打通、持续迭代平台化开发工具。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.networkOpt">网络优化</h4>
+                        <p data-i18n="researchStrength.networkOptDesc">低延迟传输算法 + 抗弱网策略算法，提升稳定性。5ms超低延迟，0丢包稳定连接，边缘节点将覆盖超30个省市。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.aiOptimization">AI算力优化</h4>
+                        <p data-i18n="researchStrength.aiOptimizationDesc">AI算力优化，精准感知决策分配。AI驱动的渲染增强算法，动态分辨率调整算法，分层编码算法，动态码率调整算法。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 研发能力 -->
+            <div class="research-section">
+                <h2 data-i18n="researchStrength.rndCapability">研发能力</h2>
+                <div class="highlight-box">
+                    <p data-i18n="researchStrength.rndCapabilityDesc">近10年硬件研发经验，负责GPU硬件研发与生产管理，保障算力供应。现专利数量：15+，团队人数：30+，研发占比：~40%。</p>
+                </div>
+                
+                <h3 data-i18n="researchStrength.coreAlgorithms">核心技术算法</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.dynamicResolution">动态分辨率调整算法</h4>
+                        <p data-i18n="researchStrength.dynamicResolutionDesc">根据网络状况动态调整分辨率，保证流畅体验</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.aiRender">AI驱动的渲染增强算法</h4>
+                        <p data-i18n="researchStrength.aiRenderDesc">利用AI技术提升渲染质量和效率</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.layeredEncoding">分层编码算法</h4>
+                        <p data-i18n="researchStrength.layeredEncodingDesc">智能分层编码，优化传输效率</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.dynamicBitrate">动态码率调整算法</h4>
+                        <p data-i18n="researchStrength.dynamicBitrateDesc">实时调整码率，适应网络变化</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.zeroCopy">零拷贝编码流水线算法</h4>
+                        <p data-i18n="researchStrength.zeroCopyDesc">减少内存拷贝，提升编码性能</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 data-i18n="researchStrength.lowLatency">低延迟传输算法</h4>
+                        <p data-i18n="researchStrength.lowLatencyDesc">优化传输路径，降低延迟</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 团队能力 -->
+            <div class="research-section">
+                <h2 data-i18n="researchStrength.team">研发团队</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">30+</div>
+                        <div class="stat-label" data-i18n="researchStrength.teamSize">团队人数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">~40%</div>
+                        <div class="stat-label" data-i18n="researchStrength.rndRatio">研发占比</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label" data-i18n="researchStrength.patents">现专利数量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-i18n="researchStrength.experienceValue">10年+</div>
+                        <div class="stat-label" data-i18n="researchStrength.experience">硬件研发经验</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 未来愿景 -->
+            <div class="research-section">
+                <h2 data-i18n="researchStrength.vision">未来愿景</h2>
+                <div class="highlight-box">
+                    <p><strong data-i18n="researchStrength.visionTitle">愿景：去中心化AI驱动的云游戏平台行业领导者</strong></p>
+                    <p style="margin-top: 1rem;" data-i18n="researchStrength.visionDesc">掌握核心产业链+具有产品定义能力，是胜出的必经之路。未来会成为高毛利水平、高溢价能力、高市场占有率的行业绝对头部，让云游戏平台走进千家万户，用科技改变世界。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

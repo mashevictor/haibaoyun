@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="products.computingPort.pageTitle">算力港 - 去中心化智算平台</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            background-image: url('../images/3back/computing-port.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .product-hero .subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+        .product-hero p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+        .product-content {
+            padding: 5rem 0;
+        }
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        .subsection {
+            margin-bottom: 3rem;
+        }
+        .subsection-title {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .info-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .info-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        .info-box ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
+        .info-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+        }
+        .info-box li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="product-hero">
+                <div class="product-icon">⚓</div>
+                <h1 data-i18n="products.computingPort.name">算力港</h1>
+                <div class="subtitle" data-i18n="products.computingPort.subtitle">去中心化智算平台</div>
+                <p data-i18n="products.computingPort.intro">算力港（XAI Center）是基于 PowerVerse Chain 构建的去中心化智算平台，致力于汇聚全球闲置 GPU/CPU 资源，通过区块链技术实现算力资产的通证化、标准化和可信交易。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="product-content">
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.computingPort.section1.title">一、核心功能</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.computingPort.section1.feature1.title">1. 算力切分与算力池化</h3>
+                    <p data-i18n="products.computingPort.section1.feature1.desc">在计算颗粒度层面，平台的多种能力有效保证隔离性和安全性，轻松应对不同颗粒度的算力资源需求。</p>
+                    <div class="info-box">
+                        <ul>
+                            <li data-i18n="products.computingPort.section1.feature1.item1">显卡多实例运行：提升单个GPU的利用效率</li>
+                            <li data-i18n="products.computingPort.section1.feature1.item2">显卡直通技术：确保高性能计算任务的无缝对接</li>
+                            <li data-i18n="products.computingPort.section1.feature1.item3">多节点并行计算：将算力扩展至前所未有的高度，满足大规模计算需求</li>
+                        </ul>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);" data-i18n="products.computingPort.section1.feature1.detail">基于容器技术，结合PowerVerse Infra驱动层级的拦截技术，实现多品牌GPU单卡的灵活分配与显存切分。用户可以根据实际需求，自定义计算规格与切分规格，轻松实现共享算力与显存切片管理。支持用户轻松组建公共算力池或专属算力池，无论是面向团队内部资源共享，还是保障特定项目的独立算力需求，都能灵活应对，支持多种调度方式，批量调度、优先级调度以及抢占式调度。</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.computingPort.section1.feature2.title">2. 数据平台</h3>
+                    <p data-i18n="products.computingPort.section1.feature2.desc">提供统一的、多元的数据存储、数据管理、弹性伸缩的存储服务，通过容器环境自动挂载存储目录。</p>
+                    <div class="info-box">
+                        <ul>
+                            <li data-i18n="products.computingPort.section1.feature2.item1">无缝集成，自动为用户提供公共存储服务，提供共享数据控制、租户级隔离、并行读写控制、SFTP支持等能力</li>
+                            <li data-i18n="products.computingPort.section1.feature2.item2">提供直观易用的可视化页面，用户可在线申请与查看、页面上传下载，轻松管理资源</li>
+                            <li data-i18n="products.computingPort.section1.feature2.item3">支持按需扩容缩容，用户可根据业务需求灵活调整存储容量，无需担心存储空间不足或资源浪费的问题</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.computingPort.section1.feature3.title">3. 模型训推全生命周期</h3>
+                    <p data-i18n="products.computingPort.section1.feature3.desc">提供从模型开发、模型训练、模型部署、模型推理到模型优化等一系列工作的全生命周期支持。</p>
+                    <div class="info-box">
+                        <h4 data-i18n="products.computingPort.section1.feature3.devTitle">开发环境服务</h4>
+                        <ul>
+                            <li data-i18n="products.computingPort.section1.feature3.dev1">在线秒级创建开发环境，可按CPU核心、内存、GPU型号、数量、系统盘等创建开发机</li>
+                            <li data-i18n="products.computingPort.section1.feature3.dev2">支持无卡开机、关机、在线开发Jupyter、Python、VScode、保存镜像</li>
+                            <li data-i18n="products.computingPort.section1.feature3.dev3">支持定时关机、定时释放等资源回收策略</li>
+                        </ul>
+                        <h4 style="margin-top: 1.5rem;" data-i18n="products.computingPort.section1.feature3.trainTitle">分布式训练服务</h4>
+                        <p style="color: var(--text-secondary);" data-i18n="products.computingPort.section1.feature3.trainDesc">用户可启动训练任务、微调服务进行模型的调整以增加更多精细业务场景的训练，支持多模态训练、预训练DLC、SFT精调等。</p>
+                        <h4 style="margin-top: 1.5rem;" data-i18n="products.computingPort.section1.feature3.evalTitle">模型效果评估</h4>
+                        <p style="color: var(--text-secondary);" data-i18n="products.computingPort.section1.feature3.evalDesc">根据测试数据集测试大模型的表现、效率和适用性，可根据性能指标、泛化能力、推理速度和延迟、资源消耗、可解释性、可扩展性、模型大小、数据依赖性等方面进行评估。</p>
+                        <h4 style="margin-top: 1.5rem;" data-i18n="products.computingPort.section1.feature3.inferTitle">在线推理</h4>
+                        <ul>
+                            <li data-i18n="products.computingPort.section1.feature3.infer1">无缝部署与定制化选择：简化部署流程，实现真正的"一键部署"体验，在模型广场直接部署模型；同时也支持上传私有模型，并通过公共镜像、自定义推理镜像或指定镜像地址进行灵活部署</li>
+                            <li data-i18n="products.computingPort.section1.feature3.infer2">全生命周期管理与弹性资源调度：提供在线推理服务实例的全生命周期管理，包括实例的即时扩容、缩容操作，确保服务随业务需求平滑扩展。实时监控推理实例的运行状态，以及提供日志检索查询功能</li>
+                        </ul>
+                        <h4 style="margin-top: 1.5rem;" data-i18n="products.computingPort.section1.feature3.optTitle">模型优化</h4>
+                        <p style="color: var(--text-secondary);" data-i18n="products.computingPort.section1.feature3.optDesc">提供专业的模型调优服务，通过模型评估机制，帮助用户科学对比模型效果，确保模型选择与业务需求的精准匹配。同时，不断探索推理加速技术，致力于在保持模型精度的同时，大幅提升推理速度。</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.computingPort.section1.feature4.title">4. 智能监控与故障自愈</h3>
+                    <p data-i18n="products.computingPort.section1.feature4.desc">基于PowerVerse Infra的监控管理服务，提供可视化的监控数据、可配置的告警服务、自动化的故障处理，简化运维，实现服务运维智能化。</p>
+                    <div class="info-box">
+                        <h4 data-i18n="products.computingPort.section1.feature4.monitorTitle">智能监控与多维度资源可视化</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="products.computingPort.section1.feature4.monitorDesc">通过统一运维管理平台，实现了对计算资源、存储资源及网络资源等关键运维要素的规范化、可视化管理。监控维度广泛，支持基于计算节点、GPU卡、容器三个维度多指标监控，支持CPU利用率、内存利用率、GPU利用率、GPU显存利用率、网络效率监控，支持计算过程中的NVLink监控、TensorCore监控。</p>
+                        <h4 style="margin-top: 1.5rem;" data-i18n="products.computingPort.section1.feature4.alertTitle">告警配置与通知</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="products.computingPort.section1.feature4.alertDesc">支持用户根据业务需求自定义告警规则组，包括但不限于资源阈值告警、性能异常告警等。一旦触发告警条件，系统将立即生成告警记录，并通过webhook、电子邮件等多种渠道向指定接收人发送告警通知。</p>
+                        <h4 style="margin-top: 1.5rem;" data-i18n="products.computingPort.section1.feature4.faultTitle">故障检测与修复</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;" data-i18n="products.computingPort.section1.feature4.faultDesc">自动检测集群中的潜在故障，如硬件故障、软件异常或资源瓶颈等。一旦检测到故障，系统将迅速启动自愈机制：</p>
+                        <ul>
+                            <li data-i18n="products.computingPort.section1.feature4.fault1">故障隔离：将受影响的节点或GPU卡标记为"污点"，自动阻止新的任务调度到这些资源上，防止故障扩散</li>
+                            <li data-i18n="products.computingPort.section1.feature4.fault2">任务迁移与重试：自动迁移正在该节点上执行的任务到其他健康节点，并尝试重新执行失败的任务，确保业务连续性</li>
+                            <li data-i18n="products.computingPort.section1.feature4.fault3">节点重启与检测：针对可重启恢复的临时故障，自动重启节点并验证服务状态，验证通过后，节点自动回归计算队列</li>
+                            <li data-i18n="products.computingPort.section1.feature4.fault4">下线维修与恢复：针对无法自动修复的故障，系统自动下线节点/GPU卡，并通知相关运维人员，修复验证后，自动恢复资源至计算队列</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.computingPort.section1.feature5.title">5. 边缘计算</h3>
+                    <p data-i18n="products.computingPort.section1.feature5.desc">提供边缘计算能力，构建一个高度可扩展、开放且智能的云边协同基础设施平台，精准击破边缘计算场景下的多重难题，实现边缘计算与AI场景化应用的深度融合。</p>
+                    <div class="info-box">
+                        <ul>
+                            <li data-i18n="products.computingPort.section1.feature5.item1">用户自助服务优化：提供用户自助服务能力，涵盖账户快速创建至资源申请、一键开通、便捷使用及自动释放的全流程优化，用户可根据需求选择共享资源按任务卡时计费或专属资源按配置计费</li>
+                            <li data-i18n="products.computingPort.section1.feature5.item2">系统管理与多租户支持：支持多租户资源与业务隔离，确保各租户业务互不干扰，支持子账号与精细化的角色权限管理</li>
+                            <li data-i18n="products.computingPort.section1.feature5.item3">定价与计费：通过直观易懂的可视化页面，构建全面且灵活的定价策略，涵盖枚举、线性、阶梯等多种定价方式，满足不同用户的成本偏好与实际使用场景</li>
+                            <li data-i18n="products.computingPort.section1.feature5.item4">客户运营：实现全生命周期客户管理，全面收集并分析客户数据，覆盖注册、认证、充值、消费各环节，为精准营销与个性化服务奠定坚实基础</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.computingPort.features.title">核心特性</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 data-i18n="products.computingPort.features.item1">算力池化</h3>
+                        <p data-i18n="products.computingPort.features.item1Desc">灵活的算力切分与池化管理，支持公共和专属算力池</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.computingPort.features.item2">模型训推</h3>
+                        <p data-i18n="products.computingPort.features.item2Desc">完整的AI模型开发、训练、部署、推理全生命周期支持</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.computingPort.features.item3">智能监控</h3>
+                        <p data-i18n="products.computingPort.features.item3Desc">自动化故障检测与自愈机制，保障服务稳定运行</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-i18n="products.computingPort.features.item4">数据平台</h3>
+                        <p data-i18n="products.computingPort.features.item4Desc">统一的数据存储与管理服务，支持弹性伸缩</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

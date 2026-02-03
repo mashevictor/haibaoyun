@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="scenarios.workflow.title">全链路场景 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .workflow-content {
+            padding: 5rem 0;
+        }
+
+        .workflow-diagram {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 102, 255, 0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            overflow-x: auto;
+        }
+        
+        .workflow-video-container {
+            width: 100%;
+            background: var(--bg-darker);
+            border-radius: 24px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            max-height: 600px;
+        }
+        
+        .workflow-video-container video {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            object-fit: contain;
+            display: block;
+            background: #000;
+        }
+        
+        @media (max-width: 1200px) {
+            .workflow-video-container {
+                max-height: 500px;
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .workflow-video-container {
+                max-height: 350px;
+                padding: 1rem;
+                aspect-ratio: 16/9;
+            }
+        }
+
+        .flowchart-container {
+            min-width: 1000px;
+            position: relative;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .flow-step {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 2rem;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .flow-step-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .flow-step-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-step-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .flow-branches {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .flow-branch {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .branch-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            border-radius: 8px;
+        }
+
+        .token-flow {
+            background: linear-gradient(135deg, rgba(255, 200, 0, 0.1) 0%, rgba(255, 150, 0, 0.1) 100%);
+            border-color: #ffc800;
+        }
+
+        .token-flow .flow-step-title {
+            color: #ffc800;
+        }
+
+        .scenario-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .scenario-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .scenario-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .scenario-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .scenario-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .scenario-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .flow-branches {
+                flex-direction: column;
+            }
+            .flowchart-container {
+                min-width: auto;
+            }
+            .scenario-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="scenarios.workflow.title">全链路场景</h1>
+            <p class="section-description" data-i18n="scenarios.workflow.description">云游戏、算力交易与PEC代币支付的完整闭环流程</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="workflow-content">
+            <!-- 流程图视频 -->
+            <div class="workflow-diagram" style="margin-bottom: 3rem;">
+                <div class="workflow-video-container">
+                    <video controls autoplay muted loop>
+                        <source src="../video/compressed/视频4.mp4" type="video/mp4">
+                        <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
+                    </video>
+                </div>
+            </div>
+            
+            <div class="workflow-diagram">
+                <h2 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 2rem; text-align: center;" data-i18n="scenarios.workflow.flowchartTitle">云游戏与算力交易全链路流程图</h2>
+                <div class="flowchart-container">
+                    <div class="flowchart">
+                        <!-- 起始：用户注册 -->
+                        <div class="flow-step">
+                            <div class="flow-step-icon">👤</div>
+                            <div class="flow-step-title" data-i18n="scenarios.workflow.step1.title">用户注册登录</div>
+                            <div class="flow-step-desc" data-i18n="scenarios.workflow.step1.desc">通过PowerVerse Chain钱包连接，实现去中心化身份认证</div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <!-- 分支：云游戏和算力交易 -->
+                        <div class="flow-branches">
+                            <!-- 云游戏分支 -->
+                            <div class="flow-branch">
+                                <div class="branch-title" data-i18n="scenarios.workflow.branch1.title">云游戏场景</div>
+                                
+                                <div class="flow-step">
+                                    <div class="flow-step-icon">🎮</div>
+                                    <div class="flow-step-title" data-i18n="scenarios.workflow.branch1.step1.title">选择游戏</div>
+                                    <div class="flow-step-desc" data-i18n="scenarios.workflow.branch1.step1.desc">浏览游戏库，选择想要游玩的游戏</div>
+                                </div>
+
+                                <div class="flow-arrow">↓</div>
+
+                                <div class="flow-step">
+                                    <div class="flow-step-icon">⚡</div>
+                                    <div class="flow-step-title" data-i18n="scenarios.workflow.branch1.step2.title">资源分配</div>
+                                    <div class="flow-step-desc" data-i18n="scenarios.workflow.branch1.step2.desc">PowerVerse Infra智能调度边缘计算节点，分配GPU资源</div>
+                                </div>
+
+                                <div class="flow-arrow">↓</div>
+
+                                <div class="flow-step">
+                                    <div class="flow-step-icon">🎬</div>
+                                    <div class="flow-step-title" data-i18n="scenarios.workflow.branch1.step3.title">游戏运行</div>
+                                    <div class="flow-step-desc" data-i18n="scenarios.workflow.branch1.step3.desc">游戏在云端GPU上运行，低延迟流媒体传输</div>
+                                </div>
+                            </div>
+
+                            <!-- 算力交易分支 -->
+                            <div class="flow-branch">
+                                <div class="branch-title" data-i18n="scenarios.workflow.branch2.title">算力交易场景</div>
+                                
+                                <div class="flow-step">
+                                    <div class="flow-step-icon">💱</div>
+                                    <div class="flow-step-title" data-i18n="scenarios.workflow.branch2.step1.title">发布需求/资源</div>
+                                    <div class="flow-step-desc" data-i18n="scenarios.workflow.branch2.step1.desc">需求方发布订单或提供方上架算力资源</div>
+                                </div>
+
+                                <div class="flow-arrow">↓</div>
+
+                                <div class="flow-step">
+                                    <div class="flow-step-icon">🤝</div>
+                                    <div class="flow-step-title" data-i18n="scenarios.workflow.branch2.step2.title">智能匹配</div>
+                                    <div class="flow-step-desc" data-i18n="scenarios.workflow.branch2.step2.desc">PowerVerse Market智能合约自动匹配供需</div>
+                                </div>
+
+                                <div class="flow-arrow">↓</div>
+
+                                <div class="flow-step">
+                                    <div class="flow-step-icon">⚙️</div>
+                                    <div class="flow-step-title" data-i18n="scenarios.workflow.branch2.step3.title">执行任务</div>
+                                    <div class="flow-step-desc" data-i18n="scenarios.workflow.branch2.step3.desc">PowerVerse Infra分配资源，执行计算任务</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <!-- PEC代币支付 -->
+                        <div class="flow-step token-flow">
+                            <div class="flow-step-icon">💰</div>
+                            <div class="flow-step-title" data-i18n="scenarios.workflow.payment.title">PEC代币支付</div>
+                            <div class="flow-step-desc" data-i18n="scenarios.workflow.payment.desc">使用PowerVerse代币（PEC）按使用时长/资源付费，智能合约自动结算</div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <!-- 资源释放 -->
+                        <div class="flow-step">
+                            <div class="flow-step-icon">♻️</div>
+                            <div class="flow-step-title" data-i18n="scenarios.workflow.release.title">资源释放</div>
+                            <div class="flow-step-desc" data-i18n="scenarios.workflow.release.desc">任务完成后，GPU/CPU资源自动释放回资源池，供其他用户使用</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 场景详情卡片 -->
+            <div class="scenario-cards">
+                <div class="scenario-card">
+                    <h3 data-i18n="scenarios.workflow.cloudgaming.title">云游戏场景</h3>
+                    <ul>
+                        <li data-i18n="scenarios.workflow.cloudgaming.item1">用户通过钱包连接，实现去中心化身份认证</li>
+                        <li data-i18n="scenarios.workflow.cloudgaming.item2">浏览游戏库，选择想要游玩的游戏</li>
+                        <li data-i18n="scenarios.workflow.cloudgaming.item3">PowerVerse Infra智能调度边缘计算节点</li>
+                        <li data-i18n="scenarios.workflow.cloudgaming.item4">游戏在云端GPU上运行，低延迟流媒体传输</li>
+                        <li data-i18n="scenarios.workflow.cloudgaming.item5">使用PEC代币按使用时长付费</li>
+                        <li data-i18n="scenarios.workflow.cloudgaming.item6">游戏结束后，GPU资源自动释放</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="cloudgaming.html" class="btn btn-primary" style="text-decoration: none; display: inline-block;">了解更多 →</a>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <h3 data-i18n="scenarios.workflow.computingexchange.title">算力交易场景</h3>
+                    <ul>
+                        <li data-i18n="scenarios.workflow.computingexchange.item1">算力提供方在PowerVerse Market注册并上架资源</li>
+                        <li data-i18n="scenarios.workflow.computingexchange.item2">需求方发布需求订单，指定算力类型和预算</li>
+                        <li data-i18n="scenarios.workflow.computingexchange.item3">智能合约自动匹配供需双方</li>
+                        <li data-i18n="scenarios.workflow.computingexchange.item4">PowerVerse Infra根据订单分配算力资源</li>
+                        <li data-i18n="scenarios.workflow.computingexchange.item5">使用PEC代币支付，智能合约自动结算</li>
+                        <li data-i18n="scenarios.workflow.computingexchange.item6">任务完成后，算力资源自动释放回资源池</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="computingpowerexchange.html" class="btn btn-primary" style="text-decoration: none; display: inline-block;">了解更多 →</a>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <h3 data-i18n="scenarios.workflow.token.title">PEC代币支付</h3>
+                    <ul>
+                        <li data-i18n="scenarios.workflow.token.item1">PowerVerse代币（PEC）是生态系统的原生代币</li>
+                        <li data-i18n="scenarios.workflow.token.item2">用于支付云游戏使用时长费用</li>
+                        <li data-i18n="scenarios.workflow.token.item3">用于支付算力交易费用</li>
+                        <li data-i18n="scenarios.workflow.token.item4">智能合约自动执行结算，安全可靠</li>
+                        <li data-i18n="scenarios.workflow.token.item5">按需付费，无需预充值</li>
+                        <li data-i18n="scenarios.workflow.token.item6">支持多种支付方式，灵活便捷</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="token.html" class="btn btn-primary" style="text-decoration: none; display: inline-block;">了解更多 →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

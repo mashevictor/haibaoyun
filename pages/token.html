@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="token.pageTitle">代币 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: var(--bg-darker);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cryptocurrency%20token%20economy%20with%20digital%20coins%20and%20blockchain%20technology%2C%20financial%20data%20visualization%2C%20gold%20and%20blue%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20futuristic%20finance%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-description {
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .token-content {
+            padding: 4rem 0;
+        }
+        .token-overview {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .token-symbol {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .token-name {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .token-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .token-stat {
+            background: var(--bg-darker);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .token-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        .token-stat-value {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .token-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .token-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        .token-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        .token-card ul {
+            list-style: none;
+        }
+        .token-card li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .token-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .token-card li:last-child {
+            border-bottom: none;
+        }
+        .distribution-chart {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+        .distribution-chart h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        .distribution-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .distribution-bar {
+            flex: 1;
+            height: 30px;
+            background: var(--bg-darker);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .distribution-fill {
+            height: 100%;
+            background: var(--gradient-3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: var(--bg-dark);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .distribution-label {
+            min-width: 150px;
+            color: var(--text-secondary);
+        }
+        /* 网络信息和钱包信息容器 */
+        .network-info, .wallet-info {
+            margin-top: 1.5rem;
+        }
+        
+        /* 整体容器 */
+        .network-wallet-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 垂直排列容器 */
+        .network-wallet-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        /* 网络和钱包信息卡片容器 */
+        .network-section, .wallet-section {
+            background: var(--bg-darker);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .network-section:hover, .wallet-section:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+        }
+        
+        .network-section h4, .wallet-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .network-section h4::before, .wallet-section h4::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient-3);
+            border-radius: 2px;
+        }
+        
+        .network-item, .wallet-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 1.5rem;
+            transition: background 0.2s;
+            border-radius: 6px;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        .network-item:hover, .wallet-item:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+        .network-item:last-child, .wallet-item:last-child {
+            border-bottom: none;
+        }
+        
+        .network-label, .wallet-label {
+            min-width: 140px;
+            max-width: 140px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .network-value, .wallet-value {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+        
+        .network-value a {
+            color: var(--primary-color);
+            text-decoration: none;
+            word-break: break-all;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: break-word;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .network-value a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+            white-space: normal;
+            overflow: visible;
+        }
+        
+        .wallet-value code {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            color: var(--primary-color);
+            font-family: 'Courier New', monospace;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            flex: 1;
+            min-width: 0;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .copy-btn {
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: 70px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        .copy-btn.copied {
+            background: #00ff88;
+            color: var(--bg-dark);
+        }
+        @media (max-width: 768px) {
+            .token-card {
+                padding: 1.5rem !important;
+            }
+            .network-section, .wallet-section {
+                padding: 1.25rem;
+            }
+            .network-item, .wallet-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                padding: 1rem 0.5rem;
+            }
+            .network-label, .wallet-label {
+                min-width: auto;
+                max-width: none;
+                width: 100%;
+                font-weight: 600;
+                color: var(--text-primary);
+            }
+            .network-value, .wallet-value {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+            .network-value a, .wallet-value code {
+                width: 100%;
+                display: block;
+            }
+            .copy-btn {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="token.title">代币经济</h1>
+            <p class="section-description" data-i18n="token.description">构建可持续的生态经济模型</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="token-content">
+            <div class="token-overview">
+                <div class="token-symbol">🪙</div>
+                <div class="token-name" data-i18n="token.name">PEC Token</div>
+                <p style="color: var(--text-secondary);" data-i18n="token.intro">PowerVerse Token是PowerVerse Chain生态系统的原生代币</p>
+                <div class="token-stats">
+                    <div class="token-stat">
+                        <div class="token-stat-label" data-i18n="token.totalSupply">总供应量</div>
+                        <div class="token-stat-value">1,400,000,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="token-details" style="margin-bottom: 3rem;">
+                <div class="token-card network-wallet-container" style="width: 100%; max-width: 100%; grid-column: 1 / -1; padding: 2.5rem;">
+                    <h3 style="margin-bottom: 2rem; font-size: 1.75rem;" data-i18n="token.networkInfo">PowerVerse 网络信息</h3>
+                    <div class="network-wallet-wrapper">
+                        <div class="network-section">
+                            <h4 data-i18n="token.rpcInterface">RPC 接口</h4>
+                            <div class="network-info">
+                                <div class="network-item">
+                                    <span class="network-label" data-i18n="token.mainRPC">主RPC接口:</span>
+                                    <span class="network-value">
+                                        <a href="https://rpc.powerverse.io/" target="_blank">https://rpc.powerverse.io/</a>
+                                        <button class="copy-btn" data-copy="https://rpc.powerverse.io/" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                                <div class="network-item">
+                                    <span class="network-label" data-i18n="token.webSocket">WebSocket:</span>
+                                    <span class="network-value">
+                                        <a href="wss://rpc.powerverse.io/ws" target="_blank">wss://rpc.powerverse.io/ws</a>
+                                        <button class="copy-btn" data-copy="wss://rpc.powerverse.io/ws" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                                <div class="network-item">
+                                    <span class="network-label" data-i18n="token.beaconAPI">Beacon API:</span>
+                                    <span class="network-value">
+                                        <a href="https://rpc.powerverse.io/beacon/" target="_blank">https://rpc.powerverse.io/beacon/</a>
+                                        <button class="copy-btn" data-copy="https://rpc.powerverse.io/beacon/" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                                <div class="network-item">
+                                    <span class="network-label" data-i18n="token.healthCheck">健康检查:</span>
+                                    <span class="network-value">
+                                        <a href="https://rpc.powerverse.io/health" target="_blank">https://rpc.powerverse.io/health</a>
+                                        <button class="copy-btn" data-copy="https://rpc.powerverse.io/health" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wallet-section">
+                            <h4 data-i18n="token.walletInfo">钱包连接信息</h4>
+                            <div class="wallet-info">
+                                <div class="wallet-item">
+                                    <span class="wallet-label" data-i18n="token.rpcURL">RPC URL:</span>
+                                    <span class="wallet-value">
+                                        <code>https://rpc.powerverse.io/</code>
+                                        <button class="copy-btn" data-copy="https://rpc.powerverse.io/" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                                <div class="wallet-item">
+                                    <span class="wallet-label" data-i18n="token.chainID">Chain ID:</span>
+                                    <span class="wallet-value">
+                                        <code>20250930</code>
+                                        <button class="copy-btn" data-copy="20250930" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                                <div class="wallet-item">
+                                    <span class="wallet-label" data-i18n="token.symbol">Symbol:</span>
+                                    <span class="wallet-value">
+                                        <code>PEC</code>
+                                        <button class="copy-btn" data-copy="PEC" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                                <div class="wallet-item">
+                                    <span class="wallet-label" data-i18n="token.decimals">Decimals:</span>
+                                    <span class="wallet-value">
+                                        <code>18</code>
+                                        <button class="copy-btn" data-copy="18" data-i18n="common.copy">复制</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="distribution-chart">
+                <h2 style="font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1rem; text-align: center;">总发行量: 1,400,000,000 枚</h2>
+                <h3 data-i18n="token.distributionChart" style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; text-align: center;">代币分配可视化</h3>
+                <div class="chart-container" style="display: flex; flex-direction: column; gap: 30px; margin-top: 20px;">
+                    <div class="chart-wrapper" style="width: 100%; max-width: 500px; margin: 0 auto; position: relative; height: 400px;">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    
+                    <div class="details-panel" style="width: 100%; background-color: var(--bg-darker); border-radius: 10px; padding: 20px; border-left: 4px solid var(--primary-color);">
+                        <h2 style="color: var(--primary-color); margin: 0 0 15px 0; font-size: 1.2rem;">分配详情</h2>
+                        <div class="allocation-table" id="allocationTable" style="font-size: 0.9rem;">
+                            <!-- 表格将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        // 复制功能
+        function setupCopyButtons() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                // 移除旧的事件监听器
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                
+                newBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const text = this.getAttribute('data-copy');
+                    if (!text) return;
+                    
+                    const i18nKey = this.getAttribute('data-i18n') || 'common.copy';
+                    const languageManager = window.languageManager;
+                    
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        const originalText = languageManager ? languageManager.getTranslation(i18nKey) : this.textContent;
+                        const copiedText = languageManager ? languageManager.getTranslation('common.copied') : '已复制!';
+                        this.textContent = copiedText;
+                        this.classList.add('copied');
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        // 降级方案
+                        const textarea = document.createElement('textarea');
+                        textarea.value = text;
+                        textarea.style.position = 'fixed';
+                        textarea.style.left = '-9999px';
+                        textarea.style.top = '0';
+                        textarea.style.opacity = '0';
+                        document.body.appendChild(textarea);
+                        textarea.focus();
+                        textarea.select();
+                        try {
+                            const successful = document.execCommand('copy');
+                            if (successful) {
+                                const originalText = languageManager ? languageManager.getTranslation(i18nKey) : this.textContent;
+                                const copiedText = languageManager ? languageManager.getTranslation('common.copied') : '已复制!';
+                                this.textContent = copiedText;
+                                this.classList.add('copied');
+                                setTimeout(() => {
+                                    this.textContent = originalText;
+                                    this.classList.remove('copied');
+                                }, 2000);
+                            } else {
+                                const failText = languageManager ? languageManager.getTranslation('common.copyFailed') : '复制失败，请手动复制: ';
+                                alert(failText + text);
+                            }
+                        } catch (e) {
+                            const failText = languageManager ? languageManager.getTranslation('common.copyFailed') : '复制失败，请手动复制: ';
+                            alert(failText + text);
+                        }
+                        document.body.removeChild(textarea);
+                    }
+                });
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            setupCopyButtons();
+            initDistributionChart();
+            
+            // 监听语言切换事件，重新设置复制按钮
+            if (window.languageManager) {
+                const originalUpdateLanguage = window.languageManager.updateLanguage;
+                window.languageManager.updateLanguage = function(lang) {
+                    originalUpdateLanguage.call(this, lang);
+                    setTimeout(() => {
+                        setupCopyButtons();
+                        initDistributionChart();
+                    }, 100);
+                };
+            }
+        });
+
+        // 分配数据
+        const allocationData = [
+            { 
+                label: "区块验证奖励", 
+                shortLabel: "区块奖励",
+                percentage: 20, 
+                amount: 280000000, 
+                color: "#5da0d6"
+            },
+            { 
+                label: "基金会生态", 
+                shortLabel: "基金会",
+                percentage: 20, 
+                amount: 280000000, 
+                color: "#4a6fa5"
+            },
+            { 
+                label: "团队", 
+                shortLabel: "团队",
+                percentage: 15, 
+                amount: 210000000, 
+                color: "#36d1dc"
+            },
+            { 
+                label: "天使轮", 
+                shortLabel: "天使轮",
+                percentage: 10, 
+                amount: 140000000, 
+                color: "#f5a623"
+            },
+            { 
+                label: "种子轮", 
+                shortLabel: "种子轮",
+                percentage: 10, 
+                amount: 140000000, 
+                color: "#6dc5b8"
+            },
+            { 
+                label: "A轮", 
+                shortLabel: "A轮",
+                percentage: 10, 
+                amount: 140000000, 
+                color: "#c56cf0"
+            },
+            { 
+                label: "IDO", 
+                shortLabel: "IDO",
+                percentage: 5, 
+                amount: 70000000, 
+                color: "#ff6b6b"
+            },
+            { 
+                label: "市场营销", 
+                shortLabel: "市场营销",
+                percentage: 5, 
+                amount: 70000000, 
+                color: "#9ad46c"
+            },
+            { 
+                label: "合规", 
+                shortLabel: "合规",
+                percentage: 3, 
+                amount: 42000000, 
+                color: "#4a6fa5"
+            },
+            { 
+                label: "社区奖励", 
+                shortLabel: "社区奖励",
+                percentage: 2, 
+                amount: 28000000, 
+                color: "#5da0d6"
+            }
+        ];
+
+        // 初始化代币分配饼图
+        function initDistributionChart() {
+            const ctx = document.getElementById('allocationChart');
+            if (!ctx) return;
+
+            // 销毁旧图表
+            if (window.distributionChart) {
+                window.distributionChart.destroy();
+            }
+
+            // 创建新图表
+            window.distributionChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: allocationData.map(item => item.label),
+                    datasets: [{
+                        data: allocationData.map(item => item.percentage),
+                        backgroundColor: allocationData.map(item => item.color),
+                        borderColor: '#fff',
+                        borderWidth: 2,
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                font: {
+                                    size: 10
+                                },
+                                color: '#fff',
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    if (data.labels.length && data.datasets.length) {
+                                        return data.labels.map((label, i) => {
+                                            const dataset = data.datasets[0];
+                                            const value = dataset.data[i];
+                                            const amount = allocationData[i].amount.toLocaleString();
+                                            const color = dataset.backgroundColor[i];
+                                            
+                                            return {
+                                                text: `${label} (${value}%)`,
+                                                fillStyle: color,
+                				fontColor: '#fff', // 添加这行，确保文字颜色为白色
+                                                hidden: false,
+                                                index: i
+                                            };
+                                        });
+                                    }
+                                    return [];
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const percentage = context.raw || 0;
+                                    const item = allocationData.find(d => d.label === label);
+                                    const amount = item ? item.amount.toLocaleString() : '0';
+                                    return `${label}: ${percentage}% (${amount} 枚)`;
+                                }
+                            }
+                        }
+                    },
+                    elements: {
+                        arc: {
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+
+            // 生成分配表格
+            generateAllocationTable();
+        }
+
+        // 生成分配表格
+        function generateAllocationTable() {
+            const tableContainer = document.getElementById('allocationTable');
+            if (!tableContainer) return;
+            
+            let tableHTML = `
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                    <thead>
+                        <tr style="background-color: rgba(0, 212, 255, 0.1);">
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">分配项</th>
+                            <th style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">占比</th>
+                            <th style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">数量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            allocationData.forEach((item, index) => {
+                tableHTML += `
+                    <tr style="cursor: pointer; transition: all 0.2s;" data-index="${index}">
+                        <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 12px; height: 12px; background-color: ${item.color}; border-radius: 50%;"></div>
+                                <span style="color: var(--text-secondary);">${item.label}</span>
+                            </div>
+                        </td>
+                        <td style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color); font-weight: bold;">${item.percentage}%</td>
+                        <td style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; min-width: 120px;">${item.amount.toLocaleString()} 枚</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            tableContainer.innerHTML = tableHTML;
+            
+            // 添加点击事件
+            document.querySelectorAll('#allocationTable tr[data-index]').forEach(row => {
+                row.addEventListener('click', () => {
+                    const index = parseInt(row.getAttribute('data-index'));
+                    highlightAllocationItem(index);
+                });
+            });
+        }
+
+        // 高亮分配项
+        function highlightAllocationItem(index) {
+            // 移除所有active类
+            document.querySelectorAll('#allocationTable tr[data-index]').forEach(row => {
+                row.style.backgroundColor = 'transparent';
+                row.style.fontWeight = 'normal';
+            });
+            
+            // 为选中的项添加active类
+            const selectedRow = document.querySelector(`#allocationTable tr[data-index="${index}"]`);
+            if (selectedRow) {
+                selectedRow.style.backgroundColor = 'rgba(0, 212, 255, 0.1)';
+                selectedRow.style.fontWeight = '600';
+                selectedRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            // 高亮图表对应的部分
+            if (window.distributionChart) {
+                // 暂时突出显示选中的扇区
+                const meta = window.distributionChart.getDatasetMeta(0);
+                meta.data.forEach((arc, i) => {
+                    arc.options.offset = i === index ? 15 : 0;
+                });
+                window.distributionChart.update();
+            }
+        }
+    </script>
+</body>
+</html>

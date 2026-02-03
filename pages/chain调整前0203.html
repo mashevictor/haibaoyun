@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="products.chain.pageTitle">PowerVerse Chain - 技术简介</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=blockchain%20technology%20with%20digital%20blocks%20and%20cryptocurrency%20network%2C%20futuristic%20block%20chain%20visualization%2C%20blue%20and%20purple%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-hero p {
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .product-content {
+            padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        .subsection {
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+        .subsection-title {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .subsection-title::before {
+            content: '';
+            width: 4px;
+            height: 1.75rem;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .layer-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .layer-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .layer-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .layer-card ul {
+            list-style: none;
+            margin: 0;
+        }
+        .layer-card li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        .layer-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .layer-card li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .info-box {
+            background: var(--bg-darker);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .info-box h4 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .info-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+            font-size: 1rem;
+        }
+        .process-steps {
+            background: var(--bg-darker);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .process-steps ol {
+            list-style: none;
+            counter-reset: step-counter;
+            margin: 0;
+            padding: 0;
+        }
+        .process-steps li {
+            counter-increment: step-counter;
+            padding: 1.25rem 0 1.25rem 3rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .process-steps li:last-child {
+            border-bottom: none;
+        }
+        .process-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 1.25rem;
+            width: 2rem;
+            height: 2rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        .coin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .coin-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        .feature-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+            font-size: 1rem;
+        }
+        .highlight-text {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .product-hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .architecture-grid,
+            .coin-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="product-hero">
+                <div class="product-icon">🔗</div>
+                <h1>PowerVerse Chain</h1>
+                <div class="subtitle" data-i18n="products.chain.subtitle">技术简介</div>
+                <p data-i18n="products.chain.intro">PowerVerse Chain 是一个基于区块链的分布式账本平台，通过去中心化网络、智能合约与共识机制，为去中心化应用提供安全、高效的基础设施。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="product-content">
+            <!-- 总体架构 -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.chain.architecture.title">总体架构</h2>
+                
+                <div class="architecture-grid">
+                    <div class="layer-card">
+                        <h3 data-i18n="products.chain.architecture.baseLayer.title">1. 基础层</h3>
+                        <ul>
+                            <li><strong data-i18n="products.chain.architecture.baseLayer.p2p.label">P2P 网络：</strong><span data-i18n="products.chain.architecture.baseLayer.p2p.desc">节点间直接通信，实现快速数据同步与高可用网络。</span></li>
+                            <li><strong data-i18n="products.chain.architecture.baseLayer.database.label">数据库：</strong><span data-i18n="products.chain.architecture.baseLayer.database.desc">采用优化 Merkle 树存储交易、合约与账户状态，确保数据完整可验证。</span></li>
+                            <li><strong data-i18n="products.chain.architecture.baseLayer.crypto.label">密码学算法：</strong><span data-i18n="products.chain.architecture.baseLayer.crypto.desc">提供密钥管理、数字签名与哈希计算，保障隐私与安全。</span></li>
+                            <li><strong data-i18n="products.chain.architecture.baseLayer.sharding.label">分片优化：</strong><span data-i18n="products.chain.architecture.baseLayer.sharding.desc">支持交易并行验证，提升区块生成效率。</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="layer-card">
+                        <h3 data-i18n="products.chain.architecture.coreLayer.title">2. 核心层</h3>
+                        <ul>
+                            <li><strong data-i18n="products.chain.architecture.coreLayer.ledger.label">分布式账本：</strong><span data-i18n="products.chain.architecture.coreLayer.ledger.desc">包含交易、区块、交易池等核心账本数据。</span></li>
+                            <li><strong data-i18n="products.chain.architecture.coreLayer.consensus.label">共识机制：</strong><span data-i18n="products.chain.architecture.coreLayer.consensus.desc">采用 POW+POS 混合共识机制，结合工作量证明与权益证明，实现高效去中心化一致性。</span></li>
+                            <li><strong data-i18n="products.chain.architecture.coreLayer.smartContract.label">智能合约：</strong><span data-i18n="products.chain.architecture.coreLayer.smartContract.desc">完全兼容 EVM，支持使用 Solidity 等语言开发合约。</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="layer-card">
+                        <h3 data-i18n="products.chain.architecture.appLayer.title">3. 应用层</h3>
+                        <ul>
+                            <li><strong data-i18n="products.chain.architecture.appLayer.api.label">API 接口：</strong><span data-i18n="products.chain.architecture.appLayer.api.desc">提供 HTTP/TCP 接口与 RPC 服务，便于生态集成。</span></li>
+                            <li><strong data-i18n="products.chain.architecture.appLayer.dapp.label">DApp：</strong><span data-i18n="products.chain.architecture.appLayer.dapp.desc">支持开发各类去中心化应用，如 DeFi、DID 等。</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 区块与交易 -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.chain.blockTransaction.title">区块与交易</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.chain.blockTransaction.structure.title">区块结构</h3>
+                    <div class="info-box">
+                        <h4 data-i18n="products.chain.blockTransaction.structure.header.title">区块头</h4>
+                        <p data-i18n="products.chain.blockTransaction.structure.header.desc">包含父区块哈希、时间戳、交易树根哈希（TxRoot）等。</p>
+                    </div>
+                    <div class="info-box">
+                        <h4 data-i18n="products.chain.blockTransaction.structure.body.title">区块体</h4>
+                        <p data-i18n="products.chain.blockTransaction.structure.body.desc">包含交易列表。</p>
+                    </div>
+                    <p class="highlight-text" data-i18n="products.chain.blockTransaction.structure.note">交易通过 Merkle 树组织，TxRoot 用于快速验证区块完整性。</p>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.chain.blockTransaction.process.title">交易流程</h3>
+                    <div class="process-steps">
+                        <ol>
+                            <li data-i18n="products.chain.blockTransaction.process.step1">用户构造并广播交易。</li>
+                            <li data-i18n="products.chain.blockTransaction.process.step2">节点校验交易后存入交易池。</li>
+                            <li data-i18n="products.chain.blockTransaction.process.step3">提案节点打包交易，生成区块提案。</li>
+                            <li data-i18n="products.chain.blockTransaction.process.step4">交易由 EVM 执行，区块进入共识流程。</li>
+                            <li data-i18n="products.chain.blockTransaction.process.step5">共识成功后区块落盘，更新状态并处理分叉。</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 共识机制 -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.chain.consensus.title">共识机制：POW+POS 混合共识</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.chain.consensus.overview.title">1. 共识机制概述</h3>
+                    <p data-i18n="products.chain.consensus.overview.desc">PowerVerse Chain 采用 POW+POS 混合共识机制，结合工作量证明（Proof of Work）和权益证明（Proof of Stake）的优势，在保证网络安全性的同时提升交易处理效率。</p>
+                    <div class="info-box">
+                        <h4 data-i18n="products.chain.consensus.overview.pow.title">工作量证明（POW）</h4>
+                        <p data-i18n="products.chain.consensus.overview.pow.desc">通过计算能力竞争来验证交易和创建新区块，确保网络的安全性和去中心化特性。矿工通过解决复杂的数学难题来获得记账权，获得区块奖励。</p>
+                    </div>
+                    <div class="info-box">
+                        <h4 data-i18n="products.chain.consensus.overview.pos.title">权益证明（POS）</h4>
+                        <p data-i18n="products.chain.consensus.overview.pos.desc">验证者通过质押代币参与网络共识，质押数量越多，被选为验证者的概率越高。POS 机制大幅降低了能源消耗，提高了交易处理速度。</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.chain.consensus.workflow.title">2. 共识流程</h3>
+                    <div class="process-steps">
+                        <ol>
+                            <li data-i18n="products.chain.consensus.workflow.step1">POW 矿工通过算力竞争创建候选区块，获得区块奖励。</li>
+                            <li data-i18n="products.chain.consensus.workflow.step2">POS 验证者通过质押代币参与区块验证，确保交易合法性。</li>
+                            <li data-i18n="products.chain.consensus.workflow.step3">验证者进行投票，超过 2/3 验证者同意的区块被确认。</li>
+                            <li data-i18n="products.chain.consensus.workflow.step4">确认的区块被添加到区块链，更新网络状态。</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.chain.consensus.staking.title">3. POS 质押机制</h3>
+                    <p data-i18n="products.chain.consensus.staking.intro">权益证明（POS）质押是 PowerVerse Chain 网络安全的核心机制，参考以太坊 2.0 的质押设计，为验证者提供稳定的收益来源。</p>
+                    
+                    <div class="coin-features">
+                        <div class="feature-card">
+                            <h4 data-i18n="products.chain.consensus.staking.minimum.title">最低质押要求</h4>
+                            <p data-i18n="products.chain.consensus.staking.minimum.desc">成为验证者需要质押最低数量的代币，确保验证者的经济激励与网络安全对齐。</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 data-i18n="products.chain.consensus.staking.rewards.title">质押奖励</h4>
+                            <p data-i18n="products.chain.consensus.staking.rewards.desc">验证者通过参与区块验证和共识投票获得奖励，奖励率与质押总量和网络活跃度相关。</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 data-i18n="products.chain.consensus.staking.slashing.title">惩罚机制</h4>
+                            <p data-i18n="products.chain.consensus.staking.slashing.desc">验证者如果恶意行为或长期离线，将面临质押代币被罚没的风险，确保网络安全。</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h4 data-i18n="products.chain.consensus.staking.benefits.title">质押优势</h4>
+                        <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
+                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">✓</span>
+                                <span data-i18n="products.chain.consensus.staking.benefits.item1">获得稳定的质押收益，年化收益率根据网络情况动态调整</span>
+                            </li>
+                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">✓</span>
+                                <span data-i18n="products.chain.consensus.staking.benefits.item2">参与网络治理，对协议升级和重要决策进行投票</span>
+                            </li>
+                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">✓</span>
+                                <span data-i18n="products.chain.consensus.staking.benefits.item3">增强网络安全性，质押代币越多，网络越安全</span>
+                            </li>
+                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">✓</span>
+                                <span data-i18n="products.chain.consensus.staking.benefits.item4">支持委托质押，普通用户可以将代币委托给验证者节点</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 网络配置标准 -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.chain.networkConfig.title">网络配置标准</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title" data-i18n="products.chain.networkConfig.overview.title">网络参数配置</h3>
+                    <p data-i18n="products.chain.networkConfig.overview.desc">PowerVerse Chain 采用标准化的网络配置，确保节点间的兼容性和网络的稳定运行。</p>
+                    
+                    <div class="coin-features">
+                        <div class="feature-card">
+                            <h4 data-i18n="products.chain.networkConfig.blockParams.title">区块参数</h4>
+                            <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.blockParams.size">区块大小：最大 2MB</span>
+                                </li>
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.blockParams.interval">出块间隔：约 3 秒</span>
+                                </li>
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.blockParams.gasLimit">Gas 限制：每区块 8,000,000 Gas</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 data-i18n="products.chain.networkConfig.consensusParams.title">共识参数</h4>
+                            <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.consensusParams.minStake">最低质押：10,000 PEC</span>
+                                </li>
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.consensusParams.epoch">Epoch 周期：100 个区块</span>
+                                </li>
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.consensusParams.finality">最终确认：2/3 验证者投票</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 data-i18n="products.chain.networkConfig.networkParams.title">网络参数</h4>
+                            <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.networkParams.chainId">Chain ID：主网 1001</span>
+                                </li>
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.networkParams.rpcPort">RPC 端口：8545</span>
+                                </li>
+                                <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
+                                    <span data-i18n="products.chain.networkConfig.networkParams.p2pPort">P2P 端口：30303</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PowerVerse Coin -->
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.chain.coin.title">PowerVerse Coin：生态核心资产</h2>
+                
+                <div class="coin-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" data-i18n="products.chain.coin.totalSupplyValue">14亿</div>
+                        <div class="stat-label" data-i18n="products.chain.coin.totalSupply">总发行量</div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title" data-i18n="products.chain.coin.features.title">主要功能</h3>
+                <div class="coin-features">
+                    <div class="feature-card">
+                        <h4 data-i18n="products.chain.coin.features.staking.title">质押维护网络</h4>
+                        <p data-i18n="products.chain.coin.features.staking.desc">通过质押参与共识，获得奖励，增强网络安全与稳定性。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4 data-i18n="products.chain.coin.features.circulation.title">生态流通与支付</h4>
+                        <p data-i18n="products.chain.coin.features.circulation.desc">作为生态内价值交换媒介，用于开发激励、服务支付与应用内交易。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4 data-i18n="products.chain.coin.features.dao.title">DAO 治理</h4>
+                        <p data-i18n="products.chain.coin.features.dao.desc">持有者可参与 PowerVerse DAO 投票，共同决定协议升级、资金分配等重大决策。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

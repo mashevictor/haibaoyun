@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="hardwareFactory.pageTitle">硬件工厂 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: var(--bg-darker);
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=hardware%20factory%20with%20server%20chassis%20and%20industrial%20equipment%2C%20high-tech%20manufacturing%20facility%2C%20blue%20and%20silver%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20industrial%20tech%20background&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .page-header-banner {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .page-header-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-description {
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .hardware-content {
+            padding: 2rem 0;
+        }
+        .hardware-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+        .hardware-section:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        .hardware-section h2 {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .hardware-section h2::before {
+            content: '🏭';
+            font-size: 2rem;
+        }
+        .hardware-section h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .hardware-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .product-category {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .category-card {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+        }
+        .category-card h4 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .category-card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 0.75rem;
+        }
+        .category-card li {
+            padding: 0.35rem 0;
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        .category-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .product-card {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .product-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem;
+        }
+        .feature-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 8px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+        }
+        .product-card h4 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .product-specs {
+            margin-top: 0.75rem;
+        }
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+        .spec-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .spec-value {
+            color: var(--text-primary);
+        }
+        .qualification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .qualification-item {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .qualification-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .qualification-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .hardware-section {
+                padding: 2rem 1.5rem;
+            }
+            .product-category,
+            .product-grid,
+            .qualification-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../index.html" style="cursor: pointer;">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="../index.html#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../index.html#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-i18n="hardwareFactory.title">硬件工厂</h1>
+            <p class="section-description" data-i18n="hardwareFactory.description">专业服务器机箱与工业控制机箱制造商</p>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="hardware-content">
+            <!-- 公司介绍 -->
+            <div class="hardware-section">
+                <h2 data-i18n="hardwareFactory.companyProfile">公司介绍</h2>
+                <div class="highlight-box">
+                    <p data-i18n="hardwareFactory.companyIntro">我们是一家专业的服务器机箱与工业控制机箱制造商，致力于为客户提供高品质的硬件产品解决方案。</p>
+                </div>
+                
+                <h3 data-i18n="hardwareFactory.companyDesc">公司简介</h3>
+                <p data-i18n="hardwareFactory.companyDescText">我们拥有完整的生产制造能力，从设计、研发到生产、质检，全流程自主可控。工厂配备先进的生产设备和专业的技术团队，确保产品质量和交付效率。</p>
+                
+                <h3 data-i18n="hardwareFactory.companyCulture">企业文化</h3>
+                <p data-i18n="hardwareFactory.companyCultureText">我们秉承"质量第一、客户至上、持续创新"的企业理念，不断优化生产工艺，提升产品质量，为客户创造更大价值。我们注重团队建设，营造积极向上的工作氛围，激发员工创新潜能。</p>
+            </div>
+
+            <!-- 产品中心 -->
+            <div class="hardware-section">
+                <h2 data-i18n="hardwareFactory.productCenter">产品中心</h2>
+                <p data-i18n="hardwareFactory.productCenterDesc">我们提供全系列的服务器机箱、工业控制机箱和嵌入式机箱产品，满足不同应用场景的需求。</p>
+                
+                <div class="product-category">
+                    <div class="category-card">
+                        <h4 data-i18n="hardwareFactory.serverChassis">服务器机箱</h4>
+                        <p data-i18n="hardwareFactory.serverChassisDesc">提供全系列服务器机箱产品</p>
+                        <ul>
+                            <li data-i18n="hardwareFactory.serverChassisList.item1">6U机架式8节点服务器机箱</li>
+                            <li data-i18n="hardwareFactory.serverChassisList.item2">5U机架式8节点服务器机箱</li>
+                            <li data-i18n="hardwareFactory.serverChassisList.item3">4U36盘位机架式服务器机箱</li>
+                            <li data-i18n="hardwareFactory.serverChassisList.item4">4U24盘位机架式服务器机箱</li>
+                            <li data-i18n="hardwareFactory.serverChassisList.item5">4U8盘位机架式服务器机箱</li>
+                            <li data-i18n="hardwareFactory.serverChassisList.item6">2U标准服务器</li>
+                            <li data-i18n="hardwareFactory.serverChassisList.item7">瘦客</li>
+                        </ul>
+                    </div>
+                    <div class="category-card">
+                        <h4 data-i18n="hardwareFactory.industrialChassis">工控机箱</h4>
+                        <p data-i18n="hardwareFactory.industrialChassisDesc">工业控制专用机箱</p>
+                        <ul>
+                            <li data-i18n="hardwareFactory.industrialChassisList.item1">标准工控机箱</li>
+                            <li data-i18n="hardwareFactory.industrialChassisList.item2">定制化工控机箱</li>
+                        </ul>
+                    </div>
+                    <div class="category-card">
+                        <h4 data-i18n="hardwareFactory.embeddedChassis">嵌入式机箱</h4>
+                        <p data-i18n="hardwareFactory.embeddedChassisDesc">紧凑型嵌入式解决方案</p>
+                        <ul>
+                            <li data-i18n="hardwareFactory.embeddedChassisList.item1">嵌入式机箱</li>
+                            <li data-i18n="hardwareFactory.embeddedChassisList.item2">小型化设计</li>
+                        </ul>
+                    </div>
+                    <div class="category-card">
+                        <h4 data-i18n="hardwareFactory.accessories">配件</h4>
+                        <p data-i18n="hardwareFactory.accessoriesDesc">各类机箱配件和附件</p>
+                        <ul>
+                            <li data-i18n="hardwareFactory.accessoriesList.item1">风扇模块</li>
+                            <li data-i18n="hardwareFactory.accessoriesList.item2">电源模块</li>
+                            <li data-i18n="hardwareFactory.accessoriesList.item3">扩展卡支架</li>
+                            <li data-i18n="hardwareFactory.accessoriesList.item4">其他配件</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 产品详情 -->
+            <div class="hardware-section">
+                <h2 data-i18n="hardwareFactory.productDetails">产品详情</h2>
+                
+                <h3 data-i18n="hardwareFactory.serverChassisSeries">服务器机箱系列</h3>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <a href="server-detail-6u.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/6U.png" alt="6U机架式8节点服务器机箱" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item1">6U机架式8节点服务器机箱</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item1">6U机架式设计，集成8个独立计算节点，专为云游戏、云PC、云渲染等多用户并发访问场景设计。采用"集中算力+分布式部署"模式，显著减少硬件部署空间和成本，同时确保每位用户享受独立稳定的计算性能。</p>
+                        </a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <a href="server-detail-5u.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/5U.png" alt="5U机架式8节点服务器机箱" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item2">5U机架式8节点服务器机箱</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item2">5U高度机箱，支持8张高性能GPU卡，为AI模型训练和深度学习推理提供强大计算能力。机箱配备高效电源模块和智能散热系统，确保GPU在最佳性能下稳定运行。此外，它提供充足的扩展接口，以适应各种算法框架和软件平台。</p>
+                        </a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <a href="server-detail-4u36.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/4U36.png" alt="4U36盘位机架式服务器机箱" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item3">4U36盘位机架式服务器机箱</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item3">专为大容量数据存储场景设计，专注于"高容量、高可靠性、高扩展性"。它采用多盘位设计、RAID保护和智能管理，为企业提供安全、稳定、易于管理的存储解决方案，适用于数据备份、监控存储、媒体库和文件共享。</p>
+                        </a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <a href="server-detail-4u24.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/4U24.png" alt="4U24盘位机架式服务器机箱" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item4">4U24盘位机架式服务器机箱</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item4">专为大容量数据存储场景设计，专注于"高容量、高可靠性、高扩展性"。它采用多盘位设计、RAID保护和智能管理，为企业提供安全、稳定、易于管理的存储解决方案，适用于数据备份、监控存储、媒体库和文件共享。</p>
+                        </a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <a href="server-detail-4u8.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/4U8.png" alt="4U8盘位机架式服务器机箱" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item5">4U8盘位机架式服务器机箱</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item5">专为大容量数据存储场景设计，专注于"高容量、高可靠性、高扩展性"。它采用多盘位设计、RAID保护和智能管理，为企业提供安全、稳定、易于管理的存储解决方案，适用于数据备份、监控存储、媒体库和文件共享。</p>
+                        </a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <a href="server-detail-2u.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/2U.png" alt="2U标准服务器" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item6">2U标准服务器</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item6">通用计算能力，适应多种场景。核心价值：2U标准机架式设计，平衡性能、可扩展性和成本效益。专为企业一般IT需求设计，可作为Web服务器、数据库服务器、虚拟化主机或文件服务器，是中小型企业IT架构的"核心算力平台"。</p>
+                        </a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <a href="server-detail-thin.html" style="text-decoration: none; color: inherit;">
+                            <img src="../images/切图/服务器/服务器图片和对应关系/瘦身.png" alt="瘦客" class="product-card-image">
+                            <h4 data-i18n="hardwareFactory.serverChassisList.item7">瘦客</h4>
+                            <p data-i18n="hardwareFactory.serverChassisDesc.item7">采用"轻量化、高性能、低功耗"设计理念，这款紧凑便携的迷你PC可灵活部署于云游戏、办公、教育和云终端等场景。瘦客户机迷你PC支持远程桌面连接和云资源访问，有效降低终端设备的采购和维护成本。同时，它提供出色的安全性和稳定性，为用户提供流畅的云办公和娱乐体验。</p>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- 产品优势 -->
+            <div class="hardware-section">
+                <h2 data-i18n="hardwareFactory.productAdvantages">产品优势</h2>
+                <div class="highlight-box">
+                    <p data-i18n="hardwareFactory.advantagesIntro">我们致力于为客户提供高品质、高性能的硬件产品，满足不同应用场景的需求。</p>
+                </div>
+                
+                <h3 data-i18n="hardwareFactory.advantagesTitle">核心优势</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                    <div style="text-align: center;">
+                        <img src="../images/compressed/切图/服务器/机架式设计.jpg" alt="机架式设计" class="feature-image">
+                        <p style="margin-top: 1rem; color: var(--text-secondary);"><strong data-i18n="hardwareFactory.advantage1"></strong></p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="../images/compressed/切图/服务器/冷轧钢板材质.jpg" alt="冷轧钢板材质" class="feature-image">
+                        <p style="margin-top: 1rem; color: var(--text-secondary);"><strong data-i18n="hardwareFactory.advantage2"></strong></p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="../images/compressed/切图/服务器/智能温控系统.jpg" alt="智能温控系统" class="feature-image">
+                        <p style="margin-top: 1rem; color: var(--text-secondary);"><strong data-i18n="hardwareFactory.advantage3"></strong></p>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong data-i18n="hardwareFactory.advantage4"></strong></li>
+                    <li><strong data-i18n="hardwareFactory.advantage5"></strong></li>
+                    <li><strong data-i18n="hardwareFactory.advantage6"></strong></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/languages.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

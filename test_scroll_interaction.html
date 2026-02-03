@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动交互测试 - PowerVerse Chain</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .test-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 450px;
+            max-height: 85vh;
+            background: rgba(10, 14, 39, 0.98);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 10000;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+        }
+        .test-panel h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        .test-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            color: #00d4ff;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        .test-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .test-btn.running {
+            background: rgba(255, 165, 0, 0.2);
+            border-color: #ffa500;
+            color: #ffa500;
+        }
+        .test-log {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+        .log-entry {
+            margin: 4px 0;
+            padding: 4px;
+            border-left: 3px solid transparent;
+            padding-left: 8px;
+        }
+        .log-entry.pass { 
+            color: #00ff00; 
+            border-left-color: #00ff00;
+        }
+        .log-entry.fail { 
+            color: #ff0000; 
+            border-left-color: #ff0000;
+        }
+        .log-entry.warning { 
+            color: #ffaa00; 
+            border-left-color: #ffaa00;
+        }
+        .log-entry.info { 
+            color: #00d4ff; 
+            border-left-color: #00d4ff;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .stat-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: #a0aec0;
+            margin-top: 5px;
+        }
+        .scroll-indicator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            padding: 10px 15px;
+            border-radius: 6px;
+            color: #00d4ff;
+            font-size: 0.85rem;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- 滚动指示器 -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        滚动位置: <span id="scrollPos">0</span>px
+    </div>
+    
+    <!-- 测试面板 -->
+    <div class="test-panel" id="testPanel">
+        <h3>🔄 Ralph Loop 滚动交互测试</h3>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label">总测试</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statPassed">0</div>
+                <div class="stat-label">通过</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statFailed">0</div>
+                <div class="stat-label">失败</div>
+            </div>
+        </div>
+        
+        <button class="test-btn" onclick="startRalphLoopTest()">🚀 开始 Ralph Loop 测试</button>
+        <button class="test-btn" onclick="testScrollAndClick()">📜 测试滚动后点击</button>
+        <button class="test-btn" onclick="testMultipleScrolls()">🔄 多次滚动测试</button>
+        <button class="test-btn" onclick="testRealUserScenario()">👤 真实用户场景</button>
+        <button class="test-btn" onclick="clearLog()">🗑️ 清空日志</button>
+        
+        <div class="test-log" id="testLog"></div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-icon">P</div>
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#product" data-i18n="nav.product">产品</a></li>
+                    <li><a href="pages/scenarios.html" data-i18n="nav.scenario">应用场景</a></li>
+                    <li><a href="pages/developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="pages/token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="pages/hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="pages/research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-switch">简体中文</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 长内容区域，用于测试滚动 -->
+    <div style="padding-top: 100px; min-height: 3000px; background: var(--bg-darker);">
+        <div class="container">
+            <section style="padding: 4rem 0;">
+                <h1 data-i18n="home.title" style="text-align: center; margin-bottom: 2rem; font-size: 3rem;">PowerVerse Chain</h1>
+                <p data-i18n="home.description" style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.2rem;">构建下一代分布式计算基础设施</p>
+            </section>
+            
+            <section style="padding: 4rem 0; margin: 4rem 0;">
+                <div class="section-header">
+                    <h2 data-i18n="architecture.title" style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">技术框架</h2>
+                </div>
+                <div style="background: var(--card-bg); padding: 3rem; border-radius: 20px; margin: 2rem 0;">
+                    <h3 data-i18n="architecture.appLayer" style="color: var(--primary-color); margin-bottom: 1rem;">应用层</h3>
+                    <p>应用层包含各种去中心化应用和API接口。</p>
+                </div>
+                <div style="background: var(--card-bg); padding: 3rem; border-radius: 20px; margin: 2rem 0;">
+                    <h3 data-i18n="architecture.protocolLayer" style="color: var(--primary-color); margin-bottom: 1rem;">协议层</h3>
+                    <p>协议层提供共识机制和智能合约功能。</p>
+                </div>
+                <div style="background: var(--card-bg); padding: 3rem; border-radius: 20px; margin: 2rem 0;">
+                    <h3 data-i18n="architecture.networkLayer" style="color: var(--primary-color); margin-bottom: 1rem;">网络层</h3>
+                    <p>网络层管理P2P网络和节点通信。</p>
+                </div>
+            </section>
+            
+            <section style="padding: 4rem 0; margin: 4rem 0;">
+                <h2 data-i18n="products.title" style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">产品生态系统</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px;">
+                        <h3>PowerVerse Chain</h3>
+                        <p>高性能区块链基础设施</p>
+                    </div>
+                    <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px;">
+                        <h3>PowerVerse Infra</h3>
+                        <p>基础设施服务</p>
+                    </div>
+                    <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px;">
+                        <h3>PowerVerse Market</h3>
+                        <p>去中心化市场</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section style="padding: 4rem 0; margin: 4rem 0; min-height: 500px;">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">更多内容区域</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: var(--text-secondary);">继续滚动以测试语言按钮功能</p>
+            </section>
+        </div>
+    </div>
+    
+    <!-- 加载脚本 -->
+    <script src="js/languages.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        let testStats = { total: 0, passed: 0, failed: 0 };
+        
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('testLog');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${time}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        function updateStats() {
+            document.getElementById('statTotal').textContent = testStats.total;
+            document.getElementById('statPassed').textContent = testStats.passed;
+            document.getElementById('statFailed').textContent = testStats.failed;
+        }
+        
+        function addResult(passed, message) {
+            testStats.total++;
+            if (passed) {
+                testStats.passed++;
+                log(`✓ ${message}`, 'pass');
+            } else {
+                testStats.failed++;
+                log(`✗ ${message}`, 'fail');
+            }
+            updateStats();
+        }
+        
+        function clearLog() {
+            testStats = { total: 0, passed: 0, failed: 0 };
+            document.getElementById('testLog').innerHTML = '';
+            updateStats();
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        function updateScrollIndicator() {
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            document.getElementById('scrollPos').textContent = Math.round(scrollPos);
+        }
+        
+        // 监听滚动
+        window.addEventListener('scroll', updateScrollIndicator);
+        updateScrollIndicator();
+        
+        // 模拟真实点击
+        async function simulateRealClick(element) {
+            if (!element) return false;
+            
+            // 方法1: 直接调用点击方法
+            try {
+                element.click();
+                await sleep(100);
+                return true;
+            } catch (e) {
+                console.warn('直接click失败:', e);
+            }
+            
+            // 方法2: 分发鼠标事件
+            try {
+                const events = [
+                    new MouseEvent('mousedown', { bubbles: true, cancelable: true }),
+                    new MouseEvent('mouseup', { bubbles: true, cancelable: true }),
+                    new MouseEvent('click', { bubbles: true, cancelable: true })
+                ];
+                
+                for (const event of events) {
+                    element.dispatchEvent(event);
+                    await sleep(50);
+                }
+                return true;
+            } catch (e) {
+                console.warn('事件分发失败:', e);
+            }
+            
+            // 方法3: 直接调用语言管理器方法
+            if (window.languageManager && window.languageManager.showLanguageMenu) {
+                try {
+                    window.languageManager.showLanguageMenu();
+                    await sleep(100);
+                    return true;
+                } catch (e) {
+                    console.warn('直接调用方法失败:', e);
+                }
+            }
+            
+            return false;
+        }
+        
+        async function testButtonAfterScroll(scrollPosition) {
+            log(`测试: 滚动到 ${scrollPosition}px 后点击按钮`, 'info');
+            
+            // 滚动到指定位置
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+            await sleep(800); // 等待滚动完成
+            
+            // 检查按钮是否存在
+            const btn = document.querySelector('.lang-switch');
+            if (!btn) {
+                addResult(false, `滚动到 ${scrollPosition}px 后按钮不存在`);
+                return false;
+            }
+            
+            // 检查按钮是否可见
+            const rect = btn.getBoundingClientRect();
+            const isVisible = rect.top >= 0 && rect.left >= 0 && 
+                            rect.bottom <= window.innerHeight && 
+                            rect.right <= window.innerWidth;
+            
+            if (!isVisible && scrollPosition > 200) {
+                log(`按钮在视口外 (top: ${rect.top}px)`, 'warning');
+            }
+            
+            // 尝试点击按钮
+            const clickSuccess = await simulateRealClick(btn);
+            await sleep(300);
+            
+            // 检查菜单是否显示
+            const menu = document.getElementById('language-menu');
+            const menuVisible = menu && menu.style.display === 'block';
+            
+            if (menuVisible) {
+                addResult(true, `滚动到 ${scrollPosition}px 后按钮可用`);
+                menu.style.display = 'none';
+                return true;
+            } else {
+                addResult(false, `滚动到 ${scrollPosition}px 后按钮失效 (点击成功: ${clickSuccess})`);
+                return false;
+            }
+        }
+        
+        async function testScrollAndClick() {
+            clearLog();
+            log('开始测试滚动后点击...', 'info');
+            
+            const scrollPositions = [0, 500, 1000, 1500, 2000, 2500];
+            
+            for (const pos of scrollPositions) {
+                await testButtonAfterScroll(pos);
+                await sleep(500);
+            }
+            
+            log('滚动测试完成', 'info');
+        }
+        
+        async function testMultipleScrolls() {
+            clearLog();
+            log('开始多次滚动测试（Ralph Loop）...', 'info');
+            
+            // 循环测试10次
+            for (let i = 1; i <= 10; i++) {
+                log(`--- 第 ${i} 次循环 ---`, 'info');
+                
+                // 随机滚动位置
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const randomScroll = Math.floor(Math.random() * maxScroll);
+                
+                await testButtonAfterScroll(randomScroll);
+                await sleep(500);
+                
+                // 滚动回顶部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                await sleep(500);
+                
+                await testButtonAfterScroll(0);
+                await sleep(500);
+            }
+            
+            log('多次滚动测试完成', 'info');
+        }
+        
+        async function testRealUserScenario() {
+            clearLog();
+            log('开始真实用户场景测试...', 'info');
+            
+            const scenarios = [
+                { name: '快速滚动到底部', scroll: () => document.documentElement.scrollHeight - window.innerHeight },
+                { name: '滚动到中间', scroll: () => (document.documentElement.scrollHeight - window.innerHeight) / 2 },
+                { name: '滚动到1/4位置', scroll: () => (document.documentElement.scrollHeight - window.innerHeight) / 4 },
+                { name: '滚动到3/4位置', scroll: () => (document.documentElement.scrollHeight - window.innerHeight) * 3 / 4 },
+            ];
+            
+            for (const scenario of scenarios) {
+                log(`场景: ${scenario.name}`, 'info');
+                const scrollPos = scenario.scroll();
+                await testButtonAfterScroll(scrollPos);
+                await sleep(1000);
+            }
+            
+            log('真实用户场景测试完成', 'info');
+        }
+        
+        async function startRalphLoopTest() {
+            clearLog();
+            log('🚀 开始 Ralph Loop 全量测试...', 'info');
+            
+            // 测试1: 初始状态
+            log('测试1: 初始状态按钮', 'info');
+            await testButtonAfterScroll(0);
+            await sleep(500);
+            
+            // 测试2: 滚动后点击（多次）
+            log('测试2: 滚动后点击测试', 'info');
+            await testScrollAndClick();
+            await sleep(500);
+            
+            // 测试3: 多次滚动循环
+            log('测试3: 多次滚动循环测试', 'info');
+            await testMultipleScrolls();
+            await sleep(500);
+            
+            // 测试4: 真实用户场景
+            log('测试4: 真实用户场景测试', 'info');
+            await testRealUserScenario();
+            
+            log('✅ Ralph Loop 测试完成！', 'pass');
+            log(`总计: ${testStats.total} 个测试, 通过: ${testStats.passed}, 失败: ${testStats.failed}`, 
+                testStats.failed === 0 ? 'pass' : 'fail');
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                log('测试系统已加载', 'info');
+                log('等待语言管理器初始化...', 'info');
+                
+                // 等待语言管理器
+                let retries = 0;
+                const checkManager = setInterval(() => {
+                    retries++;
+                    if (window.languageManager) {
+                        clearInterval(checkManager);
+                        log('✓ 语言管理器已初始化', 'pass');
+                    } else if (retries > 20) {
+                        clearInterval(checkManager);
+                        log('✗ 语言管理器初始化超时', 'fail');
+                    }
+                }, 100);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
