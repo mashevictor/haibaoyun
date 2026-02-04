@@ -3,85 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="products.infra.pageTitle">PowerVerse Infra - 去中心化物理基础设施网络（DePIN）起点</title>
+    <title data-i18n="products.infra.pageTitle">PowerVerse Infra - DePIN 起点</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 基础样式 */
         .page-header {
             padding: 140px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
-            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=decentralized%20physical%20infrastructure%20network%20%28DePIN%29%2C%20connecting%20physical%20devices%20and%20sensors%2C%20futuristic%20smart%20city%20infrastructure%2C%20blue%20and%20green%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-image: url('../images/backgrounds/powerverse infra 4.svg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
         }
+        
+        /* 背景遮罩 */
         .page-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
         }
+        
+        /* 鼠标跟随光效 */
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(0, 212, 255, 0.15) 0%, 
+                rgba(0, 102, 255, 0.05) 20%, 
+                transparent 60%);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        
+        /* 高级悬浮效果 */
         .product-hero {
             position: relative;
             z-index: 1;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
         }
+        
+        /* 浮动动画 */
         .product-icon {
             font-size: 6rem;
             margin-bottom: 2rem;
             display: inline-block;
             animation: float 3s ease-in-out infinite;
         }
+        
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+        
+        /* 淡入上移动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* 产品标题动画 */
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.2s ease-out;
         }
+        
         .product-hero .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: #f0f0f0;
             margin-bottom: 1rem;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.4s ease-out;
         }
-        .product-hero .depin-badge {
-            display: inline-block;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-        }
+        
         .product-hero p {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            line-height: 1.8;
-            margin: 0 auto;
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.6s ease-out;
         }
+        
+        /* 产品内容区域 */
         .product-content {
             padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
         }
+        
         .section {
             margin-bottom: 5rem;
         }
+        
+        /* 章节标题动画 */
         .section-title {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -89,10 +135,13 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
+            animation: fadeInUp 1s ease-out;
         }
+        
         .section-title::before {
             content: '';
             width: 6px;
@@ -100,276 +149,275 @@
             background: var(--gradient-3);
             border-radius: 3px;
         }
-        .subsection {
-            margin-bottom: 3rem;
+        
+        /* 五大组件架构图动画 */
+        .architecture-container {
+            margin-top: 3rem;
+            text-align: center;
+            animation: fadeInUp 1.2s ease-out;
         }
-        .subsection-title {
-            font-size: 1.75rem;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
+        
+        .architecture-container h3 {
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: 1.5rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
         }
-        .subsection-title::before {
-            content: '';
-            width: 4px;
-            height: 1.75rem;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-        .components-table {
-            width: 100%;
+        
+        .architecture-wrapper {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            overflow: hidden;
-            margin: 2rem 0;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1.4s ease-out;
         }
-        .components-table table {
+        
+        /* 架构图容器 */
+        .architecture-diagram {
             width: 100%;
-            border-collapse: collapse;
+            max-width: 1200px;
+            height: 400px;
+            background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.6s ease-out;
         }
-        .components-table thead {
-            background: var(--bg-darker);
+        
+        /* 背景网格动画 */
+        .architecture-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(0,212,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: gridPulse 4s ease-in-out infinite;
         }
-        .components-table th {
+        
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* 组件动画 */
+        .component-box {
+            position: absolute;
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 12px;
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 200px;
+            transition: all 0.3s ease;
+            animation: componentGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes componentGlow {
+            from {
+                box-shadow: 0 0 10px rgba(0,212,255,0.3);
+                border-color: rgba(0,212,255,0.3);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(0,212,255,0.6), 0 0 30px rgba(0,212,255,0.3);
+                border-color: var(--primary-color);
+            }
+        }
+        
+        /* 连接线动画 */
+        .connection-line {
+            position: absolute;
+            stroke: var(--primary-color);
+            stroke-width: 2;
+            stroke-dasharray: 5,5;
+            fill: none;
+            opacity: 0.7;
+            animation: dash 3s linear infinite;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -10;
+            }
+        }
+        
+        /* 组件详情卡片动画 */
+        .component-details {
+            margin-top: 2rem;
             text-align: left;
+            animation: fadeInUp 1.8s ease-out;
+        }
+        
+        .component-details h4 {
             color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 1.125rem;
-            border-bottom: 2px solid var(--border-color);
         }
-        .components-table td {
-            padding: 1.5rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .components-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-        .components-table tbody tr:hover {
-            background: rgba(0, 212, 255, 0.05);
-        }
-        .components-table td:first-child {
-            color: var(--text-primary);
-            font-weight: 600;
-            width: 200px;
-        }
-        .services-grid {
+        
+        .component-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
         }
-        .service-card {
+        
+        .component-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 1.5rem;
             transition: all 0.3s ease;
+            animation: fadeInUp 2s ease-out;
         }
-        .service-card:hover {
+        
+        .component-card:hover {
             border-color: var(--primary-color);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.15);
-            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
         }
-        .service-card h4 {
-            font-size: 1.125rem;
+        
+        .component-card h5 {
             color: var(--primary-color);
             margin-bottom: 0.75rem;
-            font-weight: 600;
+            font-size: 1.1rem;
         }
-        .service-card p {
+        
+        .component-card p {
             color: var(--text-secondary);
-            line-height: 1.8;
-            margin: 0;
-            font-size: 0.9375rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
-        .virtualization-comparison {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+        
+        /* 功能特性卡片动画 */
+        .architecture-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             margin-top: 2rem;
+            text-align: left;
         }
-        .virtualization-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
-        .virtualization-card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        .virtualization-card.type1 {
-            border-left: 4px solid var(--primary-color);
-        }
-        .virtualization-card.type2 {
-            border-left: 4px solid var(--text-secondary);
-        }
-        .virtualization-card h4 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        .virtualization-card .type-badge {
-            display: inline-block;
-            background: var(--bg-darker);
-            color: var(--text-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            margin-bottom: 1.5rem;
-        }
-        .virtualization-card .feature-list {
-            list-style: none;
-            margin: 1.5rem 0;
-            padding: 0;
-        }
-        .virtualization-card .feature-list li {
-            padding: 0.75rem 0;
-            padding-left: 1.5rem;
-            color: var(--text-secondary);
-            position: relative;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-        .virtualization-card .feature-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .collaboration-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .collaboration-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
-        .collaboration-card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        .collaboration-card h4 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-        .collaboration-card ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .collaboration-card li {
-            padding: 0.75rem 0;
-            padding-left: 1.5rem;
-            color: var(--text-secondary);
-            position: relative;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-        .collaboration-card li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+        
         .feature-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 1.5rem 2rem;
             transition: all 0.3s ease;
-            text-align: center;
+            animation: fadeInUp 2.2s ease-out;
         }
+        
         .feature-card:hover {
             border-color: var(--primary-color);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
             transform: translateY(-5px);
         }
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+        
+        .feature-card .card-icon {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
-        .feature-card h4 {
-            font-size: 1.25rem;
+        
+        .feature-card .card-icon svg {
+            width: 40px;
+            height: 40px;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+        }
+        
+        .feature-card .card-body {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .feature-card h4 {
+            font-size: 1.35rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
+        
         .feature-card p {
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.7;
             margin: 0;
-            font-size: 1rem;
-            text-align: left;
+            font-size: 0.95rem;
         }
-        .highlight-text {
-            color: var(--text-primary);
-            font-weight: 600;
+        
+        /* 滚动触发动画 */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
-        .info-box {
-            background: var(--bg-darker);
-            border-left: 4px solid var(--primary-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
+        
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .info-box p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin: 0;
-            font-size: 1rem;
+        
+        /* 鼠标跟随光效 */
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0,212,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: screen;
         }
+        
+        /* 响应式设计 */
         @media (max-width: 1200px) {
-            .virtualization-comparison {
-                grid-template-columns: 1fr;
-            }
-            .collaboration-grid {
-                grid-template-columns: 1fr;
+            .components-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
+        
         @media (max-width: 768px) {
             .product-hero h1 {
                 font-size: 2.5rem;
             }
+            
             .section-title {
                 font-size: 2rem;
             }
-            .components-table {
-                font-size: 0.875rem;
+            
+            .feature-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
-            .components-table th,
-            .components-table td {
-                padding: 1rem;
+            
+            .feature-card .card-icon {
+                width: 56px;
+                height: 56px;
             }
-            .services-grid,
-            .features-grid {
-                grid-template-columns: 1fr;
+            
+            .feature-card .card-icon svg {
+                width: 32px;
+                height: 32px;
             }
         }
     </style>
@@ -421,192 +469,150 @@
                 </ul>
                 <div class="nav-actions">
                     <button class="lang-switch">English</button>
-                    <button class="menu-toggle" id="menuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                    <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
                 </div>
             </div>
         </div>
     </nav>
 
-
     <div class="page-header">
         <div class="container">
             <div class="product-hero">
                 <div class="product-icon">🏗️</div>
-                <h1>PowerVerse Infra</h1>
-                <div class="depin-badge" data-i18n="products.infra.depinBadge">DePIN 的开始</div>
+                <h1 data-i18n="products.infra.name">PowerVerse Infra</h1>
                 <div class="subtitle" data-i18n="products.infra.subtitle">去中心化物理基础设施网络（DePIN）起点</div>
-                <p data-i18n="products.infra.intro">PowerVerse Infra 是一个虚拟化软件平台，基于软件定义理念，整合并虚拟化管理多种芯片算力（包括 CPU、GPU、AI 芯片及量子芯片），将闲置算力转化为可共享、可交易的数字资产，为用户提供高效、多样的算力获取途径。</p>
+                <p data-i18n="products.infra.intro">PowerVerse Infra 是虚拟化软件平台，整合并虚拟化管理多种芯片算力（CPU、GPU、AI 及量子芯片），将闲置算力转化为可共享、可交易的数字资产，为用户提供高效、多样的算力获取途径。</p>
             </div>
         </div>
     </div>
 
     <div class="container">
         <section class="product-content">
-            <!-- 一、核心设计：五大组件与九大服务 -->
             <div class="section">
-                <h2 class="section-title" data-i18n="products.infra.section1.title">一、核心设计：五大组件与九大服务</h2>
-                
-                <div class="subsection">
-                    <h3 class="subsection-title" data-i18n="products.infra.section1.components.title">五大核心组件</h3>
-                    <div class="components-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-i18n="products.infra.section1.components.table.component">组件</th>
-                                    <th data-i18n="products.infra.section1.components.table.function">核心功能</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td data-i18n="products.infra.section1.components.control.name">控制组件</td>
-                                    <td data-i18n="products.infra.section1.components.control.desc">架构核心，负责接收请求、资源分配与系统监控，包含虚拟化、网络、镜像等服务。</td>
-                                </tr>
-                                <tr>
-                                    <td data-i18n="products.infra.section1.components.compute.name">计算组件</td>
-                                    <td data-i18n="products.infra.section1.components.compute.desc">计算资源提供者，运行虚拟机实例并处理计算任务。</td>
-                                </tr>
-                                <tr>
-                                    <td data-i18n="products.infra.section1.components.storage.name">存储组件</td>
-                                    <td data-i18n="products.infra.section1.components.storage.desc">支持块存储与对象存储，负责数据与镜像的存储。</td>
-                                </tr>
-                                <tr>
-                                    <td data-i18n="products.infra.section1.components.network.name">网络组件</td>
-                                    <td data-i18n="products.infra.section1.components.network.desc">管理虚拟网络、子网、路由等，实现虚拟机通信、网络隔离与安全。</td>
-                                </tr>
-                                <tr>
-                                    <td data-i18n="products.infra.section1.components.interface.name">接口服务</td>
-                                    <td data-i18n="products.infra.section1.components.interface.desc">提供 RESTful API，实现各组件间的通信与交互。</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="subsection">
-                    <h3 class="subsection-title" data-i18n="products.infra.section1.services.title">九大关键服务模块</h3>
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.virtualization.title">核心虚拟化</h4>
-                            <p data-i18n="products.infra.section1.services.virtualization.desc">管理虚拟机全生命周期（创建、挂起、调整、销毁），配置 CPU、GPU、内存等资源。</p>
+                <h2 class="section-title" data-i18n="products.infra.section1.title">核心设计：五大组件</h2>
+                <!-- 五大组件架构图 -->
+                <div class="architecture-container">
+                    <h3>五大组件架构与交互</h3>
+                    <div class="architecture-wrapper">
+                        <div class="architecture-diagram">
+                            <!-- 架构布局 -->
+                            <div style="width: 90%; height: 80%; position: relative; display: flex; align-items: center; justify-content: center;">
+                                <!-- 左侧组件组 -->
+                                <div class="component-box" style="left: 10%; top: 30%; transform: translateY(-50%); width: 20%;">
+                                    <!-- 计算组件 -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+                                        <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">💻</div>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">计算组件</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">运行虚拟机实例</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="component-box" style="left: 10%; top: 70%; transform: translateY(-50%); width: 20%;">
+                                    <!-- 存储组件 -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+                                        <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">💾</div>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">存储组件</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">数据与镜像存储</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 控制组件 - 中心位置 -->
+                                <div class="component-box" style="top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,212,255,0.15); border: 2px solid var(--primary-color); border-radius: 16px; padding: 2.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 0 20px rgba(0,212,255,0.3); z-index: 10;">
+                                    <div style="font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--primary-color);">⚙️</div>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.3rem; font-weight: 600;">控制组件</h4>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; max-width: 250px;">架构核心<br>资源分配与系统监控</p>
+                                </div>
+                                
+                                <!-- 右侧组件组 -->
+                                <div class="component-box" style="right: 10%; top: 30%; transform: translateY(-50%); width: 20%;">
+                                    <!-- 网络组件 -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+                                        <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">🌐</div>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">网络组件</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">虚拟网络管理</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="component-box" style="right: 10%; top: 70%; transform: translateY(-50%); width: 20%;">
+                                    <!-- 接口服务 -->
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+                                        <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">🔌</div>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">接口服务</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">RESTful API 通信</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 连接线 -->
+                                <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;" viewBox="0 0 1000 400">
+                                    <!-- 控制组件到计算组件 -->
+                                    <path class="connection-line" d="M500,150 L350,100"/>
+                                    <!-- 控制组件到存储组件 -->
+                                    <path class="connection-line" d="M500,250 L350,300"/>
+                                    <!-- 控制组件到网络组件 -->
+                                    <path class="connection-line" d="M500,150 L650,100"/>
+                                    <!-- 控制组件到接口服务 -->
+                                    <path class="connection-line" d="M500,250 L650,300"/>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.network.title">网络虚拟化</h4>
-                            <p data-i18n="products.infra.section1.services.network.desc">提供网络虚拟化技术与连接服务。</p>
+                        <div class="component-details">
+                            <h4>组件详情</h4>
+                            <div class="component-cards">
+                                <div class="component-card">
+                                    <h5>控制组件</h5>
+                                    <p>架构核心，负责接收请求、资源分配与系统监控，包含虚拟化、网络、镜像等服务。</p>
+                                </div>
+                                <div class="component-card">
+                                    <h5>计算组件</h5>
+                                    <p>计算资源提供者，运行虚拟机实例并处理计算任务。</p>
+                                </div>
+                                <div class="component-card">
+                                    <h5>存储组件</h5>
+                                    <p>支持块存储与对象存储，负责数据与镜像的存储。</p>
+                                </div>
+                                <div class="component-card">
+                                    <h5>网络组件</h5>
+                                    <p>管理虚拟网络、子网、路由等，实现虚拟机通信、网络隔离与安全。</p>
+                                </div>
+                                <div class="component-card">
+                                    <h5>接口服务</h5>
+                                    <p>提供 RESTful API，实现各组件间的通信与交互。</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.image.title">镜像服务</h4>
-                            <p data-i18n="products.infra.section1.services.image.desc">支持多种镜像格式，实现镜像的上传、删除与信息编辑。</p>
-                        </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.blockStorage.title">块存储</h4>
-                            <p data-i18n="products.infra.section1.services.blockStorage.desc">为虚拟机提供稳定的数据块存储服务。</p>
-                        </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.objectStorage.title">对象存储</h4>
-                            <p data-i18n="products.infra.section1.services.objectStorage.desc">通过冗余与容错机制实现可扩展的对象存储，支持文件存取与持久化存储。</p>
-                        </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.monitoring.title">监测服务</h4>
-                            <p data-i18n="products.infra.section1.services.monitoring.desc">为计费、监控及其他服务提供统计数据支撑。</p>
-                        </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.permission.title">权限服务</h4>
-                            <p data-i18n="products.infra.section1.services.permission.desc">基于 PowerVerse Chain 的 <span class="highlight-text">DID</span> 服务，提供身份验证、规则管理与令牌服务。</p>
-                        </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.orchestration.title">编排服务</h4>
-                            <p data-i18n="products.infra.section1.services.orchestration.desc">通过模板实现 DeCloud 基础设施的自动化部署。</p>
-                        </div>
-                        <div class="service-card">
-                            <h4 data-i18n="products.infra.section1.services.management.title">管理</h4>
-                            <p data-i18n="products.infra.section1.services.management.desc">提供各类服务的 Web 管理界面。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 二、虚拟化方案：Type1 与 Type2 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.infra.section2.title">二、虚拟化方案：Type1 与 Type2</h2>
-                
-                <div class="virtualization-comparison">
-                    <div class="virtualization-card type1">
-                        <h4 data-i18n="products.infra.section2.type1.title">Type1（裸金属）</h4>
-                        <div class="type-badge" data-i18n="products.infra.section2.type1.badge">高性能方案</div>
-                        <ul class="feature-list">
-                            <li><strong data-i18n="products.infra.section2.type1.arch.label">架构特点：</strong><span data-i18n="products.infra.section2.type1.arch.desc">直接运行于硬件之上，无宿主操作系统，资源利用高效。</span></li>
-                            <li><strong data-i18n="products.infra.section2.type1.performance.label">性能表现：</strong><span data-i18n="products.infra.section2.type1.performance.desc">低延迟、高吞吐量，精准控制硬件资源，优化网络与存储 I/O。</span></li>
-                            <li><strong data-i18n="products.infra.section2.type1.scenario.label">适用场景：</strong><span data-i18n="products.infra.section2.type1.scenario.desc">大规模数据运算、高负载企业级应用、高性能计算。</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="virtualization-card type2">
-                        <h4 data-i18n="products.infra.section2.type2.title">Type2</h4>
-                        <div class="type-badge" data-i18n="products.infra.section2.type2.badge">灵活方案</div>
-                        <ul class="feature-list">
-                            <li><strong data-i18n="products.infra.section2.type2.arch.label">架构特点：</strong><span data-i18n="products.infra.section2.type2.arch.desc">运行于宿主操作系统之上，依赖宿主机管理资源。</span></li>
-                            <li><strong data-i18n="products.infra.section2.type2.performance.label">性能表现：</strong><span data-i18n="products.infra.section2.type2.performance.desc">受宿主机资源竞争影响，可能在高强度任务中出现性能瓶颈。</span></li>
-                            <li><strong data-i18n="products.infra.section2.type2.scenario.label">适用场景：</strong><span data-i18n="products.infra.section2.type2.scenario.desc">个人开发、小型应用、快速部署与测试环境。</span></li>
-                        </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- 三、与 PowerVerse Chain 的协作 -->
             <div class="section">
-                <h2 class="section-title" data-i18n="products.infra.section3.title">三、与 PowerVerse Chain 的协作</h2>
-                
-                <div class="collaboration-grid">
-                    <div class="collaboration-card">
-                        <h4 data-i18n="products.infra.section3.did.title">1. 基于 <span class="highlight-text">DID</span> 的虚拟机权限服务</h4>
-                        <ul>
-                            <li data-i18n="products.infra.section3.did.item1">为每个用户与虚拟机创建唯一去中心化身份（DID），关联历史行为与信用数据。</li>
-                            <li data-i18n="products.infra.section3.did.item2">通过区块链共识验证身份，无需中心化机构，确保公正、安全、不可篡改。</li>
-                            <li data-i18n="products.infra.section3.did.item3">在算力租用中，双方可互相验证信用与支付能力，构建透明可信的交易环境。</li>
-                        </ul>
-                    </div>
-
-                    <div class="collaboration-card">
-                        <h4 data-i18n="products.infra.section3.smartContract.title">2. <span class="highlight-text">智能合约</span>驱动的算力交易聚合器（PowerVerse Market）</h4>
-                        <ul>
-                            <li data-i18n="products.infra.section3.smartContract.item1">买卖双方直接达成意向，通过智能合约自动执行租赁、结算与存证。</li>
-                            <li data-i18n="products.infra.section3.smartContract.item2">去除人工协商与第三方中介，实现高效、透明、低成本的算力交易。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 四、功能特性 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.infra.section4.title">四、功能特性</h2>
-                
-                <div class="features-grid">
+                <h2 class="section-title" data-i18n="products.infra.section4.title">功能特性</h2>
+                <div class="architecture-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">💻</div>
-                        <h4 data-i18n="products.infra.section4.chipCompatibility.title">广泛的芯片兼容性</h4>
-                        <p data-i18n="products.infra.section4.chipCompatibility.desc">全面支持 CPU、GPU、AI 算力芯片及量子芯片，满足多样化计算需求，最大化利用闲置算力。</p>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.infra.section4.chipCompatibility.title">广泛的芯片兼容性</h4>
+                            <p data-i18n="products.infra.section4.chipCompatibility.desc">全面支持 CPU、GPU、AI 算力芯片及量子芯片，满足多样化计算需求。</p>
+                        </div>
                     </div>
-
                     <div class="feature-card">
-                        <div class="feature-icon">⚛️</div>
-                        <h4 data-i18n="products.infra.section4.quantum.title">前瞻性量子计算支持</h4>
-                        <p data-i18n="products.infra.section4.quantum.desc">已开展量子芯片虚拟化技术储备，提供量子比特抽象模型与模拟接口，支持量子算法实验。</p>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.infra.section4.security.title">高度安全与信任保障</h4>
+                            <p data-i18n="products.infra.section4.security.desc">结合 DID 身份管理、智能合约与区块链存证，构建公正透明的可信生态。</p>
+                        </div>
                     </div>
-
                     <div class="feature-card">
-                        <div class="feature-icon">🛡️</div>
-                        <h4 data-i18n="products.infra.section4.security.title">高度安全与信任保障</h4>
-                        <p data-i18n="products.infra.section4.security.desc">结合 DID 身份管理、智能合约自动执行与区块链不可篡改存证，构建公正透明的可信生态。</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h4 data-i18n="products.infra.section4.scheduling.title">高效资源利用与动态调度</h4>
-                        <p data-i18n="products.infra.section4.scheduling.desc">根据虚拟机实时负载自动调整算力分配，避免资源浪费与过载，提升利用效率并降低成本。</p>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.infra.section4.scheduling.title">高效资源利用与动态调度</h4>
+                            <p data-i18n="products.infra.section4.scheduling.desc">根据虚拟机实时负载自动调整算力分配，提升利用效率并降低成本。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -635,20 +641,128 @@
                     <ul>
                         <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
                         <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
-                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub (Coming soon)">GitHub</a></li>
                         <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="footer-copyright">
-                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
-                </div>
+                <div class="footer-copyright"><p>&copy; 2024 PowerVerse Chain. All rights reserved.</p></div>
             </div>
         </div>
     </footer>
 
     <script src="../js/languages.js"></script>
     <script src="../script.js"></script>
+    <script>
+        // 鼠标跟随光效
+        document.addEventListener('mousemove', function(e) {
+            const pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
+                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
+            }
+        });
+        
+        // 滚动触发动画
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // 初始化滚动动画
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation);
+        
+        // 鼠标跟随效果
+        const cursorFollower = document.createElement('div');
+        cursorFollower.className = 'cursor-follower';
+        document.body.appendChild(cursorFollower);
+        
+        document.addEventListener('mousemove', function(e) {
+            cursorFollower.style.left = e.clientX - 10 + 'px';
+            cursorFollower.style.top = e.clientY - 10 + 'px';
+        });
+        
+        // 组件卡片悬停效果增强
+        const componentCards = document.querySelectorAll('.component-card');
+        componentCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+            });
+        });
+        
+        // 功能卡片悬停效果增强
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.01)';
+                this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+            });
+        });
+        
+        // 架构图组件交互效果
+        const componentBoxes = document.querySelectorAll('.component-box');
+        componentBoxes.forEach(box => {
+            // 保存原始的transform值
+            const originalTransform = box.style.transform;
+            
+            box.addEventListener('mouseenter', function() {
+                // 保留原始的transform并添加scale
+                this.style.transform = originalTransform + ' scale(1.05)';
+                this.style.boxShadow = '0 0 30px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 102, 255, 0.5)';
+            });
+            
+            box.addEventListener('mouseleave', function() {
+                // 恢复原始的transform
+                this.style.transform = originalTransform;
+                this.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.3)';
+            });
+        });
+        
+        // 点击其他区域时复原组件状态
+        document.addEventListener('click', function(e) {
+            // 检查点击的是否不是组件盒子
+            if (!e.target.closest('.component-box')) {
+                const componentBoxes = document.querySelectorAll('.component-box');
+                componentBoxes.forEach(box => {
+                    // 保存原始的transform值
+                    const originalTransform = box.style.transform;
+                    // 恢复原始状态
+                    box.style.transform = originalTransform;
+                    box.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.3)';
+                });
+            }
+        });
+        
+        // 背景网格动画速度控制
+        function randomizeGridAnimation() {
+            const gridElements = document.querySelectorAll('.architecture-diagram::before');
+            // 这里可以添加随机化网格动画速度的逻辑
+        }
+        
+        // 初始化动画
+        window.addEventListener('load', function() {
+            // 添加页面加载完成的动画效果
+            document.body.style.opacity = '1';
+        });
+    </script>
 </body>
 </html>

@@ -108,12 +108,19 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// 滚动动画
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// 滚动动画：首页区块揭示（section 进入视口时添加 .animate-in，由 CSS 做交错动画）
+const revealOptions = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animate-in');
+    });
+}, revealOptions);
+document.querySelectorAll('.reveal-section').forEach(function (section) {
+    revealObserver.observe(section);
+});
 
+// 非首页的卡片单独做滚动揭示（不含 .reveal-section 内的卡片，避免重复）
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -122,10 +129,10 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
-// 观察需要动画的元素
-const animateElements = document.querySelectorAll('.product-card, .scenario-item, .resource-card, .token-card');
-animateElements.forEach(el => {
+const animateElements = Array.from(document.querySelectorAll('.product-card, .scenario-item, .resource-card, .token-card')).filter(function (el) {
+    return !el.closest('.reveal-section');
+});
+animateElements.forEach(function (el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';

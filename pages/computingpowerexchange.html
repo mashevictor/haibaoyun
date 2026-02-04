@@ -1,180 +1,636 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="scenarios.computingexchange.title">算力交易 - PowerVerse Chain</title>
+    <title data-i18n="nav.scenario.computingexchange">算力交易场景 - PowerVerse</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 第一屏底图：与 computingpowerexchange备份.html 同款算力交易 SVG */
         .page-header {
             padding: 140px 0 80px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(0, 102, 255, 0.08) 100%);
+            background-image: url('../images/svg/算力交易.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
         }
-
-        .page-header h1 {
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+            pointer-events: none;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        /* Hero 区图标：与 chain 一致 float 动画 */
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero .subtitle {
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
-
-        .scenario-content {
+        .product-hero p {
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .product-hero p:last-of-type {
+            margin-bottom: 0;
+        }
+        .product-content {
             padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
         }
-
-        .scenario-card-large {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 102, 255, 0.03) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 24px;
-            padding: 0;
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
             margin-bottom: 3rem;
-            overflow: hidden;
-        }
-
-        .scenario-image {
-            width: 100%;
-            min-height: 300px;
-            max-height: 600px;
-            background: var(--bg-darker);
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            position: relative;
-            padding: 0.5rem;
-            box-sizing: border-box;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
         }
-
-        .scenario-image img {
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            max-height: 600px;
-            object-fit: contain;
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        /* 板块 icon：统一尺寸 + 3D 效果凸显算力交易 */
+        .icon-3d {
+            perspective: 400px;
+            display: inline-block;
+        }
+        .section-icon, .step-icon, .advantage-icon, .scene-icon {
+            width: 52px;
+            height: 52px;
+            fill: var(--primary-color);
+            margin: 0 auto 1.5rem;
             display: block;
-            margin: 0 auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 12px rgba(0, 212, 255, 0.4));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0) rotateY(-5deg);
         }
-        
-        @media (max-width: 1200px) {
-            .scenario-image {
-                max-height: 550px;
-                padding: 1.5rem;
-            }
-            .scenario-image img {
-                max-height: 500px;
-                max-width: 100%;
-            }
+        .feature-card:hover .advantage-icon,
+        .layer-card:hover .scene-icon,
+        .info-box:hover .section-icon,
+        .layer-card:hover .section-icon {
+            transform: translateZ(12px) rotateY(0deg) scale(1.08);
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(0, 212, 255, 0.55));
         }
-        
-        @media (max-width: 768px) {
-            .scenario-image {
-                max-height: 400px;
-                padding: 1rem;
-            }
-            .scenario-image img {
-                max-height: 350px;
-                max-width: 100%;
-            }
+        .section-icon, .advantage-icon, .scene-icon {
+            color: var(--primary-color);
         }
-
-        .scenario-content-section {
-            padding: 3.5rem;
+        .subsection {
+            margin-bottom: 3rem;
+            text-align: left;
         }
-
-        .scenario-stats {
+        .subsection-title {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .subsection-title::before {
+            content: '';
+            width: 4px;
+            height: 1.75rem;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        .module-list {
+            margin-top: 2rem;
+        }
+        .module-row {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-bottom: 3.5rem;
+            text-align: left;
+        }
+        .module-row:last-child {
+            margin-bottom: 0;
+        }
+        .module-row.reverse {
+            flex-direction: row-reverse;
+        }
+        .module-img {
+            flex: 0 0 42%;
+            max-width: 420px;
+            min-width: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.06) 0%, rgba(25, 100, 254, 0.06) 100%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(25, 100, 254, 0.08);
+            animation: module-glow-pulse 3s ease-in-out infinite;
+            transition: box-shadow 0.4s ease, transform 0.3s ease;
+        }
+        .module-img:hover {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.35), 0 0 60px rgba(25, 100, 254, 0.2);
+            transform: scale(1.02);
+        }
+        @keyframes module-glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(25, 100, 254, 0.08); }
+            50% { box-shadow: 0 0 28px rgba(0, 212, 255, 0.28), 0 0 55px rgba(25, 100, 254, 0.15); }
+        }
+        .module-img::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 14px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.5), rgba(25, 100, 254, 0.5), rgba(0, 212, 255, 0.5));
+            background-size: 200% 200%;
+            animation: module-border-flow 4s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .module-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background: radial-gradient(ellipse 75% 55% at 50% 50%, rgba(0, 212, 255, 0.18) 0%, transparent 65%);
+            animation: module-inner-glow 3.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes module-border-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes module-inner-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .module-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 0;
+        }
+        .module-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .module-row-equal {
+            align-items: stretch;
+        }
+        .module-row-equal .module-img {
+            aspect-ratio: 400 / 280;
+            display: flex;
+        }
+        .module-row-equal .module-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .module-row-equal .module-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .module-row-equal .module-body.layer-card {
+            min-height: 0;
+        }
+        .module-body .subsection-title {
+            justify-content: flex-start;
+        }
+        .module-body.layer-card h3 {
+            margin-bottom: 1rem;
+        }
+        .architecture-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            margin: 2rem 0;
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            text-align: left;
         }
-
-        .scenario-stat {
+        .layer-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .layer-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .layer-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
             text-align: center;
-            padding: 2.5rem 1.5rem;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
-            border-right: 1px solid rgba(0, 212, 255, 0.2);
         }
-
-        .scenario-stat:last-child {
-            border-right: none;
+        .layer-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
-
-        .scenario-stat-value {
-            font-size: 2.5rem;
+        .layer-card li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        .layer-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
             font-weight: 700;
+        }
+        .layer-card li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .info-box {
+            background: var(--bg-darker);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        /* 适配 info-box 内 icon 布局 */
+        .info-box .section-icon {
+            margin: 0;
+            flex-shrink: 0;
+        }
+        .section-icon-policy path[fill="currentColor"] {
+            fill: var(--primary-color);
+        }
+        .info-box-content {
+            flex: 1;
+        }
+        .info-box h4 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .info-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+            font-size: 1rem;
+        }
+        /* 算力交易完整链路闭环 - 页面截图式流程图 */
+        .flow-screenshot {
+            margin: 2.5rem 0 3rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.15);
+            background: var(--bg-darker);
+        }
+        .flow-screenshot-bar {
+            background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .flow-screenshot-bar .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .flow-screenshot-bar .dot:nth-child(1) { background: #ff5f57; }
+        .flow-screenshot-bar .dot:nth-child(2) { background: #febc2e; }
+        .flow-screenshot-bar .dot:nth-child(3) { background: #28c840; }
+        .flow-screenshot-bar .title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+        .flow-screenshot-inner {
+            padding: 2rem 1.5rem;
+            min-height: 180px;
+        }
+        .flow-steps-row {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 0;
+            flex-wrap: nowrap;
+        }
+        .flow-step-card {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.25rem 0.75rem;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.06) 0%, rgba(25, 100, 254, 0.04) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            margin: 0 4px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .flow-step-card:first-child { margin-left: 0; }
+        .flow-step-card:last-child { margin-right: 0; }
+        .flow-step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.45);
+        }
+        .flow-step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gradient-3);
+            color: #0a0e27;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+        .flow-step-icon {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 0.6rem;
+            color: var(--primary-color);
+        }
+        .flow-step-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+        .flow-step-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.35;
+        }
+        .flow-arrow {
+            flex-shrink: 0;
+            align-self: center;
+            color: rgba(0, 212, 255, 0.5);
+            padding: 0 2px;
+        }
+        .flow-arrow svg {
+            width: 24px;
+            height: 24px;
+        }
+        @media (max-width: 900px) {
+            .flow-steps-row {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+            .flow-step-card {
+                flex: 0 1 calc(50% - 12px);
+                min-width: 140px;
+                margin: 0;
+            }
+            .flow-arrow {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .flow-step-card {
+                flex: 1 1 100%;
+            }
+        }
+        .flow-screenshot-desc {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .flow-closed-loop-hint {
+            text-align: center;
+            margin: 1.25rem 0 0;
+            font-size: 0.875rem;
+            color: rgba(0, 212, 255, 0.85);
+            font-weight: 500;
+        }
+        .process-steps {
+            background: var(--bg-darker);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .process-steps ol {
+            list-style: none;
+            counter-reset: step-counter;
+            margin: 0;
+            padding: 0;
+        }
+        .process-steps li {
+            counter-increment: step-counter;
+            padding: 1.25rem 0 1.25rem 3rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .process-steps li:last-child {
+            border-bottom: none;
+        }
+        .process-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 1.25rem;
+            width: 2rem;
+            height: 2rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        .coin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.75rem;
         }
-
-        .scenario-stat-label {
+        .stat-label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 1rem;
         }
-
-        .scenario-details h4 {
-            color: var(--primary-color);
+        .coin-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .feature-card h4 {
             font-size: 1.5rem;
-            margin: 2rem 0 1.5rem 0;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
             font-weight: 600;
         }
-
-        .scenario-details ul {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .scenario-details li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
+        .feature-card p {
             color: var(--text-secondary);
-            position: relative;
-            line-height: 1.7;
+            line-height: 1.8;
+            margin: 0;
+            font-size: 1rem;
         }
-
-        .scenario-details li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-size: 0.75rem;
+        .highlight-text {
+            color: var(--text-primary);
+            font-weight: 500;
         }
-
         @media (max-width: 768px) {
-            .scenario-stats {
+            .product-hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .module-row,
+            .module-row.reverse {
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-bottom: 2.5rem;
+            }
+            .module-row-equal .module-img {
+                aspect-ratio: unset;
+            }
+            .module-row-equal .module-img img {
+                height: auto;
+            }
+            .module-img {
+                flex: none;
+                max-width: 100%;
+                width: 100%;
+            }
+            .architecture-grid,
+            .coin-features {
                 grid-template-columns: 1fr;
             }
-            .scenario-stat {
-                border-right: none;
-                border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            .page-header {
+                padding: 100px 0 60px;
+            }
+            .section-icon, .advantage-icon, .scene-icon {
+                width: 44px;
+                height: 44px;
+            }
+            .info-box {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .info-box-content {
+                width: 100%;
             }
         }
     </style>
 </head>
-
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
                     <a href="../index.html" style="cursor: pointer;">
-                        <img src="../images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <img src="../images/logo/logo/1.png" alt="PowerVerse" class="logo-icon">
                         <span>PowerVerse Chain</span>
                     </a>
                 </div>
@@ -225,94 +681,224 @@
         </div>
     </nav>
 
-
     <div class="page-header">
         <div class="container">
-            <h1 data-i18n="scenarios.computingexchange.title">算力交易</h1>
-            <p class="section-description" data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
-            <div style="margin-top: 2rem;">
-                <a href="market.html" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <span>💱</span>
-                    <span data-i18n="scenarios.computingexchange.goToTrade">前往交易市场</span>
-                </a>
+            <div class="product-hero">
+                <div class="product-icon">⚡</div>
+                <h1>算力交易场景</h1>
+                <div class="subtitle">去中心化算力聚合交易和计算管理平台</div>
+                <p>基于 PowerVerse Chain 智能合约构建的算力资源自动化交易聚合器，实现算力供需的高效、透明、安全对接与自动化结算管理，响应国家算力网络建设与算力调度交易政策要求。</p>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <section class="scenario-content">
-            <div class="scenario-card-large">
-                <div class="scenario-image">
-                    <img src="../images/svg/算力交易.svg" alt="算力交易" 
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(0,102,255,0.15) 100%); align-items:center; justify-content:center; font-size:5rem; color:var(--primary-color); opacity:0.6;">💱</div>
+        <section class="product-content">
+            <!-- 政策背景与平台定位 - 新增政策icon -->
+            <div class="section">
+                <h2 class="section-title">政策背景与平台定位</h2>
+                <div class="info-box">
+                    <!-- 国家算力发展政策导向：权威/国家层面 - 圆形徽章 + 五角星（国家象征） -->
+                    <svg class="section-icon section-icon-policy" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12 3L13.8 9.2L20 9.2L14.6 13.4L16.2 19.6L12 16.2L7.8 19.6L9.4 13.4L4 9.2L10.2 9.2L12 3Z" fill="currentColor" stroke="none"/>
+                        <path d="M7 20h10M9 22h6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                    </svg>
+                    <div class="info-box-content">
+                        <h4>国家算力发展政策导向</h4>
+                        <p>国家深入实施"东数西算"工程，加快构建全国一体化算力网，明确提出推动算力资源有序池化、并网运行，鼓励构建算力调度和交易平台，促进跨区域算力高效流通，降低企业用算成本。PowerVerse Market正是顺应这一政策导向，打造的去中心化算力交易基础设施。</p>
+                    </div>
                 </div>
-
-                <div class="scenario-content-section">
-                    <div class="scenario-stats">
-                        <div class="scenario-stat">
-                            <div class="scenario-stat-value">1000+</div>
-                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.providers">算力提供方</div>
-                        </div>
-                        <div class="scenario-stat">
-                            <div class="scenario-stat-value">10K+</div>
-                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.transactions">交易订单</div>
-                        </div>
-                        <div class="scenario-stat">
-                            <div class="scenario-stat-value">99.9%</div>
-                            <div class="scenario-stat-label" data-i18n="scenarios.computingexchange.stats.successRate">交易成功率</div>
-                        </div>
+                <div class="subsection">
+                    <div class="layer-card">
+                        <!-- 平台定位SVG Icon -->
+                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17V13.17L12 18.17L2 13.17V17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h3>平台核心定位</h3>
+                        <p>利用PowerVerse Chain智能合约构建算力资源自动化交易聚合器，摒弃繁琐的人工协商与第三方中介，实现算力交易全流程智能合约自动化执行，打造高效、透明、不可篡改的算力交易生态，助力算力资源的市场化配置与高效流通。</p>
                     </div>
+                </div>
+            </div>
 
-                    <div class="scenario-details">
-                        <h4 data-i18n="scenarios.computingexchange.workflow.title">完整链路闭环</h4>
-                        <ul>
-                            <li data-i18n="scenarios.computingexchange.workflow.step1">算力提供方注册：GPU/CPU资源提供方在PowerVerse Market注册，发布算力资源信息</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step2">资源上架：设置算力规格、价格、可用时间等参数，资源信息上链存证</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step3">需求方发布：算力需求方发布需求订单，指定算力类型、数量、时长、预算</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step4">智能匹配：PowerVerse Market智能合约自动匹配供需双方，或提供方主动接单</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step5">订单确认：双方确认订单，需求方支付PowerVerse代币（PEC）作为保证金</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step6">资源分配：PowerVerse Infra根据订单自动分配算力资源，启动虚拟机</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step7">任务执行：需求方提交计算任务，系统自动执行并返回结果</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step8">实时监控：双方可实时查看算力使用情况、任务进度、资源状态</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step9">自动结算：任务完成后，智能合约根据实际使用时长自动结算，释放保证金</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step10">评价反馈：交易双方互评，评价计入信誉体系，影响后续交易优先级</li>
-                            <li data-i18n="scenarios.computingexchange.workflow.step11">资源回收：算力资源自动释放回资源池，供其他订单使用</li>
-                        </ul>
+            <!-- 算力交易完整链路闭环：页面截图式 5 步流程图 + 详细列表 -->
+            <div class="section">
+                <h2 class="section-title">算力交易完整链路闭环</h2>
+                <p class="flow-screenshot-desc">PowerVerse Market 算力交易全流程一览</p>
+                <div class="flow-screenshot">
+                    <div class="flow-screenshot-bar">
+                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        <span class="title">PowerVerse Market · 算力交易流程</span>
+                    </div>
+                    <div class="flow-screenshot-inner">
+                        <div class="flow-steps-row">
+                            <div class="flow-step-card">
+                                <span class="flow-step-num">1</span>
+                                <span class="flow-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="4" width="14" height="14" rx="1"/><path d="M9 8h6M9 11h4"/><path d="M12 4v16"/><path d="M8 12l2-2 2 2-2 2"/><path d="M14 10l2 2-2 2"/></svg></span>
+                                <span class="flow-step-name">供需发布</span>
+                            </div>
+                            <span class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            <div class="flow-step-card">
+                                <span class="flow-step-num">2</span>
+                                <span class="flow-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+                                <span class="flow-step-name">智能匹配</span>
+                            </div>
+                            <span class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            <div class="flow-step-card">
+                                <span class="flow-step-num">3</span>
+                                <span class="flow-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="6" rx="1"/><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 8v0M6 18v0M12 8v0M12 18v0M18 8v0M18 18v0"/></svg></span>
+                                <span class="flow-step-name">资源调度</span>
+                            </div>
+                            <span class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            <div class="flow-step-card">
+                                <span class="flow-step-num">4</span>
+                                <span class="flow-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span>
+                                <span class="flow-step-name">实时监控</span>
+                            </div>
+                            <span class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            <div class="flow-step-card">
+                                <span class="flow-step-num">5</span>
+                                <span class="flow-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/><path d="M9 12l2 2 4-4"/></svg></span>
+                                <span class="flow-step-name">结算回收</span>
+                            </div>
+                        </div>
+                        <p class="flow-closed-loop-hint">五步形成完整闭环 · 全链上可追溯</p>
+                    </div>
+                </div>
+                <div class="process-steps">
+                    <ol>
+                        <li><strong>供需发布：</strong>算力提供方上架资源（规格/价格/时长），需求方发布算力需求，信息全部上链存证不可篡改</li>
+                        <li><strong>智能匹配：</strong>智能合约自动匹配供需双方，支持主动接单/议价，确认后需求方支付PEC代币作为保证金</li>
+                        <li><strong>资源调度：</strong>PowerVerse Infra自动分配算力资源，启动虚拟机，需求方提交计算任务并实时执行</li>
+                        <li><strong>实时监控：</strong>交易双方可实时查看算力使用、任务进度、资源状态，全程透明可追溯</li>
+                        <li><strong>结算回收：</strong>任务完成后智能合约自动结算，释放剩余保证金，算力资源回收至资源池循环利用，双方互评上链</li>
+                    </ol>
+                </div>
+            </div>
 
-                        <h4 data-i18n="scenarios.computingexchange.coreAdvantages.title">核心优势</h4>
-                        <ul>
-                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item1">去中心化交易：无需第三方中介，买卖双方直接交易，降低交易成本</li>
-                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item2">智能合约保障：交易全程由智能合约执行，自动结算，安全可靠</li>
-                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item3">透明定价：市场价格公开透明，供需双方自由议价</li>
-                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item4">灵活交易：支持按小时、按天、按月等多种计费方式</li>
-                            <li data-i18n="scenarios.computingexchange.coreAdvantages.item5">信誉体系：基于区块链的信誉评价系统，保障交易安全</li>
-                        </ul>
+            <!-- 核心优势 - 每个优势新增icon -->
+            <div class="section">
+                <h2 class="section-title">核心优势</h2>
+                <div class="coin-features">
+                    <div class="feature-card">
+                        <!-- 去中心化交易 Icon -->
+                        <svg class="advantage-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C10.34 6 9 7.34 9 9C9 10.66 10.34 12 12 12C13.66 12 15 10.66 15 9C15 7.34 13.66 6 12 6ZM12 10C11.45 10 11 9.55 11 9C11 8.45 11.45 8 12 8C12.55 8 13 8.45 13 9C13 9.55 12.55 10 12 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h4>去中心化交易</h4>
+                        <p>无需第三方中介机构，买卖双方直接点对点交易，彻底消除中介佣金，大幅降低算力交易成本</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- 智能合约保障 Icon -->
+                        <svg class="advantage-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17V13.17L12 18.17L2 13.17V17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h4>智能合约保障</h4>
+                        <p>交易全程由智能合约自动执行，从匹配、结算到资金划转无需人工干预，安全可靠且不可篡改</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- 透明定价 Icon -->
+                        <svg class="advantage-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                            <path d="M16 10H8M16 14H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h4>透明定价</h4>
+                        <p>市场算力价格公开透明，供需双方可自由议价，形成市场化的算力价格机制，拒绝价格垄断</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- 灵活交易 Icon -->
+                        <svg class="advantage-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM10 16.5L16 10.5L13.5 8L10 11.5L6.5 8L4 10.5L10 16.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h4>灵活交易</h4>
+                        <p>支持按小时、按天、按月等多种计费方式，满足不同需求方的多样化算力使用需求</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- 区块链信誉体系：链块 + 星级评价 -->
+                        <svg class="advantage-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="7" width="5" height="5" rx="1"/><rect x="17" y="10" width="5" height="5" rx="1"/><path d="M8 12.5h2M14 9.5h2"/>
+                            <path d="M12 15.2l1.4 2.1 2.5.4-1.8 1.7.4 2.5L12 20l-2.5-1.1.4-2.5-1.8-1.7 2.5-.4 1.4-2.1z" fill="currentColor" stroke="currentColor" stroke-width="0.8"/>
+                        </svg>
+                        <h4>区块链信誉体系</h4>
+                        <p>基于区块链的去中心化信誉评价系统，评价结果上链存证，有效保障交易安全，规避违约风险</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- 高效结算 Icon -->
+                        <svg class="advantage-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17V13.17L12 18.17L2 13.17V17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h4>高效结算</h4>
+                        <p>任务完成后智能合约自动结算，资金实时到账，提升资金周转效率，提高市场流动性</p>
+                    </div>
+                </div>
+            </div>
 
-                        <h4 data-i18n="scenarios.computingexchange.scenarios.title">应用场景</h4>
+            <!-- 核心应用场景 - 每个场景新增icon -->
+            <div class="section">
+                <h2 class="section-title">核心应用场景</h2>
+                <div class="architecture-grid">
+                    <div class="layer-card">
+                        <!-- AI训练算力租赁：神经网络层 + GPU/芯片 + 租赁/连接 -->
+                        <svg class="scene-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="6" cy="6" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2.5"/><circle cx="18" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+                            <path d="M6 8v2M8 6h2M18 8v2M16 6h2M6 14h2M18 14h2M12 14.5v2.5"/><rect x="9" y="15" width="6" height="5" rx="1"/><path d="M11 17h2M11 18.5h2"/>
+                        </svg>
+                        <h3>AI训练算力租赁</h3>
                         <ul>
-                            <li data-i18n="scenarios.computingexchange.scenarios.item1">AI训练算力租赁：为AI公司提供GPU算力，支持模型训练</li>
-                            <li data-i18n="scenarios.computingexchange.scenarios.item2">渲染算力交易：为影视公司提供渲染算力，加速项目制作</li>
-                            <li data-i18n="scenarios.computingexchange.scenarios.item3">科学计算资源：为科研机构提供高性能计算资源</li>
-                            <li data-i18n="scenarios.computingexchange.scenarios.item4">闲置资源变现：个人或企业闲置GPU/CPU资源可上架交易，获得收益</li>
-                        </ul>
-
-                        <h4 data-i18n="scenarios.computingexchange.links.title">相关链接</h4>
-                        <ul>
-                            <li>
-                                <a href="market.html" data-i18n="scenarios.computingexchange.links.market" style="color: var(--primary-color); text-decoration: none;">前往PowerVerse Market交易市场 →</a>
-                            </li>
-                            <li>
-                                <a href="infra.html" data-i18n="scenarios.computingexchange.links.infra" style="color: var(--primary-color); text-decoration: none;">了解PowerVerse Infra基础设施 →</a>
-                            </li>
-                            <li>
-                                <a href="token.html" data-i18n="scenarios.computingexchange.links.token" style="color: var(--primary-color); text-decoration: none;">查看PowerVerse代币（PEC）信息 →</a>
-                            </li>
-                            <li>
-                                <a href="workflow.html" data-i18n="scenarios.computingexchange.links.workflow" style="color: var(--primary-color); text-decoration: none;">查看全链路场景流程图 →</a>
-                            </li>
+                            <li>为AI科技公司提供海量GPU算力资源</li>
+                            <li>支持大模型训练、深度学习、算法研发</li>
+                            <li>弹性扩容，按需租赁，降低AI研发成本</li>
                         </ul>
                     </div>
+                    <div class="layer-card">
+                        <!-- 渲染算力交易 Icon -->
+                        <svg class="scene-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3L2 7V17L12 21L22 17V7L12 3ZM12 17C10.34 17 9 15.66 9 14C9 12.34 10.34 11 12 11C13.66 11 15 12.34 15 14C15 15.66 13.66 17 12 17ZM12 9C10.34 9 9 7.66 9 6C9 4.34 10.34 3 12 3C13.66 3 15 4.34 15 6C15 7.66 13.66 9 12 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h3>渲染算力交易</h3>
+                        <ul>
+                            <li>为影视、动漫、游戏公司提供渲染算力</li>
+                            <li>加速影视特效制作、3D模型渲染、动画生成</li>
+                            <li>大幅缩短项目制作周期，提升生产效率</li>
+                        </ul>
+                    </div>
+                    <div class="layer-card">
+                        <!-- 科学计算资源 Icon -->
+                        <svg class="scene-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM14 10L10 14M10 10L14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h3>科学计算资源</h3>
+                        <ul>
+                            <li>为科研机构、高校提供高性能计算资源</li>
+                            <li>支持气象预报、生物医药、航天航空等领域计算</li>
+                            <li>降低科研机构算力基础设施投入成本</li>
+                        </ul>
+                    </div>
+                    <div class="layer-card">
+                        <!-- 闲置资源变现 Icon -->
+                        <svg class="scene-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM14 9H10V15H14V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                        </svg>
+                        <h3>闲置资源变现</h3>
+                        <ul>
+                            <li>个人/企业闲置GPU/CPU资源可上架交易</li>
+                            <li>充分盘活算力资源，实现闲置资产价值最大化</li>
+                            <li>为普通用户提供区块链算力收益渠道</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 平台核心价值 - 新增价值icon -->
+            <div class="section">
+                <h2 class="section-title">平台核心价值</h2>
+                <div class="layer-card">
+                    <!-- 平台核心价值：价值核心 + 多向连接 + 增长 -->
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
+                        <path d="M12 8.5L13 10l1.5.5L13 11l.5 1.5L12 12l-1.5.5L10.5 11 12 10l-1-1.5L12 8.5z"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                    </svg>
+                    <p>PowerVerse Market通过区块链与智能合约技术，解决了传统算力交易中<span style="color: var(--primary-color); font-weight: 600;">中介成本高、交易流程繁琐、结算不及时、信誉无保障</span>等痛点，实现了算力资源的市场化、智能化、去中心化交易。</p>
                 </div>
             </div>
         </section>
@@ -340,16 +926,8 @@
                     <ul>
                         <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
                         <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
-                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub (Coming soon)">GitHub</a></li>
                         <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 data-i18n="nav.about">关于</h4>
-                    <ul>
-                        <li><a href="about.html#about" data-i18n="nav.about">关于我们</a></li>
-                        <li><a href="about.html#contact" data-i18n="common.contact">联系我们</a></li>
-                        <li><a href="about.html#contact" data-i18n="common.join">加入我们</a></li>
                     </ul>
                 </div>
             </div>
@@ -364,5 +942,4 @@
     <script src="../js/languages.js"></script>
     <script src="../script.js"></script>
 </body>
-
 </html>

@@ -9,69 +9,125 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 基础样式 */
         .page-header {
             padding: 140px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
-            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=decentralized%20computing%20power%20trading%20platform%2C%20digital%20marketplace%20for%20CPU%20and%20GPU%20resources%2C%20futuristic%20trading%20interface%2C%20blue%20and%20green%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=decentralized%20computing%20power%20trading%20platform%2C%20digital%20marketplace%2C%20blue%20and%20green%20hue%2C%203D%20rendering%2C%20tech%20background&image_size=landscape_16_9');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
         }
+        
+        /* 背景遮罩 */
         .page-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
         }
+        
+        /* 鼠标跟随光效 */
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(0, 212, 255, 0.15) 0%, 
+                rgba(0, 102, 255, 0.05) 20%, 
+                transparent 60%);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        
+        /* 高级悬浮效果 */
         .product-hero {
             position: relative;
             z-index: 1;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
         }
+        
+        /* 浮动动画 */
         .product-icon {
             font-size: 6rem;
             margin-bottom: 2rem;
             display: inline-block;
             animation: float 3s ease-in-out infinite;
         }
+        
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+        
+        /* 淡入上移动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* 产品标题动画 */
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.2s ease-out;
         }
+        
         .product-hero .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        .product-hero p {
+            font-size: 1.25rem;
             color: #f0f0f0;
             margin-bottom: 2rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-            font-weight: 500;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.6s ease-out;
         }
-        .product-hero p {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            line-height: 1.8;
-            margin: 0 auto;
-        }
+        
+        /* 产品内容区域 */
         .product-content {
             padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
         }
+        
         .section {
             margin-bottom: 5rem;
         }
+        
+        /* 章节标题动画 */
         .section-title {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -79,10 +135,13 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
+            animation: fadeInUp 1s ease-out;
         }
+        
         .section-title::before {
             content: '';
             width: 6px;
@@ -90,256 +149,237 @@
             background: var(--gradient-3);
             border-radius: 3px;
         }
-        .functions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        
+        /* 功能卡片样式 */
+        .architecture-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             margin-top: 2rem;
-        }
-        .function-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .function-card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        .function-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .function-card h4 {
-            font-size: 1.25rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        .function-card p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin: 0;
-            font-size: 1rem;
             text-align: left;
         }
-        .function-card ul {
-            list-style: none;
-            margin: 1rem 0 0 0;
-            padding: 0;
-            text-align: left;
-        }
-        .function-card li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            color: var(--text-secondary);
-            position: relative;
-            line-height: 1.8;
-            font-size: 0.9375rem;
-        }
-        .function-card li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .roles-table {
-            width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            margin: 2rem 0;
-        }
-        .roles-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .roles-table thead {
-            background: var(--bg-darker);
-        }
-        .roles-table th {
-            padding: 1.5rem;
-            text-align: left;
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.125rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-        .roles-table td {
-            padding: 1.5rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .roles-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-        .roles-table tbody tr:hover {
-            background: rgba(0, 212, 255, 0.05);
-        }
-        .roles-table td:first-child {
-            color: var(--text-primary);
-            font-weight: 600;
-            width: 200px;
-        }
-        .process-steps {
-            background: var(--bg-darker);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .process-steps ol {
-            list-style: none;
-            counter-reset: step-counter;
-            margin: 0;
-            padding: 0;
-        }
-        .process-steps li {
-            counter-increment: step-counter;
-            padding: 1.5rem 0 1.5rem 4rem;
-            color: var(--text-secondary);
-            position: relative;
-            line-height: 1.8;
-            font-size: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .process-steps li:last-child {
-            border-bottom: none;
-        }
-        .process-steps li::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 0;
-            top: 1.5rem;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            border-radius: 50%;
+        
+        .feature-card {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        .process-steps li strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        .trading-modes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
-        }
-        .trading-mode-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 1.5rem 2rem;
             transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease-out;
         }
-        .trading-mode-card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        .trading-mode-card h4 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-        .trading-mode-card .mode-steps {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .trading-mode-card .mode-steps li {
-            padding: 0.75rem 0;
-            padding-left: 1.5rem;
-            color: var(--text-secondary);
-            position: relative;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-        .trading-mode-card .mode-steps li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
+        
         .feature-card:hover {
             border-color: var(--primary-color);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
             transform: translateY(-5px);
         }
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+        
+        .feature-card .card-icon {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
-        .feature-card h4 {
-            font-size: 1.25rem;
+        
+        .feature-card:hover .card-icon {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 102, 255, 0.25) 100%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .feature-card .card-icon svg {
+            width: 40px;
+            height: 40px;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+        }
+        
+        .feature-card .card-body {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .feature-card h4 {
+            font-size: 1.35rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
+        
         .feature-card p {
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.7;
             margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* 流程步骤样式 */
+        .process-steps {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-3);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        /* 流程步骤背景光效 */
+        .process-steps::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(0, 212, 255, 0.03) 0%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
+        .process-steps ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-steps li {
+            padding: 1.5rem 0;
+            color: var(--text-secondary);
+            line-height: 1.8;
             font-size: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
         }
-        @media (max-width: 1200px) {
-            .trading-modes {
-                grid-template-columns: 1fr;
-            }
+        
+        .process-steps li:hover {
+            color: var(--text-primary);
+            padding-left: 1rem;
         }
+        
+        .process-steps li:last-child {
+            border-bottom: none;
+        }
+        
+        .process-steps li strong {
+            color: var(--primary-color);
+            font-weight: 600;
+            min-width: 120px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        /* 步骤序号装饰 */
+        .process-steps li strong::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .process-steps li:hover strong::before {
+            opacity: 1;
+            left: -0.75rem;
+        }
+        
+        .process-steps li span {
+            flex: 1;
+        }
+        
+        /* 滚动触发动画 */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 鼠标跟随光效 */
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0,212,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: screen;
+        }
+        
+        /* 响应式设计 */
         @media (max-width: 768px) {
             .product-hero h1 {
                 font-size: 2.5rem;
             }
+            
             .section-title {
                 font-size: 2rem;
             }
-            .functions-grid,
-            .features-grid {
-                grid-template-columns: 1fr;
+            
+            .feature-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
-            .roles-table {
-                font-size: 0.875rem;
+            
+            .feature-card .card-icon {
+                width: 56px;
+                height: 56px;
             }
-            .roles-table th,
-            .roles-table td {
-                padding: 1rem;
+            
+            .feature-card .card-icon svg {
+                width: 32px;
+                height: 32px;
             }
+            
             .process-steps li {
-                padding-left: 3.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
-            .process-steps li::before {
-                width: 2rem;
-                height: 2rem;
-                font-size: 0.875rem;
+            
+            .process-steps li strong {
+                min-width: auto;
+                margin-bottom: 0.25rem;
             }
         }
     </style>
@@ -391,16 +431,11 @@
                 </ul>
                 <div class="nav-actions">
                     <button class="lang-switch">English</button>
-                    <button class="menu-toggle" id="menuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                    <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
                 </div>
             </div>
         </div>
     </nav>
-
 
     <div class="page-header">
         <div class="container">
@@ -408,107 +443,61 @@
                 <div class="product-icon">🛒</div>
                 <h1 data-i18n="products.market.name">PowerVerse Market</h1>
                 <div class="subtitle" data-i18n="products.market.subtitle">去中心化算力交易平台</div>
-                <p data-i18n="products.market.intro">PowerVerse Market 是基于 PowerVerse Chain 与 PowerVerse Infra 构建的去中心化算力交易平台。它通过智能合约与区块链技术连接算力供应方与需求方，实现自动化、透明化、无需信任第三方的算力资源交易。</p>
+                <p data-i18n="products.market.intro">PowerVerse Market 基于 PowerVerse Chain 与 Infra 构建，通过智能合约连接算力供应方与需求方，实现自动化、透明化、无需信任第三方的算力资源交易。</p>
             </div>
         </div>
     </div>
 
     <div class="container">
         <section class="product-content">
-            <!-- 一、平台核心功能 -->
             <div class="section">
-                <h2 class="section-title" data-i18n="products.market.section1.title">一、平台核心功能</h2>
-                
-                <div class="functions-grid">
-                    <div class="function-card">
-                        <div class="function-icon">📦</div>
-                        <h4 data-i18n="products.market.section1.function1.title">1. 算力资源管理</h4>
-                        <ul>
-                            <li data-i18n="products.market.section1.function1.item1">供应方发布算力资源信息（CPU/GPU/存储等），设定价格、可用时间等参数</li>
-                            <li data-i18n="products.market.section1.function1.item2">资源信息可实时更新，灵活适应市场变化</li>
-                        </ul>
+                <h2 class="section-title" data-i18n="products.market.section1.title">平台核心功能</h2>
+                <div class="architecture-grid">
+                    <div class="feature-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section1.function1.title">算力资源管理</h4>
+                            <p data-i18n="products.market.section1.function1.item1">供应方发布算力资源信息（CPU/GPU/存储等），设定价格、可用时间等参数，资源信息可实时更新。</p>
+                        </div>
                     </div>
-
-                    <div class="function-card">
-                        <div class="function-icon">📋</div>
-                        <h4 data-i18n="products.market.section1.function2.title">2. 算力需求单管理</h4>
-                        <ul>
-                            <li data-i18n="products.market.section1.function2.item1">需求方提交算力需求订单，指定类型、数量、时长、预算等</li>
-                            <li data-i18n="products.market.section1.function2.item2">平台自动匹配资源，供应方也可主动接单</li>
-                        </ul>
+                    <div class="feature-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section1.function2.title">算力需求单管理</h4>
+                            <p data-i18n="products.market.section1.function2.item1">需求方提交算力需求订单，指定类型、数量、时长、预算等，平台自动匹配或供应方主动接单。</p>
+                        </div>
                     </div>
-
-                    <div class="function-card">
-                        <div class="function-icon">⚙️</div>
-                        <h4 data-i18n="products.market.section1.function3.title">3. 交易执行与监控</h4>
-                        <ul>
-                            <li data-i18n="products.market.section1.function3.item1">智能合约自动执行算力供应与费用结算</li>
-                            <li data-i18n="products.market.section1.function3.item2">需求方可实时监控算力使用与任务进度，异常情况自动通知</li>
-                        </ul>
+                    <div class="feature-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section1.function3.title">交易执行与监控</h4>
+                            <p data-i18n="products.market.section1.function3.item1">智能合约自动执行算力供应与费用结算，需求方可实时监控使用与任务进度。</p>
+                        </div>
                     </div>
-
-                    <div class="function-card">
-                        <div class="function-icon">📊</div>
-                        <h4 data-i18n="products.market.section1.function4.title">4. 数据统计与分析</h4>
-                        <ul>
-                            <li data-i18n="products.market.section1.function4.item1">提供交易历史、资源分布、价格趋势等数据分析</li>
-                            <li data-i18n="products.market.section1.function4.item2">帮助用户制定交易策略，优化资源利用率与收益</li>
-                        </ul>
-                    </div>
-
-                    <div class="function-card">
-                        <div class="function-icon">⭐</div>
-                        <h4 data-i18n="products.market.section1.function5.title">5. 用户评价与信誉体系</h4>
-                        <ul>
-                            <li data-i18n="products.market.section1.function5.item1">交易双方互评，评价计入信誉体系</li>
-                            <li data-i18n="products.market.section1.function5.item2">信誉影响交易权限与优先级，激励诚信交易</li>
-                        </ul>
+                    <div class="feature-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section1.function5.title">用户评价与信誉体系</h4>
+                            <p data-i18n="products.market.section1.function5.item1">交易双方互评，评价计入信誉体系，信誉影响交易权限与优先级，激励诚信交易。</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 二、平台角色 -->
             <div class="section">
-                <h2 class="section-title" data-i18n="products.market.section2.title">二、平台角色</h2>
-                
-                <div class="roles-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th data-i18n="products.market.section2.table.role">角色</th>
-                                <th data-i18n="products.market.section2.table.responsibility">职责与权益</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-i18n="products.market.section2.role1.name">算力供应方</td>
-                                <td data-i18n="products.market.section2.role1.desc">将虚拟化算力资源注册发布至平台，获取租金与代币分红。</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="products.market.section2.role2.name">算力需求方</td>
-                                <td data-i18n="products.market.section2.role2.desc">租赁算力资源用于应用构建、挖矿、模型训练等，也可发布需求单等待匹配。</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="products.market.section2.role3.name">管理员</td>
-                                <td data-i18n="products.market.section2.role3.desc">维护市场秩序，对不诚实用户执行冻结、列入黑名单等操作。</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="products.market.section2.role4.name">仲裁委员会</td>
-                                <td data-i18n="products.market.section2.role4.desc">处理交易争议，判定过失方与补偿方案，或提交 DAO 组织投票裁决。</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 三、算力资源发布流程 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.market.section3.title">三、算力资源发布流程</h2>
-                
+                <h2 class="section-title" data-i18n="products.market.section3.title">算力资源发布流程</h2>
                 <div class="process-steps">
                     <ol>
                         <li><strong data-i18n="products.market.section3.step1.label">虚拟化：</strong><span data-i18n="products.market.section3.step1.desc">通过 PowerVerse Infra 将本地闲置算力虚拟化为独立虚拟机。</span></li>
-                        <li><strong data-i18n="products.market.section3.step2.label">注册：</strong><span data-i18n="products.market.section3.step2.desc">向平台注册虚拟资源，提交详细技术参数（CPU/GPU/内存/存储等），平台验证真实性。</span></li>
+                        <li><strong data-i18n="products.market.section3.step2.label">注册：</strong><span data-i18n="products.market.section3.step2.desc">向平台注册虚拟资源，提交技术参数，平台验证真实性。</span></li>
                         <li><strong data-i18n="products.market.section3.step3.label">计分：</strong><span data-i18n="products.market.section3.step3.desc">平台通过加权参数计算资源性能得分。</span></li>
                         <li><strong data-i18n="products.market.section3.step4.label">NFT 凭证发放：</strong><span data-i18n="products.market.section3.step4.desc">为每个算力资源生成唯一 NFT，记录所有权、性能、状态等信息。</span></li>
                         <li><strong data-i18n="products.market.section3.step5.label">上架：</strong><span data-i18n="products.market.section3.step5.desc">资源上架至平台列表，供需求方查询与租赁。</span></li>
@@ -516,58 +505,35 @@
                 </div>
             </div>
 
-            <!-- 四、交易模式 -->
             <div class="section">
-                <h2 class="section-title" data-i18n="products.market.section4.title">四、交易模式</h2>
-                
-                <div class="trading-modes">
-                    <div class="trading-mode-card">
-                        <h4 data-i18n="products.market.section4.mode1.title">1. 直接租赁交易</h4>
-                        <ul class="mode-steps">
-                            <li data-i18n="products.market.section4.mode1.step1">需求方选择资源</li>
-                            <li data-i18n="products.market.section4.mode1.step2">支付 PowerVerse Coin</li>
-                            <li data-i18n="products.market.section4.mode1.step3">使用资源</li>
-                            <li data-i18n="products.market.section4.mode1.step4">平台监测</li>
-                            <li data-i18n="products.market.section4.mode1.step5">到期结算</li>
-                            <li data-i18n="products.market.section4.mode1.step6">双方互评</li>
-                        </ul>
-                    </div>
-
-                    <div class="trading-mode-card">
-                        <h4 data-i18n="products.market.section4.mode2.title">2. 任务式需求单</h4>
-                        <ul class="mode-steps">
-                            <li data-i18n="products.market.section4.mode2.step1">需求方发布任务（含需求、价格、验收方式等）</li>
-                            <li data-i18n="products.market.section4.mode2.step2">供应方承接</li>
-                            <li data-i18n="products.market.section4.mode2.step3">执行任务</li>
-                            <li data-i18n="products.market.section4.mode2.step4">提交成果</li>
-                            <li data-i18n="products.market.section4.mode2.step5">验收后结算</li>
-                            <li data-i18n="products.market.section4.mode2.step6">双方互评</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 五、平台特性 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.market.section5.title">五、平台特性</h2>
-                
-                <div class="features-grid">
+                <h2 class="section-title" data-i18n="products.market.section5.title">平台特性</h2>
+                <div class="architecture-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">🌐</div>
-                        <h4 data-i18n="products.market.section5.feature1.title">去中心化</h4>
-                        <p data-i18n="products.market.section5.feature1.desc">点对点交易，无中介，降低成本，提升透明度与公正性。</p>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section5.feature1.title">去中心化</h4>
+                            <p data-i18n="products.market.section5.feature1.desc">点对点交易，无中介，降低成本，提升透明度与公正性。</p>
+                        </div>
                     </div>
-
                     <div class="feature-card">
-                        <div class="feature-icon">🔒</div>
-                        <h4 data-i18n="products.market.section5.feature2.title">安全性</h4>
-                        <p data-i18n="products.market.section5.feature2.desc">数据加密、智能合约审计、区块链不可篡改，保障交易隐私与可靠。</p>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section5.feature2.title">安全性</h4>
+                            <p data-i18n="products.market.section5.feature2.desc">数据加密、智能合约审计、区块链不可篡改，保障交易隐私与可靠。</p>
+                        </div>
                     </div>
-
                     <div class="feature-card">
-                        <div class="feature-icon">📈</div>
-                        <h4 data-i18n="products.market.section5.feature3.title">可扩展性</h4>
-                        <p data-i18n="products.market.section5.feature3.desc">支持多种算力资源接入，架构可灵活扩展，适应未来业务增长。</p>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.market.section5.feature3.title">可扩展性</h4>
+                            <p data-i18n="products.market.section5.feature3.desc">支持多种算力资源接入，架构可灵活扩展，适应未来业务增长。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -596,20 +562,92 @@
                     <ul>
                         <li><a href="whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
                         <li><a href="developer.html" data-i18n="nav.developer">技术文档</a></li>
-                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub (Coming soon)">GitHub</a></li>
                         <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="footer-copyright">
-                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
-                </div>
+                <div class="footer-copyright"><p>&copy; 2024 PowerVerse Chain. All rights reserved.</p></div>
             </div>
         </div>
     </footer>
 
     <script src="../js/languages.js"></script>
     <script src="../script.js"></script>
+    <script>
+        // 鼠标跟随光效
+        document.addEventListener('mousemove', function(e) {
+            const pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
+                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
+            }
+        });
+
+        // 滚动触发动画
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation);
+
+        // 鼠标指针跟随效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursorFollower = document.createElement('div');
+            cursorFollower.className = 'cursor-follower';
+            document.body.appendChild(cursorFollower);
+
+            document.addEventListener('mousemove', function(e) {
+                cursorFollower.style.left = e.clientX - 10 + 'px';
+                cursorFollower.style.top = e.clientY - 10 + 'px';
+            });
+
+            // 功能卡片悬停效果增强
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+                });
+            });
+
+            // 流程步骤交互效果
+            const processSteps = document.querySelectorAll('.process-steps li');
+            processSteps.forEach(step => {
+                step.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(0, 212, 255, 0.02)';
+                    this.style.borderLeft = '3px solid var(--primary-color)';
+                });
+                
+                step.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'transparent';
+                    this.style.borderLeft = 'none';
+                });
+            });
+
+            // 页面加载动画
+            window.addEventListener('load', function() {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>

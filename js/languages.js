@@ -231,7 +231,7 @@ const translations = {
                 subtitle: '去中心化物理基础设施网络（DePIN）起点',
                 intro: 'PowerVerse Infra 是一个虚拟化软件平台，基于软件定义理念，整合并虚拟化管理多种芯片算力（包括 CPU、GPU、AI 芯片及量子芯片），将闲置算力转化为可共享、可交易的数字资产，为用户提供高效、多样的算力获取途径。',
                 section1: {
-                    title: '一、核心设计：五大组件与九大服务',
+                    title: '核心设计：五大组件',
                     components: {
                         title: '五大核心组件',
                         table: {
@@ -349,7 +349,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、功能特性',
+                    title: '功能特性',
                     chipCompatibility: {
                         title: '广泛的芯片兼容性',
                         desc: '全面支持 CPU、GPU、AI 算力芯片及量子芯片，满足多样化计算需求，最大化利用闲置算力。'
@@ -376,35 +376,35 @@ const translations = {
                 subtitle: '去中心化算力交易平台',
                 intro: 'PowerVerse Market 是基于 PowerVerse Chain 与 PowerVerse Infra 构建的去中心化算力交易平台。它通过智能合约与区块链技术连接算力供应方与需求方，实现自动化、透明化、无需信任第三方的算力资源交易。',
                 section1: {
-                    title: '一、平台核心功能',
+                    title: '平台核心功能',
                     function1: {
-                        title: '1. 算力资源管理',
+                        title: '算力资源管理',
                         item1: '供应方发布算力资源信息（CPU/GPU/存储等），设定价格、可用时间等参数',
                         item2: '资源信息可实时更新，灵活适应市场变化'
                     },
                     function2: {
-                        title: '2. 算力需求单管理',
+                        title: '算力需求单管理',
                         item1: '需求方提交算力需求订单，指定类型、数量、时长、预算等',
                         item2: '平台自动匹配资源，供应方也可主动接单'
                     },
                     function3: {
-                        title: '3. 交易执行与监控',
+                        title: '交易执行与监控',
                         item1: '智能合约自动执行算力供应与费用结算',
                         item2: '需求方可实时监控算力使用与任务进度，异常情况自动通知'
                     },
                     function4: {
-                        title: '4. 数据统计与分析',
+                        title: '数据统计与分析',
                         item1: '提供交易历史、资源分布、价格趋势等数据分析',
                         item2: '帮助用户制定交易策略，优化资源利用率与收益'
                     },
                     function5: {
-                        title: '5. 用户评价与信誉体系',
+                        title: '用户评价与信誉体系',
                         item1: '交易双方互评，评价计入信誉体系',
                         item2: '信誉影响交易权限与优先级，激励诚信交易'
                     }
                 },
                 section2: {
-                    title: '二、平台角色',
+                    title: '平台角色',
                     table: {
                         role: '角色',
                         responsibility: '职责与权益'
@@ -427,7 +427,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、算力资源发布流程',
+                    title: '算力资源发布流程',
                     step1: {
                         label: '虚拟化：',
                         desc: '通过 PowerVerse Infra 将本地闲置算力虚拟化为独立虚拟机。'
@@ -450,9 +450,9 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、交易模式',
+                    title: '交易模式',
                     mode1: {
-                        title: '1. 直接租赁交易',
+                        title: '直接租赁交易',
                         step1: '需求方选择资源',
                         step2: '支付 PowerVerse Coin',
                         step3: '使用资源',
@@ -461,7 +461,7 @@ const translations = {
                         step6: '双方互评'
                     },
                     mode2: {
-                        title: '2. 任务式需求单',
+                        title: '任务式需求单',
                         step1: '需求方发布任务（含需求、价格、验收方式等）',
                         step2: '供应方承接',
                         step3: '执行任务',
@@ -471,7 +471,7 @@ const translations = {
                     }
                 },
                 section5: {
-                    title: '五、平台特性',
+                    title: '平台特性',
                     feature1: {
                         title: '去中心化',
                         desc: '点对点交易，无中介，降低成本，提升透明度与公正性。'
@@ -2060,7 +2060,7 @@ const translations = {
                 subtitle: '去中心化物理基礎設施網絡（DePIN）起點',
                 intro: 'PowerVerse Infra 是一個虛擬化軟件平台，基於軟件定義理念，整合並虛擬化管理多種芯片算力（包括 CPU、GPU、AI 芯片及量子芯片），將閒置算力轉化為可共享、可交易的數字資產，為用戶提供高效、多樣的算力獲取途徑。',
                 section1: {
-                    title: '一、核心設計：五大組件與九大服務',
+                    title: '核心設計：五大組件',
                     components: {
                         title: '五大核心組件',
                         table: {
@@ -2185,7 +2185,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、功能特性',
+                    title: '功能特性',
                     chipCompatibility: {
                         title: '廣泛的芯片兼容性',
                         desc: '全面支持 CPU、GPU、AI 算力芯片及量子芯片，滿足多樣化計算需求，最大化利用閒置算力。'
@@ -3776,7 +3776,7 @@ const translations = {
                 subtitle: 'Starting Point of Decentralized Physical Infrastructure Network (DePIN)',
                 intro: 'PowerVerse Infra is a virtualization software platform based on software-defined concepts, integrating and virtualizing management of various chip computing power (including CPU, GPU, AI chips, and quantum chips), transforming idle computing power into shareable and tradable digital assets, providing users with efficient and diverse computing power acquisition methods.',
                 section1: {
-                    title: 'I. Core Design: Five Components and Nine Services',
+                    title: 'Core Design: Five Components',
                     components: {
                         title: 'Five Core Components',
                         table: {
@@ -3894,7 +3894,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: 'IV. Feature Characteristics',
+                    title: 'Feature Characteristics',
                     chipCompatibility: {
                         title: 'Extensive Chip Compatibility',
                         desc: 'Comprehensively supports CPU, GPU, AI computing chips, and quantum chips, meeting diverse computing needs and maximizing utilization of idle computing power.'
@@ -3928,7 +3928,7 @@ const translations = {
                 subtitle: 'Decentralized Computing Power Trading Platform',
                 intro: 'PowerVerse Market is a decentralized computing power trading platform built on PowerVerse Chain and PowerVerse Infra. It connects computing power suppliers and demanders through smart contracts and blockchain technology, achieving automated, transparent, trustless computing resource trading.',
                 section1: {
-                    title: 'I. Platform Core Functions',
+                    title: 'Platform Core Functions',
                     function1: {
                         title: '1. Computing Resource Management',
                         item1: 'Suppliers publish computing resource information (CPU/GPU/storage, etc.), setting prices, available time, and other parameters',
@@ -3979,7 +3979,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: 'III. Computing Resource Publishing Process',
+                    title: 'Computing Resource Publishing Process',
                     step1: {
                         label: 'Virtualization: ',
                         desc: 'Virtualize local idle computing power into independent virtual machines through PowerVerse Infra.'

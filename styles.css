@@ -277,12 +277,13 @@ body {
     position: relative;
 }
 
-/* 方案三：下拉框霓虹边框 + 整体背景统一 + 边框光点滑动；高度=内容叠加 */
+/* 方案三：下拉框霓虹边框 + 整体背景统一 + 边框光点滑动；高度=内容叠加；子导航背景浅灰/透明不抢眼 */
 .product-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    background: rgba(0, 140, 180, 0.92);
+    background: rgba(45, 55, 72, 0.92);
+    backdrop-filter: blur(14px);
     border: 2px solid rgba(0, 212, 255, 0.5);
     border-radius: 12px;
     padding: 0;
@@ -349,14 +350,14 @@ body {
     box-shadow: 0 0 24px rgba(0, 212, 255, 0.25), inset 0 0 20px rgba(0, 212, 255, 0.03);
 }
 
-/* 子导航：高度再缩小为之前 80%（约原高 64%）；背景加深便于白字在各页可见；首尾项圆角与容器一致 */
+/* 子导航：浅色背景能遮住下方内容，首尾项圆角与容器一致 */
 .product-dropdown a {
     display: block;
     position: relative;
     padding: 0.48rem 1.5rem;
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.92);
     text-decoration: none;
-    background: rgba(0, 140, 180, 0.92);
+    background: rgba(45, 55, 72, 0.85);
     transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
     overflow: hidden;
@@ -371,21 +372,11 @@ body {
     border-radius: 10px;
 }
 
-/* 悬浮：点亮渐变（同色系由暗到亮再暗），渐变轻微流动 */
+/* 悬浮：轻微高亮，不抢眼 */
 .product-dropdown a:hover {
-    background: linear-gradient(
-        90deg,
-        rgba(0, 160, 200, 0.95) 0%,
-        rgba(0, 190, 230, 0.98) 35%,
-        rgba(0, 212, 255, 0.98) 50%,
-        rgba(0, 190, 230, 0.98) 65%,
-        rgba(0, 160, 200, 0.95) 100%
-    );
-    background-size: 200% 100%;
-    background-position: 100% 0;
+    background: rgba(255, 255, 255, 0.08);
     color: #fff;
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.35);
-    animation: dropdown-glow 1.2s ease-in-out infinite;
+    box-shadow: none;
 }
 
 @keyframes dropdown-glow {
@@ -656,6 +647,17 @@ body {
     background-clip: text;
 }
 
+/* Hero 第二行标题：主标题出现后再入场 */
+.hero-subtitle-line {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: hero-subtitle-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+}
+@keyframes hero-subtitle-in {
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .hero-description {
     font-size: 1.25rem;
     color: var(--text-secondary);
@@ -710,6 +712,11 @@ body {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
+    opacity: 0;
+    animation: scroll-indicator-in 0.6s ease-out 1.5s forwards;
+}
+@keyframes scroll-indicator-in {
+    to { opacity: 1; }
 }
 
 .mouse {
@@ -736,6 +743,116 @@ body {
 @keyframes scroll {
     0% { opacity: 1; transform: translateX(-50%) translateY(0); }
     100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+}
+
+/* ========== 首页动画优化：滚动揭示 + 交错入场（参考高端官网） ========== */
+.reveal-section .section-header {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-section.animate-in .section-header {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.reveal-section .architecture-content {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-section.animate-in .architecture-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-section .architecture-content:nth-of-type(1) { transition-delay: 0.05s; }
+.reveal-section .architecture-content:nth-of-type(2) { transition-delay: 0.15s; }
+.reveal-section .architecture-content:nth-of-type(3) { transition-delay: 0.25s; }
+.reveal-section .architecture-diagram .diagram-node {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-section .architecture-diagram .center-node {
+    transform: translate(-50%, -50%) scale(0.88);
+}
+.reveal-section .architecture-diagram .left-node { transition-delay: 0.2s; }
+.reveal-section .architecture-diagram .center-node { transition-delay: 0.35s; }
+.reveal-section .architecture-diagram .right-node { transition-delay: 0.2s; }
+.reveal-section.animate-in .architecture-diagram .diagram-node {
+    opacity: 1;
+    transform: scale(1);
+}
+.reveal-section.animate-in .architecture-diagram .center-node {
+    transform: translate(-50%, -50%) scale(1);
+}
+.reveal-section .connection-line {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-section.animate-in .connection-line { opacity: 1; transform: scaleX(1); }
+.reveal-section.animate-in .connection-line.line-1 { transition-delay: 0.4s; }
+.reveal-section.animate-in .connection-line.line-2 { transition-delay: 0.5s; }
+.reveal-section.animate-in .connection-line.line-3 { transition-delay: 0.4s; }
+
+.reveal-section .product-card,
+.reveal-section .scenario-item,
+.reveal-section .resource-card {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-section.animate-in .product-card:nth-child(1), .reveal-section.animate-in .scenario-item:nth-child(1), .reveal-section.animate-in .resource-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+.reveal-section.animate-in .product-card:nth-child(2), .reveal-section.animate-in .scenario-item:nth-child(2), .reveal-section.animate-in .resource-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+.reveal-section.animate-in .product-card:nth-child(3), .reveal-section.animate-in .scenario-item:nth-child(3), .reveal-section.animate-in .resource-card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.19s; }
+.reveal-section.animate-in .product-card:nth-child(4), .reveal-section.animate-in .scenario-item:nth-child(4), .reveal-section.animate-in .resource-card:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+.reveal-section.animate-in .product-card:nth-child(5), .reveal-section.animate-in .scenario-item:nth-child(5), .reveal-section.animate-in .resource-card:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.33s; }
+.reveal-section.animate-in .scenario-item:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+.reveal-section.animate-in .scenario-item:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 0.47s; }
+.reveal-section.animate-in .scenario-item:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 0.54s; }
+
+/* Hero 副标题与按钮延迟入场 */
+.hero .hero-description {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: hero-desc-in 0.8s ease-out 0.9s forwards;
+}
+.hero .hero-buttons {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: hero-btns-in 0.6s ease-out 1.2s forwards;
+}
+@keyframes hero-desc-in {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-btns-in {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 尊重用户“减少动态”偏好：动画简化 */
+@media (prefers-reduced-motion: reduce) {
+    .hero-main-title,
+    .hero-main-title::after,
+    .hero-subtitle-line,
+    .hero .hero-description,
+    .hero .hero-buttons,
+    .scroll-indicator { animation: none; }
+    .hero-subtitle-line,
+    .hero .hero-description,
+    .hero .hero-buttons { opacity: 1; transform: none; }
+    .scroll-indicator { opacity: 1; }
+    .reveal-section .section-header,
+    .reveal-section .architecture-content,
+    .reveal-section .architecture-diagram .diagram-node,
+    .reveal-section .connection-line,
+    .reveal-section .product-card,
+    .reveal-section .scenario-item,
+    .reveal-section .resource-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 /* 通用区块样式 */
@@ -1343,7 +1460,7 @@ section {
         left: 0;
     }
     
-    /* 移动端下拉菜单 */
+    /* 移动端下拉菜单：浅色背景能遮住下方内容 */
     .product-dropdown {
         position: static;
         opacity: 1;
@@ -1353,7 +1470,7 @@ section {
         border: none;
         padding: 0.5rem 0 0.5rem 1.5rem;
         margin-top: 0;
-        background: rgba(0, 140, 180, 0.88);
+        background: rgba(45, 55, 72, 0.92);
     }
     
     .product-dropdown a {

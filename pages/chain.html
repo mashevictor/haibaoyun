@@ -13,7 +13,7 @@
             padding: 140px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
-            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=blockchain%20technology%20with%20digital%20blocks%20and%20cryptocurrency%20network%2C%20futuristic%20block%20chain%20visualization%2C%20blue%20and%20purple%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
+            background-image: url('../images/backgrounds/PowerVerse Chain 4.svg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -30,11 +30,49 @@
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
         }
+        
+        /* 鼠标跟随光效 */
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(0, 212, 255, 0.15) 0%, 
+                rgba(0, 102, 255, 0.05) 20%, 
+                transparent 60%);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        
+        /* 高级悬浮效果 */
         .product-hero {
             position: relative;
             z-index: 1;
             max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        /* 淡入上移动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
         .product-icon {
             font-size: 6rem;
@@ -46,12 +84,14 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
+        /* 产品标题动画 */
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
             color: #ffffff;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .product-hero p {
@@ -60,16 +100,22 @@
             margin-bottom: 2rem;
             line-height: 1.6;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1.4s ease-out;
         }
+        
+        /* 产品内容区域 */
         .product-content {
             padding: 5rem 0;
             max-width: 960px;
             margin: 0 auto;
             text-align: center;
         }
+        
         .section {
             margin-bottom: 5rem;
         }
+        
+        /* 章节标题动画 */
         .section-title {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -81,6 +127,7 @@
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
+            animation: fadeInUp 1s ease-out;
         }
         .section-title::before {
             content: '';
@@ -119,6 +166,7 @@
             gap: 2.5rem;
             margin-bottom: 3.5rem;
             text-align: left;
+            animation: fadeInUp 1.2s ease-out;
         }
         .module-row:last-child {
             margin-bottom: 0;
@@ -140,7 +188,7 @@
         }
         .module-img:hover {
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.35), 0 0 60px rgba(25, 100, 254, 0.2);
-            transform: scale(1.02);
+            transform: scale(1.05);
         }
         @keyframes module-glow-pulse {
             0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(25, 100, 254, 0.08); }
@@ -237,11 +285,41 @@
             border-radius: 16px;
             padding: 2.5rem;
             transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease-out;
         }
         .layer-card:hover {
             border-color: var(--primary-color);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+        }
+        
+        .layer-card li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.8;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .layer-card li:hover {
+            color: var(--text-primary);
+            padding-left: 2rem;
+        }
+        
+        .layer-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .layer-card li:hover::before {
+            transform: scale(1.2);
+            left: 0.25rem;
         }
         .layer-card h3 {
             font-size: 1.5rem;
@@ -278,6 +356,13 @@
             border-radius: 8px;
             padding: 2rem;
             margin: 2rem 0;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .info-box:hover {
+            border-left: 6px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1);
         }
         .info-box h4 {
             font-size: 1.25rem;
@@ -296,13 +381,34 @@
             border-radius: 12px;
             padding: 2rem;
             margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.2s ease-out;
         }
+        
+        /* 流程步骤背景光效 */
+        .process-steps::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(0, 212, 255, 0.03) 0%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
         .process-steps ol {
             list-style: none;
             counter-reset: step-counter;
             margin: 0;
             padding: 0;
+            position: relative;
+            z-index: 1;
         }
+        
         .process-steps li {
             counter-increment: step-counter;
             padding: 1.25rem 0 1.25rem 3rem;
@@ -311,10 +417,18 @@
             line-height: 1.8;
             font-size: 1rem;
             border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
+        
+        .process-steps li:hover {
+            color: var(--text-primary);
+            padding-left: 3.5rem;
+        }
+        
         .process-steps li:last-child {
             border-bottom: none;
         }
+        
         .process-steps li::before {
             content: counter(step-counter);
             position: absolute;
@@ -330,6 +444,12 @@
             justify-content: center;
             font-weight: 700;
             font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .process-steps li:hover::before {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
         }
         .coin-stats {
             display: grid;
@@ -648,5 +768,93 @@
 
     <script src="../js/languages.js"></script>
     <script src="../script.js"></script>
+    <script>
+        // 鼠标跟随光效
+        document.addEventListener('mousemove', function(e) {
+            const pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
+                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
+            }
+        });
+
+        // 滚动触发动画
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation);
+
+        // 鼠标指针跟随效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursorFollower = document.createElement('div');
+            cursorFollower.className = 'cursor-follower';
+            document.body.appendChild(cursorFollower);
+
+            document.addEventListener('mousemove', function(e) {
+                cursorFollower.style.left = e.clientX - 10 + 'px';
+                cursorFollower.style.top = e.clientY - 10 + 'px';
+            });
+
+            // 模块图片悬停效果增强
+            const moduleImgs = document.querySelectorAll('.module-img');
+            moduleImgs.forEach(img => {
+                img.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(25, 100, 254, 0.08)';
+                });
+            });
+
+            // 卡片悬停效果增强
+            const cards = document.querySelectorAll('.layer-card, .stat-card, .feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+                });
+            });
+
+            // 流程步骤交互效果
+            const processSteps = document.querySelectorAll('.process-steps li');
+            processSteps.forEach(step => {
+                step.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(0, 212, 255, 0.02)';
+                    this.style.borderLeft = '3px solid var(--primary-color)';
+                });
+                
+                step.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'transparent';
+                    this.style.borderLeft = 'none';
+                });
+            });
+
+            // 页面加载动画
+            window.addEventListener('load', function() {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>
