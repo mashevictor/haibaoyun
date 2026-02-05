@@ -22,8 +22,8 @@ const translations = {
         // 首页
         home: {
             title: 'PowerVerse Chain',
-            subtitle: '去中心化计算网络',
-            description: '构建下一代分布式计算基础设施，让全球计算资源高效共享，赋能Web3生态发展',
+            subtitle: 'AI驱动的超级公链',
+            description: '融合RWA、DePIN、GameFi与DeFi，汇聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元',
             ios: 'iOS',
             android: 'Android'
         },
@@ -1516,8 +1516,9 @@ const translations = {
         token: {
             pageTitle: '代币 - PowerVerse Chain',
             title: '代币经济',
+            name: 'PEC 代币',
             description: '构建可持续的生态经济模型',
-            intro: 'PowerVerse Token是PowerVerse Chain生态系统的原生代币',
+            intro: 'PowerVerse Token 是 PowerVerse Chain 生态系统的原生代币',
             totalSupply: '总供应量',
             circulated: '已流通',
             marketCap: '市值',
@@ -1846,8 +1847,8 @@ const translations = {
         },
         home: {
             title: 'PowerVerse Chain',
-            subtitle: '去中心化計算網絡',
-            description: '構建下一代分布式計算基礎設施，讓全球計算資源高效共享，賦能Web3生態發展',
+            subtitle: 'AI驅動的超級公鏈',
+            description: '融合RWA、DePIN、GameFi與DeFi，匯聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>與智慧，激活智能生態，開啟數字文明新紀元',
             ios: 'iOS',
             android: 'Android'
         },
@@ -3246,8 +3247,9 @@ const translations = {
         token: {
             pageTitle: '代幣 - PowerVerse Chain',
             title: '代幣經濟',
+            name: 'PEC 代幣',
             description: '構建可持續的生態經濟模型',
-            intro: 'PowerVerse Token是PowerVerse Chain生態系統的原生代幣',
+            intro: 'PowerVerse Token 是 PowerVerse Chain 生態系統的原生代幣',
             totalSupply: '總供應量',
             circulated: '已流通',
             marketCap: '市值',
@@ -3562,8 +3564,8 @@ const translations = {
         },
         home: {
             title: 'PowerVerse Chain',
-            subtitle: 'Decentralized Computing Network',
-            description: 'Building next-generation distributed computing infrastructure to enable efficient sharing of global computing resources and empower Web3 ecosystem development',
+            subtitle: 'AI-Powered Super Chain',
+            description: 'Integrating RWA, DePIN, GameFi and DeFi, converging <span style="color: #00d4ff; font-weight: bold;">global computing power</span> and wisdom, activating the intelligent ecosystem, and opening a new era of digital civilization',
             ios: 'iOS',
             android: 'Android'
         },
@@ -5051,6 +5053,7 @@ const translations = {
         token: {
             pageTitle: 'Token - PowerVerse Chain',
             title: 'Tokenomics',
+            name: 'PEC Token',
             description: 'Building a sustainable ecosystem economic model',
             intro: 'PowerVerse Token is the native token of the PowerVerse Chain ecosystem',
             totalSupply: 'Total Supply',
@@ -5370,8 +5373,8 @@ const translations = {
         },
         home: {
             title: 'PowerVerse Chain',
-            subtitle: '分散型コンピューティングネットワーク',
-            description: '次世代の分散コンピューティングインフラストラクチャを構築し、グローバルなコンピューティングリソースの効率的な共有を可能にし、Web3エコシステムの発展を促進します',
+            subtitle: 'AI駆動のスーパーパブリックチェーン',
+            description: 'RWA、DePIN、GameFi、DeFiを融合し、<span style="color: #00d4ff; font-weight: bold;">世界中の算力</span>と知恵を集結し、インテリジェントエコシステムを活性化し、デジタル文明の新時代を開きます',
             ios: 'iOS',
             android: 'Android'
         },
@@ -6818,6 +6821,7 @@ const translations = {
         token: {
             pageTitle: 'トークン - PowerVerse Chain',
             title: 'トークンエコノミクス',
+            name: 'PEC トークン',
             description: '持続可能なエコシステム経済モデルの構築',
             intro: 'PowerVerse TokenはPowerVerse Chainエコシステムのネイティブトークンです',
             totalSupply: '総供給量',
@@ -7135,8 +7139,8 @@ const translations = {
         },
         home: {
             title: 'PowerVerse Chain',
-            subtitle: '분산 컴퓨팅 네트워크',
-            description: '차세대 분산 컴퓨팅 인프라를 구축하여 전 세계 컴퓨팅 리소스를 효율적으로 공유하고 Web3 생태계 발전을 지원합니다',
+            subtitle: 'AI 기반 슈퍼 퍼블릭 체인',
+            description: 'RWA, DePIN, GameFi, DeFi를 융합하고 <span style="color: #00d4ff; font-weight: bold;">전 세계 연산력</span>과 지혜를 모아 지능 생태를 활성화하고 디지털 문명의 새 시대를 엽니다',
             ios: 'iOS',
             android: 'Android'
         },
@@ -8583,6 +8587,7 @@ const translations = {
         token: {
             pageTitle: '토큰 - PowerVerse Chain',
             title: '토큰 경제',
+            name: 'PEC 토큰',
             description: '지속 가능한 생태계 경제 모델 구축',
             intro: 'PowerVerse Token은 PowerVerse Chain 생태계의 네이티브 토큰입니다',
             totalSupply: '총 공급량',

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="home.title">PowerVerse Chain - AI驱动的超级公链</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20250206">
     <link rel="stylesheet" href="./css/modal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +84,7 @@
                     <span class="title-line hero-main-title" data-i18n="home.title">PowerVerse Chain</span>
                     <span class="title-line highlight hero-subtitle-line" data-i18n="home.subtitle">AI驱动的超级公链</span>
                 </h1>
-                <p class="hero-description" data-i18n="home.description">融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>与<span class="highlight">DeFi</span>，汇聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元</p>
+                <p class="hero-description" data-i18n="home.description" data-i18n-html>融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>与<span class="highlight">DeFi</span>，汇聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元</p>
                 <div class="hero-buttons">
                     <a href="javascript:void(0);" id="qr-ios" class="btn btn-primary" data-i18n="home.ios" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
                         <span data-i18n="home.ios">iOS</span>
@@ -201,8 +201,9 @@
         </div>
     </section>
 
-    <!-- 产品介绍 -->
+    <!-- 产品介绍（Three.js 平铺小粒子底图） -->
     <section id="product" class="products reveal-section">
+        <canvas id="products-three" class="products-three-canvas" aria-hidden="true"></canvas>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="products.title">产品生态</h2>
@@ -409,8 +410,8 @@
         </div>
     </div>
 
-    <script src="js/languages.js"></script>
-    <script src="script.js"></script>
+    <script src="js/languages.js?v=20250206"></script>
+    <script src="script.js?v=20250206"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     <script>
         // 第一屏 Three.js 3D 粒子背景（参考 threejs.org 粒子示例，轻量科技感）
@@ -526,6 +527,107 @@
             window.addEventListener('resize', resize);
             var ro = new ResizeObserver(resize);
             ro.observe(footer);
+        })();
+    </script>
+    <script>
+        // 产品生态 - Three.js 波浪粒子 3D 底图
+        (function () {
+            var section = document.querySelector('.products');
+            var canvas = document.getElementById('products-three');
+            if (!section || !canvas || typeof THREE === 'undefined') return;
+
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 500);
+            camera.position.set(0, 20, 100);
+            camera.lookAt(0, 0, 0);
+
+            var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setClearColor(0x000000, 0);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // 粒子网格：XZ 平面，顶点数用于波浪计算
+            var cols = 100;
+            var rows = 65;
+            var count = cols * rows;
+            var spacing = 2.4;
+            var positions = new Float32Array(count * 3);
+            var baseX = [];
+            var baseZ = [];
+            for (var i = 0; i < rows; i++) {
+                for (var j = 0; j < cols; j++) {
+                    var idx = (i * cols + j) * 3;
+                    var x = (j - cols * 0.5) * spacing;
+                    var z = (i - rows * 0.5) * spacing;
+                    baseX.push(x);
+                    baseZ.push(z);
+                    positions[idx] = x;
+                    positions[idx + 1] = 0;
+                    positions[idx + 2] = z;
+                }
+            }
+            var geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            var positionAttr = geometry.getAttribute('position');
+            var material = new THREE.PointsMaterial({
+                color: 0x9dc9f0,
+                size: 0.4,
+                transparent: true,
+                opacity: 0.75,
+                sizeAttenuation: true,
+                depthWrite: false
+            });
+            var points = new THREE.Points(geometry, material);
+            points.rotation.x = -0.35;
+            scene.add(points);
+
+            var animId = null;
+            var clock = new THREE.Clock();
+            var waveAmp1 = 8;
+            var waveAmp2 = 5;
+            var waveFreq1 = 0.08;
+            var waveFreq2 = 0.06;
+            function animate() {
+                animId = requestAnimationFrame(animate);
+                var t = clock.getElapsedTime();
+                for (var i = 0; i < count; i++) {
+                    var x = baseX[i];
+                    var z = baseZ[i];
+                    var y = waveAmp1 * Math.sin(x * waveFreq1 + t * 1.2) + waveAmp2 * Math.sin(z * waveFreq2 + t * 0.9);
+                    positionAttr.array[i * 3 + 1] = y;
+                }
+                positionAttr.needsUpdate = true;
+                points.rotation.y = t * 0.03;
+                renderer.render(scene, camera);
+            }
+
+            function resize() {
+                var w = section.offsetWidth;
+                var h = section.offsetHeight;
+                if (!w || !h) return;
+                renderer.setSize(w, h);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.render(scene, camera);
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) {
+                        if (!animId) animate();
+                    } else {
+                        if (animId) {
+                            cancelAnimationFrame(animId);
+                            animId = null;
+                        }
+                    }
+                });
+            }, { rootMargin: '80px', threshold: 0 });
+            io.observe(section);
+
+            resize();
+            window.addEventListener('resize', resize);
+            var ro = new ResizeObserver(resize);
+            ro.observe(section);
         })();
     </script>
     <!-- 测试系统 -->

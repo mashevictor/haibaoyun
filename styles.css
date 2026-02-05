@@ -665,6 +665,12 @@ body {
     line-height: 1.8;
 }
 
+/* 中文、繁体首页描述一行显示 */
+html[lang="zh-CN"] .hero-description,
+html[lang="zh-TW"] .hero-description {
+    white-space: nowrap;
+}
+
 .hero-buttons {
     display: flex;
     gap: 1rem;
@@ -1065,9 +1071,74 @@ section {
     color: var(--primary-color);
 }
 
-/* 产品网格 */
+/* 产品生态模块 - 高级感视觉强化 */
 .products {
-    background: var(--bg-dark);
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 8rem 0;
+    overflow: hidden;
+}
+
+/* 产品生态背景装饰（微光纹理） */
+.products::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(76, 181, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 产品生态 - Three.js 粒子画布（平铺小细点 3D 底图） */
+.products-three-canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.products .container {
+    position: relative;
+    z-index: 2;
+}
+
+.products .section-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.products .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.products .section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    margin: 1rem auto 0;
+    border-radius: 3px;
+}
+
+.products .section-description {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .products-grid {
@@ -1077,49 +1148,70 @@ section {
 }
 
 .product-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s;
-    backdrop-filter: blur(10px);
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(76, 181, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.1), transparent);
+    transition: all 0.6s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+    transform: translateY(-8px);
+    border-color: rgba(76, 181, 255, 0.3);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    background: rgba(30, 41, 59, 0.8);
+}
+
+.product-card:hover::before {
+    left: 100%;
 }
 
 .product-icon {
     margin-bottom: 1rem;
 }
 
-.product-icon img{
+.product-icon img {
     width: 3rem;
 }
 
-.product-name {
-    font-size: 1.5rem;
+.product-card .product-name {
+    color: #f8fafc;
+    font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    font-size: 1.5rem;
 }
 
-.product-description {
-    color: var(--text-secondary);
+.product-card .product-description {
+    color: #94a3b8;
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
 
-.product-link {
-    color: var(--primary-color);
+.product-card .product-link {
+    color: #38bdf8;
+    font-weight: 500;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
 }
 
-.product-link:hover {
-    gap: 0.5rem;
+.product-card .product-link:hover {
+    color: #818cf8;
 }
 
 /* 应用场景 */
@@ -1183,61 +1275,145 @@ section {
     line-height: 1.6;
 }
 
-/* 开发者中心 */
+/* 开发者中心模块 - 背景恢复为原深色 */
 .developer {
-    background: var(--bg-dark);
+    position: relative;
+    background: linear-gradient(180deg, #0a0e27 0%, #0d1229 40%, #080c1a 100%);
+    padding: 8rem 0;
+    overflow: hidden;
+}
+
+.developer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, rgba(79, 172, 254, 0.2) 30%, rgba(0, 242, 254, 0.6) 50%, rgba(79, 172, 254, 0.2) 70%, transparent 100%);
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.developer::after {
+    content: "";
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 50%;
+    height: 70%;
+    background: radial-gradient(ellipse, rgba(79, 172, 254, 0.06) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.developer .container {
+    position: relative;
+    z-index: 2;
+}
+
+.developer .section-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.developer .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.developer .section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #a855f7, #f472b6);
+    margin: 1rem auto 0;
+    border-radius: 3px;
+}
+
+.developer .section-description {
+    font-size: 1.1rem;
+    color: #c7d2fe;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .developer-resources {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
 .resource-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    transition: all 0.3s;
+    background: rgba(49, 46, 129, 0.6);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(199, 210, 254, 0.1), transparent);
+    transition: all 0.6s ease;
 }
 
 .resource-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-color);
-    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+    transform: translateY(-8px);
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    background: rgba(49, 46, 129, 0.8);
+}
+
+.resource-card:hover::before {
+    left: 100%;
 }
 
 .resource-icon {
     margin-bottom: 1rem;
 }
 
-.resource-icon img{
+.resource-icon img {
     width: 3rem;
 }
 
 .resource-card h3 {
-    font-size: 1.5rem;
+    color: #f8fafc;
+    font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    font-size: 1.5rem;
 }
 
 .resource-card p {
-    color: var(--text-secondary);
+    color: #c7d2fe;
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
 
-.resource-link {
-    color: var(--primary-color);
+.resource-card .resource-link {
+    color: #a855f7;
+    font-weight: 500;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
 }
 
-.resource-link:hover {
-    gap: 0.5rem;
+.resource-card .resource-link:hover {
+    color: #f472b6;
 }
 
 /* 代币经济 */
@@ -1501,6 +1677,22 @@ section {
 
     .footer-bottom {
         text-align: center;
+    }
+
+    /* 产品生态、开发者中心 - 移动端 */
+    .products,
+    .developer {
+        padding: 5rem 0;
+    }
+
+    .products .section-title,
+    .developer .section-title {
+        font-size: 2rem;
+    }
+
+    .product-card,
+    .resource-card {
+        padding: 1.5rem;
     }
 }
 
