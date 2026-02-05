@@ -9,11 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 与 infra 一致的页面头部 */
         .page-header {
             padding: 140px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
-            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=decentralized%20autonomous%20organization%2C%20DAO%2C%20community%20governance%2C%20blue%20and%20purple%20hue%2C%203D%20rendering%2C%20tech%20background&image_size=landscape_16_9');
+            background-image: url('../images/backgrounds/powerverse infra 4.svg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -27,44 +28,123 @@
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
         }
-        .product-hero { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
-        .product-icon { font-size: 6rem; margin-bottom: 2rem; display: inline-block; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .product-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .product-hero .subtitle { font-size: 1.25rem; color: #f0f0f0; margin-bottom: 1rem; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-        .product-hero p { font-size: 1.25rem; color: #f0f0f0; margin-bottom: 2rem; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-        .product-content { padding: 5rem 0; max-width: 960px; margin: 0 auto; text-align: center; }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 212, 255, 0.15) 0%,
+                rgba(0, 102, 255, 0.05) 20%,
+                transparent 60%);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .product-hero .subtitle {
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.4s ease-out;
+        }
+        .product-hero p {
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.6s ease-out;
+        }
+        .product-content {
+            padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
+        }
         .section { margin-bottom: 5rem; }
         .section-title {
-            font-size: 2.5rem; color: var(--primary-color); margin-bottom: 3rem; font-weight: 700;
-            display: flex; align-items: center; justify-content: center; gap: 1rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border-color);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            animation: fadeInUp 1s ease-out;
         }
-        .section-title::before { content: ''; width: 6px; height: 2.5rem; background: var(--gradient-3); border-radius: 3px; }
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 2.5rem;
+            background: var(--gradient-3);
+            border-radius: 3px;
+        }
+        /* 工作流程：卡片式步骤，与 infra 风格一致 */
         .process-steps {
-            background: var(--bg-darker);
-            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 2rem;
             margin: 2rem 0;
             text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .process-steps:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
         }
         .process-steps ol { list-style: none; counter-reset: step-counter; margin: 0; padding: 0; }
         .process-steps li {
             counter-increment: step-counter;
-            padding: 1.25rem 0 1.25rem 3rem;
+            padding: 1.25rem 0 1.25rem 3.5rem;
             color: var(--text-secondary);
             position: relative;
             line-height: 1.8;
             font-size: 1rem;
             border-bottom: 1px solid var(--border-color);
+            transition: color 0.3s ease;
         }
         .process-steps li:last-child { border-bottom: none; }
+        .process-steps li:hover { color: var(--text-primary); }
         .process-steps li::before {
             content: counter(step-counter);
             position: absolute;
             left: 0;
             top: 1.25rem;
-            width: 2rem;
-            height: 2rem;
+            width: 2.25rem;
+            height: 2.25rem;
             background: var(--gradient-3);
             color: var(--bg-dark);
             border-radius: 50%;
@@ -72,44 +152,82 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.875rem;
+            font-size: 0.9rem;
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+            transition: transform 0.3s ease;
         }
-        .process-steps li strong { color: var(--text-primary); font-weight: 600; }
+        .process-steps li:hover::before {
+            transform: scale(1.08);
+        }
+        .process-steps li strong { color: var(--primary-color); font-weight: 600; }
+        /* 核心特点：与 infra 一致的横向卡片 + 图标 */
         .architecture-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             margin-top: 2rem;
             text-align: left;
         }
         .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 1.5rem 2rem;
             transition: all 0.3s ease;
         }
         .feature-card:hover {
             border-color: var(--primary-color);
-            transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
         }
-        .feature-card h4 { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem; font-weight: 600; }
-        .feature-card p { color: var(--text-secondary); line-height: 1.8; margin: 0 0 0.5rem 0; font-size: 1rem; }
+        .feature-card .card-icon {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            font-size: 2.5rem;
+        }
+        .feature-card .card-body { flex: 1; min-width: 0; }
+        .feature-card h4 {
+            font-size: 1.35rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
         .feature-card ul { list-style: none; margin: 0; padding: 0; }
         .feature-card li {
-            padding: 0.5rem 0 0.5rem 1.25rem;
+            padding: 0.4rem 0 0.4rem 1.25rem;
             color: var(--text-secondary);
             position: relative;
-            line-height: 1.6;
-            font-size: 1rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
         .feature-card li::before { content: '✓'; position: absolute; left: 0; color: var(--primary-color); font-weight: 700; }
         .feature-card li strong { color: var(--text-primary); font-weight: 600; }
+        /* 滚动触发动画 */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 响应式 */
         @media (max-width: 768px) {
             .product-hero h1 { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
-            .architecture-grid { grid-template-columns: 1fr; }
+            .feature-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .feature-card .card-icon { width: 56px; height: 56px; font-size: 2rem; }
         }
     </style>
 </head>
@@ -179,11 +297,11 @@
 
     <div class="container">
         <section class="product-content">
-            <div class="section">
+            <div class="section scroll-animate">
                 <h2 class="section-title" data-i18n="products.dao.section1.title">DAO 工作流程</h2>
                 <div class="process-steps">
                     <ol>
-                        <li><strong data-i18n="products.dao.section1.step1.title">提案与发起：</strong><span data-i18n="products.dao.section1.step1.memberProposal.desc">社区成员提交发展提案，审核委员会评估通过后进入投票。</span></li>
+                        <li><strong data-i18n="products.dao.section1.step1.title">提案与发起：</strong><span data-i18n="products.dao.section1.step1.memberProposal.desc">成员均可提交提案，审核委员会评估通过后进入投票。</span></li>
                         <li><strong data-i18n="products.dao.section1.step2.title">社区投票决策：</strong><span data-i18n="products.dao.section1.step2.votingStart.desc">代币持有者在规定期限内投票表决，达到赞成比例后提案通过并执行。</span></li>
                         <li><strong data-i18n="products.dao.section1.step3.title">实施与监督：</strong><span data-i18n="products.dao.section1.step3.teamBuilding.desc">组建执行团队，社区通过链上信息监督进展，监督小组定期检查。</span></li>
                         <li><strong data-i18n="products.dao.section1.step4.title">成果与反馈：</strong><span data-i18n="products.dao.section1.step4.acceptance.desc">项目完成后验收公示，经验总结反馈至社区，优化 DAO 运营机制。</span></li>
@@ -191,29 +309,38 @@
                 </div>
             </div>
 
-            <div class="section">
+            <div class="section scroll-animate">
                 <h2 class="section-title" data-i18n="products.dao.section2.title">核心特点</h2>
                 <div class="architecture-grid">
                     <div class="feature-card">
-                        <h4 data-i18n="products.dao.section2.feature1.title">去中心化治理</h4>
-                        <ul>
-                            <li><strong data-i18n="products.dao.section2.feature1.decentralization.label">权力下放：</strong><span data-i18n="products.dao.section2.feature1.decentralization.desc">链上投票，社区成员直接参与重大决策。</span></li>
-                            <li><strong data-i18n="products.dao.section2.feature1.transparency.label">透明可追溯：</strong><span data-i18n="products.dao.section2.feature1.transparency.desc">决策与交易记录于区块链，完全公开可查。</span></li>
-                        </ul>
+                        <div class="card-icon">⚖️</div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.dao.section2.feature1.title">去中心化治理</h4>
+                            <ul>
+                                <li><strong data-i18n="products.dao.section2.feature1.decentralization.label">权力下放：</strong><span data-i18n="products.dao.section2.feature1.decentralization.desc">链上投票，社区成员直接参与重大决策。</span></li>
+                                <li><strong data-i18n="products.dao.section2.feature1.transparency.label">透明可追溯：</strong><span data-i18n="products.dao.section2.feature1.transparency.desc">决策与交易记录于区块链，完全公开可查。</span></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="feature-card">
-                        <h4 data-i18n="products.dao.section2.feature2.title">社区驱动发展</h4>
-                        <ul>
-                            <li><strong data-i18n="products.dao.section2.feature2.participation.label">广泛参与：</strong><span data-i18n="products.dao.section2.feature2.participation.desc">代币奖励、荣誉表彰等机制激发贡献。</span></li>
-                            <li><strong data-i18n="products.dao.section2.feature2.diversity.label">成员多元化：</strong><span data-i18n="products.dao.section2.feature2.diversity.desc">汇聚技术、行业、投资、法律等多领域人才。</span></li>
-                        </ul>
+                        <div class="card-icon">🌐</div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.dao.section2.feature2.title">社区驱动发展</h4>
+                            <ul>
+                                <li><strong data-i18n="products.dao.section2.feature2.participation.label">广泛参与：</strong><span data-i18n="products.dao.section2.feature2.participation.desc">代币奖励、荣誉表彰等机制激发贡献。</span></li>
+                                <li><strong data-i18n="products.dao.section2.feature2.diversity.label">成员多元化：</strong><span data-i18n="products.dao.section2.feature2.diversity.desc">汇聚技术、行业、投资、法律等多领域人才。</span></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="feature-card">
-                        <h4 data-i18n="products.dao.section2.feature3.title">创新经济模型</h4>
-                        <ul>
-                            <li><strong data-i18n="products.dao.section2.feature3.tokenEconomy.label">代币经济：</strong><span data-i18n="products.dao.section2.feature3.tokenEconomy.desc">PowerVerse Coin 作为治理与激励工具，利益与生态绑定。</span></li>
-                            <li><strong data-i18n="products.dao.section2.feature3.valueSharing.label">价值共享：</strong><span data-i18n="products.dao.section2.feature3.valueSharing.desc">生态成长价值通过代币捕获与分配，共享发展红利。</span></li>
-                        </ul>
+                        <div class="card-icon">💎</div>
+                        <div class="card-body">
+                            <h4 data-i18n="products.dao.section2.feature3.title">创新经济模型</h4>
+                            <ul>
+                                <li><strong data-i18n="products.dao.section2.feature3.tokenEconomy.label">代币经济：</strong><span data-i18n="products.dao.section2.feature3.tokenEconomy.desc">PowerVerse Coin 作为治理与激励工具，利益与生态绑定。</span></li>
+                                <li><strong data-i18n="products.dao.section2.feature3.valueSharing.label">价值共享：</strong><span data-i18n="products.dao.section2.feature3.valueSharing.desc">生态成长价值通过代币捕获与分配，共享发展红利。</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -253,7 +380,44 @@
         </div>
     </footer>
 
-    <script src="../js/languages.js?v=20250206"></script>
-    <script src="../script.js?v=20250206"></script>
+    <script src="../js/languages.js?v=20250207"></script>
+    <script src="../script.js?v=20250207"></script>
+    <script>
+        // 鼠标跟随光效（与 infra 一致）
+        document.addEventListener('mousemove', function(e) {
+            var pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
+                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
+            }
+        });
+
+        // 滚动触发动画
+        function handleScrollAnimation() {
+            var elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(function(el) {
+                var top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 150) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation);
+
+        // 功能卡片悬停增强（与 infra 一致）
+        var featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(function(card) {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.01)';
+                this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+            });
+        });
+
+    </script>
 </body>
 </html>

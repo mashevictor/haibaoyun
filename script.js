@@ -61,8 +61,12 @@ function highlightCurrentPage() {
                         link.classList.add('active');
                     }
                 }
-            } else if (linkPath === currentPath || currentPath.endsWith(linkPath)) {
-                link.classList.add('active');
+            } else {
+                // 用当前页面文件名精确匹配，避免 xai-token.html 被误判为 token.html
+                const currentFile = currentPath.split('/').pop() || currentPath.split('\\').pop() || '';
+                if (linkPath === currentPath || currentFile === linkPath) {
+                    link.classList.add('active');
+                }
             }
         }
     });

@@ -502,12 +502,12 @@ const translations = {
                 slogan: '共建、共治、共享——PowerVerse 生态的治理核心',
                 intro: 'PowerVerse DAO 是基于 PowerVerse Chain 构建的去中心化自治组织，旨在通过社区集体决策与治理，推动 PowerVerse 生态的公平、透明与可持续发展。',
                 section1: {
-                    title: '一、DAO 工作流程',
+                    title: 'DAO 工作流程',
                     step1: {
-                        title: '1. 提案与发起',
+                        title: '提案与发起',
                         memberProposal: {
                             label: '成员提案：',
-                            desc: '任何社区成员均可提交发展提案（技术改进、市场活动、合作机会等），需包含背景、目标、计划、预算等详细信息。'
+                            desc: '成员均可提交提案（技术改进、市场活动、合作机会等），需包含背景、目标、计划、预算等详细信息。'
                         },
                         review: {
                             label: '提案审核：',
@@ -515,7 +515,7 @@ const translations = {
                         }
                     },
                     step2: {
-                        title: '2. 社区投票决策',
+                        title: '社区投票决策',
                         votingStart: {
                             label: '投票启动：',
                             desc: '通过审核的提案进入社区投票。代币持有者可在规定期限内投票表决。'
@@ -526,7 +526,7 @@ const translations = {
                         }
                     },
                     step3: {
-                        title: '3. 实施与监督',
+                        title: '实施与监督',
                         teamBuilding: {
                             label: '团队组建：',
                             desc: '通过自愿或招聘组建项目执行团队，负责任务分配、进度跟踪与质量控制。'
@@ -537,7 +537,7 @@ const translations = {
                         }
                     },
                     step4: {
-                        title: '4. 成果与反馈',
+                        title: '成果与反馈',
                         acceptance: {
                             label: '验收与分享：',
                             desc: '项目完成后由监督小组验收，成果向社区公示（经济效益、技术创新等）。'
@@ -549,9 +549,9 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: '二、核心特点',
+                    title: '核心特点',
                     feature1: {
-                        title: '1. 去中心化治理',
+                        title: '去中心化治理',
                         decentralization: {
                             label: '权力下放：',
                             desc: '通过链上投票，社区成员直接参与重大决策（方向、资金、规则等），实现民主治理。'
@@ -562,7 +562,7 @@ const translations = {
                         }
                     },
                     feature2: {
-                        title: '2. 社区驱动发展',
+                        title: '社区驱动发展',
                         participation: {
                             label: '广泛参与：',
                             desc: '鼓励成员参与技术、市场、运营等活动，通过代币奖励、荣誉表彰等机制激发贡献。'
@@ -573,7 +573,7 @@ const translations = {
                         }
                     },
                     feature3: {
-                        title: '3. 创新经济模型',
+                        title: '创新经济模型',
                         tokenEconomy: {
                             label: '代币经济：',
                             desc: '以 PowerVerse Coin 作为治理与激励工具，持有者通过参与治理获得奖励，实现利益与生态绑定。'
@@ -600,7 +600,7 @@ const translations = {
                 subtitle: 'Web3.0 去中心化算力云平台',
                 intro: 'DeCloud 整合 PowerVerse Chain、PowerVerse Infra 与 PowerVerse Market，构建了一个开放、高效、安全、可扩展的去中心化算力云平台。它通过资源最优配置，支持从企业级大规模计算到个人开发者项目的多样化算力需求，重塑算力分配与使用模式。',
                 section1: {
-                    title: '一、更智能的 DePIN 基础设施',
+                    title: '更智能的 DePIN 基础设施',
                     table: {
                         tech: '技术',
                         capability: '核心能力',
@@ -623,7 +623,7 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: '二、更安全高效的 AI 支持',
+                    title: '更安全高效的 AI 支持',
                     table: {
                         solution: '技术方案',
                         coreTech: '核心技术',
@@ -641,7 +641,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、更丰富的 PowerVerse Market 元素',
+                    title: '更丰富的 PowerVerse Market 元素',
                     marketType: '市场板块',
                     market1: {
                         title: 'AI 数据集与模型市场',
@@ -667,7 +667,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、更全面的生态打造',
+                    title: '更全面的生态打造',
                     sdk: {
                         title: 'SDK 支持',
                         function: {
@@ -729,26 +729,26 @@ const translations = {
                 subtitle: '数字资产钱包',
                 intro: 'PowerVerse Wallet 是一款安全、易用的多链数字资产钱包，支持 PowerVerse Chain 及主流公链，为用户提供资产管理、DeFi 交互、NFT 收藏等全方位服务。',
                 section1: {
-                    title: '一、核心功能',
+                    title: '核心功能',
                     feature1: {
-                        title: '1. 多链资产管理',
+                        title: '多链资产管理',
                         desc: '支持 PowerVerse Chain、Ethereum、BSC 等多条公链，统一管理各类数字资产，包括 PEC、ETH、BNB 等主流代币。'
                     },
                     feature2: {
-                        title: '2. 安全存储',
+                        title: '安全存储',
                         desc: '采用硬件加密和多重签名技术，私钥本地加密存储，支持助记词备份，确保资产安全。'
                     },
                     feature3: {
-                        title: '3. DeFi 交互',
+                        title: 'DeFi 交互',
                         desc: '内置 DApp 浏览器，支持一键连接 DeFi 协议，便捷进行流动性挖矿、质押、借贷等操作。'
                     },
                     feature4: {
-                        title: '4. NFT 管理',
+                        title: 'NFT 管理',
                         desc: '支持 NFT 的查看、转账、展示，轻松管理您的数字收藏品。'
                     }
                 },
                 section2: {
-                    title: '二、全球支付功能',
+                    title: '全球支付功能',
                     globalPayment: {
                         title: '全球支付能力',
                         desc: 'PowerVerse Wallet 支持全球范围内的数字资产支付，无论您身在何处，都能快速、安全地完成跨境支付。支持多种支付方式，包括扫码支付、NFC 近场支付、在线支付等，让数字资产真正成为全球通用的支付工具。',
@@ -759,7 +759,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、DEX 交易功能',
+                    title: 'DEX 交易功能',
                     dexTrading: {
                         title: '去中心化交易所集成',
                         desc: 'PowerVerse Wallet 内置去中心化交易所（DEX）功能，无需离开钱包即可完成代币交易。支持多种交易对，提供最优价格路由，确保用户获得最佳交易体验。',
@@ -770,7 +770,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、云游戏全场景贯通',
+                    title: '云游戏全场景贯通',
                     cloudGaming: {
                         title: '无缝游戏体验',
                         desc: 'PowerVerse Wallet 深度集成云游戏生态，实现游戏内资产、道具、NFT 的统一管理。玩家可以使用钱包直接登录游戏，使用代币购买游戏道具，交易游戏内 NFT，真正实现 Web3 游戏的全场景贯通。',
@@ -800,21 +800,21 @@ const translations = {
                 subtitle: '区块链浏览器',
                 intro: 'PowerVerse Scan 是 PowerVerse Chain 的官方区块链浏览器，提供完整的链上数据查询与分析服务，让用户轻松追踪交易、查看区块、分析地址，实现链上活动的透明化。',
                 section1: {
-                    title: '一、核心功能',
+                    title: '核心功能',
                     feature1: {
-                        title: '1. 区块查询',
+                        title: '区块查询',
                         desc: '实时查看最新区块信息，包括区块高度、时间戳、交易数量、Gas 使用等详细数据。'
                     },
                     feature2: {
-                        title: '2. 交易追踪',
+                        title: '交易追踪',
                         desc: '通过交易哈希快速查询交易详情，包括发送方、接收方、金额、Gas 费用、交易状态等。'
                     },
                     feature3: {
-                        title: '3. 地址分析',
+                        title: '地址分析',
                         desc: '查看任意地址的余额、交易历史、代币持有情况、合约交互记录等，全面了解地址活动。'
                     },
                     feature4: {
-                        title: '4. 智能合约查询',
+                        title: '智能合约查询',
                         desc: '查看智能合约的代码、ABI、调用记录、事件日志等，便于开发者调试和用户验证。'
                     }
                 },
@@ -914,42 +914,22 @@ const translations = {
                 subtitle: '生态核心通证',
                 intro: 'XAI 是 XRWA AI 生态内的核心功能通证与价值储备代币，基于 ERC-3643 标准开发，承担生态价值流转媒介、收益分配工具、服务支付凭证三大核心职能。',
                 section1: {
-                    title: '一、核心职能',
+                    title: '核心职能',
                     feature1: {
-                        title: '1. 生态收益分配的唯一支付工具',
-                        desc: 'GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放，这一设计将资产与 XAI 价值深度绑定，确保代币持有者获得算力资产产生的收益分红。',
-                        gnftDesc: 'GNFT 是 XRWA 生态中物理 GPU 资产的链上唯一确权凭证，基于 ERC-721 标准开发，具备不可分割、不可替代、唯一标识的技术属性。每一枚 GNFT 对应现实世界中一台经过硬件验证、性能测评的 GPU 设备，实现物理资产与链上资产的 1:1 锚定。',
-                        gunitDesc: 'GUnit 是基于 GNFT 拆分生成通证，遵循 ERC-3643 标准，具备可分割、可替代、标准化的技术属性，同时也集成了 KYC/AML 相关信息。每一枚 GUnit 对应 GNFT 底层 GPU 资产的单位算力份额。',
-                        xaiDesc: 'XAI 作为收益分配的唯一支付工具，将 GNFT 和 GUnit 持有者的收益与 XAI 价值深度绑定，形成稳定的价值循环。'
+                        title: '生态收益分配的唯一支付工具',
+                        desc: 'GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放，这一设计将资产与 XAI 价值深度绑定，确保代币持有者获得算力资产产生的收益分红。'
                     },
                     feature2: {
-                        title: '2. AI生态服务的强制支付凭证',
-                        desc: '在 XRWA 的 AI 应用生态中，XAI 是唯一的服务支付工具，覆盖所有算力与 AI 相关服务场景，构建了 XAI 的刚性需求，推动代币价值提升。',
-                        intro: 'XAI 覆盖 XRWA 生态的 AI 全场景交互，是连接资产端与应用端的价值桥梁。在算力港（XAI Center）平台中，所有算力服务、模型训练、推理服务、数据存储等服务的支付均使用 XAI 代币，形成刚性的支付需求。',
-                        usage: '这一"强制支付"机制构建了 XAI 的刚性需求，XAI 的使用场景与需求量将同步增长，进而推动代币价值提升。随着生态规模的扩大，XAI 的支付场景将不断扩展，包括：',
-                        service1: '算力租赁与购买服务',
-                        service2: 'AI 模型训练与推理服务',
-                        service3: '数据存储与管理服务',
-                        service4: 'Agent 应用开发与部署服务'
+                        title: 'AI生态服务的强制支付凭证',
+                        desc: '在 XRWA 的 AI 应用生态中，XAI 是唯一的服务支付工具，覆盖所有算力与 AI 相关服务场景，构建了 XAI 的刚性需求，推动代币价值提升。'
                     },
                     feature3: {
-                        title: '3. 生态治理与节点激励的核心代币',
-                        desc: 'XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，核心角色需质押 XAI 获得节点资格，通过质押惩罚机制保障生态节点的合规性与可靠性。',
-                        governanceTitle: '治理参与',
-                        governanceIntro: 'XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，包括：',
-                        gov1: '协议升级与功能改进提案',
-                        gov2: '资产配置与运营策略调整',
-                        gov3: '收益分配机制优化',
-                        gov4: '生态合作伙伴选择',
-                        stakingTitle: '节点质押',
-                        stakingIntro: 'XRWA 生态的核心角色，需质押一定数量的 XAI 方可获得节点资格，并通过"质押惩罚"机制保障生态节点的合规性与可靠性。质押机制包括：',
-                        stake1: '最低质押要求：成为验证者需要质押最低数量的 XAI',
-                        stake2: '质押奖励：验证者根据质押量和在线时间获得区块奖励和交易费用',
-                        stake3: '惩罚机制：恶意行为（如双重签名、长时间离线）将导致部分或全部质押代币被罚没'
+                        title: '生态治理与节点激励的核心代币',
+                        desc: 'XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，核心角色需质押 XAI 获得节点资格，通过质押惩罚机制保障生态节点的合规性与可靠性。'
                     }
                 },
                 section2: {
-                    title: '二、经济模型',
+                    title: '经济模型',
                     issuance: {
                         title: '发行机制',
                         intro: 'XAI 的发行采用"创世发行+生态挖矿"结合的方式：',
@@ -1600,8 +1580,8 @@ const translations = {
             contact: {
                 title: '联系我们',
                 intro: '如果您对我们的项目感兴趣，或者有任何问题，欢迎通过以下方式联系我们：',
-                email: '邮箱：hiabacloud@gmail.com',
-                address: '地址：浙江人才大厦2号楼7楼',
+                email: '邮箱：harvey@powerverse.io',
+                address: '地址：112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE',
                 twitter: 'Twitter：@PowerVerseChain',
                 telegram: 'Telegram：@PowerVerseChain_Offical',
                 discord: 'Discord：PowerVerse Community'
@@ -2332,12 +2312,12 @@ const translations = {
                 slogan: '共建、共治、共享——PowerVerse 生態的治理核心',
                 intro: 'PowerVerse DAO 是基於 PowerVerse Chain 構建的去中心化自治組織，旨在通過社區集體決策與治理，推動 PowerVerse 生態的公平、透明與可持續發展。',
                 section1: {
-                    title: '一、DAO 工作流程',
+                    title: 'DAO 工作流程',
                     step1: {
-                        title: '1. 提案與發起',
+                        title: '提案與發起',
                         memberProposal: {
                             label: '成員提案：',
-                            desc: '任何社區成員均可提交發展提案（技術改進、市場活動、合作機會等），需包含背景、目標、計劃、預算等詳細信息。'
+                            desc: '成員均可提交提案（技術改進、市場活動、合作機會等），需包含背景、目標、計劃、預算等詳細信息。'
                         },
                         review: {
                             label: '提案審核：',
@@ -2345,7 +2325,7 @@ const translations = {
                         }
                     },
                     step2: {
-                        title: '2. 社區投票決策',
+                        title: '社區投票決策',
                         votingStart: {
                             label: '投票啟動：',
                             desc: '通過審核的提案進入社區投票。代幣持有者可在規定期限內投票表決。'
@@ -2356,7 +2336,7 @@ const translations = {
                         }
                     },
                     step3: {
-                        title: '3. 實施與監督',
+                        title: '實施與監督',
                         teamBuilding: {
                             label: '團隊組建：',
                             desc: '通過自願或招聘組建項目執行團隊，負責任務分配、進度跟踪與質量控制。'
@@ -2367,7 +2347,7 @@ const translations = {
                         }
                     },
                     step4: {
-                        title: '4. 成果與反饋',
+                        title: '成果與反饋',
                         acceptance: {
                             label: '驗收與分享：',
                             desc: '項目完成後由監督小組驗收，成果向社區公示（經濟效益、技術創新等）。'
@@ -2379,9 +2359,9 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: '二、核心特點',
+                    title: '核心特點',
                     feature1: {
-                        title: '1. 去中心化治理',
+                        title: '去中心化治理',
                         decentralization: {
                             label: '權力下放：',
                             desc: '通過鏈上投票，社區成員直接參與重大決策（方向、資金、規則等），實現民主治理。'
@@ -2392,7 +2372,7 @@ const translations = {
                         }
                     },
                     feature2: {
-                        title: '2. 社區驅動發展',
+                        title: '社區驅動發展',
                         participation: {
                             label: '廣泛參與：',
                             desc: '鼓勵成員參與技術、市場、運營等活動，通過代幣獎勵、榮譽表彰等機制激發貢獻。'
@@ -2403,7 +2383,7 @@ const translations = {
                         }
                     },
                     feature3: {
-                        title: '3. 創新經濟模型',
+                        title: '創新經濟模型',
                         tokenEconomy: {
                             label: '代幣經濟：',
                             desc: '以 PowerVerse Coin 作為治理與激勵工具，持有者通過參與治理獲得獎勵，實現利益與生態綁定。'
@@ -2423,7 +2403,7 @@ const translations = {
                 subtitle: 'Web3.0 去中心化算力雲平台',
                 intro: 'DeCloud 整合 PowerVerse Chain、PowerVerse Infra 與 PowerVerse Market，構建了一個開放、高效、安全、可擴展的去中心化算力雲平台。它通過資源最優配置，支持從企業級大規模計算到個人開發者項目的多樣化算力需求，重塑算力分配與使用模式。',
                 section1: {
-                    title: '一、更智能的 DePIN 基礎設施',
+                    title: '更智能的 DePIN 基礎設施',
                     table: {
                         tech: '技術',
                         capability: '核心能力',
@@ -2446,7 +2426,7 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: '二、更安全高效的 AI 支持',
+                    title: '更安全高效的 AI 支持',
                     table: {
                         solution: '技術方案',
                         coreTech: '核心技術',
@@ -2464,7 +2444,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、更豐富的 PowerVerse Market 元素',
+                    title: '更豐富的 PowerVerse Market 元素',
                     marketType: '市場板塊',
                     market1: {
                         title: 'AI 數據集與模型市場',
@@ -2490,7 +2470,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、更全面的生態打造',
+                    title: '更全面的生態打造',
                     sdk: {
                         title: 'SDK 支持',
                         function: {
@@ -2552,26 +2532,26 @@ const translations = {
                 subtitle: '數字資產錢包',
                 intro: 'PowerVerse Wallet 是一款安全、易用的多鏈數字資產錢包，支持 PowerVerse Chain 及主流公鏈，為用戶提供資產管理、DeFi 交互、NFT 收藏等全方位服務。',
                 section1: {
-                    title: '一、核心功能',
+                    title: '核心功能',
                     feature1: {
-                        title: '1. 多鏈資產管理',
+                        title: '多鏈資產管理',
                         desc: '支持 PowerVerse Chain、Ethereum、BSC 等多條公鏈，統一管理各類數字資產，包括 PEC、ETH、BNB 等主流代幣。'
                     },
                     feature2: {
-                        title: '2. 安全存儲',
+                        title: '安全存儲',
                         desc: '採用硬件加密和多重簽名技術，私鑰本地加密存儲，支持助記詞備份，確保資產安全。'
                     },
                     feature3: {
-                        title: '3. DeFi 交互',
+                        title: 'DeFi 交互',
                         desc: '內置 DApp 瀏覽器，支持一鍵連接 DeFi 協議，便捷進行流動性挖礦、質押、借貸等操作。'
                     },
                     feature4: {
-                        title: '4. NFT 管理',
+                        title: 'NFT 管理',
                         desc: '支持 NFT 的查看、轉賬、展示，輕鬆管理您的數字收藏品。'
                     }
                 },
                 section2: {
-                    title: '二、全球支付功能',
+                    title: '全球支付功能',
                     globalPayment: {
                         title: '全球支付能力',
                         desc: 'PowerVerse Wallet 支持全球範圍內的數字資產支付，無論您身在何處，都能快速、安全地完成跨境支付。支持多種支付方式，包括掃碼支付、NFC 近場支付、在線支付等，讓數字資產真正成為全球通用的支付工具。',
@@ -2582,7 +2562,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、DEX 交易功能',
+                    title: 'DEX 交易功能',
                     dexTrading: {
                         title: '去中心化交易所集成',
                         desc: 'PowerVerse Wallet 內置去中心化交易所（DEX）功能，無需離開錢包即可完成代幣交易。支持多種交易對，提供最優價格路由，確保用戶獲得最佳交易體驗。',
@@ -2593,7 +2573,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、雲遊戲全場景貫通',
+                    title: '雲遊戲全場景貫通',
                     cloudGaming: {
                         title: '無縫遊戲體驗',
                         desc: 'PowerVerse Wallet 深度集成雲遊戲生態，實現遊戲內資產、道具、NFT 的統一管理。玩家可以使用錢包直接登錄遊戲，使用代幣購買遊戲道具，交易遊戲內 NFT，真正實現 Web3 遊戲的全場景貫通。',
@@ -2623,21 +2603,21 @@ const translations = {
                 subtitle: '區塊鏈瀏覽器',
                 intro: 'PowerVerse Scan 是 PowerVerse Chain 的官方區塊鏈瀏覽器，提供完整的鏈上數據查詢與分析服務，讓用戶輕鬆追蹤交易、查看區塊、分析地址，實現鏈上活動的透明化。',
                 section1: {
-                    title: '一、核心功能',
+                    title: '核心功能',
                     feature1: {
-                        title: '1. 區塊查詢',
+                        title: '區塊查詢',
                         desc: '實時查看最新區塊信息，包括區塊高度、時間戳、交易數量、Gas 使用等詳細數據。'
                     },
                     feature2: {
-                        title: '2. 交易追蹤',
+                        title: '交易追蹤',
                         desc: '通過交易哈希快速查詢交易詳情，包括發送方、接收方、金額、Gas 費用、交易狀態等。'
                     },
                     feature3: {
-                        title: '3. 地址分析',
+                        title: '地址分析',
                         desc: '查看任意地址的餘額、交易歷史、代幣持有情況、合約交互記錄等，全面了解地址活動。'
                     },
                     feature4: {
-                        title: '4. 智能合約查詢',
+                        title: '智能合約查詢',
                         desc: '查看智能合約的代碼、ABI、調用記錄、事件日誌等，便於開發者調試和用戶驗證。'
                     }
                 },
@@ -2737,42 +2717,22 @@ const translations = {
                 subtitle: '生態核心通證',
                 intro: 'XAI 是 XRWA AI 生態內的核心功能通證與價值儲備代幣，基於 ERC-3643 標準開發，承擔生態價值流轉媒介、收益分配工具、服務支付憑證三大核心職能。',
                 section1: {
-                    title: '一、核心職能',
+                    title: '核心職能',
                     feature1: {
-                        title: '1. 生態收益分配的唯一支付工具',
-                        desc: 'GNFT 與 GUnit 持有者的生態收益均以 XAI 形式發放，這一設計將資產與 XAI 價值深度綁定，確保代幣持有者獲得算力資產產生的收益分紅。',
-                        gnftDesc: 'GNFT 是 XRWA 生態中物理 GPU 資產的鏈上唯一確權憑證，基於 ERC-721 標準開發，具備不可分割、不可替代、唯一標識的技術屬性。每一枚 GNFT 對應現實世界中一台經過硬件驗證、性能測評的 GPU 設備，實現物理資產與鏈上資產的 1:1 錨定。',
-                        gunitDesc: 'GUnit 是基於 GNFT 拆分生成通證，遵循 ERC-3643 標準，具備可分割、可替代、標準化的技術屬性，同時也集成了 KYC/AML 相關信息。每一枚 GUnit 對應 GNFT 底層 GPU 資產的單位算力份額。',
-                        xaiDesc: 'XAI 作為收益分配的唯一支付工具，將 GNFT 和 GUnit 持有者的收益與 XAI 價值深度綁定，形成穩定的價值循環。'
+                        title: '生態收益分配的唯一支付工具',
+                        desc: 'GNFT 與 GUnit 持有者的生態收益均以 XAI 形式發放，這一設計將資產與 XAI 價值深度綁定，確保代幣持有者獲得算力資產產生的收益分紅。'
                     },
                     feature2: {
-                        title: '2. AI生態服務的強制支付憑證',
-                        desc: '在 XRWA 的 AI 應用生態中，XAI 是唯一的服務支付工具，覆蓋所有算力與 AI 相關服務場景，構建了 XAI 的剛性需求，推動代幣價值提升。',
-                        intro: 'XAI 覆蓋 XRWA 生態的 AI 全場景交互，是連接資產端與應用端的價值橋樑。在算力港（XAI Center）平台中，所有算力服務、模型訓練、推理服務、數據存儲等服務的支付均使用 XAI 代幣，形成剛性的支付需求。',
-                        usage: '這一「強制支付」機制構建了 XAI 的剛性需求，XAI 的使用場景與需求量將同步增長，進而推動代幣價值提升。隨著生態規模的擴大，XAI 的支付場景將不斷擴展，包括：',
-                        service1: '算力租賃與購買服務',
-                        service2: 'AI 模型訓練與推理服務',
-                        service3: '數據存儲與管理服務',
-                        service4: 'Agent 應用開發與部署服務'
+                        title: 'AI生態服務的強制支付憑證',
+                        desc: '在 XRWA 的 AI 應用生態中，XAI 是唯一的服務支付工具，覆蓋所有算力與 AI 相關服務場景，構建了 XAI 的剛性需求，推動代幣價值提升。'
                     },
                     feature3: {
-                        title: '3. 生態治理與節點激勵的核心代幣',
-                        desc: 'XAI 持有者具備生態治理權，可通過鏈上投票參與 XRWA 生態的關鍵決策，核心角色需質押 XAI 獲得節點資格，通過質押懲罰機制保障生態節點的合規性與可靠性。',
-                        governanceTitle: '治理參與',
-                        governanceIntro: 'XAI 持有者具備生態治理權，可通過鏈上投票參與 XRWA 生態的關鍵決策，包括：',
-                        gov1: '協議升級與功能改進提案',
-                        gov2: '資產配置與運營策略調整',
-                        gov3: '收益分配機制優化',
-                        gov4: '生態合作夥伴選擇',
-                        stakingTitle: '節點質押',
-                        stakingIntro: 'XRWA 生態的核心角色，需質押一定數量的 XAI 方可獲得節點資格，並通過「質押懲罰」機制保障生態節點的合規性與可靠性。質押機制包括：',
-                        stake1: '最低質押要求：成為驗證者需要質押最低數量的 XAI',
-                        stake2: '質押獎勵：驗證者根據質押量和在線時間獲得區塊獎勵和交易費用',
-                        stake3: '懲罰機制：惡意行為（如雙重簽名、長時間離線）將導致部分或全部質押代幣被罰沒'
+                        title: '生態治理與節點激勵的核心代幣',
+                        desc: 'XAI 持有者具備生態治理權，可通過鏈上投票參與 XRWA 生態的關鍵決策，核心角色需質押 XAI 獲得節點資格，通過質押懲罰機制保障生態節點的合規性與可靠性。'
                     }
                 },
                 section2: {
-                    title: '二、經濟模型',
+                    title: '經濟模型',
                     issuance: {
                         title: '發行機制',
                         intro: 'XAI 的發行採用「創世發行+生態挖礦」結合的方式：',
@@ -3330,8 +3290,8 @@ const translations = {
             contact: {
                 title: '聯繫我們',
                 intro: '如果您對我們的項目感興趣，或者有任何問題，歡迎通過以下方式聯繫我們：',
-                email: '郵箱：hiabacloud@gmail.com',
-                address: '地址：浙江人才大廈2號樓7樓',
+                email: '郵箱：harvey@powerverse.io',
+                address: '地址：112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE',
                 twitter: 'Twitter：@PowerVerseChain',
                 telegram: 'Telegram：@PowerVerseChain_Offical',
                 discord: 'Discord：PowerVerse Community'
@@ -4049,12 +4009,12 @@ const translations = {
                 slogan: 'Build Together, Govern Together, Share Together - The Governance Core of PowerVerse Ecosystem',
                 intro: 'PowerVerse DAO is a decentralized autonomous organization built on PowerVerse Chain, aiming to promote fairness, transparency, and sustainable development of the PowerVerse ecosystem through community collective decision-making and governance.',
                 section1: {
-                    title: 'I. DAO Workflow',
+                    title: 'DAO Workflow',
                     step1: {
-                        title: '1. Proposal and Initiation',
+                        title: 'Proposal and Initiation',
                         memberProposal: {
                             label: 'Member Proposal: ',
-                            desc: 'Any community member can submit development proposals (technical improvements, market activities, cooperation opportunities, etc.), which must include detailed information such as background, objectives, plans, and budget.'
+                            desc: 'Members can submit proposals (technical improvements, market activities, cooperation opportunities, etc.), which must include detailed information such as background, objectives, plans, and budget.'
                         },
                         review: {
                             label: 'Proposal Review: ',
@@ -4062,7 +4022,7 @@ const translations = {
                         }
                     },
                     step2: {
-                        title: '2. Community Voting Decision',
+                        title: 'Community Voting Decision',
                         votingStart: {
                             label: 'Voting Launch: ',
                             desc: 'Approved proposals enter community voting. Token holders can vote within the specified period.'
@@ -4073,7 +4033,7 @@ const translations = {
                         }
                     },
                     step3: {
-                        title: '3. Implementation and Supervision',
+                        title: 'Implementation and Supervision',
                         teamBuilding: {
                             label: 'Team Building: ',
                             desc: 'Project execution teams are formed through volunteering or recruitment, responsible for task allocation, progress tracking, and quality control.'
@@ -4084,7 +4044,7 @@ const translations = {
                         }
                     },
                     step4: {
-                        title: '4. Results and Feedback',
+                        title: 'Results and Feedback',
                         acceptance: {
                             label: 'Acceptance and Sharing: ',
                             desc: 'After project completion, the supervision group accepts the results, and achievements are announced to the community (economic benefits, technological innovations, etc.).'
@@ -4096,9 +4056,9 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: 'II. Core Characteristics',
+                    title: 'Core Characteristics',
                     feature1: {
-                        title: '1. Decentralized Governance',
+                        title: 'Decentralized Governance',
                         decentralization: {
                             label: 'Power Decentralization: ',
                             desc: 'Through on-chain voting, community members directly participate in major decisions (direction, funding, rules, etc.), achieving democratic governance.'
@@ -4109,7 +4069,7 @@ const translations = {
                         }
                     },
                     feature2: {
-                        title: '2. Community-Driven Development',
+                        title: 'Community-Driven Development',
                         participation: {
                             label: 'Broad Participation: ',
                             desc: 'Encourage members to participate in technical, market, operational, and other activities, stimulating contributions through token rewards, honor recognition, and other mechanisms.'
@@ -4120,7 +4080,7 @@ const translations = {
                         }
                     },
                     feature3: {
-                        title: '3. Innovative Economic Model',
+                        title: 'Innovative Economic Model',
                         tokenEconomy: {
                             label: 'Token Economy: ',
                             desc: 'Using PowerVerse Coin as a governance and incentive tool, holders receive rewards by participating in governance, achieving alignment of interests with the ecosystem.'
@@ -4140,7 +4100,7 @@ const translations = {
                 subtitle: 'Web3.0 Decentralized Computing Cloud Platform',
                 intro: 'DeCloud integrates PowerVerse Chain, PowerVerse Infra, and PowerVerse Market to build an open, efficient, secure, and scalable decentralized computing cloud platform. Through optimal resource allocation, it supports diverse computing needs from enterprise-level large-scale computing to individual developer projects, reshaping computing power allocation and usage patterns.',
                 section1: {
-                    title: 'I. Smarter DePIN Infrastructure',
+                    title: 'Smarter DePIN Infrastructure',
                     table: {
                         tech: 'Technology',
                         capability: 'Core Capability',
@@ -4163,7 +4123,7 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: 'II. More Secure and Efficient AI Support',
+                    title: 'More Secure and Efficient AI Support',
                     table: {
                         solution: 'Technical Solution',
                         coreTech: 'Core Technology',
@@ -4181,7 +4141,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: 'III. Richer PowerVerse Market Elements',
+                    title: 'Richer PowerVerse Market Elements',
                     marketType: 'Market Sector',
                     market1: {
                         title: 'AI Dataset and Model Market',
@@ -4207,7 +4167,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: 'IV. More Comprehensive Ecosystem Building',
+                    title: 'More Comprehensive Ecosystem Building',
                     sdk: {
                         title: 'SDK Support',
                         function: {
@@ -4269,26 +4229,26 @@ const translations = {
                 subtitle: 'Digital Asset Wallet',
                 intro: 'PowerVerse Wallet is a secure and easy-to-use multi-chain digital asset wallet supporting PowerVerse Chain and mainstream public chains, providing users with comprehensive services including asset management, DeFi interactions, and NFT collections.',
                 section1: {
-                    title: 'I. Core Functions',
+                    title: 'Core Functions',
                     feature1: {
-                        title: '1. Multi-Chain Asset Management',
+                        title: 'Multi-Chain Asset Management',
                         desc: 'Supports PowerVerse Chain, Ethereum, BSC, and other public chains, unified management of various digital assets, including mainstream tokens such as PEC, ETH, BNB.'
                     },
                     feature2: {
-                        title: '2. Secure Storage',
+                        title: 'Secure Storage',
                         desc: 'Uses hardware encryption and multi-signature technology, private keys stored locally with encryption, supports mnemonic backup, ensuring asset security.'
                     },
                     feature3: {
-                        title: '3. DeFi Interactions',
+                        title: 'DeFi Interactions',
                         desc: 'Built-in DApp browser, supports one-click connection to DeFi protocols, convenient for liquidity mining, staking, lending, and other operations.'
                     },
                     feature4: {
-                        title: '4. NFT Management',
+                        title: 'NFT Management',
                         desc: 'Supports NFT viewing, transfer, and display, easily manage your digital collectibles.'
                     }
                 },
                 section2: {
-                    title: 'II. Global Payment Functions',
+                    title: 'Global Payment Functions',
                     globalPayment: {
                         title: 'Global Payment Capability',
                         desc: 'PowerVerse Wallet supports digital asset payments worldwide. No matter where you are, you can quickly and securely complete cross-border payments. Supports multiple payment methods including QR code payment, NFC near-field payment, online payment, making digital assets truly a globally accepted payment tool.',
@@ -4299,7 +4259,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: 'III. DEX Trading Functions',
+                    title: 'DEX Trading Functions',
                     dexTrading: {
                         title: 'Decentralized Exchange Integration',
                         desc: 'PowerVerse Wallet has built-in decentralized exchange (DEX) functionality, allowing token trading without leaving the wallet. Supports multiple trading pairs, provides optimal price routing, ensuring users get the best trading experience.',
@@ -4310,7 +4270,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: 'IV. Full-Scene Cloud Gaming Integration',
+                    title: 'Full-Scene Cloud Gaming Integration',
                     cloudGaming: {
                         title: 'Seamless Gaming Experience',
                         desc: 'PowerVerse Wallet deeply integrates with the cloud gaming ecosystem, achieving unified management of in-game assets, items, and NFTs. Players can use the wallet to directly log into games, use tokens to purchase game items, trade in-game NFTs, truly realizing full-scene integration of Web3 gaming.',
@@ -4340,21 +4300,21 @@ const translations = {
                 subtitle: 'Blockchain Explorer',
                 intro: 'PowerVerse Scan is the official blockchain explorer of PowerVerse Chain, providing comprehensive on-chain data query and analysis services, allowing users to easily track transactions, view blocks, analyze addresses, achieving transparency of on-chain activities.',
                 section1: {
-                    title: 'I. Core Functions',
+                    title: 'Core Functions',
                     feature1: {
-                        title: '1. Block Query',
+                        title: 'Block Query',
                         desc: 'View latest block information in real-time, including block height, timestamp, transaction count, Gas usage, and other detailed data.'
                     },
                     feature2: {
-                        title: '2. Transaction Tracking',
+                        title: 'Transaction Tracking',
                         desc: 'Quickly query transaction details through transaction hash, including sender, receiver, amount, Gas fees, transaction status, etc.'
                     },
                     feature3: {
-                        title: '3. Address Analysis',
+                        title: 'Address Analysis',
                         desc: 'View balance, transaction history, token holdings, contract interaction records, etc., of any address, comprehensively understand address activities.'
                     },
                     feature4: {
-                        title: '4. Smart Contract Query',
+                        title: 'Smart Contract Query',
                         desc: 'View smart contract code, ABI, call records, event logs, etc., convenient for developer debugging and user verification.'
                     }
                 },
@@ -4454,42 +4414,22 @@ const translations = {
                 subtitle: 'Core Ecosystem Token',
                 intro: 'XAI is the core functional token and value reserve token in the XRWA AI ecosystem, developed based on ERC-3643 standard, serving three core functions: ecosystem value circulation medium, profit distribution tool, and service payment credential.',
                 section1: {
-                    title: 'I. Core Functions',
+                    title: 'Core Functions',
                     feature1: {
-                        title: '1. Sole Payment Tool for Ecosystem Profit Distribution',
-                        desc: 'Ecosystem profits of GNFT and GUnit holders are distributed in XAI form. This design deeply binds assets with XAI value, ensuring token holders receive profit dividends generated by computing assets.',
-                        gnftDesc: 'GNFT is the unique on-chain proof of ownership for physical GPU assets in the XRWA ecosystem, developed based on the ERC-721 standard, with indivisible, non-fungible, and unique identification technical attributes. Each GNFT corresponds to a hardware-verified and performance-tested GPU device in the real world, achieving 1:1 anchoring of physical assets to on-chain assets.',
-                        gunitDesc: 'GUnit is a token generated by splitting GNFT, following the ERC-3643 standard, with divisible, fungible, and standardized technical attributes, while also integrating KYC/AML related information. Each GUnit corresponds to a unit of computing power share of the underlying GPU asset of GNFT.',
-                        xaiDesc: 'XAI, as the sole payment tool for profit distribution, deeply binds the income of GNFT and GUnit holders with XAI value, forming a stable value cycle.'
+                        title: 'Sole Payment Tool for Ecosystem Profit Distribution',
+                        desc: 'Ecosystem profits of GNFT and GUnit holders are distributed in XAI form. This design deeply binds assets with XAI value, ensuring token holders receive profit dividends generated by computing assets.'
                     },
                     feature2: {
-                        title: '2. Mandatory Payment Credential for AI Ecosystem Services',
-                        desc: 'In XRWA\'s AI application ecosystem, XAI is the sole service payment tool, covering all computing power and AI-related service scenarios, building rigid demand for XAI and driving token value appreciation.',
-                        intro: 'XAI covers all AI scenario interactions in the XRWA ecosystem and is the value bridge connecting the asset side and application side. In the XAI Center platform, payments for all computing services, model training, inference services, data storage and other services use XAI tokens, forming rigid payment demand.',
-                        usage: 'This "mandatory payment" mechanism builds rigid demand for XAI. The usage scenarios and demand for XAI will grow synchronously, thereby driving token value appreciation. As the ecosystem expands, XAI payment scenarios will continue to expand, including:',
-                        service1: 'Computing power leasing and purchase services',
-                        service2: 'AI model training and inference services',
-                        service3: 'Data storage and management services',
-                        service4: 'Agent application development and deployment services'
+                        title: 'Mandatory Payment Credential for AI Ecosystem Services',
+                        desc: 'In XRWA\'s AI application ecosystem, XAI is the sole service payment tool, covering all computing power and AI-related service scenarios, building rigid demand for XAI and driving token value appreciation.'
                     },
                     feature3: {
-                        title: '3. Core Token for Ecosystem Governance and Node Incentives',
-                        desc: 'XAI holders have ecosystem governance rights and can participate in key XRWA ecosystem decisions through on-chain voting. Core roles require XAI staking to obtain node qualifications, ensuring compliance and reliability of ecosystem nodes through staking penalty mechanisms.',
-                        governanceTitle: 'Governance Participation',
-                        governanceIntro: 'XAI holders have ecosystem governance rights and can participate in key XRWA ecosystem decisions through on-chain voting, including:',
-                        gov1: 'Protocol upgrade and feature improvement proposals',
-                        gov2: 'Asset allocation and operational strategy adjustments',
-                        gov3: 'Profit distribution mechanism optimization',
-                        gov4: 'Ecosystem partner selection',
-                        stakingTitle: 'Node Staking',
-                        stakingIntro: 'Core roles in the XRWA ecosystem require staking a certain amount of XAI to obtain node qualifications, with a "staking penalty" mechanism ensuring compliance and reliability of ecosystem nodes. The staking mechanism includes:',
-                        stake1: 'Minimum staking requirement: Becoming a validator requires staking a minimum amount of XAI',
-                        stake2: 'Staking rewards: Validators receive block rewards and transaction fees based on stake amount and online time',
-                        stake3: 'Penalty mechanism: Malicious behavior (such as double signing, prolonged offline) will result in partial or full confiscation of staked tokens'
+                        title: 'Core Token for Ecosystem Governance and Node Incentives',
+                        desc: 'XAI holders have ecosystem governance rights and can participate in key XRWA ecosystem decisions through on-chain voting. Core roles require XAI staking to obtain node qualifications, ensuring compliance and reliability of ecosystem nodes through staking penalty mechanisms.'
                     }
                 },
                 section2: {
-                    title: '2. Economic Model',
+                    title: 'Economic Model',
                     issuance: {
                         title: 'Issuance Mechanism',
                         intro: 'XAI adopts a combined approach of "Genesis Issuance + Ecosystem Mining":',
@@ -5136,8 +5076,8 @@ const translations = {
             contact: {
                 title: 'Contact Us',
                 intro: 'If you are interested in our project or have any questions, please contact us using the following methods:',
-                email: 'Email: hiabacloud@gmail.com',
-                address: 'Address: Building 2, 7th Floor, Zhejiang Talent Building',
+                email: 'Email: harvey@powerverse.io',
+                address: 'Address: 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE',
                 twitter: 'Twitter: @PowerVerseChain',
                 telegram: 'Telegram: @PowerVerseChain_Offical',
                 discord: 'Discord: PowerVerse Community'
@@ -5844,12 +5784,12 @@ const translations = {
                 slogan: '共に構築、共に統治、共に共有——PowerVerseエコシステムのガバナンスコア',
                 intro: 'PowerVerse DAOは、PowerVerse Chainを基盤に構築された分散型自律組織で、コミュニティの集団的意思決定とガバナンスを通じて、PowerVerseエコシステムの公平性、透明性、持続可能な発展を推進することを目的としています。',
                 section1: {
-                    title: '一、DAOワークフロー',
+                    title: 'DAOワークフロー',
                     step1: {
-                        title: '1. 提案と開始',
+                        title: '提案と開始',
                         memberProposal: {
                             label: 'メンバー提案：',
-                            desc: 'コミュニティメンバーは誰でも開発提案（技術改善、市場活動、協力機会など）を提出でき、背景、目標、計画、予算などの詳細情報を含める必要があります。'
+                            desc: 'メンバーは提案（技術改善、市場活動、協力機会など）を提出でき、背景、目標、計画、予算などの詳細情報を含める必要があります。'
                         },
                         review: {
                             label: '提案審査：',
@@ -5857,7 +5797,7 @@ const translations = {
                         }
                     },
                     step2: {
-                        title: '2. コミュニティ投票決定',
+                        title: 'コミュニティ投票決定',
                         votingStart: {
                             label: '投票開始：',
                             desc: '承認された提案はコミュニティ投票に入ります。トークン保有者は指定期間内に投票できます。'
@@ -5868,7 +5808,7 @@ const translations = {
                         }
                     },
                     step3: {
-                        title: '3. 実施と監督',
+                        title: '実施と監督',
                         teamBuilding: {
                             label: 'チーム構築：',
                             desc: 'ボランティアまたは採用を通じてプロジェクト実行チームを形成し、タスク割り当て、進捗追跡、品質管理を担当します。'
@@ -5879,7 +5819,7 @@ const translations = {
                         }
                     },
                     step4: {
-                        title: '4. 成果とフィードバック',
+                        title: '成果とフィードバック',
                         acceptance: {
                             label: '受入と共有：',
                             desc: 'プロジェクト完了後、監督グループが成果を受け入れ、成果をコミュニティに公表します（経済効果、技術革新など）。'
@@ -5891,9 +5831,9 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: '二、コア特性',
+                    title: 'コア特性',
                     feature1: {
-                        title: '1. 分散型ガバナンス',
+                        title: '分散型ガバナンス',
                         decentralization: {
                             label: '権力の分散：',
                             desc: 'オンチェーン投票を通じて、コミュニティメンバーが重大な決定（方向、資金、規則など）に直接参加し、民主的なガバナンスを実現します。'
@@ -5904,7 +5844,7 @@ const translations = {
                         }
                     },
                     feature2: {
-                        title: '2. コミュニティ駆動型発展',
+                        title: 'コミュニティ駆動型発展',
                         participation: {
                             label: '広範な参加：',
                             desc: 'メンバーが技術、市場、運営などの活動に参加することを奨励し、トークン報酬、名誉表彰などのメカニズムを通じて貢献を刺激します。'
@@ -5915,7 +5855,7 @@ const translations = {
                         }
                     },
                     feature3: {
-                        title: '3. 革新的な経済モデル',
+                        title: '革新的な経済モデル',
                         tokenEconomy: {
                             label: 'トークン経済：',
                             desc: 'PowerVerse Coinをガバナンスとインセンティブツールとして使用し、保有者はガバナンスに参加することで報酬を受け取り、利益とエコシステムの連携を実現します。'
@@ -5935,7 +5875,7 @@ const translations = {
                 subtitle: 'Web3.0分散型コンピューティングクラウドプラットフォーム',
                 intro: 'DeCloudは、PowerVerse Chain、PowerVerse Infra、PowerVerse Marketを統合し、オープンで効率的、安全、スケーラブルな分散型コンピューティングクラウドプラットフォームを構築しました。最適なリソース配分を通じて、エンタープライズレベルの大規模コンピューティングから個人開発者プロジェクトまで、多様なコンピューティングニーズをサポートし、コンピューティングパワーの配分と使用パターンを再構築します。',
                 section1: {
-                    title: '一、よりスマートなDePINインフラストラクチャ',
+                    title: 'よりスマートなDePINインフラストラクチャ',
                     table: {
                         tech: '技術',
                         capability: 'コア機能',
@@ -5958,7 +5898,7 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: '二、より安全で効率的なAIサポート',
+                    title: 'より安全で効率的なAIサポート',
                     table: {
                         solution: '技術ソリューション',
                         coreTech: 'コア技術',
@@ -5976,7 +5916,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、より豊富なPowerVerse Market要素',
+                    title: 'より豊富なPowerVerse Market要素',
                     marketType: '市場セクター',
                     market1: {
                         title: 'AIデータセットとモデル市場',
@@ -6002,7 +5942,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、より包括的な生態構築',
+                    title: 'より包括的な生態構築',
                     sdk: {
                         title: 'SDKサポート',
                         function: {
@@ -6064,26 +6004,26 @@ const translations = {
                 subtitle: 'デジタル資産ウォレット',
                 intro: 'PowerVerse Walletは、PowerVerse Chainおよび主要なパブリックチェーンをサポートする安全で使いやすいマルチチェーンデジタル資産ウォレットで、資産管理、DeFiインタラクション、NFTコレクションなどの包括的なサービスをユーザーに提供します。',
                 section1: {
-                    title: '一、コア機能',
+                    title: 'コア機能',
                     feature1: {
-                        title: '1. マルチチェーン資産管理',
+                        title: 'マルチチェーン資産管理',
                         desc: 'PowerVerse Chain、Ethereum、BSCなどの複数のパブリックチェーンをサポートし、PEC、ETH、BNBなどの主要トークンを含む各種デジタル資産を統一管理。'
                     },
                     feature2: {
-                        title: '2. 安全なストレージ',
+                        title: '安全なストレージ',
                         desc: 'ハードウェア暗号化とマルチシグネチャ技術を採用し、秘密鍵をローカルで暗号化保存、ニーモニックバックアップをサポートし、資産の安全性を確保。'
                     },
                     feature3: {
-                        title: '3. DeFiインタラクション',
+                        title: 'DeFiインタラクション',
                         desc: '内蔵DAppブラウザ、ワンクリックでDeFiプロトコルに接続、流動性マイニング、ステーキング、レンディングなどの操作を簡単に実行。'
                     },
                     feature4: {
-                        title: '4. NFT管理',
+                        title: 'NFT管理',
                         desc: 'NFTの表示、転送、展示をサポートし、デジタルコレクションを簡単に管理。'
                     }
                 },
                 section2: {
-                    title: '二、グローバル決済機能',
+                    title: 'グローバル決済機能',
                     globalPayment: {
                         title: 'グローバル決済能力',
                         desc: 'PowerVerse Walletは世界中のデジタル資産決済をサポートし、どこにいても迅速かつ安全にクロスボーダー決済を完了できます。QRコード決済、NFC近距離決済、オンライン決済など複数の決済方法をサポートし、デジタル資産を真にグローバルに通用する決済ツールにします。',
@@ -6094,7 +6034,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: '三、DEX取引機能',
+                    title: 'DEX取引機能',
                     dexTrading: {
                         title: '分散型取引所統合',
                         desc: 'PowerVerse Walletは分散型取引所（DEX）機能を内蔵し、ウォレットを離れることなくトークン取引を完了できます。複数の取引ペアをサポートし、最適な価格ルーティングを提供し、ユーザーに最高の取引体験を保証します。',
@@ -6105,7 +6045,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: '四、クラウドゲーミング全シーン統合',
+                    title: 'クラウドゲーミング全シーン統合',
                     cloudGaming: {
                         title: 'シームレスなゲーム体験',
                         desc: 'PowerVerse Walletはクラウドゲーミングエコシステムに深く統合され、ゲーム内資産、アイテム、NFTの統一管理を実現します。プレイヤーはウォレットを使用して直接ゲームにログインし、トークンでゲームアイテムを購入し、ゲーム内NFTを取引でき、Web3ゲームの全シーン統合を真に実現します。',
@@ -6135,21 +6075,21 @@ const translations = {
                 subtitle: 'ブロックチェーンブラウザ',
                 intro: 'PowerVerse ScanはPowerVerse Chainの公式ブロックチェーンブラウザで、完全なオンチェーンデータクエリと分析サービスを提供し、ユーザーが簡単に取引を追跡し、ブロックを表示し、アドレスを分析できるようにし、オンチェーン活動の透明性を実現します。',
                 section1: {
-                    title: '一、コア機能',
+                    title: 'コア機能',
                     feature1: {
-                        title: '1. ブロッククエリ',
+                        title: 'ブロッククエリ',
                         desc: '最新のブロック情報をリアルタイムで表示し、ブロック高、タイムスタンプ、取引数、Gas使用などの詳細データを含む。'
                     },
                     feature2: {
-                        title: '2. 取引追跡',
+                        title: '取引追跡',
                         desc: '取引ハッシュを通じて取引詳細を迅速にクエリし、送信者、受信者、金額、Gas手数料、取引ステータスなどを含む。'
                     },
                     feature3: {
-                        title: '3. アドレス分析',
+                        title: 'アドレス分析',
                         desc: '任意のアドレスの残高、取引履歴、トークン保有状況、コントラクトインタラクション記録などを表示し、アドレス活動を包括的に理解。'
                     },
                     feature4: {
-                        title: '4. スマートコントラクトクエリ',
+                        title: 'スマートコントラクトクエリ',
                         desc: 'スマートコントラクトのコード、ABI、呼び出し記録、イベントログなどを表示し、開発者のデバッグとユーザーの検証に便利。'
                     }
                 },
@@ -6249,42 +6189,22 @@ const translations = {
                 subtitle: '生態系コアトークン',
                 intro: 'XAIはXRWA AI生態系内のコア機能トークンおよび価値リザーブトークンであり、ERC-3643標準に基づいて開発され、生態系価値循環媒体、収益分配ツール、サービス支払い証明書の3つのコア機能を担います。',
                 section1: {
-                    title: '一、コア機能',
+                    title: 'コア機能',
                     feature1: {
-                        title: '1. 生態系収益分配の唯一の支払いツール',
-                        desc: 'GNFTとGUnit保有者の生態系収益はXAI形式で配布され、この設計により資産とXAI価値が深く結びつき、トークン保有者がコンピューティング資産から生み出される収益配当を受け取ることを保証。',
-                        gnftDesc: 'GNFT は XRWA エコシステムにおける物理 GPU 資産のオンチェーン唯一の所有権証明であり、ERC-721 標準に基づいて開発され、分割不可能、代替不可能、一意識別の技術的属性を備えています。各 GNFT は、ハードウェア検証とパフォーマンステストを経た実世界の GPU デバイスに対応し、物理資産とオンチェーン資産の 1:1 のアンカリングを実現します。',
-                        gunitDesc: 'GUnit は GNFT を分割して生成されたトークンであり、ERC-3643 標準に従い、分割可能、代替可能、標準化された技術的属性を備え、同時に KYC/AML 関連情報も統合しています。各 GUnit は GNFT の基盤となる GPU 資産の単位コンピューティングパワーシェアに対応します。',
-                        xaiDesc: 'XAI は収益分配の唯一の支払いツールとして、GNFT と GUnit 保有者の収益を XAI 価値と深く結びつけ、安定した価値サイクルを形成します。'
+                        title: '生態系収益分配の唯一の支払いツール',
+                        desc: 'GNFTとGUnit保有者の生態系収益はXAI形式で配布され、この設計により資産とXAI価値が深く結びつき、トークン保有者がコンピューティング資産から生み出される収益配当を受け取ることを保証。'
                     },
                     feature2: {
-                        title: '2. AI生態系サービスの強制支払い証明書',
-                        desc: 'XRWAのAIアプリケーション生態系では、XAIは唯一のサービス支払いツールであり、すべてのコンピューティングパワーとAI関連サービスシナリオをカバーし、XAIの剛性需要を構築し、トークン価値の向上を推進。',
-                        intro: 'XAI は XRWA エコシステムのすべての AI シナリオインタラクションをカバーし、資産側とアプリケーション側を接続する価値の橋渡しです。XAI Center プラットフォームでは、すべてのコンピューティングサービス、モデルトレーニング、推論サービス、データストレージなどのサービスの支払いに XAI トークンを使用し、剛性の支払い需要を形成します。',
-                        usage: 'この「必須支払い」メカニズムは XAI の剛性需要を構築します。XAI の使用シナリオと需要は同期的に成長し、トークン価値の向上を推進します。エコシステムが拡大するにつれて、XAI の支払いシナリオは以下を含めて拡大し続けます：',
-                        service1: 'コンピューティングパワーリースおよび購入サービス',
-                        service2: 'AI モデルトレーニングおよび推論サービス',
-                        service3: 'データストレージおよび管理サービス',
-                        service4: 'エージェントアプリケーション開発および展開サービス'
+                        title: 'AI生態系サービスの強制支払い証明書',
+                        desc: 'XRWAのAIアプリケーション生態系では、XAIは唯一のサービス支払いツールであり、すべてのコンピューティングパワーとAI関連サービスシナリオをカバーし、XAIの剛性需要を構築し、トークン価値の向上を推進。'
                     },
                     feature3: {
-                        title: '3. 生態系ガバナンスとノードインセンティブのコアトークン',
-                        desc: 'XAI保有者は生態系ガバナンス権を持ち、オンチェーンボーティングを通じてXRWA生態系の重要な意思決定に参加でき、コアロールはノード資格を取得するためにXAIをステーキングする必要があり、ステーキングペナルティメカニズムを通じて生態系ノードのコンプライアンスと信頼性を保証。',
-                        governanceTitle: 'ガバナンス参加',
-                        governanceIntro: 'XAI 保有者は生態系ガバナンス権を持ち、オンチェーン投票を通じて XRWA 生態系の重要な決定に参加できます。以下が含まれます：',
-                        gov1: 'プロトコルアップグレードと機能改善提案',
-                        gov2: '資産配分と運営戦略の調整',
-                        gov3: '収益分配メカニズムの最適化',
-                        gov4: 'エコシステムパートナーの選択',
-                        stakingTitle: 'ノードステーキング',
-                        stakingIntro: 'XRWA エコシステムのコア役割には、ノード資格を取得するために一定量の XAI をステーキングする必要があり、「ステーキングペナルティ」メカニズムによりエコシステムノードのコンプライアンスと信頼性を保証します。ステーキングメカニズムには以下が含まれます：',
-                        stake1: '最低ステーキング要件：バリデーターになるには最低量の XAI をステーキングする必要があります',
-                        stake2: 'ステーキング報酬：バリデーターはステーキング量とオンライン時間に基づいてブロック報酬と取引手数料を受け取ります',
-                        stake3: 'ペナルティメカニズム：悪意のある行為（二重署名、長時間のオフラインなど）により、ステーキングされたトークンの一部または全部が没収されます'
+                        title: '生態系ガバナンスとノードインセンティブのコアトークン',
+                        desc: 'XAI保有者は生態系ガバナンス権を持ち、オンチェーンボーティングを通じてXRWA生態系の重要な意思決定に参加でき、コアロールはノード資格を取得するためにXAIをステーキングする必要があり、ステーキングペナルティメカニズムを通じて生態系ノードのコンプライアンスと信頼性を保証。'
                     }
                 },
                 section2: {
-                    title: '二、経済モデル',
+                    title: '経済モデル',
                     issuance: {
                         title: '発行メカニズム',
                         intro: 'XAIの発行は「ジェネシス発行+エコシステムマイニング」を組み合わせた方式を採用：',
@@ -6904,8 +6824,8 @@ const translations = {
             contact: {
                 title: 'お問い合わせ',
                 intro: 'プロジェクトにご興味がある場合、またはご質問がある場合は、以下の方法でお問い合わせください：',
-                email: 'メール：hiabacloud@gmail.com',
-                address: '住所：浙江省人材ビル2号館7階',
+                email: 'メール：harvey@powerverse.io',
+                address: '住所：112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE',
                 twitter: 'Twitter：@PowerVerseChain',
                 telegram: 'Telegram：@PowerVerseChain_Offical',
                 discord: 'Discord：PowerVerse Community'
@@ -7610,12 +7530,12 @@ const translations = {
                 slogan: '함께 구축, 함께 통치, 함께 공유——PowerVerse 생태계의 거버넌스 핵심',
                 intro: 'PowerVerse DAO는 PowerVerse Chain을 기반으로 구축된 분산 자율 조직으로, 커뮤니티의 집단적 의사결정과 거버넌스를 통해 PowerVerse 생태계의 공정성, 투명성 및 지속 가능한 발전을 추진하는 것을 목표로 합니다.',
                 section1: {
-                    title: 'I. DAO 워크플로우',
+                    title: 'DAO 워크플로우',
                     step1: {
-                        title: '1. 제안 및 시작',
+                        title: '제안 및 시작',
                         memberProposal: {
                             label: '멤버 제안: ',
-                            desc: '모든 커뮤니티 멤버는 개발 제안(기술 개선, 시장 활동, 협력 기회 등)을 제출할 수 있으며, 배경, 목표, 계획, 예산 등의 상세 정보를 포함해야 합니다.'
+                            desc: '멤버는 제안(기술 개선, 시장 활동, 협력 기회 등)을 제출할 수 있으며, 배경, 목표, 계획, 예산 등의 상세 정보를 포함해야 합니다.'
                         },
                         review: {
                             label: '제안 심사: ',
@@ -7623,7 +7543,7 @@ const translations = {
                         }
                     },
                     step2: {
-                        title: '2. 커뮤니티 투표 결정',
+                        title: '커뮤니티 투표 결정',
                         votingStart: {
                             label: '투표 시작: ',
                             desc: '승인된 제안은 커뮤니티 투표로 진행됩니다. 토큰 보유자는 지정된 기간 내에 투표할 수 있습니다.'
@@ -7634,7 +7554,7 @@ const translations = {
                         }
                     },
                     step3: {
-                        title: '3. 구현 및 감독',
+                        title: '구현 및 감독',
                         teamBuilding: {
                             label: '팀 구성: ',
                             desc: '자원봉사 또는 채용을 통해 프로젝트 실행 팀을 구성하며, 작업 할당, 진행 추적 및 품질 관리를 담당합니다.'
@@ -7645,7 +7565,7 @@ const translations = {
                         }
                     },
                     step4: {
-                        title: '4. 결과 및 피드백',
+                        title: '결과 및 피드백',
                         acceptance: {
                             label: '수락 및 공유: ',
                             desc: '프로젝트 완료 후 감독 그룹이 결과를 수락하며, 성과를 커뮤니티에 공개합니다(경제적 효과, 기술 혁신 등).'
@@ -7657,9 +7577,9 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: 'II. 핵심 특성',
+                    title: '핵심 특성',
                     feature1: {
-                        title: '1. 분산 거버넌스',
+                        title: '분산 거버넌스',
                         decentralization: {
                             label: '권력 분산: ',
                             desc: '온체인 투표를 통해 커뮤니티 멤버가 주요 결정(방향, 자금, 규칙 등)에 직접 참여하여 민주적 거버넌스를 구현합니다.'
@@ -7670,7 +7590,7 @@ const translations = {
                         }
                     },
                     feature2: {
-                        title: '2. 커뮤니티 주도 발전',
+                        title: '커뮤니티 주도 발전',
                         participation: {
                             label: '광범위한 참여: ',
                             desc: '멤버가 기술, 시장, 운영 등의 활동에 참여하도록 장려하며, 토큰 보상, 명예 인정 등의 메커니즘을 통해 기여를 자극합니다.'
@@ -7681,7 +7601,7 @@ const translations = {
                         }
                     },
                     feature3: {
-                        title: '3. 혁신적인 경제 모델',
+                        title: '혁신적인 경제 모델',
                         tokenEconomy: {
                             label: '토큰 경제: ',
                             desc: 'PowerVerse Coin을 거버넌스 및 인센티브 도구로 사용하여 보유자가 거버넌스에 참여함으로써 보상을 받고 이익과 생태계의 연계를 실현합니다.'
@@ -7701,7 +7621,7 @@ const translations = {
                 subtitle: 'Web3.0 분산형 컴퓨팅 클라우드 플랫폼',
                 intro: 'DeCloud는 PowerVerse Chain, PowerVerse Infra 및 PowerVerse Market을 통합하여 개방적이고 효율적이며 안전하고 확장 가능한 분산형 컴퓨팅 클라우드 플랫폼을 구축합니다. 최적의 리소스 할당을 통해 엔터프라이즈급 대규모 컴퓨팅부터 개인 개발자 프로젝트까지 다양한 컴퓨팅 요구를 지원하며 컴퓨팅 파워 할당 및 사용 패턴을 재구성합니다.',
                 section1: {
-                    title: 'I. 더 스마트한 DePIN 인프라',
+                    title: '더 스마트한 DePIN 인프라',
                     table: {
                         tech: '기술',
                         capability: '핵심 역량',
@@ -7724,7 +7644,7 @@ const translations = {
                     }
                 },
                 section2: {
-                    title: 'II. 더 안전하고 효율적인 AI 지원',
+                    title: '더 안전하고 효율적인 AI 지원',
                     table: {
                         solution: '기술 솔루션',
                         coreTech: '핵심 기술',
@@ -7742,7 +7662,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: 'III. 더 풍부한 PowerVerse Market 요소',
+                    title: '더 풍부한 PowerVerse Market 요소',
                     marketType: '시장 부문',
                     market1: {
                         title: 'AI 데이터셋 및 모델 마켓',
@@ -7768,7 +7688,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: 'IV. 더 포괄적인 생태계 구축',
+                    title: '더 포괄적인 생태계 구축',
                     sdk: {
                         title: 'SDK 지원',
                         function: {
@@ -7830,26 +7750,26 @@ const translations = {
                 subtitle: '디지털 자산 지갑',
                 intro: 'PowerVerse Wallet은 PowerVerse Chain 및 주요 퍼블릭 체인을 지원하는 안전하고 사용하기 쉬운 멀티 체인 디지털 자산 지갑으로, 자산 관리, DeFi 상호작용, NFT 컬렉션 등 포괄적인 서비스를 사용자에게 제공합니다.',
                 section1: {
-                    title: 'I. 핵심 기능',
+                    title: '핵심 기능',
                     feature1: {
-                        title: '1. 멀티 체인 자산 관리',
+                        title: '멀티 체인 자산 관리',
                         desc: 'PowerVerse Chain, Ethereum, BSC 등 여러 퍼블릭 체인을 지원하며 PEC, ETH, BNB 등 주요 토큰을 포함한 다양한 디지털 자산을 통합 관리.'
                     },
                     feature2: {
-                        title: '2. 안전한 저장',
+                        title: '안전한 저장',
                         desc: '하드웨어 암호화 및 다중 서명 기술을 사용하며, 개인 키를 로컬에서 암호화 저장하고 니모닉 백업을 지원하여 자산 안전을 보장.'
                     },
                     feature3: {
-                        title: '3. DeFi 상호작용',
+                        title: 'DeFi 상호작용',
                         desc: '내장 DApp 브라우저, 원클릭 DeFi 프로토콜 연결 지원, 유동성 마이닝, 스테이킹, 대출 등의 작업을 편리하게 수행.'
                     },
                     feature4: {
-                        title: '4. NFT 관리',
+                        title: 'NFT 관리',
                         desc: 'NFT 보기, 전송, 표시를 지원하여 디지털 컬렉션을 쉽게 관리.'
                     }
                 },
                 section2: {
-                    title: 'II. 글로벌 결제 기능',
+                    title: '글로벌 결제 기능',
                     globalPayment: {
                         title: '글로벌 결제 능력',
                         desc: 'PowerVerse Wallet은 전 세계 디지털 자산 결제를 지원하며 어디에 있든 빠르고 안전하게 크로스보더 결제를 완료할 수 있습니다. QR 코드 결제, NFC 근거리 결제, 온라인 결제 등 다양한 결제 방법을 지원하여 디지털 자산을 진정으로 글로벌하게 사용할 수 있는 결제 도구로 만듭니다.',
@@ -7860,7 +7780,7 @@ const translations = {
                     }
                 },
                 section3: {
-                    title: 'III. DEX 거래 기능',
+                    title: 'DEX 거래 기능',
                     dexTrading: {
                         title: '분산형 거래소 통합',
                         desc: 'PowerVerse Wallet은 분산형 거래소(DEX) 기능을 내장하여 지갑을 떠나지 않고도 토큰 거래를 완료할 수 있습니다. 다양한 거래 쌍을 지원하며 최적 가격 라우팅을 제공하여 사용자가 최상의 거래 경험을 얻을 수 있도록 보장합니다.',
@@ -7871,7 +7791,7 @@ const translations = {
                     }
                 },
                 section4: {
-                    title: 'IV. 클라우드 게이밍 전체 시나리오 통합',
+                    title: '클라우드 게이밍 전체 시나리오 통합',
                     cloudGaming: {
                         title: '원활한 게임 경험',
                         desc: 'PowerVerse Wallet은 클라우드 게이밍 생태계에 깊이 통합되어 게임 내 자산, 아이템, NFT의 통합 관리를 실현합니다. 플레이어는 지갑을 사용하여 직접 게임에 로그인하고, 토큰으로 게임 아이템을 구매하며, 게임 내 NFT를 거래할 수 있어 Web3 게임의 전체 시나리오 통합을 진정으로 실현합니다.',
@@ -7901,21 +7821,21 @@ const translations = {
                 subtitle: '블록체인 탐색기',
                 intro: 'PowerVerse Scan은 PowerVerse Chain의 공식 블록체인 탐색기로, 포괄적인 온체인 데이터 쿼리 및 분석 서비스를 제공하여 사용자가 쉽게 거래를 추적하고, 블록을 보며, 주소를 분석할 수 있도록 하여 온체인 활동의 투명성을 실현합니다.',
                 section1: {
-                    title: 'I. 핵심 기능',
+                    title: '핵심 기능',
                     feature1: {
-                        title: '1. 블록 쿼리',
+                        title: '블록 쿼리',
                         desc: '최신 블록 정보를 실시간으로 보며 블록 높이, 타임스탬프, 거래 수, Gas 사용 등 상세 데이터를 포함.'
                     },
                     feature2: {
-                        title: '2. 거래 추적',
+                        title: '거래 추적',
                         desc: '거래 해시를 통해 거래 세부 정보를 빠르게 쿼리하며 발신자, 수신자, 금액, Gas 수수료, 거래 상태 등을 포함.'
                     },
                     feature3: {
-                        title: '3. 주소 분석',
+                        title: '주소 분석',
                         desc: '임의의 주소의 잔액, 거래 내역, 토큰 보유 상황, 컨트랙트 상호작용 기록 등을 보며 주소 활동을 포괄적으로 이해.'
                     },
                     feature4: {
-                        title: '4. 스마트 컨트랙트 쿼리',
+                        title: '스마트 컨트랙트 쿼리',
                         desc: '스마트 컨트랙트의 코드, ABI, 호출 기록, 이벤트 로그 등을 보며 개발자 디버깅 및 사용자 검증에 편리.'
                     }
                 },
@@ -8015,42 +7935,22 @@ const translations = {
                 subtitle: '생태계 핵심 토큰',
                 intro: 'XAI는 XRWA AI 생태계 내의 핵심 기능 토큰 및 가치 준비 토큰으로, ERC-3643 표준을 기반으로 개발되었으며 생태계 가치 순환 매체, 수익 배분 도구, 서비스 결제 증명서의 세 가지 핵심 기능을 담당합니다.',
                 section1: {
-                    title: 'I. 핵심 기능',
+                    title: '핵심 기능',
                     feature1: {
-                        title: '1. 생태계 수익 배분의 유일한 결제 도구',
-                        desc: 'GNFT 및 GUnit 보유자의 생태계 수익은 XAI 형태로 배분되며, 이 설계는 자산과 XAI 가치를 깊이 결합시켜 토큰 보유자가 컴퓨팅 자산에서 생성되는 수익 배당을 받을 수 있도록 보장.',
-                        gnftDesc: 'GNFT는 XRWA 생태계에서 물리적 GPU 자산의 온체인 유일 소유권 증명이며, ERC-721 표준을 기반으로 개발되어 분할 불가능, 대체 불가능, 고유 식별의 기술적 속성을 갖추고 있습니다. 각 GNFT는 하드웨어 검증 및 성능 테스트를 거친 실제 GPU 장치에 대응하여 물리적 자산과 온체인 자산의 1:1 앵커링을 실현합니다.',
-                        gunitDesc: 'GUnit은 GNFT를 분할하여 생성된 토큰이며, ERC-3643 표준을 따르며 분할 가능, 대체 가능, 표준화된 기술적 속성을 갖추고 동시에 KYC/AML 관련 정보도 통합합니다. 각 GUnit은 GNFT의 기반이 되는 GPU 자산의 단위 컴퓨팅 파워 지분에 대응합니다.',
-                        xaiDesc: 'XAI는 수익 배분의 유일한 지불 도구로서 GNFT 및 GUnit 보유자의 수익을 XAI 가치와 깊이 결합하여 안정적인 가치 순환을 형성합니다.'
+                        title: '생태계 수익 배분의 유일한 결제 도구',
+                        desc: 'GNFT 및 GUnit 보유자의 생태계 수익은 XAI 형태로 배분되며, 이 설계는 자산과 XAI 가치를 깊이 결합시켜 토큰 보유자가 컴퓨팅 자산에서 생성되는 수익 배당을 받을 수 있도록 보장.'
                     },
                     feature2: {
-                        title: '2. AI 생태계 서비스의 강제 결제 증명서',
-                        desc: 'XRWA의 AI 애플리케이션 생태계에서 XAI는 유일한 서비스 결제 도구로 모든 컴퓨팅 파워 및 AI 관련 서비스 시나리오를 포괄하며 XAI의 강성 수요를 구축하고 토큰 가치 상승을 추진.',
-                        intro: 'XAI는 XRWA 생태계의 모든 AI 시나리오 상호작용을 포괄하며 자산 측면과 애플리케이션 측면을 연결하는 가치의 다리입니다. XAI Center 플랫폼에서 모든 컴퓨팅 서비스, 모델 훈련, 추론 서비스, 데이터 스토리지 등 서비스의 지불에 XAI 토큰을 사용하여 강성 지불 수요를 형성합니다.',
-                        usage: '이 「필수 지불」 메커니즘은 XAI의 강성 수요를 구축합니다. XAI의 사용 시나리오와 수요는 동기적으로 성장하여 토큰 가치 상승을 추진합니다. 생태계가 확장됨에 따라 XAI의 지불 시나리오는 다음을 포함하여 계속 확장됩니다:',
-                        service1: '컴퓨팅 파워 임대 및 구매 서비스',
-                        service2: 'AI 모델 훈련 및 추론 서비스',
-                        service3: '데이터 스토리지 및 관리 서비스',
-                        service4: '에이전트 애플리케이션 개발 및 배포 서비스'
+                        title: 'AI 생태계 서비스의 강제 결제 증명서',
+                        desc: 'XRWA의 AI 애플리케이션 생태계에서 XAI는 유일한 서비스 결제 도구로 모든 컴퓨팅 파워 및 AI 관련 서비스 시나리오를 포괄하며 XAI의 강성 수요를 구축하고 토큰 가치 상승을 추진.'
                     },
                     feature3: {
-                        title: '3. 생태계 거버넌스 및 노드 인센티브의 핵심 토큰',
-                        desc: 'XAI 보유자는 생태계 거버넌스 권한을 가지며 온체인 투표를 통해 XRWA 생태계의 주요 결정에 참여할 수 있으며, 핵심 역할은 노드 자격을 얻기 위해 XAI를 스테이킹해야 하며 스테이킹 페널티 메커니즘을 통해 생태계 노드의 컴플라이언스와 신뢰성을 보장.',
-                        governanceTitle: '거버넌스 참여',
-                        governanceIntro: 'XAI 보유자는 생태계 거버넌스 권한을 가지며 온체인 투표를 통해 XRWA 생태계의 주요 결정에 참여할 수 있습니다. 다음을 포함합니다:',
-                        gov1: '프로토콜 업그레이드 및 기능 개선 제안',
-                        gov2: '자산 배분 및 운영 전략 조정',
-                        gov3: '수익 배분 메커니즘 최적화',
-                        gov4: '생태계 파트너 선택',
-                        stakingTitle: '노드 스테이킹',
-                        stakingIntro: 'XRWA 생태계의 핵심 역할은 노드 자격을 얻기 위해 일정량의 XAI를 스테이킹해야 하며, "스테이킹 페널티" 메커니즘을 통해 생태계 노드의 컴플라이언스와 신뢰성을 보장합니다. 스테이킹 메커니즘에는 다음이 포함됩니다:',
-                        stake1: '최소 스테이킹 요구사항: 검증자가 되려면 최소 수량의 XAI를 스테이킹해야 합니다',
-                        stake2: '스테이킹 보상: 검증자는 스테이킹 양과 온라인 시간에 따라 블록 보상 및 거래 수수료를 받습니다',
-                        stake3: '페널티 메커니즘: 악의적인 행위(이중 서명, 장기간 오프라인 등)로 인해 스테이킹된 토큰의 일부 또는 전부가 몰수됩니다'
+                        title: '생태계 거버넌스 및 노드 인센티브의 핵심 토큰',
+                        desc: 'XAI 보유자는 생태계 거버넌스 권한을 가지며 온체인 투표를 통해 XRWA 생태계의 주요 결정에 참여할 수 있으며, 핵심 역할은 노드 자격을 얻기 위해 XAI를 스테이킹해야 하며 스테이킹 페널티 메커니즘을 통해 생태계 노드의 컴플라이언스와 신뢰성을 보장.'
                     }
                 },
                 section2: {
-                    title: '2. 경제 모델',
+                    title: '경제 모델',
                     issuance: {
                         title: '발행 메커니즘',
                         intro: 'XAI 발행은 "제네시스 발행 + 생태계 마이닝"을 결합한 방식을 채택합니다:',
@@ -8670,8 +8570,8 @@ const translations = {
             contact: {
                 title: '연락처',
                 intro: '저희 프로젝트에 관심이 있으시거나 질문이 있으시면 다음 방법으로 연락주세요:',
-                email: '이메일: hiabacloud@gmail.com',
-                address: '주소: 저장성 인재빌딩 2호관 7층',
+                email: '이메일: harvey@powerverse.io',
+                address: '주소: 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE',
                 twitter: '트위터: @PowerVerseChain',
                 telegram: '텔레그램: @PowerVerseChain_Offical',
                 discord: '디스코드: PowerVerse Community'

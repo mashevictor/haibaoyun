@@ -23,18 +23,27 @@
         .page-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 212, 255, 0.15) 0%,
+                rgba(0, 102, 255, 0.05) 20%,
+                transparent 60%);
+            pointer-events: none;
+            transition: all 0.5s ease;
         }
         .product-hero {
             position: relative;
             z-index: 1;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
         }
         .product-icon {
             font-size: 6rem;
@@ -43,35 +52,43 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.2s ease-out;
         }
         .product-hero .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: #f0f0f0;
-            margin-bottom: 2rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-            font-weight: 500;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.4s ease-out;
         }
         .product-hero p {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            line-height: 1.8;
-            margin: 0 auto;
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.6s ease-out;
         }
         .product-content {
             padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
         }
-        .section {
-            margin-bottom: 5rem;
-        }
+        .section { margin-bottom: 5rem; }
         .section-title {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -79,9 +96,11 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
+            animation: fadeInUp 1s ease-out;
         }
         .section-title::before {
             content: '';
@@ -90,6 +109,15 @@
             background: var(--gradient-3);
             border-radius: 3px;
         }
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         .tech-table {
             width: 100%;
             background: var(--card-bg);
@@ -97,6 +125,12 @@
             border-radius: 16px;
             overflow: hidden;
             margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .tech-table:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
         }
         .tech-table table {
             width: 100%;
@@ -147,7 +181,7 @@
         .market-card:hover {
             border-color: var(--primary-color);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
         .market-card h4 {
             font-size: 1.5rem;
@@ -202,7 +236,7 @@
         .ecosystem-card:hover {
             border-color: var(--primary-color);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
         .ecosystem-icon {
             font-size: 3rem;
@@ -281,12 +315,8 @@
             }
         }
         @media (max-width: 768px) {
-            .product-hero h1 {
-                font-size: 2.5rem;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
+            .product-hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
             .tech-table {
                 font-size: 0.875rem;
             }
@@ -374,9 +404,8 @@
 
     <div class="container">
         <section class="product-content">
-            <!-- 一、更智能的 DePIN 基础设施 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.decloud.section1.title">一、更智能的 DePIN 基础设施</h2>
+            <div class="section scroll-animate">
+                <h2 class="section-title" data-i18n="products.decloud.section1.title">更智能的 DePIN 基础设施</h2>
                 
                 <div class="tech-table">
                     <table>
@@ -408,9 +437,8 @@
                 </div>
             </div>
 
-            <!-- 二、更安全高效的 AI 支持 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.decloud.section2.title">二、更安全高效的 AI 支持</h2>
+            <div class="section scroll-animate">
+                <h2 class="section-title" data-i18n="products.decloud.section2.title">更安全高效的 AI 支持</h2>
                 
                 <div class="tech-table">
                     <table>
@@ -437,9 +465,8 @@
                 </div>
             </div>
 
-            <!-- 三、更丰富的 PowerVerse Market 元素 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.decloud.section3.title">三、更丰富的 PowerVerse Market 元素</h2>
+            <div class="section scroll-animate">
+                <h2 class="section-title" data-i18n="products.decloud.section3.title">更丰富的 PowerVerse Market 元素</h2>
                 
                 <div class="market-grid">
                     <div class="market-card">
@@ -458,9 +485,8 @@
                 </div>
             </div>
 
-            <!-- 四、更全面的生态打造 -->
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.decloud.section4.title">四、更全面的生态打造</h2>
+            <div class="section scroll-animate">
+                <h2 class="section-title" data-i18n="products.decloud.section4.title">更全面的生态打造</h2>
                 
                 <div class="ecosystem-grid">
                     <div class="ecosystem-card">
@@ -530,7 +556,36 @@
         </div>
     </footer>
 
-    <script src="../js/languages.js?v=20250206"></script>
-    <script src="../script.js?v=20250206"></script>
+    <script src="../js/languages.js?v=20250207"></script>
+    <script src="../script.js?v=20250207"></script>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            var pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
+                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
+            }
+        });
+        function handleScrollAnimation() {
+            var elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(function(el) {
+                var top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 150) el.classList.add('visible');
+            });
+        }
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation);
+        var cards = document.querySelectorAll('.market-card, .ecosystem-card');
+        cards.forEach(function(card) {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+            });
+        });
+    </script>
 </body>
 </html>

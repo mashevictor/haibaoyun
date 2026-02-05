@@ -23,18 +23,27 @@
         .page-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 212, 255, 0.15) 0%,
+                rgba(0, 102, 255, 0.05) 20%,
+                transparent 60%);
+            pointer-events: none;
+            transition: all 0.5s ease;
         }
         .product-hero {
             position: relative;
             z-index: 1;
             max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
         }
         .product-icon {
             font-size: 6rem;
@@ -43,35 +52,43 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.2s ease-out;
         }
         .product-hero .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: #f0f0f0;
-            margin-bottom: 2rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-            font-weight: 500;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.4s ease-out;
         }
         .product-hero p {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            line-height: 1.8;
-            margin: 0 auto;
+            font-size: 1.25rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.6s ease-out;
         }
         .product-content {
             padding: 5rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
         }
-        .section {
-            margin-bottom: 5rem;
-        }
+        .section { margin-bottom: 5rem; }
         .section-title {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -79,9 +96,11 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
+            animation: fadeInUp 1s ease-out;
         }
         .section-title::before {
             content: '';
@@ -90,43 +109,56 @@
             background: var(--gradient-3);
             border-radius: 3px;
         }
-        .subsection {
-            margin-bottom: 3rem;
-        }
+        .subsection { margin-bottom: 3rem; text-align: left; }
         .subsection-title {
             font-size: 1.75rem;
             color: var(--text-primary);
             margin-bottom: 1.5rem;
             font-weight: 600;
         }
-        .info-box {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
-            border-left: 4px solid var(--primary-color);
-            padding: 1.5rem;
-            border-radius: 8px;
+        /* 卡片式内容块（与 dao 一致） */
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
             margin: 1.5rem 0;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        .info-box h4 {
+        .content-card:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
+        }
+        .content-card h4 {
             color: var(--primary-color);
             margin-bottom: 0.75rem;
             font-weight: 600;
         }
-        .info-box p {
+        .content-card p {
             color: var(--text-secondary);
             line-height: 1.8;
             margin: 0.5rem 0;
         }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .content-card ul { list-style: none; margin: 1rem 0; padding-left: 0; }
+        .content-card li {
+            padding: 0.4rem 0 0.4rem 1.25rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
         }
+        .content-card li::before { content: '✓'; position: absolute; left: 0; color: var(--primary-color); font-weight: 700; }
         .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            text-align: left;
             transition: all 0.3s ease;
         }
         .feature-card:hover {
@@ -134,44 +166,51 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
             transform: translateY(-5px);
         }
+        .feature-card .card-icon {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            font-size: 2.5rem;
+        }
+        .feature-card .card-body { flex: 1; min-width: 0; }
         .feature-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
         }
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.8;
+        .feature-card p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .feature-grid .feature-card {
             margin: 0;
         }
-        .token-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+        .feature-grid .feature-card h3 { font-size: 1.35rem; }
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         @media (max-width: 768px) {
-            .feature-grid, .token-stats {
-                grid-template-columns: 1fr;
-            }
+            .product-hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .feature-card { flex-direction: column; gap: 1rem; }
+            .feature-card .card-icon { width: 56px; height: 56px; font-size: 2rem; }
         }
     </style>
 </head>
@@ -246,123 +285,59 @@
 
     <div class="container">
         <section class="product-content">
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.xaiToken.section1.title">一、核心职能</h2>
-                
+            <div class="section scroll-animate">
+                <h2 class="section-title" data-i18n="products.xaiToken.section1.title">核心职能</h2>
                 <div class="subsection">
-                    <h3 class="subsection-title" data-i18n="products.xaiToken.section1.feature1.title">1. 生态收益分配的唯一支付工具</h3>
-                    <p data-i18n="products.xaiToken.section1.feature1.desc">GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放，这一设计将资产与 XAI 价值深度绑定，确保代币持有者获得算力资产产生的收益分红。</p>
-                    <div class="info-box">
-                        <p data-i18n="products.xaiToken.section1.feature1.gnftDesc">GNFT 是 XRWA 生态中物理 GPU 资产的链上唯一确权凭证，基于 ERC-721 标准开发，具备不可分割、不可替代、唯一标识的技术属性。每一枚 GNFT 对应现实世界中一台经过硬件验证、性能测评的 GPU 设备，实现物理资产与链上资产的 1:1 锚定。</p>
-                        <p style="margin-top: 1rem;" data-i18n="products.xaiToken.section1.feature1.gunitDesc">GUnit 是基于 GNFT 拆分生成通证，遵循 ERC-3643 标准，具备可分割、可替代、标准化的技术属性，同时也集成了 KYC/AML 相关信息。每一枚 GUnit 对应 GNFT 底层 GPU 资产的单位算力份额。</p>
-                        <p style="margin-top: 1rem;" data-i18n="products.xaiToken.section1.feature1.xaiDesc">XAI 作为收益分配的唯一支付工具，将 GNFT 和 GUnit 持有者的收益与 XAI 价值深度绑定，形成稳定的价值循环。</p>
+                    <div class="feature-card">
+                        <div class="card-icon">💰</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.section1.feature1.title">生态收益分配的唯一支付工具</h3>
+                            <p data-i18n="products.xaiToken.section1.feature1.desc">GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放，这一设计将资产与 XAI 价值深度绑定，确保代币持有者获得算力资产产生的收益分红。</p>
+                        </div>
                     </div>
                 </div>
-
                 <div class="subsection">
-                    <h3 class="subsection-title" data-i18n="products.xaiToken.section1.feature2.title">2. AI生态服务的强制支付凭证</h3>
-                    <p data-i18n="products.xaiToken.section1.feature2.desc">在 XRWA 的 AI 应用生态中，XAI 是唯一的服务支付工具，覆盖所有算力与 AI 相关服务场景，构建了 XAI 的刚性需求，推动代币价值提升。</p>
-                    <div class="info-box">
-                        <p data-i18n="products.xaiToken.section1.feature2.intro">XAI 覆盖 XRWA 生态的 AI 全场景交互，是连接资产端与应用端的价值桥梁。在算力港（XAI Center）平台中，所有算力服务、模型训练、推理服务、数据存储等服务的支付均使用 XAI 代币，形成刚性的支付需求。</p>
-                        <p style="margin-top: 1rem;" data-i18n="products.xaiToken.section1.feature2.usage">这一"强制支付"机制构建了 XAI 的刚性需求，XAI 的使用场景与需求量将同步增长，进而推动代币价值提升。随着生态规模的扩大，XAI 的支付场景将不断扩展，包括：</p>
-                        <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature2.service1">算力租赁与购买服务</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature2.service2">AI 模型训练与推理服务</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature2.service3">数据存储与管理服务</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature2.service4">Agent 应用开发与部署服务</span>
-                            </li>
-                        </ul>
+                    <div class="feature-card">
+                        <div class="card-icon">🔐</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.section1.feature2.title">AI生态服务的强制支付凭证</h3>
+                            <p data-i18n="products.xaiToken.section1.feature2.desc">在 XRWA 的 AI 应用生态中，XAI 是唯一的服务支付工具，覆盖所有算力与 AI 相关服务场景，构建了 XAI 的刚性需求，推动代币价值提升。</p>
+                        </div>
                     </div>
                 </div>
-
                 <div class="subsection">
-                    <h3 class="subsection-title" data-i18n="products.xaiToken.section1.feature3.title">3. 生态治理与节点激励的核心代币</h3>
-                    <p data-i18n="products.xaiToken.section1.feature3.desc">XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，核心角色需质押 XAI 获得节点资格，通过质押惩罚机制保障生态节点的合规性与可靠性。</p>
-                    <div class="info-box">
-                        <h4 data-i18n="products.xaiToken.section1.feature3.governanceTitle">治理参与</h4>
-                        <p data-i18n="products.xaiToken.section1.feature3.governanceIntro">XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，包括：</p>
-                        <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.gov1">协议升级与功能改进提案</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.gov2">资产配置与运营策略调整</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.gov3">收益分配机制优化</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.gov4">生态合作伙伴选择</span>
-                            </li>
-                        </ul>
-                        <h4 style="margin-top: 1.5rem;" data-i18n="products.xaiToken.section1.feature3.stakingTitle">节点质押</h4>
-                        <p data-i18n="products.xaiToken.section1.feature3.stakingIntro">XRWA 生态的核心角色，需质押一定数量的 XAI 方可获得节点资格，并通过"质押惩罚"机制保障生态节点的合规性与可靠性。质押机制包括：</p>
-                        <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.stake1">最低质押要求：成为验证者需要质押最低数量的 XAI</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.stake2">质押奖励：验证者根据质押量和在线时间获得区块奖励和交易费用</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section1.feature3.stake3">惩罚机制：恶意行为（如双重签名、长时间离线）将导致部分或全部质押代币被罚没</span>
-                            </li>
-                        </ul>
+                    <div class="feature-card">
+                        <div class="card-icon">⚖️</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.section1.feature3.title">生态治理与节点激励的核心代币</h3>
+                            <p data-i18n="products.xaiToken.section1.feature3.desc">XAI 持有者具备生态治理权，可通过链上投票参与 XRWA 生态的关键决策，核心角色需质押 XAI 获得节点资格，通过质押惩罚机制保障生态节点的合规性与可靠性。</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="section">
-                <h2 class="section-title" data-i18n="products.xaiToken.section2.title">二、经济模型</h2>
-                
+            <div class="section scroll-animate">
+                <h2 class="section-title" data-i18n="products.xaiToken.section2.title">经济模型</h2>
                 <div class="subsection">
                     <h3 class="subsection-title" data-i18n="products.xaiToken.section2.issuance.title">发行机制</h3>
                     <p data-i18n="products.xaiToken.section2.issuance.intro">XAI 的发行采用"创世发行+生态挖矿"结合的方式：</p>
-                    <div class="info-box">
+                    <div class="content-card">
                         <h4 data-i18n="products.xaiToken.section2.issuance.genesis.title">创世发行</h4>
                         <p data-i18n="products.xaiToken.section2.issuance.genesis.desc">创世发行部分用于项目启动、团队激励、机构投资，确保项目初期有足够的资金和资源支持。</p>
                         <h4 style="margin-top: 1.5rem;" data-i18n="products.xaiToken.section2.issuance.mining.title">生态挖矿</h4>
                         <p data-i18n="products.xaiToken.section2.issuance.mining.intro">生态挖矿部分通过以下方式逐步释放：</p>
-                        <ul style="list-style: none; margin: 1rem 0; padding-left: 0;">
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section2.issuance.mining.item1">GNFT/GUnit 持有挖矿：持有算力资产通证的用户可获得 XAI 挖矿奖励</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section2.issuance.mining.item2">AI 服务使用挖矿：使用算力港平台服务的用户可获得 XAI 奖励</span>
-                            </li>
-                            <li style="padding: 0.5rem 0; padding-left: 1.5rem; color: var(--text-secondary); position: relative; line-height: 1.8;">
-                                <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: 700;">•</span>
-                                <span data-i18n="products.xaiToken.section2.issuance.mining.item3">节点验证挖矿：参与网络验证的节点可获得 XAI 奖励</span>
-                            </li>
+                        <ul>
+                            <li data-i18n="products.xaiToken.section2.issuance.mining.item1">GNFT/GUnit 持有挖矿：持有算力资产通证的用户可获得 XAI 挖矿奖励</li>
+                            <li data-i18n="products.xaiToken.section2.issuance.mining.item2">AI 服务使用挖矿：使用算力港平台服务的用户可获得 XAI 奖励</li>
+                            <li data-i18n="products.xaiToken.section2.issuance.mining.item3">节点验证挖矿：参与网络验证的节点可获得 XAI 奖励</li>
                         </ul>
                         <p style="margin-top: 1rem;" data-i18n="products.xaiToken.section2.issuance.mining.summary">这一机制确保代币流通量与生态发展进度匹配，避免过度通胀，保持代币价值的稳定性。</p>
                     </div>
                 </div>
-
                 <div class="subsection">
                     <h3 class="subsection-title" data-i18n="products.xaiToken.section2.anchoring.title">价值锚定体系</h3>
                     <p data-i18n="products.xaiToken.section2.anchoring.intro">GNFT、GUnit、XAI 在 XRWA 生态中并非独立存在，而是形成"资产确权-拆分流通-价值交互"的协同体系：</p>
-                    <div class="info-box">
+                    <div class="content-card">
                         <h4 data-i18n="products.xaiToken.section2.anchoring.foundation.title">基础层：GNFT 的资产锚定</h4>
                         <p data-i18n="products.xaiToken.section2.anchoring.foundation.desc">GNFT 将物理 GPU 资产转化为链上确权资产，为生态提供"价值基础"。若没有 GNFT 的资产锚定，GUnit 的拆分将失去底层资产支撑，XAI 的收益分配也将缺乏价值来源。</p>
                         <h4 style="margin-top: 1.5rem;" data-i18n="products.xaiToken.section2.anchoring.circulation.title">流通层：GUnit 的小额化赋能</h4>
@@ -373,24 +348,36 @@
                 </div>
             </div>
 
-            <div class="section">
+            <div class="section scroll-animate">
                 <h2 class="section-title" data-i18n="products.xaiToken.features.title">核心特性</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3 data-i18n="products.xaiToken.features.item1">收益分配</h3>
-                        <p data-i18n="products.xaiToken.features.item1Desc">GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放</p>
+                        <div class="card-icon">💰</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.features.item1">收益分配</h3>
+                            <p data-i18n="products.xaiToken.features.item1Desc">GNFT 与 GUnit 持有者的生态收益均以 XAI 形式发放</p>
+                        </div>
                     </div>
                     <div class="feature-card">
-                        <h3 data-i18n="products.xaiToken.features.item2">服务支付</h3>
-                        <p data-i18n="products.xaiToken.features.item2Desc">AI 生态服务的强制支付凭证，覆盖所有算力与 AI 相关服务场景</p>
+                        <div class="card-icon">🔐</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.features.item2">服务支付</h3>
+                            <p data-i18n="products.xaiToken.features.item2Desc">AI 生态服务的强制支付凭证，覆盖所有算力与 AI 相关服务场景</p>
+                        </div>
                     </div>
                     <div class="feature-card">
-                        <h3 data-i18n="products.xaiToken.features.item3">生态治理</h3>
-                        <p data-i18n="products.xaiToken.features.item3Desc">持有者具备生态治理权，可通过链上投票参与关键决策</p>
+                        <div class="card-icon">⚖️</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.features.item3">生态治理</h3>
+                            <p data-i18n="products.xaiToken.features.item3Desc">持有者具备生态治理权，可通过链上投票参与关键决策</p>
+                        </div>
                     </div>
                     <div class="feature-card">
-                        <h3 data-i18n="products.xaiToken.features.item4">价值锚定</h3>
-                        <p data-i18n="products.xaiToken.features.item4Desc">与实体算力资产深度绑定，确保代币价值的稳定性</p>
+                        <div class="card-icon">📊</div>
+                        <div class="card-body">
+                            <h3 data-i18n="products.xaiToken.features.item4">价值锚定</h3>
+                            <p data-i18n="products.xaiToken.features.item4Desc">与实体算力资产深度绑定，确保代币价值的稳定性</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -423,7 +410,43 @@
         </div>
     </footer>
 
-    <script src="../js/languages.js?v=20250206"></script>
-    <script src="../script.js?v=20250206"></script>
+    <script src="../js/languages.js?v=20250207"></script>
+    <script src="../script.js?v=20250207"></script>
+    <script>
+        // 鼠标跟随光效（与 dao 一致）
+        document.addEventListener('mousemove', function(e) {
+            var pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
+                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
+            }
+        });
+
+        // 滚动触发动画
+        function handleScrollAnimation() {
+            var elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(function(el) {
+                var top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 150) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScrollAnimation);
+        window.addEventListener('load', handleScrollAnimation);
+
+        // 功能卡片悬停增强（与 dao 一致）
+        var featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(function(card) {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.01)';
+                this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
+            });
+        });
+    </script>
 </body>
 </html>

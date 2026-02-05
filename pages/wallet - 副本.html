@@ -9,12 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 与 dao/infra 一致的页面头部 */
         .page-header {
             padding: 140px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
-            background-image: url('../images/backgrounds/powerverse infra 4.svg');
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=digital%20asset%20wallet%20with%20cryptocurrency%20coins%20and%20blockchain%20security%2C%20futuristic%20wallet%20interface%2C%20blue%20and%20gold%20hue%2C%203D%20rendering%2C%20high%20quality%2C%20tech%20background&image_size=landscape_16_9');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -24,27 +23,18 @@
         .page-header::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
             pointer-events: none;
-        }
-        .page-header::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(0, 212, 255, 0.15) 0%,
-                rgba(0, 102, 255, 0.05) 20%,
-                transparent 60%);
-            pointer-events: none;
-            transition: all 0.5s ease;
         }
         .product-hero {
             position: relative;
             z-index: 1;
             max-width: 900px;
             margin: 0 auto;
-            animation: fadeInUp 1s ease-out;
         }
         .product-icon {
             font-size: 6rem;
@@ -53,43 +43,35 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            animation: fadeInUp 1.2s ease-out;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
         .product-hero .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             color: #f0f0f0;
-            margin-bottom: 1rem;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            animation: fadeInUp 1.4s ease-out;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
         }
         .product-hero p {
+            color: var(--text-secondary);
             font-size: 1.125rem;
-            color: #f0f0f0;
             line-height: 1.8;
             margin: 0 auto;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            animation: fadeInUp 1.6s ease-out;
         }
         .product-content {
             padding: 5rem 0;
-            max-width: 960px;
-            margin: 0 auto;
-            text-align: center;
         }
-        .section { margin-bottom: 5rem; }
+        .section {
+            margin-bottom: 5rem;
+        }
         .section-title {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -97,11 +79,9 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
-            animation: fadeInUp 1s ease-out;
         }
         .section-title::before {
             content: '';
@@ -110,22 +90,17 @@
             background: var(--gradient-3);
             border-radius: 3px;
         }
-        /* 功能卡片：与 dao 一致的横向卡片 + 图标 */
         .feature-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 2rem;
-            text-align: left;
         }
         .feature-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 2rem;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 1.5rem 2rem;
+            padding: 2.5rem;
             transition: all 0.3s ease;
         }
         .feature-card:hover {
@@ -133,55 +108,37 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
             transform: translateY(-5px);
         }
-        .feature-card .card-icon {
-            flex-shrink: 0;
-            width: 72px;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            font-size: 2.5rem;
-        }
-        .feature-card .card-body { flex: 1; min-width: 0; }
         .feature-card h3 {
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             font-weight: 600;
         }
-        .feature-card .card-body p {
+        .feature-card p {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
             margin: 0;
-            font-size: 0.95rem;
         }
-        /* 信息块：卡片式 + 悬停 */
         .info-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
             border-left: 4px solid var(--primary-color);
-            transition: all 0.3s ease;
-        }
-        .info-box:hover {
-            border-color: rgba(0, 212, 255, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
         }
         .info-box h4 {
             color: var(--primary-color);
             margin-bottom: 0.75rem;
             font-weight: 600;
-            font-size: 1.25rem;
         }
-        .info-box p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
-        .info-box ul { list-style: none; margin: 0; padding-left: 0; }
+        .info-box ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
         .info-box li {
-            padding: 0.5rem 0 0.5rem 1.5rem;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
             color: var(--text-secondary);
             position: relative;
             line-height: 1.8;
@@ -193,21 +150,10 @@
             color: var(--primary-color);
             font-weight: 700;
         }
-        /* 滚动触发动画 */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        .scroll-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
         @media (max-width: 768px) {
-            .product-hero h1 { font-size: 2.5rem; }
-            .section-title { font-size: 2rem; }
-            .feature-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .feature-card .card-icon { width: 56px; height: 56px; font-size: 2rem; }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -282,42 +228,35 @@
 
     <div class="container">
         <section class="product-content">
-            <div class="section scroll-animate">
-                <h2 class="section-title" data-i18n="products.wallet.section1.title">核心功能</h2>
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section1.title">一、核心功能</h2>
+                
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <div class="card-icon">🔗</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.section1.feature1.title">多链资产管理</h3>
-                            <p data-i18n="products.wallet.section1.feature1.desc">支持 PowerVerse Chain、Ethereum、BSC 等多条公链，统一管理各类数字资产，包括 PEC、ETH、BNB 等主流代币。</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.section1.feature1.title">1. 多链资产管理</h3>
+                        <p data-i18n="products.wallet.section1.feature1.desc">支持 PowerVerse Chain、Ethereum、BSC 等多条公链，统一管理各类数字资产，包括 PEC、ETH、BNB 等主流代币。</p>
                     </div>
+
                     <div class="feature-card">
-                        <div class="card-icon">🔐</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.section1.feature2.title">安全存储</h3>
-                            <p data-i18n="products.wallet.section1.feature2.desc">采用硬件加密和多重签名技术，私钥本地加密存储，支持助记词备份，确保资产安全。</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.section1.feature2.title">2. 安全存储</h3>
+                        <p data-i18n="products.wallet.section1.feature2.desc">采用硬件加密和多重签名技术，私钥本地加密存储，支持助记词备份，确保资产安全。</p>
                     </div>
+
                     <div class="feature-card">
-                        <div class="card-icon">📊</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.section1.feature3.title">DeFi 交互</h3>
-                            <p data-i18n="products.wallet.section1.feature3.desc">内置 DApp 浏览器，支持一键连接 DeFi 协议，便捷进行流动性挖矿、质押、借贷等操作。</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.section1.feature3.title">3. DeFi 交互</h3>
+                        <p data-i18n="products.wallet.section1.feature3.desc">内置 DApp 浏览器，支持一键连接 DeFi 协议，便捷进行流动性挖矿、质押、借贷等操作。</p>
                     </div>
+
                     <div class="feature-card">
-                        <div class="card-icon">🖼️</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.section1.feature4.title">NFT 管理</h3>
-                            <p data-i18n="products.wallet.section1.feature4.desc">支持 NFT 的查看、转账、展示，轻松管理您的数字收藏品。</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.section1.feature4.title">4. NFT 管理</h3>
+                        <p data-i18n="products.wallet.section1.feature4.desc">支持 NFT 的查看、转账、展示，轻松管理您的数字收藏品。</p>
                     </div>
                 </div>
             </div>
 
-            <div class="section scroll-animate">
-                <h2 class="section-title" data-i18n="products.wallet.section2.title">全球支付功能</h2>
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section2.title">二、全球支付功能</h2>
+                
                 <div class="info-box">
                     <h4 data-i18n="products.wallet.section2.globalPayment.title">全球支付能力</h4>
                     <p data-i18n="products.wallet.section2.globalPayment.desc">PowerVerse Wallet 支持全球范围内的数字资产支付，无论您身在何处，都能快速、安全地完成跨境支付。支持多种支付方式，包括扫码支付、NFC 近场支付、在线支付等，让数字资产真正成为全球通用的支付工具。</p>
@@ -330,8 +269,9 @@
                 </div>
             </div>
 
-            <div class="section scroll-animate">
-                <h2 class="section-title" data-i18n="products.wallet.section3.title">DEX 交易功能</h2>
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section3.title">三、DEX 交易功能</h2>
+                
                 <div class="info-box">
                     <h4 data-i18n="products.wallet.section3.dexTrading.title">去中心化交易所集成</h4>
                     <p data-i18n="products.wallet.section3.dexTrading.desc">PowerVerse Wallet 内置去中心化交易所（DEX）功能，无需离开钱包即可完成代币交易。支持多种交易对，提供最优价格路由，确保用户获得最佳交易体验。</p>
@@ -344,8 +284,9 @@
                 </div>
             </div>
 
-            <div class="section scroll-animate">
-                <h2 class="section-title" data-i18n="products.wallet.section4.title">云游戏全场景贯通</h2>
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.section4.title">四、云游戏全场景贯通</h2>
+                
                 <div class="info-box">
                     <h4 data-i18n="products.wallet.section4.cloudGaming.title">无缝游戏体验</h4>
                     <p data-i18n="products.wallet.section4.cloudGaming.desc">PowerVerse Wallet 深度集成云游戏生态，实现游戏内资产、道具、NFT 的统一管理。玩家可以使用钱包直接登录游戏，使用代币购买游戏道具，交易游戏内 NFT，真正实现 Web3 游戏的全场景贯通。</p>
@@ -358,36 +299,24 @@
                 </div>
             </div>
 
-            <div class="section scroll-animate">
-                <h2 class="section-title" data-i18n="products.wallet.features.title">核心特性</h2>
+            <div class="section">
+                <h2 class="section-title" data-i18n="products.wallet.features.title">Core Features</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <div class="card-icon">🔗</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.features.item1">多链支持</h3>
-                            <p data-i18n="products.wallet.features.item1Desc">支持 PowerVerse Chain、Ethereum、BSC 等多条主流公链</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.features.item1">Multi-Chain Support</h3>
+                        <p data-i18n="products.wallet.features.item1Desc">Support for PowerVerse Chain, Ethereum, BSC and other mainstream public chains</p>
                     </div>
                     <div class="feature-card">
-                        <div class="card-icon">🔐</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.features.item2">安全可靠</h3>
-                            <p data-i18n="products.wallet.features.item2Desc">硬件加密、多重签名、助记词备份，全方位保障资产安全</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.features.item2">Secure and Reliable</h3>
+                        <p data-i18n="products.wallet.features.item2Desc">Hardware encryption, multi-signature, mnemonic backup for comprehensive asset security</p>
                     </div>
                     <div class="feature-card">
-                        <div class="card-icon">📊</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.features.item3">DeFi集成</h3>
-                            <p data-i18n="products.wallet.features.item3Desc">内置 DApp 浏览器，无缝连接 DeFi 生态</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.features.item3">DeFi Integration</h3>
+                        <p data-i18n="products.wallet.features.item3Desc">Built-in DApp browser for seamless connection to DeFi ecosystem</p>
                     </div>
                     <div class="feature-card">
-                        <div class="card-icon">🖼️</div>
-                        <div class="card-body">
-                            <h3 data-i18n="products.wallet.features.item4">NFT管理</h3>
-                            <p data-i18n="products.wallet.features.item4Desc">完整的 NFT 查看、转账、展示功能</p>
-                        </div>
+                        <h3 data-i18n="products.wallet.features.item4">NFT Management</h3>
+                        <p data-i18n="products.wallet.features.item4Desc">Complete NFT viewing, transfer, and display functionality</p>
                     </div>
                 </div>
             </div>
@@ -422,35 +351,5 @@
 
     <script src="../js/languages.js?v=20250207"></script>
     <script src="../script.js?v=20250207"></script>
-    <script>
-        document.addEventListener('mousemove', function(e) {
-            var pageHeader = document.querySelector('.page-header');
-            if (pageHeader) {
-                pageHeader.style.setProperty('--mouse-x', e.clientX + 'px');
-                pageHeader.style.setProperty('--mouse-y', e.clientY + 'px');
-            }
-        });
-        function handleScrollAnimation() {
-            var elements = document.querySelectorAll('.scroll-animate');
-            elements.forEach(function(el) {
-                if (el.getBoundingClientRect().top < window.innerHeight - 150) {
-                    el.classList.add('visible');
-                }
-            });
-        }
-        window.addEventListener('scroll', handleScrollAnimation);
-        window.addEventListener('load', handleScrollAnimation);
-        var featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach(function(card) {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.01)';
-                this.style.boxShadow = '0 15px 30px rgba(0, 212, 255, 0.3)';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.boxShadow = '0 10px 30px rgba(0, 212, 255, 0.2)';
-            });
-        });
-    </script>
 </body>
 </html>
