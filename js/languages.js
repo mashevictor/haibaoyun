@@ -23,7 +23,7 @@ const translations = {
         home: {
             title: 'PowerVerse Chain',
             subtitle: 'AI驱动的超级公链',
-            description: '融合RWA、DePIN、GameFi与DeFi，汇聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元',
+            description: '融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>与<span class="highlight">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元',
             ios: 'iOS',
             android: 'Android'
         },
@@ -34,6 +34,9 @@ const translations = {
             appLayer: '应用层',
             protocolLayer: '协议层',
             networkLayer: '网络层',
+            appLayerDesc: 'DApp、API 与 RPC 服务，面向用户与生态的接入层。',
+            protocolLayerDesc: '共识、智能合约与跨链协议，支撑链上逻辑与互操作。',
+            networkLayerDesc: 'P2P 网络、节点与数据存储，保障去中心化与安全。',
             dapp: 'DApp应用',
             api: 'API接口',
             rpc: 'RPC服务',
@@ -838,60 +841,52 @@ const translations = {
                 subtitle: '去中心化智算平台',
                 intro: '算力港（XAI Center）是基于 PowerVerse Chain 构建的去中心化智算平台，致力于汇聚全球闲置 GPU/CPU 资源，通过区块链技术实现算力资产的通证化、标准化和可信交易。',
                 section1: {
-                    title: '一、核心功能',
+                    title: '核心功能',
                     feature1: {
-                        title: '1. 算力切分与算力池化',
+                        title: '算力切分与算力池化',
                         desc: '在计算颗粒度层面，平台的多种能力有效保证隔离性和安全性，轻松应对不同颗粒度的算力资源需求。',
                         item1: '显卡多实例运行：提升单个GPU的利用效率',
                         item2: '显卡直通技术：确保高性能计算任务的无缝对接',
-                        item3: '多节点并行计算：将算力扩展至前所未有的高度，满足大规模计算需求',
-                        detail: '基于容器技术，结合PowerVerse Infra驱动层级的拦截技术，实现多品牌GPU单卡的灵活分配与显存切分。用户可以根据实际需求，自定义计算规格与切分规格，轻松实现共享算力与显存切片管理。支持用户轻松组建公共算力池或专属算力池，无论是面向团队内部资源共享，还是保障特定项目的独立算力需求，都能灵活应对，支持多种调度方式，批量调度、优先级调度以及抢占式调度。'
+                        item3: '多节点并行计算：将算力扩展至前所未有的高度，满足大规模计算需求'
                     },
                     feature2: {
-                        title: '2. 数据平台',
+                        title: '数据平台',
                         desc: '提供统一的、多元的数据存储、数据管理、弹性伸缩的存储服务，通过容器环境自动挂载存储目录。',
                         item1: '无缝集成，自动为用户提供公共存储服务，提供共享数据控制、租户级隔离、并行读写控制、SFTP支持等能力',
                         item2: '提供直观易用的可视化页面，用户可在线申请与查看、页面上传下载，轻松管理资源',
                         item3: '支持按需扩容缩容，用户可根据业务需求灵活调整存储容量，无需担心存储空间不足或资源浪费的问题'
                     },
                     feature3: {
-                        title: '3. 模型训推全生命周期',
+                        title: '模型训推全生命周期',
                         desc: '提供从模型开发、模型训练、模型部署、模型推理到模型优化等一系列工作的全生命周期支持。',
                         devTitle: '开发环境服务',
-                        dev1: '在线秒级创建开发环境，可按CPU核心、内存、GPU型号、数量、系统盘等创建开发机',
-                        dev2: '支持无卡开机、关机、在线开发Jupyter、Python、VScode、保存镜像',
-                        dev3: '支持定时关机、定时释放等资源回收策略',
+                        devDesc: '在线秒级创建开发环境，可按CPU核心、内存、GPU型号、数量、系统盘等创建开发机，支持无卡开机、在线开发与定时释放等资源回收策略。',
                         trainTitle: '分布式训练服务',
                         trainDesc: '用户可启动训练任务、微调服务进行模型的调整以增加更多精细业务场景的训练，支持多模态训练、预训练DLC、SFT精调等',
                         evalTitle: '模型效果评估',
                         evalDesc: '根据测试数据集测试大模型的表现、效率和适用性，可根据性能指标、泛化能力、推理速度和延迟、资源消耗、可解释性、可扩展性、模型大小、数据依赖性等方面进行评估。',
                         inferTitle: '在线推理',
-                        infer1: '无缝部署与定制化选择：简化部署流程，实现真正的"一键部署"体验，在模型广场直接部署模型；同时也支持上传私有模型，并通过公共镜像、自定义推理镜像或指定镜像地址进行灵活部署',
-                        infer2: '全生命周期管理与弹性资源调度：提供在线推理服务实例的全生命周期管理，包括实例的即时扩容、缩容操作，确保服务随业务需求平滑扩展。实时监控推理实例的运行状态，以及提供日志检索查询功能',
+                        inferDesc: '支持一键部署与私有模型灵活部署，提供实例全生命周期管理、弹性扩容缩容及日志检索查询。',
                         optTitle: '模型优化',
                         optDesc: '提供专业的模型调优服务，通过模型评估机制，帮助用户科学对比模型效果，确保模型选择与业务需求的精准匹配。同时，不断探索推理加速技术，致力于在保持模型精度的同时，大幅提升推理速度。'
                     },
                     feature4: {
-                        title: '4. 智能监控与故障自愈',
+                        title: '智能监控与故障自愈',
                         desc: '基于PowerVerse Infra的监控管理服务，提供可视化的监控数据、可配置的告警服务、自动化的故障处理，简化运维，实现服务运维智能化。',
                         monitorTitle: '智能监控与多维度资源可视化',
-                        monitorDesc: '通过统一运维管理平台，实现了对计算资源、存储资源及网络资源等关键运维要素的规范化、可视化管理。监控维度广泛，支持基于计算节点、GPU卡、容器三个维度多指标监控，支持CPU利用率、内存利用率、GPU利用率、GPU显存利用率、网络效率监控，支持计算过程中的NVLink监控、TensorCore监控。',
+                        monitorDesc: '通过统一运维管理平台，对计算、存储、网络等资源进行规范化可视化管理，支持节点/GPU/容器多维度及NVLink、TensorCore监控。',
                         alertTitle: '告警配置与通知',
-                        alertDesc: '支持用户根据业务需求自定义告警规则组，包括但不限于资源阈值告警、性能异常告警等。一旦触发告警条件，系统将立即生成告警记录，并通过webhook、电子邮件等多种渠道向指定接收人发送告警通知。',
+                        alertDesc: '支持自定义告警规则，触发后通过webhook、邮件等渠道向指定接收人发送告警通知。',
                         faultTitle: '故障检测与修复',
-                        faultDesc: '自动检测集群中的潜在故障，如硬件故障、软件异常或资源瓶颈等。一旦检测到故障，系统将迅速启动自愈机制：',
-                        fault1: '故障隔离：将受影响的节点或GPU卡标记为"污点"，自动阻止新的任务调度到这些资源上，防止故障扩散',
-                        fault2: '任务迁移与重试：自动迁移正在该节点上执行的任务到其他健康节点，并尝试重新执行失败的任务，确保业务连续性',
-                        fault3: '节点重启与检测：针对可重启恢复的临时故障，自动重启节点并验证服务状态，验证通过后，节点自动回归计算队列',
-                        fault4: '下线维修与恢复：针对无法自动修复的故障，系统自动下线节点/GPU卡，并通知相关运维人员，修复验证后，自动恢复资源至计算队列'
+                        faultDesc: '自动检测硬件、软件或资源瓶颈等故障，通过故障隔离、任务迁移与重试、节点重启或下线维修等自愈机制保障业务连续。'
                     },
                     feature5: {
-                        title: '5. 边缘计算',
+                        title: '边缘计算',
                         desc: '提供边缘计算能力，构建一个高度可扩展、开放且智能的云边协同基础设施平台，精准击破边缘计算场景下的多重难题，实现边缘计算与AI场景化应用的深度融合。',
-                        item1: '用户自助服务优化：提供用户自助服务能力，涵盖账户快速创建至资源申请、一键开通、便捷使用及自动释放的全流程优化，用户可根据需求选择共享资源按任务卡时计费或专属资源按配置计费',
-                        item2: '系统管理与多租户支持：支持多租户资源与业务隔离，确保各租户业务互不干扰，支持子账号与精细化的角色权限管理',
-                        item3: '定价与计费：通过直观易懂的可视化页面，构建全面且灵活的定价策略，涵盖枚举、线性、阶梯等多种定价方式，满足不同用户的成本偏好与实际使用场景',
-                        item4: '客户运营：实现全生命周期客户管理，全面收集并分析客户数据，覆盖注册、认证、充值、消费各环节，为精准营销与个性化服务奠定坚实基础'
+                        item1: '提供从账户创建到资源申请、一键开通与自动释放的全流程自助服务，支持共享按任务计费或专属按配置计费。',
+                        item2: '多租户资源与业务隔离，子账号与精细化权限管理，确保各租户互不干扰。',
+                        item3: '可视化页面提供枚举、线性、阶梯等灵活定价策略，满足不同成本偏好与使用场景。',
+                        item4: '全生命周期客户管理，覆盖注册、认证、充值、消费，支撑精准营销与个性化服务。'
                     }
                 },
                 features: {
@@ -1828,7 +1823,7 @@ const translations = {
         home: {
             title: 'PowerVerse Chain',
             subtitle: 'AI驅動的超級公鏈',
-            description: '融合RWA、DePIN、GameFi與DeFi，匯聚<span style="color: #00d4ff; font-weight: bold;">全球算力</span>與智慧，激活智能生態，開啟數字文明新紀元',
+            description: '融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>與<span class="highlight">DeFi</span>，匯聚<span class="hero-desc-highlight">全球算力</span>與智慧，激活智能生態，開啟數字文明新紀元',
             ios: 'iOS',
             android: 'Android'
         },
@@ -1838,6 +1833,9 @@ const translations = {
             appLayer: '應用層',
             protocolLayer: '協議層',
             networkLayer: '網絡層',
+            appLayerDesc: 'DApp、API 與 RPC 服務，面向用戶與生態的接入層。',
+            protocolLayerDesc: '共識、智能合約與跨鏈協議，支撐鏈上邏輯與互操作。',
+            networkLayerDesc: 'P2P 網絡、節點與數據存儲，保障去中心化與安全。',
             dapp: '去中心化應用',
             api: '應用程式介面',
             rpc: '遠程程序調用服務',
@@ -2641,60 +2639,52 @@ const translations = {
                 subtitle: '去中心化智算平台',
                 intro: '算力港（XAI Center）是基於 PowerVerse Chain 構建的去中心化智算平台，致力於匯聚全球閒置 GPU/CPU 資源，通過區塊鏈技術實現算力資產的通證化、標準化和可信交易。',
                 section1: {
-                    title: '一、核心功能',
+                    title: '核心功能',
                     feature1: {
-                        title: '1. 算力切分與算力池化',
+                        title: '算力切分與算力池化',
                         desc: '在計算顆粒度層面，平台的多種能力有效保證隔離性和安全性，輕鬆應對不同顆粒度的算力資源需求。',
                         item1: '顯卡多實例運行：提升單個GPU的利用效率',
                         item2: '顯卡直通技術：確保高性能計算任務的無縫對接',
-                        item3: '多節點並行計算：將算力擴展至前所未有的高度，滿足大規模計算需求',
-                        detail: '基於容器技術，結合PowerVerse Infra驅動層級的攔截技術，實現多品牌GPU單卡的靈活分配與顯存切分。用戶可以根據實際需求，自定義計算規格與切分規格，輕鬆實現共享算力與顯存切片管理。支持用戶輕鬆組建公共算力池或專屬算力池，無論是面向團隊內部資源共享，還是保障特定項目的獨立算力需求，都能靈活應對，支持多種調度方式，批量調度、優先級調度以及搶佔式調度。'
+                        item3: '多節點並行計算：將算力擴展至前所未有的高度，滿足大規模計算需求'
                     },
                     feature2: {
-                        title: '2. 數據平台',
+                        title: '數據平台',
                         desc: '提供統一的、多元的數據存儲、數據管理、彈性伸縮的存儲服務，通過容器環境自動掛載存儲目錄。',
                         item1: '無縫集成，自動為用戶提供公共存儲服務，提供共享數據控制、租戶級隔離、並行讀寫控制、SFTP支持等能力',
                         item2: '提供直觀易用的可視化頁面，用戶可在線申請與查看、頁面上傳下載，輕鬆管理資源',
                         item3: '支持按需擴容縮容，用戶可根據業務需求靈活調整存儲容量，無需擔心存儲空間不足或資源浪費的問題'
                     },
                     feature3: {
-                        title: '3. 模型訓推全生命週期',
+                        title: '模型訓推全生命週期',
                         desc: '提供從模型開發、模型訓練、模型部署、模型推理到模型優化等一系列工作的全生命週期支持。',
                         devTitle: '開發環境服務',
-                        dev1: '在線秒級創建開發環境，可按CPU核心、內存、GPU型號、數量、系統盤等創建開發機',
-                        dev2: '支持無卡開機、關機、在線開發Jupyter、Python、VScode、保存鏡像',
-                        dev3: '支持定時關機、定時釋放等資源回收策略',
+                        devDesc: '在線秒級創建開發環境，可按CPU核心、內存、GPU型號、數量、系統盤等創建開發機，支持無卡開機、在線開發與定時釋放等資源回收策略。',
                         trainTitle: '分佈式訓練服務',
                         trainDesc: '用戶可啟動訓練任務、微調服務進行模型的調整以增加更多精細業務場景的訓練，支持多模態訓練、預訓練DLC、SFT精調等',
                         evalTitle: '模型效果評估',
                         evalDesc: '根據測試數據集測試大模型的表現、效率和適用性，可根據性能指標、泛化能力、推理速度和延遲、資源消耗、可解釋性、可擴展性、模型大小、數據依賴性等方面進行評估。',
                         inferTitle: '在線推理',
-                        infer1: '無縫部署與定制化選擇：簡化部署流程，實現真正的"一鍵部署"體驗，在模型廣場直接部署模型；同時也支持上傳私有模型，並通過公共鏡像、自定義推理鏡像或指定鏡像地址進行靈活部署',
-                        infer2: '全生命週期管理與彈性資源調度：提供在線推理服務實例的全生命週期管理，包括實例的即時擴容、縮容操作，確保服務隨業務需求平滑擴展。實時監控推理實例的運行狀態，以及提供日誌檢索查詢功能',
+                        inferDesc: '支持一鍵部署與私有模型靈活部署，提供實例全生命週期管理、彈性擴容縮容及日誌檢索查詢。',
                         optTitle: '模型優化',
                         optDesc: '提供專業的模型調優服務，通過模型評估機制，幫助用戶科學對比模型效果，確保模型選擇與業務需求的精準匹配。同時，不斷探索推理加速技術，致力於在保持模型精度的同時，大幅提升推理速度。'
                     },
                     feature4: {
-                        title: '4. 智能監控與故障自愈',
+                        title: '智能監控與故障自愈',
                         desc: '基於PowerVerse Infra的監控管理服務，提供可視化的監控數據、可配置的告警服務、自動化的故障處理，簡化運維，實現服務運維智能化。',
                         monitorTitle: '智能監控與多維度資源可視化',
-                        monitorDesc: '通過統一運維管理平台，實現了對計算資源、存儲資源及網絡資源等關鍵運維要素的規範化、可視化管理。監控維度廣泛，支持基於計算節點、GPU卡、容器三個維度多指標監控，支持CPU利用率、內存利用率、GPU利用率、GPU顯存利用率、網絡效率監控，支持計算過程中的NVLink監控、TensorCore監控。',
+                        monitorDesc: '通過統一運維管理平台，對計算、存儲、網絡等資源進行規範化可視化管理，支持節點/GPU/容器多維度及NVLink、TensorCore監控。',
                         alertTitle: '告警配置與通知',
-                        alertDesc: '支持用戶根據業務需求自定義告警規則組，包括但不限於資源閾值告警、性能異常告警等。一旦觸發告警條件，系統將立即生成告警記錄，並通過webhook、電子郵件等多種渠道向指定接收人發送告警通知。',
+                        alertDesc: '支持自定義告警規則，觸發後通過webhook、郵件等渠道向指定接收人發送告警通知。',
                         faultTitle: '故障檢測與修復',
-                        faultDesc: '自動檢測集群中的潛在故障，如硬件故障、軟件異常或資源瓶頸等。一旦檢測到故障，系統將迅速啟動自愈機制：',
-                        fault1: '故障隔離：將受影響的節點或GPU卡標記為「污點」，自動阻止新的任務調度到這些資源上，防止故障擴散',
-                        fault2: '任務遷移與重試：自動遷移正在該節點上執行的任務到其他健康節點，並嘗試重新執行失敗的任務，確保業務連續性',
-                        fault3: '節點重啟與檢測：針對可重啟恢復的臨時故障，自動重啟節點並驗證服務狀態，驗證通過後，節點自動回歸計算隊列',
-                        fault4: '下線維修與恢復：針對無法自動修復的故障，系統自動下線節點/GPU卡，並通知相關運維人員，修復驗證後，自動恢復資源至計算隊列'
+                        faultDesc: '自動檢測硬件、軟件或資源瓶頸等故障，通過故障隔離、任務遷移與重試、節點重啟或下線維修等自愈機制保障業務連續。'
                     },
                     feature5: {
-                        title: '5. 邊緣計算',
+                        title: '邊緣計算',
                         desc: '提供邊緣計算能力，構建一個高度可擴展、開放且智能的雲邊協同基礎設施平台，精準擊破邊緣計算場景下的多重難題，實現邊緣計算與AI場景化應用的深度融合。',
-                        item1: '用戶自助服務優化：提供用戶自助服務能力，涵蓋賬戶快速創建至資源申請、一鍵開通、便捷使用及自動釋放的全流程優化，用戶可根據需求選擇共享資源按任務卡時計費或專屬資源按配置計費',
-                        item2: '系統管理與多租戶支持：支持多租戶資源與業務隔離，確保各租戶業務互不干擾，支持子賬號與精細化的角色權限管理',
-                        item3: '定價與計費：通過直觀易懂的可視化頁面，構建全面且靈活的定價策略，涵蓋枚舉、線性、階梯等多種定價方式，滿足不同用戶的成本偏好與實際使用場景',
-                        item4: '客戶運營：實現全生命週期客戶管理，全面收集並分析客戶數據，覆蓋註冊、認證、充值、消費各環節，為精準營銷與個性化服務奠定堅實基礎'
+                        item1: '提供從賬戶創建到資源申請、一鍵開通與自動釋放的全流程自助服務，支持共享按任務計費或專屬按配置計費。',
+                        item2: '多租戶資源與業務隔離，子賬號與精細化權限管理，確保各租戶互不干擾。',
+                        item3: '可視化頁面提供枚舉、線性、階梯等靈活定價策略，滿足不同成本偏好與使用場景。',
+                        item4: '全生命週期客戶管理，覆蓋註冊、認證、充值、消費，支撐精準營銷與個性化服務。'
                     }
                 },
                 features: {
@@ -3525,7 +3515,7 @@ const translations = {
         home: {
             title: 'PowerVerse Chain',
             subtitle: 'AI-Powered Super Chain',
-            description: 'Integrating RWA, DePIN, GameFi and DeFi, converging <span style="color: #00d4ff; font-weight: bold;">global computing power</span> and wisdom, activating the intelligent ecosystem, and opening a new era of digital civilization',
+            description: 'Integrating <span class="highlight">RWA</span>, <span class="highlight">DePIN</span>, <span class="highlight">GameFi</span> and <span class="highlight">DeFi</span>, converging <span class="hero-desc-highlight">global computing power</span> and wisdom, activating the intelligent ecosystem, and opening a new era of digital civilization',
             ios: 'iOS',
             android: 'Android'
         },
@@ -3535,6 +3525,9 @@ const translations = {
             appLayer: 'Application Layer',
             protocolLayer: 'Protocol Layer',
             networkLayer: 'Network Layer',
+            appLayerDesc: 'DApp, API and RPC services—the access layer for users and the ecosystem.',
+            protocolLayerDesc: 'Consensus, smart contracts and cross-chain protocols power on-chain logic and interoperability.',
+            networkLayerDesc: 'P2P network, nodes and data storage for decentralization and security.',
             dapp: 'DApp Application',
             api: 'API Interface',
             rpc: 'RPC Service',
@@ -4338,60 +4331,52 @@ const translations = {
                 subtitle: 'Decentralized Intelligent Computing Platform',
                 intro: 'Computing Port (XAI Center) is a decentralized intelligent computing platform built on PowerVerse Chain, dedicated to aggregating global idle GPU/CPU resources and achieving tokenization, standardization, and trusted trading of computing assets through blockchain technology.',
                 section1: {
-                    title: 'I. Core Functions',
+                    title: 'Core Functions',
                     feature1: {
-                        title: '1. Computing Power Segmentation and Pooling',
+                        title: 'Computing Power Segmentation and Pooling',
                         desc: 'At the computing granularity level, the platform\'s multiple capabilities effectively ensure isolation and security, easily handling computing resource requirements of different granularities.',
                         item1: 'Multi-instance GPU Operation: Improve the utilization efficiency of a single GPU',
                         item2: 'GPU Passthrough Technology: Ensure seamless connection of high-performance computing tasks',
-                        item3: 'Multi-node Parallel Computing: Extend computing power to unprecedented heights, meeting large-scale computing requirements',
-                        detail: 'Based on container technology, combined with PowerVerse Infra driver-level interception technology, achieve flexible allocation and memory segmentation of multi-brand GPU single cards. Users can customize computing specifications and segmentation specifications according to actual needs, easily achieve shared computing power and memory slice management. Support users to easily form public computing pools or dedicated computing pools, whether for internal team resource sharing or to ensure independent computing requirements for specific projects, all can be flexibly handled, supporting multiple scheduling methods, batch scheduling, priority scheduling, and preemptive scheduling.'
+                        item3: 'Multi-node Parallel Computing: Extend computing power to unprecedented heights, meeting large-scale computing requirements'
                     },
                     feature2: {
-                        title: '2. Data Platform',
+                        title: 'Data Platform',
                         desc: 'Provide unified, diverse data storage, data management, and elastic scaling storage services, automatically mount storage directories through container environments.',
                         item1: 'Seamless integration, automatically provide users with public storage services, provide shared data control, tenant-level isolation, parallel read-write control, SFTP support and other capabilities',
                         item2: 'Provide intuitive and easy-to-use visualization pages, users can apply and view online, upload and download on pages, easily manage resources',
                         item3: 'Support on-demand expansion and contraction, users can flexibly adjust storage capacity according to business needs, without worrying about insufficient storage space or resource waste'
                     },
                     feature3: {
-                        title: '3. Full Lifecycle Model Training and Inference',
+                        title: 'Full Lifecycle Model Training and Inference',
                         desc: 'Provide full lifecycle support from model development, model training, model deployment, model inference to model optimization.',
                         devTitle: 'Development Environment Service',
-                        dev1: 'Create development environment online in seconds, can create development machines according to CPU cores, memory, GPU model, quantity, system disk, etc.',
-                        dev2: 'Support cardless boot, shutdown, online development Jupyter, Python, VScode, save images',
-                        dev3: 'Support scheduled shutdown, scheduled release and other resource recycling strategies',
+                        devDesc: 'Create development environments in seconds with configurable CPU, memory, GPU, and system disk; support cardless boot, online development (Jupyter/Python/VScode), image save, and scheduled shutdown/release.',
                         trainTitle: 'Distributed Training Service',
                         trainDesc: 'Users can start training tasks and fine-tuning services to adjust models to increase training for more fine-grained business scenarios, supporting multimodal training, pre-training DLC, SFT fine-tuning, etc.',
                         evalTitle: 'Model Effect Evaluation',
                         evalDesc: 'Test the performance, efficiency, and applicability of large models based on test datasets, and can be evaluated in terms of performance indicators, generalization ability, inference speed and latency, resource consumption, interpretability, scalability, model size, data dependency, etc.',
                         inferTitle: 'Online Inference',
-                        infer1: 'Seamless Deployment and Customization: Simplify the deployment process to achieve a true "one-click deployment" experience, deploy models directly from the model marketplace; also support uploading private models and flexible deployment through public images, custom inference images, or specified image addresses',
-                        infer2: 'Full Lifecycle Management and Elastic Resource Scheduling: Provide full lifecycle management of online inference service instances, including instant scaling up and down operations to ensure services scale smoothly with business needs. Real-time monitoring of inference instance running status, and provide log search and query functions',
+                        inferDesc: 'One-click and private-model deployment with full instance lifecycle management, elastic scaling, and log search.',
                         optTitle: 'Model Optimization',
                         optDesc: 'Provide professional model tuning services, help users scientifically compare model effects through model evaluation mechanisms, ensuring precise matching of model selection with business needs. At the same time, continuously explore inference acceleration technologies, committed to significantly improving inference speed while maintaining model accuracy.'
                     },
                     feature4: {
-                        title: '4. Intelligent Monitoring and Self-Healing',
+                        title: 'Intelligent Monitoring and Self-Healing',
                         desc: 'Based on PowerVerse Infra\'s monitoring management service, provide visualized monitoring data, configurable alert services, and automated fault handling, simplify operations and maintenance, and achieve intelligent service operations and maintenance.',
                         monitorTitle: 'Intelligent Monitoring and Multi-dimensional Resource Visualization',
-                        monitorDesc: 'Through a unified operations management platform, standardized and visualized management of key operational elements such as computing resources, storage resources, and network resources is achieved. Monitoring dimensions are extensive, supporting multi-metric monitoring based on three dimensions: computing nodes, GPU cards, and containers, including CPU utilization, memory utilization, GPU utilization, GPU memory utilization, network efficiency monitoring, as well as NVLink monitoring and TensorCore monitoring during computation.',
+                        monitorDesc: 'Unified ops platform for standardized visualization of compute, storage, and network resources, with node/GPU/container and NVLink, TensorCore monitoring.',
                         alertTitle: 'Alert Configuration and Notification',
-                        alertDesc: 'Supports users to customize alert rule groups according to business needs, including but not limited to resource threshold alerts, performance anomaly alerts, etc. Once alert conditions are triggered, the system immediately generates alert records and sends alert notifications to designated recipients through multiple channels such as webhooks and email.',
+                        alertDesc: 'Custom alert rules; on trigger, notifications are sent to designated recipients via webhook, email, etc.',
                         faultTitle: 'Fault Detection and Repair',
-                        faultDesc: 'Automatically detects potential failures in the cluster, such as hardware failures, software exceptions, or resource bottlenecks. Once a failure is detected, the system quickly initiates self-healing mechanisms:',
-                        fault1: 'Fault Isolation: Marks affected nodes or GPU cards as "tainted" and automatically prevents new tasks from being scheduled to these resources, preventing failure propagation',
-                        fault2: 'Task Migration and Retry: Automatically migrates tasks executing on that node to other healthy nodes and attempts to re-execute failed tasks, ensuring business continuity',
-                        fault3: 'Node Restart and Detection: For temporary failures that can be recovered by restart, automatically restarts nodes and verifies service status; after verification, nodes automatically return to the computing queue',
-                        fault4: 'Offline Maintenance and Recovery: For failures that cannot be automatically fixed, the system automatically takes nodes/GPU cards offline and notifies relevant operations personnel; after repair and verification, automatically restores resources to the computing queue'
+                        faultDesc: 'Auto-detect hardware, software, or resource-bottleneck faults; self-heal via isolation, task migration and retry, node restart, or offline repair to ensure continuity.'
                     },
                     feature5: {
-                        title: '5. Edge Computing',
+                        title: 'Edge Computing',
                         desc: 'Provide edge computing capabilities, building a highly scalable, open, and intelligent cloud-edge collaborative infrastructure platform, accurately solving multiple challenges in edge computing scenarios, achieving deep integration of edge computing and AI scenario applications.',
-                        item1: 'User Self-Service Optimization: Provide user self-service capabilities, covering the entire process from rapid account creation to resource application, one-click activation, convenient use, and automatic release; users can choose shared resources billed by task time or dedicated resources billed by configuration based on their needs',
-                        item2: 'System Management and Multi-Tenant Support: Support multi-tenant resource and business isolation, ensuring that each tenant\'s business does not interfere with each other, supporting sub-accounts and fine-grained role permission management',
-                        item3: 'Pricing and Billing: Through intuitive and easy-to-understand visualization pages, build comprehensive and flexible pricing strategies, covering various pricing methods such as enumeration, linear, tiered, etc., to meet different users\' cost preferences and actual usage scenarios',
-                        item4: 'Customer Operations: Achieve full lifecycle customer management, comprehensively collecting and analyzing customer data, covering registration, authentication, recharge, consumption and other aspects, laying a solid foundation for precision marketing and personalized services'
+                        item1: 'Full self-service from account creation to resource application, one-click activation and auto-release; shared resources by task or dedicated by configuration.',
+                        item2: 'Multi-tenant resource and business isolation with sub-accounts and fine-grained permissions, keeping tenants isolated.',
+                        item3: 'Visual pricing with enumeration, linear, tiered and other flexible strategies for different cost and usage needs.',
+                        item4: 'Full lifecycle customer management across registration, auth, recharge and consumption for precision marketing and personalized service.'
                     }
                 },
                 features: {
@@ -5314,7 +5299,7 @@ const translations = {
         home: {
             title: 'PowerVerse Chain',
             subtitle: 'AI駆動のスーパーパブリックチェーン',
-            description: 'RWA、DePIN、GameFi、DeFiを融合し、<span style="color: #00d4ff; font-weight: bold;">世界中の算力</span>と知恵を集結し、インテリジェントエコシステムを活性化し、デジタル文明の新時代を開きます',
+            description: '<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>、<span class="highlight">DeFi</span>を融合し、<span class="hero-desc-highlight">世界中の算力</span>と知恵を集結し、インテリジェントエコシステムを活性化し、デジタル文明の新時代を開きます',
             ios: 'iOS',
             android: 'Android'
         },
@@ -5324,6 +5309,9 @@ const translations = {
             appLayer: 'アプリケーション層',
             protocolLayer: 'プロトコル層',
             networkLayer: 'ネットワーク層',
+            appLayerDesc: 'DApp・API・RPCサービス。ユーザーとエコシステム向けのアクセス層。',
+            protocolLayerDesc: 'コンセンサス・スマートコントラクト・クロスチェーンでオンチェーンロジックと相互運用を実現。',
+            networkLayerDesc: 'P2Pネットワーク・ノード・データストレージで分散化とセキュリティを確保。',
             dapp: 'DAppアプリケーション',
             api: 'APIインターフェース',
             rpc: 'RPCサービス',
@@ -6119,8 +6107,7 @@ const translations = {
                         desc: 'コンピューティング粒度レベルで、プラットフォームのさまざまな機能は分離とセキュリティを効果的に保証し、さまざまな粒度のコンピューティングパワーリソースの需要に簡単に対応します。',
                         item1: 'グラフィックカード複数インスタンス実行：単一GPUの利用効率を向上',
                         item2: 'グラフィックカード直通技術：高性能コンピューティングタスクのシームレスな接続を確保',
-                        item3: 'マルチノード並列コンピューティング：コンピューティングパワーを前例のない高みに拡張し、大規模コンピューティングニーズを満たす',
-                        detail: 'コンテナ技術に基づき、PowerVerse Infraドライバーレベルのインターセプション技術と組み合わせて、マルチブランドGPU単一カードの柔軟な割り当てとメモリ分割を実現します。ユーザーは実際のニーズに応じてコンピューティング仕様と分割仕様をカスタマイズし、共有コンピューティングパワーとメモリスライス管理を簡単に実現できます。ユーザーがパブリックコンピューティングプールまたは専用コンピューティングプールを簡単に構築できるようサポートし、チーム内部のリソース共有または特定プロジェクトの独立したコンピューティングパワーニーズを保証する場合でも柔軟に対応でき、バッチスケジューリング、優先度スケジューリング、プリエンプティブスケジューリングなどのさまざまなスケジューリング方法をサポートします。'
+                        item3: 'マルチノード並列コンピューティング：コンピューティングパワーを前例のない高みに拡張し、大規模コンピューティングニーズを満たす'
                     },
                     feature2: {
                         title: '2. データプラットフォーム',
@@ -6133,16 +6120,13 @@ const translations = {
                         title: '3. モデル訓練と推論の全ライフサイクル',
                         desc: 'モデル開発、モデル訓練、モデル展開、モデル推論からモデル最適化まで、一連の作業の完全なライフサイクルサポートを提供。',
                         devTitle: '開発環境サービス',
-                        dev1: 'オンラインで秒単位で開発環境を作成でき、CPUコア、メモリ、GPUモデル、数量、システムディスクなどに応じて開発マシンを作成可能',
-                        dev2: 'カードレス起動、シャットダウン、オンライン開発Jupyter、Python、VScode、イメージ保存をサポート',
-                        dev3: 'スケジュールされたシャットダウン、スケジュールされたリリースなどのリソース回収戦略をサポート',
+                        devDesc: 'オンラインで秒単位で開発環境を作成でき、CPUコア、メモリ、GPUモデル、数量、システムディスクなどに応じて開発マシンを作成。カードレス起動、オンライン開発、スケジュール解放などのリソース回収をサポート。',
                         trainTitle: '分散訓練サービス',
                         trainDesc: 'ユーザーは訓練タスク、微調整サービスを開始してモデルを調整し、より細かいビジネスシナリオの訓練を増やすことができ、マルチモーダル訓練、事前訓練DLC、SFT微調整などをサポート',
                         evalTitle: 'モデル効果評価',
                         evalDesc: 'テストデータセットに基づいて大規模モデルのパフォーマンス、効率、適用性をテストし、性能指標、汎化能力、推論速度と遅延、リソース消費、解釈可能性、スケーラビリティ、モデルサイズ、データ依存性などの側面から評価可能。',
                         inferTitle: 'オンライン推論',
-                        infer1: 'シームレスな展開とカスタマイズ可能な選択：展開プロセスを簡素化し、真の「ワンクリック展開」体験を実現し、モデル広場から直接モデルを展開。同時にプライベートモデルのアップロードもサポートし、パブリックイメージ、カスタム推論イメージ、または指定されたイメージアドレスを通じて柔軟に展開',
-                        infer2: '完全なライフサイクル管理と弾力的なリソーススケジューリング：オンライン推論サービスインスタンスの完全なライフサイクル管理を提供し、インスタンスの即座のスケールアップ/ダウン操作を含み、サービスがビジネスニーズに応じてスムーズに拡張することを保証。推論インスタンスの実行ステータスをリアルタイムで監視し、ログ検索とクエリ機能を提供',
+                        inferDesc: 'ワンクリック・プライベートモデル展開をサポートし、インスタンスのライフサイクル管理、弾力スケール、ログ検索を提供。',
                         optTitle: 'モデル最適化',
                         optDesc: 'プロフェッショナルなモデル調整サービスを提供し、モデル評価メカニズムを通じてユーザーがモデル効果を科学的に比較できるよう支援し、モデル選択とビジネスニーズの正確なマッチングを確保。同時に、推論加速技術を継続的に探求し、モデル精度を維持しながら推論速度を大幅に向上させることに専念。'
                     },
@@ -6150,23 +6134,19 @@ const translations = {
                         title: '4. インテリジェント監視と自己修復',
                         desc: 'PowerVerse Infraの監視管理サービスに基づき、可視化監視データ、設定可能なアラートサービス、自動化された障害処理を提供し、運用保守を簡素化し、サービス運用保守のインテリジェント化を実現。',
                         monitorTitle: 'インテリジェント監視と多次元リソース可視化',
-                        monitorDesc: '統一運用管理プラットフォームを通じて、計算資源、ストレージ資源、ネットワーク資源などの主要運用要素の標準化、可視化管理を実現。監視範囲が広く、計算ノード、GPUカード、コンテナの3つの次元に基づく多指標監視をサポートし、CPU利用率、メモリ利用率、GPU利用率、GPUメモリ利用率、ネットワーク効率監視をサポートし、計算過程におけるNVLink監視、TensorCore監視をサポート。',
+                        monitorDesc: '統一運用管理プラットフォームで計算・ストレージ・ネットワークを標準化・可視化し、ノード/GPU/コンテナ多次元およびNVLink、TensorCore監視をサポート。',
                         alertTitle: 'アラート設定と通知',
-                        alertDesc: 'ユーザーが業務ニーズに応じてアラートルールグループをカスタマイズできるようサポートし、リソース閾値アラート、性能異常アラートなどを含みます。アラート条件がトリガーされると、システムは直ちにアラート記録を生成し、webhook、電子メールなどの複数のチャネルを通じて指定された受信者にアラート通知を送信します。',
+                        alertDesc: 'カスタムアラートルールをサポートし、トリガー時にwebhook、メール等で指定受信者に通知。',
                         faultTitle: '故障検出と修復',
-                        faultDesc: 'クラスター内の潜在的な故障を自動的に検出します（ハードウェア故障、ソフトウェア異常、リソースボトルネックなど）。故障が検出されると、システムは迅速に自己修復メカニズムを起動します：',
-                        fault1: '故障隔離：影響を受けたノードまたはGPUカードを「汚染」としてマークし、これらのリソースへの新しいタスクのスケジューリングを自動的にブロックし、故障の拡散を防止',
-                        fault2: 'タスク移行と再試行：そのノードで実行中のタスクを他の健全なノードに自動的に移行し、失敗したタスクの再実行を試み、ビジネスの継続性を確保',
-                        fault3: 'ノード再起動と検出：再起動で回復可能な一時的な故障に対して、ノードを自動的に再起動してサービス状態を検証し、検証が通過するとノードは自動的に計算キューに復帰',
-                        fault4: 'オフライン保守と回復：自動修復できない故障に対して、システムはノード/GPUカードを自動的にオフラインにし、関連運用担当者に通知し、修復検証後、リソースを自動的に計算キューに復元'
+                        faultDesc: 'ハードウェア・ソフトウェア・リソースボトルネックを自動検出し、故障隔離、タスク移行・再試行、ノード再起動またはオフライン修理で業務継続を確保。'
                     },
                     feature5: {
                         title: '5. エッジコンピューティング',
                         desc: 'エッジコンピューティング能力を提供し、高度にスケーラブルでオープンかつインテリジェントなクラウドエッジ協調インフラストラクチャプラットフォームを構築し、エッジコンピューティングシナリオにおける複数の課題を正確に解決し、エッジコンピューティングとAIシナリオアプリケーションの深い統合を実現。',
-                        item1: 'ユーザーセルフサービスの最適化：ユーザーセルフサービス機能を提供し、アカウントの迅速な作成からリソース申請、ワンクリック開通、便利な使用、自動解放までの全プロセスの最適化をカバーし、ユーザーはニーズに応じて共有リソースのタスク時間課金または専用リソースの構成課金を選択可能',
-                        item2: 'システム管理とマルチテナントサポート：マルチテナントリソースとビジネス分離をサポートし、各テナントのビジネスが互いに干渉しないことを保証し、サブアカウントと細かいロール権限管理をサポート',
-                        item3: '価格設定と課金：直感的でわかりやすい可視化ページを通じて、列挙、線形、階層などの複数の価格設定方法をカバーする包括的で柔軟な価格戦略を構築し、異なるユーザーのコスト選好と実際の使用シナリオを満たす',
-                        item4: '顧客運営：全ライフサイクル顧客管理を実現し、登録、認証、チャージ、消費などのリンクをカバーする顧客データを包括的に収集・分析し、精密マーケティングとパーソナライズされたサービスの堅実な基盤を築く'
+                        item1: 'アカウント作成からリソース申請・ワンクリック開通・自動解放までのセルフサービス。共有はタスク課金、専用は構成課金に対応。',
+                        item2: 'マルチテナントのリソース・業務分離、サブアカウントと細かい権限管理でテナント間の干渉を防止。',
+                        item3: '可視化ページで列挙・線形・階層など柔軟な価格戦略を提供し、コストと利用シーンに応じた選択を可能に。',
+                        item4: '登録・認証・チャージ・消費をカバーする顧客管理で、精密マーケティングとパーソナライズサービスを支援。'
                     }
                 },
                 features: {
@@ -7060,7 +7040,7 @@ const translations = {
         home: {
             title: 'PowerVerse Chain',
             subtitle: 'AI 기반 슈퍼 퍼블릭 체인',
-            description: 'RWA, DePIN, GameFi, DeFi를 융합하고 <span style="color: #00d4ff; font-weight: bold;">전 세계 연산력</span>과 지혜를 모아 지능 생태를 활성화하고 디지털 문명의 새 시대를 엽니다',
+            description: '<span class="highlight">RWA</span>, <span class="highlight">DePIN</span>, <span class="highlight">GameFi</span>, <span class="highlight">DeFi</span>를 융합하고 <span class="hero-desc-highlight">전 세계 연산력</span>과 지혜를 모아 지능 생태를 활성화하고 디지털 문명의 새 시대를 엽니다',
             ios: 'iOS',
             android: 'Android'
         },
@@ -7070,6 +7050,9 @@ const translations = {
             appLayer: '애플리케이션 레이어',
             protocolLayer: '프로토콜 레이어',
             networkLayer: '네트워크 레이어',
+            appLayerDesc: 'DApp, API, RPC 서비스—사용자와 생태계를 위한 액세스 레이어.',
+            protocolLayerDesc: '합의, 스마트 컨트랙트, 크로스체인 프로토콜로 온체인 로직과 상호운용성 지원.',
+            networkLayerDesc: 'P2P 네트워크, 노드, 데이터 저장으로 분산화와 보안 보장.',
             dapp: 'DApp 애플리케이션',
             api: 'API 인터페이스',
             rpc: 'RPC 서비스',
@@ -7865,8 +7848,7 @@ const translations = {
                         desc: '컴퓨팅 세분성 수준에서 플랫폼의 다양한 기능은 격리 및 보안을 효과적으로 보장하여 다양한 세분성의 컴퓨팅 파워 리소스 요구를 쉽게 충족합니다.',
                         item1: '그래픽 카드 다중 인스턴스 실행: 단일 GPU의 활용 효율성 향상',
                         item2: '그래픽 카드 패스스루 기술: 고성능 컴퓨팅 작업의 원활한 연결 보장',
-                        item3: '다중 노드 병렬 컴퓨팅: 컴퓨팅 파워를 전례 없는 수준으로 확장하여 대규모 컴퓨팅 요구 충족',
-                        detail: '컨테이너 기술을 기반으로 PowerVerse Infra 드라이버 레벨의 인터셉션 기술과 결합하여 다중 브랜드 GPU 단일 카드의 유연한 할당 및 메모리 분할을 실현합니다. 사용자는 실제 요구에 따라 컴퓨팅 사양 및 분할 사양을 사용자 정의하고 공유 컴퓨팅 파워 및 메모리 슬라이스 관리를 쉽게 실현할 수 있습니다. 사용자가 공개 컴퓨팅 풀 또는 전용 컴퓨팅 풀을 쉽게 구성할 수 있도록 지원하며, 팀 내부 리소스 공유 또는 특정 프로젝트의 독립적인 컴퓨팅 파워 요구를 보장하는 경우 모두 유연하게 대응할 수 있으며 일괄 스케줄링, 우선순위 스케줄링 및 선점형 스케줄링 등 다양한 스케줄링 방법을 지원합니다.'
+                        item3: '다중 노드 병렬 컴퓨팅: 컴퓨팅 파워를 전례 없는 수준으로 확장하여 대규모 컴퓨팅 요구 충족'
                     },
                     feature2: {
                         title: '2. 데이터 플랫폼',
@@ -7879,16 +7861,13 @@ const translations = {
                         title: '3. 모델 훈련 및 추론 전체 생명주기',
                         desc: '모델 개발, 모델 훈련, 모델 배포, 모델 추론부터 모델 최적화까지 일련의 작업에 대한 전체 생명주기 지원을 제공합니다.',
                         devTitle: '개발 환경 서비스',
-                        dev1: '온라인에서 초 단위로 개발 환경을 생성할 수 있으며 CPU 코어, 메모리, GPU 모델, 수량, 시스템 디스크 등에 따라 개발 머신을 생성할 수 있습니다',
-                        dev2: '카드 없는 부팅, 종료, 온라인 개발 Jupyter, Python, VScode, 이미지 저장을 지원',
-                        dev3: '예약된 종료, 예약된 릴리스 등 리소스 회수 전략을 지원',
+                        devDesc: '온라인에서 초 단위로 개발 환경을 생성하며 CPU 코어, 메모리, GPU, 시스템 디스크 등으로 개발 머신 생성. 카드 없는 부팅, 온라인 개발, 예약 종료·릴리스 등 리소스 회수 전략 지원.',
                         trainTitle: '분산 훈련 서비스',
                         trainDesc: '사용자는 훈련 작업, 미세 조정 서비스를 시작하여 모델을 조정하고 더 세밀한 비즈니스 시나리오의 훈련을 늘릴 수 있으며 다중 모달 훈련, 사전 훈련 DLC, SFT 미세 조정 등을 지원합니다',
                         evalTitle: '모델 효과 평가',
                         evalDesc: '테스트 데이터 세트를 기반으로 대규모 모델의 성능, 효율성 및 적용 가능성을 테스트하고 성능 지표, 일반화 능력, 추론 속도 및 대기 시간, 리소스 소비, 해석 가능성, 확장성, 모델 크기, 데이터 종속성 등의 측면에서 평가할 수 있습니다.',
                         inferTitle: '온라인 추론',
-                        infer1: '원활한 배포 및 사용자 정의 선택: 배포 프로세스를 간소화하여 진정한 "원클릭 배포" 경험을 실현하고 모델 광장에서 직접 모델을 배포합니다. 동시에 개인 모델 업로드도 지원하며 공개 이미지, 사용자 정의 추론 이미지 또는 지정된 이미지 주소를 통해 유연하게 배포할 수 있습니다',
-                        infer2: '전체 생명주기 관리 및 탄력적 리소스 스케줄링: 온라인 추론 서비스 인스턴스의 전체 생명주기 관리를 제공하며 인스턴스의 즉각적인 확장/축소 작업을 포함하여 서비스가 비즈니스 요구에 따라 원활하게 확장되도록 보장합니다. 추론 인스턴스의 실행 상태를 실시간으로 모니터링하고 로그 검색 및 쿼리 기능을 제공합니다',
+                        inferDesc: '원클릭 및 개인 모델 배포를 지원하며, 인스턴스 생명주기 관리, 탄력적 확장·축소, 로그 검색을 제공.',
                         optTitle: '모델 최적화',
                         optDesc: '전문적인 모델 조정 서비스를 제공하고 모델 평가 메커니즘을 통해 사용자가 모델 효과를 과학적으로 비교할 수 있도록 지원하여 모델 선택과 비즈니스 요구의 정확한 일치를 보장합니다. 동시에 추론 가속 기술을 지속적으로 탐구하여 모델 정확도를 유지하면서 추론 속도를 대폭 향상시키는 데 전념하고 있습니다.'
                     },
@@ -7896,23 +7875,19 @@ const translations = {
                         title: '4. 지능형 모니터링 및 자가 치유',
                         desc: 'PowerVerse Infra의 모니터링 관리 서비스를 기반으로 시각화된 모니터링 데이터, 구성 가능한 경고 서비스, 자동화된 장애 처리를 제공하여 운영 유지보수를 간소화하고 서비스 운영 유지보수의 지능화를 실현.',
                         monitorTitle: '지능형 모니터링 및 다차원 리소스 시각화',
-                        monitorDesc: '통합 운영 관리 플랫폼을 통해 컴퓨팅 리소스, 스토리지 리소스, 네트워크 리소스 등 주요 운영 요소의 표준화 및 시각화 관리를 실현. 모니터링 범위가 광범위하며 컴퓨팅 노드, GPU 카드, 컨테이너 세 가지 차원을 기반으로 한 다중 지표 모니터링을 지원하고 CPU 사용률, 메모리 사용률, GPU 사용률, GPU 메모리 사용률, 네트워크 효율 모니터링을 지원하며 컴퓨팅 프로세스 중 NVLink 모니터링, TensorCore 모니터링을 지원.',
+                        monitorDesc: '통합 운영 관리 플랫폼으로 컴퓨팅·스토리지·네트워크를 표준화·시각화하며 노드/GPU/컨테이너 다차원 및 NVLink, TensorCore 모니터링 지원.',
                         alertTitle: '경고 구성 및 알림',
-                        alertDesc: '사용자가 비즈니스 요구에 따라 경고 규칙 그룹을 사용자 정의할 수 있도록 지원하며 리소스 임계값 경고, 성능 이상 경고 등을 포함합니다. 경고 조건이 트리거되면 시스템은 즉시 경고 기록을 생성하고 webhook, 이메일 등 다양한 채널을 통해 지정된 수신자에게 경고 알림을 전송합니다.',
+                        alertDesc: '사용자 정의 경고 규칙 지원, 트리거 시 webhook·이메일 등으로 지정 수신자에게 알림 전송.',
                         faultTitle: '장애 감지 및 수리',
-                        faultDesc: '클러스터 내의 잠재적 장애를 자동으로 감지합니다(하드웨어 장애, 소프트웨어 이상, 리소스 병목 현상 등). 장애가 감지되면 시스템은 신속하게 자가 치유 메커니즘을 시작합니다:',
-                        fault1: '장애 격리: 영향을 받은 노드 또는 GPU 카드를 "오염"으로 표시하고 이러한 리소스로 새 작업이 스케줄링되는 것을 자동으로 차단하여 장애 확산 방지',
-                        fault2: '작업 마이그레이션 및 재시도: 해당 노드에서 실행 중인 작업을 다른 정상 노드로 자동 마이그레이션하고 실패한 작업을 다시 실행하여 비즈니스 연속성 보장',
-                        fault3: '노드 재시작 및 감지: 재시작으로 복구 가능한 일시적 장애에 대해 노드를 자동으로 재시작하고 서비스 상태를 확인하며 확인이 통과되면 노드가 자동으로 컴퓨팅 대기열로 복귀',
-                        fault4: '오프라인 유지보수 및 복구: 자동으로 수리할 수 없는 장애에 대해 시스템은 노드/GPU 카드를 자동으로 오프라인으로 전환하고 관련 운영 담당자에게 알리며 수리 및 확인 후 리소스를 컴퓨팅 대기열로 자동 복원'
+                        faultDesc: '하드웨어·소프트웨어·리소스 병목 장애를 자동 감지하고, 장애 격리·작업 이전·재시도·노드 재시작 또는 오프라인 수리로 업무 연속성 보장.'
                     },
                     feature5: {
                         title: '5. 엣지 컴퓨팅',
                         desc: '엣지 컴퓨팅 능력을 제공하고 확장성이 뛰어나고 개방적이며 지능적인 클라우드-엣지 협업 인프라 플랫폼을 구축하여 엣지 컴퓨팅 시나리오의 여러 과제를 정확하게 해결하고 엣지 컴퓨팅과 AI 시나리오 애플리케이션의 긴밀한 통합을 실현합니다.',
-                        item1: '사용자 셀프서비스 최적화: 사용자 셀프서비스 기능을 제공하여 계정 빠른 생성부터 리소스 신청, 원클릭 개통, 편리한 사용 및 자동 릴리스까지 전체 프로세스 최적화를 포함하며, 사용자는 필요에 따라 작업 시간 기반 공유 리소스 요금 또는 구성 기반 전용 리소스 요금을 선택할 수 있습니다',
-                        item2: '시스템 관리 및 멀티 테넌트 지원: 멀티 테넌트 리소스 및 비즈니스 격리를 지원하여 각 테넌트의 비즈니스가 서로 간섭하지 않도록 보장하고 서브 계정 및 세분화된 역할 권한 관리를 지원합니다',
-                        item3: '가격 책정 및 청구: 직관적이고 이해하기 쉬운 시각화 페이지를 통해 열거형, 선형, 계층형 등 다양한 가격 책정 방법을 포함하는 포괄적이고 유연한 가격 전략을 구축하여 다양한 사용자의 비용 선호도와 실제 사용 시나리오를 충족합니다',
-                        item4: '고객 운영: 전체 라이프사이클 고객 관리를 실현하고 등록, 인증, 충전, 소비 등의 단계를 포괄하는 고객 데이터를 종합적으로 수집하고 분석하여 정밀 마케팅과 개인화된 서비스를 위한 견고한 기반을 마련합니다'
+                        item1: '계정 생성부터 리소스 신청·원클릭 개통·자동 릴리스까지 셀프서비스. 공유는 작업 기준 과금, 전용은 구성 기준 과금 지원.',
+                        item2: '멀티 테넌트 리소스·비즈니스 격리, 서브 계정 및 세분화된 권한 관리로 테넌트 간 간섭 방지.',
+                        item3: '시각화 페이지로 열거·선형·계층형 등 유연한 가격 전략 제공, 비용 선호와 사용 시나리오에 맞춤.',
+                        item4: '등록·인증·충전·소비를 아우르는 고객 관리로 정밀 마케팅과 개인화 서비스 지원.'
                     }
                 },
                 features: {
@@ -8790,7 +8765,7 @@ const translations = {
 // 语言管理类
 class LanguageManager {
     constructor() {
-        this.currentLang = this.getStoredLanguage() || 'zh-CN';
+        this.currentLang = this.getStoredLanguage() || 'en';
         this.init();
     }
 
@@ -8812,7 +8787,7 @@ class LanguageManager {
     }
 
     getStoredLanguage() {
-        return localStorage.getItem('preferredLanguage') || 'zh-CN';
+        return localStorage.getItem('preferredLanguage') || 'en';
     }
 
     setStoredLanguage(lang) {

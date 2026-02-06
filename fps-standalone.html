@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS 关卡 + 点击抛球 | threejs.org games_fps</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 100vw; height: 100vh; overflow: hidden;
+      background: #0a0a0f; color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .content-left {
+      position: fixed; top: 0; left: 0;
+      width: 0; height: 100vh;
+      padding: 0 5vw;
+      display: flex; flex-direction: column; justify-content: center; gap: 2rem;
+      z-index: 2; opacity: 0; overflow: hidden;
+      transform: translateX(-80px);
+      transition: width 0.9s ease-out, opacity 0.8s ease-out 0.15s, transform 0.8s ease-out 0.2s;
+    }
+    .content-left.active {
+      width: 66.666%; opacity: 1; transform: translateX(0);
+    }
+    .content-left h1 {
+      font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
+      background: linear-gradient(90deg, #6366f1, #a5b4fc);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .content-left p { font-size: 1.1rem; color: #94a3b8; max-width: 420px; line-height: 1.6; }
+    .content-left button {
+      padding: 0.9rem 1.8rem; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+      background: #6366f1; color: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .content-left button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    }
+    #canvas-container {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 1;
+      transition: left 0s, width 0.9s ease-out, right 0s;
+      cursor: crosshair;
+    }
+    #canvas-container.active {
+      left: auto; right: 0; width: 33.333%; height: 100vh;
+    }
+    @media (max-width: 768px) {
+      .content-left.active { width: 100%; height: 55%; }
+      #canvas-container.active { top: 55%; left: 0; width: 100%; height: 45%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-left">
+    <h1>FPS 关卡 + 抛球</h1>
+    <p>同款场景与球体，点击 3D 区域会沿视线方向抛出一颗球，与地面碰撞弹跳。</p>
+    <button>开始探索</button>
+  </div>
+  <div id="canvas-container"></div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://threejs.org/build/three.module.js",
+      "three/addons/": "https://threejs.org/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { Octree } from 'three/addons/math/Octree.js';
+    const gsap = (await import('https://esm.sh/gsap@3.12.5')).default;
+
+    const canvasContainer = document.getElementById('canvas-container');
+    const contentLeft = document.querySelector('.content-left');
+    let W = window.innerWidth, H = window.innerHeight;
+
+    const GRAVITY = 30;
+    const NUM_SPHERES = 80;
+    const SPHERE_RADIUS = 0.2;
+    const IMPULSE = 18;
+    const playerDirection = new THREE.Vector3();
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x88ccee);
+    scene.fog = new THREE.Fog(0x88ccee, 0, 50);
+
+    const camera = new THREE.PerspectiveCamera(70, W / H, 0.1, 1000);
+    camera.position.set(0, 2, 8);
+
+    const fillLight1 = new THREE.HemisphereLight(0x8dc1de, 0x00668d, 1.5);
+    fillLight1.position.set(2, 1, 1);
+    scene.add(fillLight1);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    directionalLight.position.set(-5, 25, -1);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.camera.near = 0.01;
+    directionalLight.shadow.camera.far = 500;
+    directionalLight.shadow.camera.right = 30;
+    directionalLight.shadow.camera.left = -30;
+    directionalLight.shadow.camera.top = 30;
+    directionalLight.shadow.camera.bottom = -30;
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
+    directionalLight.shadow.radius = 4;
+    directionalLight.shadow.bias = -0.00006;
+    scene.add(directionalLight);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(W, H);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.VSMShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    canvasContainer.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 2;
+    controls.maxDistance = 50;
+    controls.target.set(0, 1, 0);
+
+    const worldOctree = new Octree();
+    const sphereGeometry = new THREE.IcosahedronGeometry(SPHERE_RADIUS, 5);
+    const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xdede8d });
+
+    const spheres = [];
+    let sphereIdx = 0;
+
+    for (let i = 0; i < NUM_SPHERES; i++) {
+      const mesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      mesh.visible = false;
+      mesh.position.set(0, -100, 0);
+      scene.add(mesh);
+      spheres.push({
+        mesh,
+        collider: new THREE.Sphere(new THREE.Vector3(0, -100, 0), SPHERE_RADIUS),
+        velocity: new THREE.Vector3(0, 0, 0)
+      });
+    }
+
+    function throwBall() {
+      camera.getWorldDirection(playerDirection);
+      const sphere = spheres[sphereIdx];
+      sphere.collider.center.copy(camera.position).addScaledVector(playerDirection, 1.2);
+      sphere.velocity.copy(playerDirection).multiplyScalar(IMPULSE);
+      sphere.mesh.visible = true;
+      sphereIdx = (sphereIdx + 1) % NUM_SPHERES;
+    }
+
+    function updateSpheres(deltaTime) {
+      const damping = Math.exp(-1.5 * deltaTime) - 1;
+      for (const s of spheres) {
+        if (!s.mesh.visible) continue;
+        s.collider.center.addScaledVector(s.velocity, deltaTime);
+        const result = worldOctree.sphereIntersect(s.collider);
+        if (result) {
+          const n = result.normal.clone();
+          s.collider.center.add(n.multiplyScalar(result.depth));
+          s.velocity.addScaledVector(n.normalize(), -n.dot(s.velocity) * 1.5);
+        } else {
+          s.velocity.y -= GRAVITY * deltaTime;
+        }
+        s.velocity.addScaledVector(s.velocity, damping);
+        s.mesh.position.copy(s.collider.center);
+      }
+    }
+
+    canvasContainer.addEventListener('click', (e) => {
+      if (e.target === canvasContainer || e.target === renderer.domElement) {
+        throwBall();
+      }
+    });
+    renderer.domElement.addEventListener('click', () => throwBall());
+
+    const loader = new GLTFLoader().setPath('https://threejs.org/examples/models/gltf/');
+    loader.load('collision-world.glb', (gltf) => {
+      scene.add(gltf.scene);
+      worldOctree.fromGraphNode(gltf.scene);
+      gltf.scene.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.material && child.material.map) {
+            child.material.map.anisotropy = 4;
+          }
+        }
+      });
+    });
+
+    let lastTime = performance.now() / 1000;
+    function animate() {
+      requestAnimationFrame(animate);
+      const now = performance.now() / 1000;
+      const deltaTime = Math.min(0.05, now - lastTime);
+      lastTime = now;
+      if (worldOctree.box) updateSpheres(deltaTime);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function triggerTransition() {
+      canvasContainer.classList.add('active');
+      contentLeft.classList.add('active');
+      const finalAspect = (W * 0.333) / H;
+      const cam = { aspect: camera.aspect, fov: camera.fov };
+      gsap.to(cam, {
+        aspect: finalAspect,
+        fov: 70,
+        duration: 0.9,
+        ease: 'power2.out',
+        onUpdate: () => {
+          camera.aspect = cam.aspect;
+          camera.fov = cam.fov;
+          camera.updateProjectionMatrix();
+        }
+      });
+      gsap.delayedCall(0.95, () => resize());
+    }
+
+    function resize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      const w = canvasContainer.classList.contains('active') ? W * 0.333 : W;
+      camera.aspect = w / H;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, H);
+    }
+    window.addEventListener('resize', resize);
+
+    setTimeout(triggerTransition, 2500);
+  </script>
+</body>
+</html>

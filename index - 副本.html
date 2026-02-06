@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="home.title">PowerVerse Chain - AI驱动的超级公链</title>
-    <link rel="stylesheet" href="styles.css?v=20250210">
+    <link rel="stylesheet" href="styles.css?v=20250207">
     <link rel="stylesheet" href="./css/modal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     {"imports":{"three":"https://threejs.org/build/three.module.js","three/addons/":"https://threejs.org/examples/jsm/"}}
     </script>
     <script>
-    (function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='dark'?t:'light');})();
+    (function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();
     </script>
 </head>
 <body>
@@ -85,10 +85,10 @@
         <div class="hero-content-left" id="heroContentLeft">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="title-line hero-main-title hero-brand" data-i18n="home.title">PowerVerse Chain</span>
+                    <span class="title-line hero-main-title" data-i18n="home.title">PowerVerse Chain</span>
                     <span class="title-line highlight hero-subtitle-line" data-i18n="home.subtitle">AI驱动的超级公链</span>
                 </h1>
-                <p class="hero-description" data-i18n="home.description" data-i18n-html>融合<span class="hero-desc-tag">RWA</span>、<span class="hero-desc-tag">DePIN</span>、<span class="hero-desc-tag">GameFi</span>与<span class="hero-desc-tag">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span><span class="hero-desc-flow">与智慧</span>，<span class="hero-desc-flow">激活智能生态</span>，<span class="hero-desc-flow">开启数字文明新纪元</span></p>
+                <p class="hero-description" data-i18n="home.description" data-i18n-html>融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>与<span class="highlight">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元</p>
                 <div class="hero-buttons">
                     <a href="javascript:void(0);" id="qr-ios" class="btn btn-primary" data-i18n="home.ios" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
                         <span data-i18n="home.ios">iOS</span>
@@ -115,8 +115,8 @@
     <div class="main-3d-wrap" id="main3dWrap">
         <canvas id="products-three" class="products-three-canvas" aria-hidden="true"></canvas>
 
-    <!-- 技术框架：三层堆叠，交互与产品生态/开发者中心一致 -->
-    <section id="architecture" class="architecture architecture-stack-section reveal-section">
+    <!-- 技术框架：仅卡片堆叠，标题置顶可见 -->
+    <section id="architecture" class="architecture architecture-stack-section">
         <div class="architecture-stack-header">
             <h2 class="section-title">
                 <span class="title-main" data-i18n="architecture.title">技术框架</span>
@@ -124,69 +124,55 @@
             </h2>
             <p class="architecture-stack-hint">向下滚动探索</p>
         </div>
-        <div class="architecture-scroll-container">
-            <div class="architecture-stack">
-                <!-- 应用层 -->
-                <div class="architecture-stack-item" data-layer="1">
-                    <div class="architecture-card-title-bar">
-                        <p class="architecture-card-headline">
-                            <strong data-i18n="architecture.appLayer">应用层</strong>
-                            <span data-i18n="architecture.appLayerDesc">DApp、API 与 RPC 服务，面向用户与生态的接入层。</span>
-                        </p>
+        <div class="architecture-stack">
+            <div class="architecture-stack-item" data-layer="1">
+                <div class="architecture-card-title-bar">
+                    <p class="architecture-card-headline"><strong data-i18n="architecture.appLayer">应用层</strong> <span data-i18n="architecture.appLayerDesc">DApp、API 与 RPC 服务，面向用户与生态的接入层。</span></p>
+                </div>
+                <div class="architecture-stack-inner architecture-card">
+                    <div class="architecture-card-text">
+                        <ul class="architecture-stack-list">
+                            <li data-i18n="architecture.dapp">DApp应用</li>
+                            <li data-i18n="architecture.api">API接口</li>
+                            <li data-i18n="architecture.rpc">RPC服务</li>
+                        </ul>
                     </div>
-                    <div class="architecture-stack-inner architecture-card">
-                        <div class="architecture-card-text">
-                            <ul class="architecture-stack-list">
-                                <li data-i18n="architecture.dapp">DApp应用</li>
-                                <li data-i18n="architecture.api">API接口</li>
-                                <li data-i18n="architecture.rpc">RPC服务</li>
-                            </ul>
-                        </div>
-                        <div class="architecture-card-icon" aria-hidden="true">
-                            <span class="architecture-card-icon-symbol">📱</span>
-                        </div>
+                    <div class="architecture-card-icon" aria-hidden="true">
+                        <span class="architecture-card-icon-symbol">📱</span>
                     </div>
                 </div>
-                <!-- 协议层 -->
-                <div class="architecture-stack-item" data-layer="2">
-                    <div class="architecture-card-title-bar">
-                        <p class="architecture-card-headline">
-                            <strong data-i18n="architecture.protocolLayer">协议层</strong>
-                            <span data-i18n="architecture.protocolLayerDesc">共识、智能合约与跨链协议，支撑链上逻辑与互操作。</span>
-                        </p>
+            </div>
+            <div class="architecture-stack-item" data-layer="2">
+                <div class="architecture-card-title-bar">
+                    <p class="architecture-card-headline"><strong data-i18n="architecture.protocolLayer">协议层</strong> <span data-i18n="architecture.protocolLayerDesc">共识、智能合约与跨链协议，支撑链上逻辑与互操作。</span></p>
+                </div>
+                <div class="architecture-stack-inner architecture-card">
+                    <div class="architecture-card-text">
+                        <ul class="architecture-stack-list">
+                            <li data-i18n="architecture.consensus">共识机制</li>
+                            <li data-i18n="architecture.smartContract">智能合约</li>
+                            <li data-i18n="architecture.crossChain">跨链协议</li>
+                        </ul>
                     </div>
-                    <div class="architecture-stack-inner architecture-card">
-                        <div class="architecture-card-text">
-                            <ul class="architecture-stack-list">
-                                <li data-i18n="architecture.consensus">共识机制</li>
-                                <li data-i18n="architecture.smartContract">智能合约</li>
-                                <li data-i18n="architecture.crossChain">跨链协议</li>
-                            </ul>
-                        </div>
-                        <div class="architecture-card-icon" aria-hidden="true">
-                            <span class="architecture-card-icon-symbol">🤝</span>
-                        </div>
+                    <div class="architecture-card-icon" aria-hidden="true">
+                        <span class="architecture-card-icon-symbol">🤝</span>
                     </div>
                 </div>
-                <!-- 网络层 -->
-                <div class="architecture-stack-item" data-layer="3">
-                    <div class="architecture-card-title-bar">
-                        <p class="architecture-card-headline">
-                            <strong data-i18n="architecture.networkLayer">网络层</strong>
-                            <span data-i18n="architecture.networkLayerDesc">P2P 网络、节点与数据存储，保障去中心化与安全。</span>
-                        </p>
+            </div>
+            <div class="architecture-stack-item" data-layer="3">
+                <div class="architecture-card-title-bar">
+                    <p class="architecture-card-headline"><strong data-i18n="architecture.networkLayer">网络层</strong> <span data-i18n="architecture.networkLayerDesc">P2P 网络、节点与数据存储，保障去中心化与安全。</span></p>
+                </div>
+                <div class="architecture-stack-inner architecture-card">
+                    <div class="architecture-card-text">
+                        <ul class="architecture-stack-list">
+                            <li data-i18n="architecture.p2p">P2P网络</li>
+                            <li data-i18n="architecture.nodeManagement">节点管理</li>
+                            <li data-i18n="architecture.dataStorage">数据存储</li>
+                        </ul>
                     </div>
-                    <div class="architecture-stack-inner architecture-card">
-                        <div class="architecture-card-text">
-                            <ul class="architecture-stack-list">
-                                <li data-i18n="architecture.p2p">P2P网络</li>
-                                <li data-i18n="architecture.nodeManagement">节点管理</li>
-                                <li data-i18n="architecture.dataStorage">数据存储</li>
-                            </ul>
-                        </div>
-                        <div class="architecture-card-icon" aria-hidden="true">
-                            <span class="architecture-card-icon-symbol">🌐</span>
-                        </div>
+                    <div class="architecture-card-icon" aria-hidden="true">
+                        <span class="architecture-card-icon-symbol">🌐</span>
                     </div>
                 </div>
             </div>
@@ -414,8 +400,8 @@
         </div>
     </div>
 
-    <script src="js/languages.js?v=20250210"></script>
-    <script src="script.js?v=20250210"></script>
+    <script src="js/languages.js?v=20250207"></script>
+    <script src="script.js?v=20250207"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     <script type="module">
         // 第一屏 3D 效果与加载方式（来自 fps-standalone：场景 + 左侧文字滑入）
@@ -526,9 +512,8 @@
             });
 
             let lastTime = performance.now() / 1000;
-            let animId = null;
             function animate() {
-                animId = requestAnimationFrame(animate);
+                requestAnimationFrame(animate);
                 const now = performance.now() / 1000;
                 const deltaTime = Math.min(0.05, now - lastTime);
                 lastTime = now;
@@ -572,14 +557,6 @@
                 renderer.setSize(w, h);
             }
             window.addEventListener('resize', resize);
-
-            window.addEventListener('beforeunload', function () {
-                if (animId) cancelAnimationFrame(animId);
-                controls.dispose();
-                renderer.dispose();
-                if (renderer.domElement && renderer.domElement.parentNode)
-                    renderer.domElement.parentNode.removeChild(renderer.domElement);
-            });
 
             setTimeout(triggerTransition, 2500);
         })();

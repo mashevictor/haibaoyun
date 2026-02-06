@@ -1,3 +1,23 @@
+// 深色/浅色模式：默认浅色，首屏即应用避免闪烁
+(function () {
+    var stored = localStorage.getItem('theme');
+    var theme = stored === 'light' || stored === 'dark' ? stored : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+})();
+
+// 主题切换按钮
+var themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+        var html = document.documentElement;
+        var current = html.getAttribute('data-theme') || 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        if (typeof updateNavbarBackground === 'function') updateNavbarBackground();
+    });
+}
+
 // 子导航边框光点：悬浮某子项时光点跳动到该区域
 document.querySelectorAll('.product-dropdown').forEach(function (dropdown) {
     dropdown.querySelectorAll('a').forEach(function (link) {
@@ -30,6 +50,14 @@ navLinks.forEach(link => {
         if (navMenu) navMenu.classList.remove('active');
         if (menuToggle) menuToggle.classList.remove('active');
     });
+});
+
+// 点击页面空白处关闭移动端菜单（避免菜单层级遮挡后无法关闭）
+document.body.addEventListener('click', function (e) {
+    if (!navMenu || !navMenu.classList.contains('active')) return;
+    if (navMenu.contains(e.target) || (menuToggle && menuToggle.contains(e.target))) return;
+    navMenu.classList.remove('active');
+    if (menuToggle) menuToggle.classList.remove('active');
 });
 
 // 导航高亮 - 当前页面
@@ -76,7 +104,7 @@ function highlightCurrentPage() {
 document.addEventListener('DOMContentLoaded', highlightCurrentPage);
 window.addEventListener('hashchange', highlightCurrentPage);
 
-// 平滑滚动：支持从 #product 等点击「首页」滚动到 #home，并更新地址栏
+// 平滑滚动：支持从 #product 等点击「首页」滚动到 #home，修复锚点 offsetTop 计算偏差（适配不同屏幕）
 document.addEventListener('click', function (e) {
     var anchor = e.target.closest('a[href^="#"]');
     if (!anchor) return;
@@ -85,8 +113,10 @@ document.addEventListener('click', function (e) {
     var target = document.querySelector(href);
     if (target) {
         e.preventDefault();
-        var offsetTop = target.offsetTop - 80;
-        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        var rect = target.getBoundingClientRect();
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var top = rect.top + scrollTop - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
         if (window.history && window.history.replaceState) {
             window.history.replaceState(null, '', window.location.pathname + href);
         }
@@ -98,20 +128,23 @@ document.addEventListener('click', function (e) {
 let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        navbar.style.background = 'rgba(10, 14, 39, 0.95)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+function updateNavbarBackground() {
+    if (!navbar) return;
+    var theme = document.documentElement.getAttribute('data-theme') || 'light';
+    var isScrolled = window.pageYOffset > 100;
+    if (theme === 'light') {
+        navbar.style.background = isScrolled ? 'rgba(240, 244, 248, 0.98)' : 'rgba(240, 244, 248, 0.92)';
+        navbar.style.boxShadow = isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.08)' : 'none';
     } else {
-        navbar.style.background = 'rgba(10, 14, 39, 0.8)';
-        navbar.style.boxShadow = 'none';
+        navbar.style.background = isScrolled ? 'rgba(10, 14, 39, 0.95)' : 'rgba(10, 14, 39, 0.8)';
+        navbar.style.boxShadow = isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.3)' : 'none';
     }
-    
-    lastScroll = currentScroll;
+}
+window.addEventListener('scroll', function () {
+    lastScroll = window.pageYOffset;
+    updateNavbarBackground();
 });
-
+if (navbar) updateNavbarBackground();
 // 滚动动画：首页区块揭示（section 进入视口时添加 .animate-in，由 CSS 做交错动画）
 const revealOptions = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
 const revealObserver = new IntersectionObserver((entries) => {
