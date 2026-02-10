@@ -718,7 +718,7 @@ body {
     --hero-reveal-duration: 1000ms;
     --hero-ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
     --hero-ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-    --hero-gap: 12px;
+    --hero-gap: 6px;
     /* hero-sequencer 动画体系（与文档逻辑一致） */
     --navbar-height: 72px;
     --hero-left-height: 338px;
@@ -1149,13 +1149,9 @@ body {
     background: #000;
     padding-top: 72px;
 }
-/* 浅色模式：模块间隙缩小为 1/4（3px） */
+/* 浅色模式：与深色统一使用 --hero-gap 模块间隙 */
 [data-theme="light"] .hero-video-layout .hero-inner {
     background: #000;
-    gap: 3px;
-    margin: 3px;
-    max-width: calc(100% - 6px);
-    min-height: calc(100vh - 72px - 6px);
 }
 /* 首页浅色模式：视频区域右下角圆角 ×5（1.5rem → 7.5rem） */
 [data-theme="light"] .hero-video-layout #hero-sequencer,
@@ -1168,7 +1164,7 @@ body {
 [data-theme="light"] .hero-video-layout .hero-logo-white-area {
     border-radius: 1.5rem 1.5rem 7.5rem 1.5rem;
 }
-[data-theme="light"] .hero-video-layout .hero-left { gap: 3px; }
+[data-theme="light"] .hero-video-layout .hero-left { gap: var(--hero-gap); }
 [data-theme="light"] .hero-video-layout .hero-left-card,
 [data-theme="light"] .hero-video-layout .hero-right-card {
     background: #ffffff;
@@ -1212,24 +1208,64 @@ body {
 [data-theme="light"] .hero-video-layout .hero-description .hero-desc-tag { color: #0f172a; }
 [data-theme="light"] .hero-video-layout .hero-description .hero-desc-flow { color: #0f172a; }
 
-/* 深色模式：第一屏背景全黑，蓝色统一 #1964FE（PowerVerse Chain、AI驱动的超级公链、导航等） */
-[data-theme="dark"] .hero-video-layout { background: #000000; }
-[data-theme="dark"] .hero-video-layout .hero-inner { background: #000000; }
+/* 深色模式：第一屏浅灰底，英雄区各圆角模块为黑色，与浅色统一 --hero-gap 间隙 */
+[data-theme="dark"] .hero-video-layout { background: #383838; }
+[data-theme="dark"] .hero-video-layout .hero-inner {
+    background: #383838;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    gap: var(--hero-gap);
+    margin: var(--hero-gap);
+    max-width: calc(100% - var(--hero-gap) * 2);
+    min-height: calc(100vh - 72px - var(--hero-gap) * 2);
+}
+[data-theme="dark"] .hero-video-layout .hero-left { gap: var(--hero-gap); }
 [data-theme="dark"] .hero-video-layout .hero-left-card,
 [data-theme="dark"] .hero-video-layout .hero-right-card {
     background: #000000;
     color: var(--text-primary);
     border: none;
+    border-radius: 1rem;
+    overflow: hidden;
 }
 [data-theme="dark"] .hero-video-layout .hero-left-card-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
 }
-[data-theme="dark"] .hero-video-layout .hero-center-wrap,
-[data-theme="dark"] .hero-video-layout #hero-sequencer { background: transparent; border: none; }
+[data-theme="dark"] .hero-video-layout .hero-center-wrap {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+[data-theme="dark"] .hero-video-layout #hero-sequencer {
+    background: #000000;
+    border-radius: 1rem;
+    overflow: hidden;
+}
 [data-theme="dark"] .hero-video-layout .hero-center-inner,
 [data-theme="dark"] .hero-video-layout .hero-sequencer-inner .video-layer-inner,
 [data-theme="dark"] .hero-video-layout .hero-sequencer-inner .video-layer { background: transparent !important; }
 [data-theme="dark"] .hero-video-layout .hero-logo-white-area { border: none; box-shadow: none; }
+
+/* 深色模式：第二屏（技术框架、产品生态等）浅灰背景，区块圆角区分 */
+[data-theme="dark"] .main-3d-wrap { background: #383838; }
+[data-theme="dark"] .main-3d-wrap .architecture,
+[data-theme="dark"] .main-3d-wrap .stack-modules-wrap { background: #383838; }
+[data-theme="dark"] .architecture { background: #383838; }
+[data-theme="dark"] .stack-modules-wrap { background: #383838; }
+[data-theme="dark"] .architecture-stack-section { background: #383838; }
+[data-theme="dark"] .architecture-stack-header {
+    background: #2e2e2e;
+    border-radius: 0 0 1rem 1rem;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .architecture-stack-item {
+    background: #2e2e2e;
+    border-radius: 1rem;
+}
+[data-theme="dark"] .stack-modules-wrap .stack-module-item {
+    background: #2e2e2e;
+    border-radius: 1rem;
+}
 [data-theme="dark"] .hero-video-layout .hero-subtitle-line { color: #1964FE !important; -webkit-text-fill-color: #1964FE !important; }
 [data-theme="dark"] .hero-video-layout .hero-left .hero-main-title,
 [data-theme="dark"] .hero-video-layout .hero-right-title {
