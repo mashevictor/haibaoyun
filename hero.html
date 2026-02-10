@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PowerVerse Chain - AI 驱动的超级链</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { red: '#e84142', 'red-700': '#b91c1c' },
+          animation: {
+            marquee: 'marquee 25s linear infinite',
+            float: 'float 6s ease-in-out infinite',
+            pulse-slow: 'pulse 3s ease-in-out infinite',
+          },
+          keyframes: {
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+          },
+        },
+      },
+      plugins: [
+        function({ addVariant }) { addVariant('mounted', '.mounted &'); },
+      ],
+    }
+  </script>
+  <style>
+    :root {
+      --navbar-height: 4rem;
+      --radius-4xl: 2rem;
+      --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+      --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+      --hero-reveal-duration: 2000ms;
+      --hero-left-height: 338px;
+      --hero-right-height: 338px;
+    }
+    .dark { color-scheme: dark; }
+
+    /* ========== 浅色/深色模式 文字对比度优化 ========== */
+    /* 浅色模式：主文深色，辅文至少 #475569 */
+    html:not(.dark) body { color: #0f172a; }
+    html:not(.dark) .text-neutral-500,
+    html:not(.dark) .text-neutral-600 { color: #475569 !important; }
+    html:not(.dark) .text-neutral-400 { color: #64748b !important; }
+    /* Hero 区域浅色模式：强制深色文字，避免白底上看不见 */
+    html:not(.dark) #hero-left,
+    html:not(.dark) #hero-right { color: #0f172a !important; }
+    html:not(.dark) #hero-left p,
+    html:not(.dark) #hero-right p,
+    html:not(.dark) #hero-left h2,
+    html:not(.dark) #hero-right h2 { color: #0f172a !important; }
+    html:not(.dark) #hero-left .border-red,
+    html:not(.dark) #hero-left a[href="#links"] { color: #b91c1c !important; border-color: #b91c1c !important; }
+    html:not(.dark) #hero-right .text-neutral-500,
+    html:not(.dark) #hero-right span { color: #334155 !important; }
+    /* 深色模式：主文浅色，辅文 #94a3b8 / #cbd5e1 */
+    html.dark body { color: #f8fafc; }
+    html.dark .text-neutral-500 { color: #94a3b8 !important; }
+    html.dark .text-neutral-600,
+    html.dark .text-neutral-400 { color: #cbd5e1 !important; }
+    html.dark .text-neutral-300 { color: #e2e8f0 !important; }
+
+    html { scroll-behavior: smooth; }
+    * { -webkit-tap-highlight-color: transparent; }
+
+    /* Hero overlay: logo full screen → shrink → panels in */
+    .hero-mount { opacity: 0; transform: translateY(1rem); transition: opacity 0.8s var(--ease-out-cubic), transform 0.8s var(--ease-in-out-quart); }
+    .panels-in .hero-mount { opacity: 1; transform: translateY(0); }
+    .panels-in .hero-mount.hero-mount-left { transition-delay: 0.8s; }
+    .panels-in .hero-mount.hero-mount-powered { transition-delay: 2s; animation: powered-bounce 0.7s var(--ease-out-cubic) 2.6s both; }
+    @keyframes powered-bounce {
+      0% { transform: translateY(0); } 35% { transform: translateY(-18px); }
+      60% { transform: translateY(5px); } 85% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+    .panels-in .hero-mount.hero-mount-right { transition-delay: 1s; }
+
+    /* 白色 logo 区域：初始铺满屏，动画时从两侧往中间推进，最终尺寸与第一个视频区域一致 */
+    #hero-logo-white-area {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100vw;
+      height: 100vh;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      backface-visibility: hidden;
+      transition: width var(--hero-reveal-duration) var(--ease-in-out-quart),
+                  height var(--hero-reveal-duration) var(--ease-in-out-quart);
+    }
+    /* 最终尺寸：与第一个视频容器一致，使 logo 正好被视频覆盖（视频为 16:9） */
+    #hero-logo-white-area.hero-white-shrunk {
+      width: min(85vw, 32rem);
+      height: min(calc(85vw * 9 / 16), 18rem);
+    }
+    @media (min-width: 1024px) {
+      /* 桌面端：视频约 42.5vw 宽，16:9 高 */
+      #hero-logo-white-area.hero-white-shrunk {
+        width: min(42.5vw, 32rem);
+        height: min(calc(42.5vw * 9 / 16), 18rem);
+      }
+    }
+
+    #hero-center-wrap { opacity: 0; clip-path: inset(50% 50% 50% 50% round 2rem); transition: opacity 0.6s var(--ease-out-cubic), clip-path var(--hero-reveal-duration) var(--ease-in-out-quart); }
+    .panels-in #hero-center-wrap { opacity: 1; clip-path: inset(0 0 0 0 round 2rem); }
+    /* 两侧内容与白色框同步从两侧往中间推进，无延迟，与参考图一致的平滑缓动 */
+    #hero-left { transform: translateX(-100%); backface-visibility: hidden; transition: transform var(--hero-reveal-duration) var(--ease-in-out-quart); }
+    #hero-right { transform: translateX(100%); backface-visibility: hidden; transition: transform var(--hero-reveal-duration) var(--ease-in-out-quart); }
+    .panels-in #hero-left { transform: translateX(0); }
+    .panels-in #hero-right { transform: translateX(0); }
+
+    /* ========== 浅色模式：明亮、轻盈、白底 ========== */
+    html:not(.dark) #navigation { box-shadow: 0 2px 16px rgba(0,0,0,0.06); background: rgba(255,255,255,0.95); color: #0f172a; }
+    html:not(.dark) #navigation a, html:not(.dark) #navigation button { color: inherit; }
+    html:not(.dark) .hud-layer { display: none !important; }
+    html:not(.dark) #hero { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); }
+    html:not(.dark) #hero-inner { background: #f1f5f9; }
+    html:not(.dark) #hero-logo-white-area { background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    html:not(.dark) .interactive-card:hover { box-shadow: 0 16px 40px -12px rgba(0,0,0,0.15); }
+    html:not(.dark) .btn-glow:hover { box-shadow: 0 0 20px rgba(232, 65, 66, 0.35); }
+    html:not(.dark) #companies { background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%); }
+    html:not(.dark) #solutions-insights { background: #ffffff; }
+    html:not(.dark) #links { background: #f8fafc; }
+    /* 页脚浅色模式：浅底 + 深色文字 */
+    html:not(.dark) #grants { background: #f1f5f9 !important; color: #0f172a !important; }
+    html:not(.dark) #grants img { filter: none !important; opacity: 1; }
+    html:not(.dark) #grants p, html:not(.dark) #grants .text-neutral-400 { color: #64748b !important; }
+
+    /* ========== 深色模式：沉浸、科技感、黑底 ========== */
+    html.dark #navigation { box-shadow: 0 2px 24px rgba(0,0,0,0.4); background: rgba(10,10,10,0.9); }
+    html.dark #hero { background: #000; }
+    html.dark #hero-inner { background: #0a0a0a; }
+    html.dark #hero-logo-white-area { background: #0f172a; border: 1px solid rgba(255,255,255,0.06); }
+    html.dark .interactive-card:hover { box-shadow: 0 0 32px rgba(232, 65, 66, 0.15), 0 16px 48px -12px rgba(0,0,0,0.6); }
+    html.dark .btn-glow:hover { box-shadow: 0 0 32px rgba(232, 65, 66, 0.5), 0 0 64px rgba(232, 65, 66, 0.2); }
+    html.dark #companies { background: linear-gradient(90deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+    html.dark #solutions-insights { background: #0f172a; }
+    html.dark #links { background: #0a0a0a; }
+    /* 视频区域固定宽高比，播放时位置不移动；所有 layer 保持 flex 居中，避免 5/6/7/8 因 lg:block 顶到左上角 */
+    #hero-sequencer-inner .video-layer { display: flex !important; align-items: center !important; justify-content: center !important; }
+    #hero-sequencer-inner .video-layer > div { aspect-ratio: 16/9; flex-shrink: 0; width: 85%; max-width: 32rem; display: flex; align-items: center; justify-content: center; }
+    #hero-sequencer-inner .video-layer video { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+    @media (max-width: 1024px) {
+      #hero-sequencer-inner #layer-6, #hero-sequencer-inner #layer-7, #hero-sequencer-inner #layer-8, #hero-sequencer-inner #layer-9 { display: none !important; }
+    }
+
+    /* 品牌名 PowerVerse Chain 从左往右点亮效果 */
+    /* 浅色模式：深色文字，保证在白底上可读 */
+    .brand-title {
+      background: linear-gradient(90deg, #0f172a 0%, #0f172a 50%, rgba(15,23,42,0.35) 50%, rgba(15,23,42,0.35) 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: brandLightUp 2.5s var(--ease-in-out-quart) 2s forwards;
+    }
+    html.dark .brand-title {
+      background: linear-gradient(90deg, #f8fafc 0%, #f8fafc 50%, rgba(248,250,252,0.4) 50%, rgba(248,250,252,0.4) 100%);
+      background-size: 200% 100%;
+    }
+    @keyframes brandLightUp {
+      0% { background-position: 100% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    /* AI 驱动的超级链 同样左→右点亮 - 浅色/深色模式对比度 */
+    .split-line.text-red span {
+      background: linear-gradient(90deg, #c53030 0%, #c53030 50%, rgba(180,50,50,0.55) 50%, rgba(180,50,50,0.55) 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: sublineLightUp 2s var(--ease-in-out-quart) 2.5s forwards;
+    }
+    @keyframes sublineLightUp {
+      0% { background-position: 100% 0; }
+      100% { background-position: 0 0; }
+    }
+    html.dark .split-line.text-red span {
+      background: linear-gradient(90deg, #f87171 0%, #f87171 50%, rgba(248,113,113,0.5) 50%, rgba(248,113,113,0.5) 100%);
+      background-size: 200% 100%;
+    }
+
+    /* 右侧 PowerVerse Chain 左→右出现 - 浅色模式深色字 */
+    .brand-title-right {
+      background: linear-gradient(90deg, #0f172a 0%, #0f172a 50%, rgba(15,23,42,0.35) 50%, rgba(15,23,42,0.35) 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: brandRightReveal 2s var(--ease-in-out-quart) 2.2s forwards;
+    }
+    html.dark .brand-title-right {
+      background: linear-gradient(90deg, #f8fafc 0%, #f8fafc 50%, rgba(248,250,252,0.4) 50%, rgba(248,250,252,0.4) 100%);
+      background-size: 200% 100%;
+    }
+    @keyframes brandRightReveal {
+      0% { background-position: 100% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    .split-line span { display: block; transform: translateY(100%); transition: transform 0.7s var(--ease-out-cubic); }
+    .panels-in .split-line span { transform: translateY(0); }
+    .panels-in .split-line span:nth-child(1) { transition-delay: 1.2s; }
+    .panels-in .split-line span:nth-child(2) { transition-delay: 1.35s; }
+    .panels-in .split-line span:nth-child(3) { transition-delay: 1.5s; }
+    .panels-in .split-line span:nth-child(4) { transition-delay: 1.65s; }
+
+    /* Video sequencer */
+    .video-layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .video-layer.invisible { visibility: hidden; }
+
+    /* HUD overlay */
+    .hud-layer { opacity: 0; transition: opacity 1s 2s ease-out; pointer-events: none; }
+    .hud-layer.loaded { opacity: 1; }
+    .dark .hud-layer-light { opacity: 0; }
+    .dark .hud-layer-dark { opacity: 1; mix-blend-mode: screen; }
+    .hud-layer-light { opacity: 1; }
+    .hud-layer-dark { opacity: 0; }
+
+    /* Scroll reveal - staggered */
+    .section-reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-cubic), transform 0.8s var(--ease-out-cubic); }
+    .section-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Interactive cards - 3D tilt on hover */
+    .interactive-card {
+      transition: transform 0.4s var(--ease-out-cubic), box-shadow 0.4s var(--ease-out-cubic);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .interactive-card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    .interactive-card:active { transform: translateY(-4px); }
+    a.interactive-card { cursor: pointer; }
+
+    /* Marquee */
+    .marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Button glow effect */
+    .btn-glow { transition: box-shadow 0.3s ease, transform 0.2s ease; }
+    .btn-glow:hover { box-shadow: 0 0 24px rgba(232, 65, 66, 0.5); transform: translateY(-2px); }
+
+    /* Nav menu */
+    .nav-menu { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease-out-cubic); }
+    .nav-menu.opened { max-height: 80vh; }
+    section[id] { scroll-margin-top: calc(var(--navbar-height) + 1rem); }
+    #navigation.menu-opened #toggle-menu-button span:nth-child(1) { transform: rotate(45deg) translateY(4px); }
+    #navigation.menu-opened #toggle-menu-button span:nth-child(2) { opacity: 0; }
+    #navigation.menu-opened #toggle-menu-button span:nth-child(3) { transform: rotate(-45deg) translateY(-4px); }
+
+    /* Gradient text */
+    .gradient-text { background: linear-gradient(135deg, #e84142, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Parallax scroll hint */
+    .scroll-hint { animation: float 2s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-black text-neutral-900 dark:text-neutral-100 antialiased transition-colors duration-300">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeBtn = document.getElementById('theme-toggle-button');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark');
+          document.documentElement.classList.contains('dark') ? localStorage.setItem('theme', 'dark') : localStorage.removeItem('theme');
+        });
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+
+  <!-- 导航栏 -->
+  <nav id="navigation" class="fixed top-0 left-0 w-full h-[var(--navbar-height)] backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 z-50 -translate-y-full mounted:translate-y-0 rounded-b-2xl transition-all duration-500">
+    <div class="w-full h-full flex items-center justify-between px-4 lg:px-8">
+      <a href="/" class="flex items-center z-10 gap-2 group">
+        <img src="images/logo/1.1.png" alt="PowerVerse Chain" class="h-7 w-auto transition-transform group-hover:scale-110" onerror="this.style.display='none';this.nextElementSibling?.classList.remove('hidden')">
+        <svg class="h-7 text-red hidden" viewBox="0 0 1024 186" fill="none"><path d="M161.511 112.482C164.805 106.855 172.984 106.855 176.242 112.482L211.241 172.457C214.535 178.085 210.409 185.091 203.857 185.091H133.86" fill="currentColor"/></svg>
+        <span class="font-bold text-lg hidden sm:inline">PowerVerse Chain</span>
+      </a>
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#solutions-insights" class="text-sm font-semibold hover:text-red transition-colors">产品</a>
+        <a href="#links" class="text-sm font-semibold hover:text-red transition-colors">应用</a>
+        <a href="#companies" class="text-sm font-semibold hover:text-red transition-colors">生态</a>
+        <a href="#grants" class="text-sm font-semibold hover:text-red transition-colors">Grants</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button id="theme-toggle-button" class="relative w-14 h-8 rounded-full border border-black dark:border-neutral-600 bg-white dark:bg-neutral-800 cursor-pointer overflow-hidden hover:border-red transition-colors">
+          <span class="absolute left-1 top-1 w-6 h-6 rounded-full bg-black dark:translate-x-6 dark:bg-neutral-400 transition-all duration-300"></span>
+        </button>
+        <a href="#links" class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 bg-red dark:bg-white text-white dark:text-black rounded-xl font-semibold text-sm btn-glow">立即构建 →</a>
+        <button id="toggle-menu-button" class="lg:hidden p-2 flex flex-col justify-center gap-1.5 w-10 h-10" aria-label="菜单">
+          <span class="block w-6 h-0.5 bg-black dark:bg-white transition-all duration-300 origin-center"></span>
+          <span class="block w-6 h-0.5 bg-black dark:bg-white transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-black dark:bg-white transition-all duration-300 origin-center"></span>
+        </button>
+      </div>
+    </div>
+    <div id="nav-menu" class="nav-menu lg:hidden bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+      <div class="flex flex-col gap-2 p-4">
+        <a href="#solutions-insights" class="py-2 hover:text-red transition-colors">产品</a>
+        <a href="#links" class="py-2 hover:text-red transition-colors">应用</a>
+        <a href="#companies" class="py-2 hover:text-red transition-colors">生态</a>
+        <a href="#grants" class="py-2 hover:text-red transition-colors">Grants</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex flex-col overflow-x-clip min-h-screen">
+    <!-- Hero 区域 -->
+    <section id="hero" class="relative w-full min-h-screen flex items-end justify-center pt-[var(--navbar-height)] overflow-hidden transition-colors duration-300">
+      <!-- Logo 全屏遮罩 → 缩小动画 -->
+      <div id="hero-logo-overlay" class="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
+        <!-- 白色区域：初始铺满屏，动画时四周往中间推进至 1987×1987，与 logo 变大、两侧内容推进同步 -->
+        <div id="hero-logo-white-area" class="flex items-center justify-center rounded-2xl lg:rounded-3xl origin-center transition-all duration-300">
+          <div id="hero-overlay-logo-wrap" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <img id="hero-overlay-logo" src="images/logo/1.1.png" alt="PowerVerse Chain" class="w-[90%] max-w-[28rem] h-auto max-h-[90%] object-contain origin-center will-change-transform [backface-visibility:hidden]" style="transform: scale(0.12); transition: transform var(--hero-reveal-duration) var(--ease-in-out-quart);" onerror="this.style.display='none';this.nextElementSibling?.classList.remove('hidden')">
+            <svg id="hero-overlay-logo-svg" class="hidden w-[90%] max-w-[28rem] h-auto max-h-[90%] text-red object-contain origin-center will-change-transform [backface-visibility:hidden]" style="transform: scale(0.12); transition: transform var(--hero-reveal-duration) var(--ease-in-out-quart);" viewBox="0 0 722 628" fill="none"><path d="M548.831 381.485C560.015 362.435 587.792 362.435 598.853 381.485L717.703 584.525" fill="currentColor"/><path d="M477.034 246.295C487.849 227.367 487.849 204.015 477.034 184.965" fill="currentColor"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div id="hero-inner" class="relative w-full min-h-[calc(100svh-var(--navbar-height))] grid grid-cols-12 gap-px p-px z-10 items-stretch rounded-2xl lg:rounded-3xl transition-colors duration-300">
+        <!-- Hero 左侧 -->
+        <div id="hero-left" class="col-span-12 sm:col-span-6 lg:col-span-3 flex flex-col gap-px">
+          <div class="w-full bg-white dark:bg-neutral-950 p-6 flex flex-col justify-between gap-4 flex-1 rounded-2xl hero-mount hero-mount-left">
+            <div>
+              <h1 class="brand-title text-3xl lg:text-5xl font-bold mb-4">PowerVerse Chain</h1>
+              <p class="text-xl lg:text-2xl font-bold text-red split-line"><span>AI 驱动的超级链</span></p>
+            </div>
+          </div>
+          <div class="hero-mount hero-mount-powered w-full p-6 bg-white dark:bg-neutral-950 rounded-2xl border border-neutral-200 dark:border-neutral-800 flex flex-col justify-between">
+            <p class="text-base lg:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">整合 RWA、DePIN、GameFi 与 DeFi，汇聚全球算力与智慧，激活智能生态，开启数字文明新纪元。</p>
+            <a href="#links" class="inline-flex items-center gap-2 px-4 py-2 border-2 border-red text-red rounded-xl font-semibold hover:bg-red hover:text-white transition-colors w-fit">了解更多 →</a>
+          </div>
+        </div>
+
+        <!-- Hero 中部 - 视频序列器 -->
+        <div id="hero-center-wrap" class="col-span-12 lg:col-span-6 relative h-full min-h-[50vh] lg:min-h-0 flex">
+          <div class="relative w-full h-full flex items-center justify-center bg-white dark:bg-neutral-950 rounded-2xl overflow-hidden">
+            <div id="hero-sequencer-inner" class="absolute inset-0 flex items-center justify-center opacity-0">
+              <!-- Layer 1: Reveal 视频 -->
+              <div id="layer-1" class="video-layer">
+                <div class="w-[85%] max-w-2xl relative">
+                  <video playsinline preload="auto" muted class="w-full h-auto object-contain" data-is-reveal>
+                    <source src="videos2/reveal.mp4" type="video/mp4">
+                    <source src="videos2/reveal.webm" type="video/webm">
+                  </video>
+                </div>
+              </div>
+              <!-- Layers 2-9: Demo 视频 1-8 -->
+              <div id="layer-2" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="auto" playsinline muted class="w-full h-auto object-contain"><source src="videos2/1.mp4" type="video/mp4"><source src="videos2/1.webm" type="video/webm"></video></div></div>
+              <div id="layer-3" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="auto" playsinline muted class="w-full h-auto object-contain"><source src="videos2/2.mp4" type="video/mp4"><source src="videos2/2.webm" type="video/webm"></video></div></div>
+              <div id="layer-4" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="auto" playsinline muted class="w-full h-auto object-contain"><source src="videos2/3.mp4" type="video/mp4"><source src="videos2/3.webm" type="video/webm"></video></div></div>
+              <div id="layer-5" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="auto" playsinline muted class="w-full h-auto object-contain"><source src="videos2/4.mp4" type="video/mp4"><source src="videos2/4.webm" type="video/webm"></video></div></div>
+              <div id="layer-6" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="none" playsinline muted class="w-full h-auto object-contain"><source src="videos2/5.mp4" type="video/mp4"><source src="videos2/5.webm" type="video/webm"></video></div></div>
+              <div id="layer-7" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="none" playsinline muted class="w-full h-auto object-contain"><source src="videos2/6.mp4" type="video/mp4"><source src="videos2/6.webm" type="video/webm"></video></div></div>
+              <div id="layer-8" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="none" playsinline muted class="w-full h-auto object-contain"><source src="videos2/7.mp4" type="video/mp4"><source src="videos2/7.webm" type="video/webm"></video></div></div>
+              <div id="layer-9" class="video-layer invisible"><div class="w-[85%] max-w-2xl"><video preload="none" playsinline muted class="w-full h-auto object-contain"><source src="videos2/8.mp4" type="video/mp4"><source src="videos2/8.webm" type="video/webm"></video></div></div>
+            </div>
+            <!-- HUD 叠加层 -->
+            <div class="hud-layer hud-layer-light absolute inset-0 flex items-end justify-between p-4 pointer-events-none">
+              <video src="videos2/hud.mp4" playsinline preload="auto" loop muted class="w-[40%] h-auto object-contain scale-x-[-1]"></video>
+              <video src="videos2/hud.mp4" playsinline preload="auto" loop muted class="w-1/3 h-auto object-contain scale-x-[-1]"></video>
+            </div>
+            <div class="hud-layer hud-layer-dark absolute inset-0 flex items-end justify-between p-4 pointer-events-none">
+              <video src="videos2/hud_dark.mp4" playsinline preload="auto" loop muted class="w-[40%] h-auto object-contain scale-x-[-1]"></video>
+              <video src="videos2/hud_dark.mp4" playsinline preload="auto" loop muted class="w-1/3 h-auto object-contain scale-x-[-1]"></video>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero 右侧 -->
+        <div id="hero-right" class="col-span-12 sm:col-span-6 lg:col-span-3">
+          <div class="hero-mount hero-mount-right w-full h-full bg-white dark:bg-neutral-950 p-6 flex flex-col justify-between rounded-2xl">
+            <div>
+              <h2 class="text-2xl lg:text-4xl font-bold mb-6 brand-title-right">PowerVerse Chain</h2>
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-red mb-4"><img src="images/logo/1.1.png" alt="" class="w-6 h-6" onerror="this.style.display='none'"></div>
+              <h2 id="current-time" class="text-2xl font-bold">--:-- --</h2>
+              <p id="current-day" class="text-neutral-500">加载中...</p>
+            </div>
+            <div class="flex items-end gap-2 cursor-pointer scroll-hint" onclick="document.getElementById('solutions-insights')?.scrollIntoView({behavior:'smooth'})">
+              <div class="text-right"><span class="block text-sm font-semibold uppercase">向下滚动</span><span class="block text-neutral-500 text-sm">探索更多</span></div>
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 128 128"><path stroke-width="2" d="M8 0V120H24.58H128"/><path stroke-width="2" d="M8 120L122.15 5.84961"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 生态伙伴 Marquee -->
+    <section id="companies" class="relative w-full py-12 overflow-hidden mx-4 rounded-2xl transition-colors duration-300">
+      <h2 class="text-2xl lg:text-4xl font-bold uppercase text-center mb-8 px-4 section-reveal">全球生态伙伴</h2>
+      <div class="marquee-track flex gap-12 py-4">
+        <div class="flex gap-12 shrink-0">
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Republic</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">BlackRock</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Citi</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Aave</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Uniswap</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">MapleStory</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Gunzilla</span>
+        </div>
+        <div class="flex gap-12 shrink-0">
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Republic</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">BlackRock</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Citi</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Aave</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Uniswap</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">MapleStory</span>
+          <span class="text-2xl font-bold text-neutral-400 px-4 hover:text-red transition-colors cursor-default">Gunzilla</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 为什么选择 PowerVerse -->
+    <section id="solutions-insights" class="relative w-full p-6 lg:p-12 mx-4 rounded-2xl transition-colors duration-300">
+      <h2 class="text-4xl lg:text-6xl font-bold uppercase mb-12 section-reveal">为什么选择 PowerVerse Chain</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 interactive-card section-reveal" style="transition-delay:0.1s"><p class="text-2xl font-bold text-red mb-2">01</p><h3 class="text-xl font-bold uppercase mb-4">极速 · 强大 · 安全</h3><p class="text-neutral-600 dark:text-neutral-300">AI 共识驱动，交易几乎瞬时确认，打造高效可信的链上体验。</p></div>
+        <div class="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 interactive-card section-reveal" style="transition-delay:0.2s"><p class="text-2xl font-bold text-red mb-2">02</p><h3 class="text-xl font-bold uppercase mb-4">无限扩展</h3><p class="text-neutral-600 dark:text-neutral-300">从单一应用到完整 L1 区块链，灵活扩展，从容应对增长。</p></div>
+        <div class="p-6 rounded-2xl bg-neutral-200 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 interactive-card section-reveal" style="transition-delay:0.3s"><p class="text-2xl font-bold text-red mb-2">03</p><h3 class="text-xl font-bold uppercase mb-4">可定制 L1</h3><p class="text-neutral-600 dark:text-neutral-300">低成本启动专属链，简单定制、快速迭代、迅速上市。</p></div>
+        <div class="p-6 rounded-2xl bg-red border border-red-700 interactive-card section-reveal" style="transition-delay:0.4s"><p class="text-2xl font-bold text-white mb-2">04</p><h3 class="text-xl font-bold uppercase mb-4 text-white">全球社区</h3><p class="text-white/90">汇聚全球开发者、创作者与协作者，共建智能生态。</p></div>
+      </div>
+    </section>
+
+    <!-- 快速入口 -->
+    <section id="links" class="relative w-full p-6 lg:p-12 grid grid-cols-1 sm:grid-cols-3 gap-6 mx-4 rounded-2xl transition-colors duration-300">
+      <a href="#" class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 interactive-card section-reveal group">
+        <h3 class="text-lg font-bold uppercase mb-4 group-hover:text-red transition-colors">创建钱包</h3>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4">使用非托管钱包连接生态，安全存储资产，畅享链上应用。</p>
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-red dark:bg-white text-white dark:text-black rounded-lg font-semibold group-hover:gap-3 transition-all">创建钱包 →</span>
+      </a>
+      <a href="#" class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 interactive-card section-reveal group">
+        <h3 class="text-lg font-bold uppercase mb-4 group-hover:text-red transition-colors">代币</h3>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4">PowerVerse 代币驱动网络——手续费、安全与链上操作。</p>
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-red dark:bg-white text-white dark:text-black rounded-lg font-semibold">了解更多 →</span>
+      </a>
+      <a href="#" class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 interactive-card section-reveal group">
+        <h3 class="text-lg font-bold uppercase mb-4 group-hover:text-red transition-colors">探索生态</h3>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4">发现覆盖应用、工具与体验的全域生态。</p>
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-red dark:bg-white text-white dark:text-black rounded-lg font-semibold">开始探索 →</span>
+      </a>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="grants" class="w-full p-8 bg-black text-white rounded-t-3xl mx-4 transition-colors duration-300">
+      <div class="flex flex-col items-center gap-4">
+        <img src="images/logo/1.1.png" alt="PowerVerse Chain" class="h-8 w-auto dark:invert opacity-90" onerror="this.style.display='none'">
+        <p class="text-neutral-400 text-sm">© PowerVerse Chain. AI 驱动的超级链。</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const HUD_DELAY = 4000;
+      document.documentElement.classList.add('mounted');
+      document.getElementById('navigation')?.classList.add('mounted');
+
+      // 实时时钟
+      const updateTime = () => {
+        const now = new Date();
+        const te = document.getElementById('current-time'), de = document.getElementById('current-day');
+        if (te) te.textContent = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        if (de) de.textContent = now.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      };
+      updateTime(); setInterval(updateTime, 1000);
+
+      // 视频序列器逻辑
+      const heroLogoOverlay = document.getElementById('hero-logo-overlay');
+      const whiteArea = document.getElementById('hero-logo-white-area');
+      const logoEl = document.getElementById('hero-overlay-logo');
+      const heroSequencer = document.getElementById('hero-sequencer-inner');
+      const layers = Array.from(document.querySelectorAll('[id^="layer-"]')).slice(0, window.innerWidth < 1025 ? 5 : 9);
+      let currentLayer = 0;
+
+      const switchLayer = () => {
+        const v = layers[currentLayer]?.querySelector('video');
+        if (v) { layers[currentLayer].classList.add('invisible'); v.pause(); v.currentTime = 0; }
+        currentLayer = (currentLayer + 1) % layers.length;
+        if (currentLayer === 0) currentLayer = 1;
+        const next = layers[currentLayer]?.querySelector('video');
+        if (next) {
+          next.currentTime = 0;
+          next.play().catch(() => {});
+          layers[currentLayer].classList.remove('invisible');
+          const nextIdx = (currentLayer + 1) % layers.length;
+          const preload = layers[nextIdx === 0 ? 1 : nextIdx]?.querySelector('video');
+          if (preload && preload.readyState < 2) preload.load();
+        }
+      };
+
+      const startVideoSequencer = () => {
+        if (!heroSequencer) return;
+        heroSequencer.style.opacity = '1';
+        heroSequencer.style.transition = 'opacity 700ms ease-out';
+        layers.forEach((layer, i) => {
+          if (i === 0) return;
+          layer.querySelector('video')?.addEventListener('ended', switchLayer);
+        });
+        const first = layers[0]?.querySelector('video');
+        if (first) { first.currentTime = 0; first.play(); first.addEventListener('ended', switchLayer); }
+      };
+
+      // HUD 延迟显示
+      setTimeout(() => {
+        document.querySelectorAll('.hud-layer video').forEach(v => { v.currentTime = 0; v.play(); });
+        document.querySelectorAll('.hud-layer').forEach(el => el.classList.add('loaded'));
+      }, HUD_DELAY);
+
+      // Hero 揭示：白底铺满 → logo 变大 + 白色区域四周往中间推进 → 两侧内容推进 → 视频1开始（参考截图：平滑缓动，2s 时长）
+      const runHeroReveal = () => {
+        if (!logoEl || !heroLogoOverlay || !whiteArea) return;
+        const revealDuration = 2000;
+        const startDelay = 400;
+        setTimeout(() => {
+          // 1) 白色区域从铺满屏缩小（四周往中间推进）
+          whiteArea.classList.add('hero-white-shrunk');
+          // 2) logo 从 0.12 放大到 1（参考 Avalanche：ease-in-out-quart 平滑缓动）
+          logoEl.style.transition = 'transform ' + revealDuration + 'ms var(--ease-in-out-quart)';
+          logoEl.style.transform = 'scale(1)';
+          const svgLogo = document.getElementById('hero-overlay-logo-svg');
+          if (svgLogo) {
+            svgLogo.style.transition = 'transform ' + revealDuration + 'ms var(--ease-in-out-quart)';
+            svgLogo.style.transform = 'scale(1)';
+          }
+          // 3) 两侧内容由两侧往中间推进（与 logo/白框同步）
+          document.documentElement.classList.add('panels-in');
+          // 动画结束后淡出遮罩并开始播放视频1
+          setTimeout(() => {
+            heroLogoOverlay.style.transition = 'opacity 700ms var(--ease-out-cubic)';
+            heroLogoOverlay.style.opacity = '0';
+            setTimeout(() => {
+              heroLogoOverlay.style.visibility = 'hidden';
+              heroLogoOverlay.style.pointerEvents = 'none';
+              startVideoSequencer();
+            }, 700);
+          }, revealDuration);
+        }, startDelay);
+      };
+      setTimeout(runHeroReveal, 300);
+
+      // 移动端菜单
+      const toggleBtn = document.getElementById('toggle-menu-button');
+      const navMenu = document.getElementById('nav-menu');
+      const navEl = document.getElementById('navigation');
+      if (toggleBtn && navMenu && navEl) {
+        toggleBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('opened');
+          navEl.classList.toggle('menu-opened');
+        });
+      }
+      document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', () => {
+        navMenu?.classList.remove('opened');
+        navEl?.classList.remove('menu-opened');
+      }));
+
+      // 滚动触发显示
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.section-reveal').forEach(el => revealObserver.observe(el));
+    });
+  </script>
+</body>
+</html>

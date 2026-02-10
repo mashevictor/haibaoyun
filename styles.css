@@ -156,6 +156,15 @@
     --border-color: rgba(0, 0, 0, 0.08);
 }
 
+/* 深色模式：全黑背景 + 蓝色统一为 #1964FE（含导航、标题、全站强调色） */
+[data-theme="dark"] {
+    --accent-blue: #1964FE;
+    --primary-color: #1964FE;
+    --bg-dark: #000000;
+    --bg-darker: #000000;
+    --card-bg: rgba(0, 0, 0, 0.6);
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--bg-dark);
@@ -187,9 +196,14 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
+[data-theme="dark"] .navbar {
+    background: #000000;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
 [data-theme="light"] .navbar {
-    background: rgba(240, 244, 248, 0.92);
-    border-bottom-color: var(--border-color);
+    background: #ffffff;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
 .nav-wrapper {
@@ -420,6 +434,32 @@ body {
     background: rgba(0, 97, 226, 0.08);
     color: var(--accent-blue);
 }
+[data-theme="light"] .nav-menu a:hover,
+[data-theme="light"] .nav-menu a.active {
+    color: var(--accent-blue);
+    text-shadow: none;
+}
+[data-theme="light"] .nav-menu a:hover::after,
+[data-theme="light"] .nav-menu a.active::after {
+    background: var(--accent-blue);
+}
+
+[data-theme="dark"] .nav-menu a {
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .nav-menu a:hover,
+[data-theme="dark"] .nav-menu a.active {
+    color: #1964FE;
+    text-shadow: 0 0 12px rgba(25, 100, 254, 0.5);
+}
+[data-theme="dark"] .nav-menu a:hover::after,
+[data-theme="dark"] .nav-menu a.active::after {
+    background: #1964FE;
+    box-shadow: 0 0 10px rgba(25, 100, 254, 0.5);
+}
+[data-theme="dark"] .product-dropdown a:hover {
+    color: #1964FE;
+}
 
 @keyframes dropdown-glow {
     0%, 100% {
@@ -607,7 +647,7 @@ body {
     transition: all 0.3s;
 }
 
-/* Hero区域：仅第一屏，不继承 section 的上下 padding，避免多余空白 */
+/* Hero区域：仅第一屏，顶部留出固定导航高度避免被遮挡 */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -615,6 +655,7 @@ body {
     overflow: hidden;
     box-sizing: border-box;
     padding: 0;
+    padding-top: 72px;
 }
 
 /* 左侧文案区：绝对定位在 hero 内，z-index 高于画布避免被遮挡 */
@@ -666,7 +707,590 @@ body {
     bottom: 1rem;
 }
 
+/* ========== hero 动画：仅 logo 放大 + 背景往中间推进 + 两侧推进 ========== */
+/* Logo 缩放：0 → 1，1.5s ease-out */
+@keyframes hero-logoScale {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+/* ========== hero.html 风格：三栏 + 视频序列，适配 data-theme 浅色/深色 ========== */
+:root {
+    --hero-reveal-duration: 1000ms;
+    --hero-ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+    --hero-ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    --hero-gap: 12px;
+    /* hero-sequencer 动画体系（与文档逻辑一致） */
+    --navbar-height: 72px;
+    --hero-left-height: 338px;
+    --hero-right-height: 338px;
+    --radius-4xl: 1.5rem;
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.hero-video-layout {
+    display: block;
+    padding: 0;
+    padding-top: 72px;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+/* 导航与英雄区、圆角区域四周间隙统一为 --hero-gap */
+.hero-video-layout .hero-inner {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--hero-gap);
+    min-height: calc(100vh - 72px - var(--hero-gap) * 2);
+    margin: var(--hero-gap);
+    max-width: calc(100% - var(--hero-gap) * 2);
+    box-sizing: border-box;
+    align-items: stretch;
+    border-radius: 1rem;
+}
+@media (min-width: 1024px) {
+    .hero-video-layout .hero-inner {
+        border-radius: 1.5rem;
+        grid-template-rows: 1fr;
+        height: calc(100vh - 72px - var(--hero-gap) * 2);
+        min-height: calc(100vh - 72px - var(--hero-gap) * 2);
+    }
+}
+.hero-video-layout .hero-left {
+    grid-column: 1 / span 3;
+    display: flex;
+    flex-direction: column;
+    gap: var(--hero-gap);
+    min-height: 0;
+    height: 100%;
+}
+.hero-video-layout .hero-left-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+/* 左上卡片缩小高度，把更多空间留给左下 */
+.hero-video-layout .hero-left .hero-mount-left.hero-left-card {
+    flex: 0 1 auto;
+    max-height: 32%;
+    min-height: 0;
+}
+.hero-video-layout .hero-left-card-bottom {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 0;
+    overflow: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.hero-video-layout .hero-left-card-bottom-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    animation: hero-pull-down 0.7s var(--hero-ease-out-cubic) 0.35s backwards;
+}
+@keyframes hero-pull-down {
+    from { opacity: 0; transform: translateY(-100%); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.hero-video-layout .hero-learn-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.9) 0%, rgba(0, 102, 255, 0.9) 50%, rgba(124, 58, 237, 0.85) 100%);
+    background-size: 200% 200%;
+    transition: background-position 0.4s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.hero-video-layout .hero-learn-more-btn:hover {
+    background-position: 100% 100%;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+    transform: translateY(-1px);
+}
+[data-theme="light"] .hero-video-layout .hero-learn-more-btn {
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #6366f1 50%, var(--accent-coral) 100%);
+    background-size: 200% 200%;
+}
+[data-theme="light"] .hero-video-layout .hero-learn-more-btn:hover {
+    background-position: 100% 100%;
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.35);
+}
+.hero-video-layout .hero-left-card-bottom::-webkit-scrollbar {
+    display: none;
+}
+.hero-video-layout .hero-left-card-bottom .hero-description {
+    line-height: 1.65;
+    font-size: clamp(0.875rem, 2vw, 1.0625rem);
+    margin-top: 0.5rem;
+}
+.hero-video-layout .hero-left-card-bottom {
+    padding: 1.25rem 1.5rem;
+}
+/* 描述区上方科技感图：预留更多空间给文字 */
+.hero-video-layout .hero-desc-visual {
+    flex: 0 0 auto;
+    max-height: min(22vh, 160px);
+    min-height: 80px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(0, 102, 255, 0.06) 50%, rgba(124, 58, 237, 0.06) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-video-layout .hero-desc-visual-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 0.5rem;
+}
+[data-theme="light"] .hero-video-layout .hero-desc-visual {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.06) 0%, rgba(124, 58, 237, 0.05) 100%);
+}
+.hero-video-layout .hero-left-card-bottom .hero-description {
+    flex: 0 1 auto;
+    margin-bottom: 0;
+}
+.hero-video-layout .hero-content-left {
+    position: relative;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    background: transparent;
+    padding: 0;
+    height: auto;
+}
+.hero-video-layout .hero-content-left .hero-content { padding-left: 0; }
+.hero-video-layout .hero-center-wrap {
+    grid-column: 4 / span 6;
+    position: relative;
+    min-height: 0;
+    height: 100%;
+}
+.hero-video-layout #hero-logo-white-area #hero-sequencer {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+/* 视频区与 logo 区同一位置；logo 消失时直接显示，无额外淡入 */
+#hero-sequencer {
+    clip-path: inset(0 0 0 0 round var(--radius-4xl));
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+#hero-sequencer.mounted {
+    clip-path: inset(0 0 0 0 round var(--radius-4xl));
+    opacity: 1;
+}
+
+.hero-video-layout .hero-center-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-video-layout .hero-sequencer-inner {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translate(-50%, calc((var(--hero-left-height) - var(--hero-right-height)) / 2));
+    transition: opacity 700ms ease-out;
+}
+#hero-sequencer.mounted .hero-sequencer-inner {
+    opacity: 1;
+    transform: translate(-50%, calc((var(--hero-left-height) - var(--hero-right-height)) / 2));
+}
+.hero-video-layout .hero-sequencer-inner .video-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 600ms var(--ease-out-cubic), transform 800ms var(--ease-in-out-quart);
+}
+#hero-sequencer.mounted .hero-sequencer-inner .video-layer {
+    opacity: 1;
+    transform: scale(1);
+}
+#hero-sequencer.mounted .hero-sequencer-inner #layer-1 { transition-delay: 0ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-2 { transition-delay: 50ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-3 { transition-delay: 100ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-4 { transition-delay: 150ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-5 { transition-delay: 200ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-6 { transition-delay: 250ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-7 { transition-delay: 300ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-8 { transition-delay: 350ms; }
+#hero-sequencer.mounted .hero-sequencer-inner #layer-9 { transition-delay: 400ms; }
+.hero-video-layout .hero-sequencer-inner .video-layer-inner {
+    aspect-ratio: 16/9;
+    width: 85%;
+    max-width: 32rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-video-layout .hero-sequencer-inner .hero-center-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.hero-video-layout .video-layer.invisible { visibility: hidden; }
+
+/* HUD 层：2000ms 延迟 + 1000ms 过渡，暗色模式 mix-blend-mode */
+.hero-video-layout .hud-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1000ms 2000ms var(--ease-out-cubic);
+}
+#hero-sequencer.mounted .hud-layer { opacity: 1; }
+.hero-video-layout .hud-layer-dark { mix-blend-mode: screen; }
+.hero-video-layout .hud-video { width: 40%; height: auto; object-fit: contain; transform: scaleX(-1); }
+.hero-video-layout .hud-video-right { width: 33.33%; }
+[data-theme="light"] .hero-video-layout .hud-layer { display: none !important; }
+[data-theme="dark"] .hero-video-layout .hud-layer-light,
+[data-theme="dark"] .hero-video-layout .hud-layer-dark { display: none !important; opacity: 0 !important; }
+
+.hero-video-layout .hero-right {
+    grid-column: 10 / span 3;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+.hero-video-layout .hero-right-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 0;
+    min-height: 0;
+}
+/* 左侧主标题、右侧标题：与「全球算力」一致（渐变徽章），字号统一便于一行展示 */
+.hero-video-layout .hero-left .hero-main-title,
+.hero-video-layout .hero-right-title {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5em;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3.2vw, 1.75rem);
+    line-height: 1.25;
+    color: #fff;
+    padding: 0.35em 0.6em;
+    margin: 0 0 0.5rem 0;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-coral) 100%);
+    box-shadow: 0 2px 12px rgba(0, 97, 226, 0.4);
+    -webkit-text-fill-color: unset;
+    clip-path: none;
+    overflow: visible;
+    text-align: center;
+}
+.hero-video-layout .hero-left .hero-main-title {
+    white-space: nowrap;
+}
+.hero-video-layout .hero-right-title {
+    margin-bottom: 0.5rem;
+}
+.hero-video-layout .hero-left .hero-main-title::before,
+.hero-video-layout .hero-left .hero-main-title::after { display: none !important; }
+.hero-video-layout .hero-content-left.active .hero-main-title { animation: none; }
+.hero-video-layout .hero-content-left.active .hero-main-title::before,
+.hero-video-layout .hero-content-left.active .hero-main-title::after { animation: none; }
+.hero-video-layout .hero-right-time { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+.hero-video-layout .hero-right-day { font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem; }
+.hero-video-layout .hero-scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    margin-top: auto;
+}
+.hero-video-layout .hero-scroll-hint-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.hero-video-layout .hero-scroll-hint-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.hero-video-layout .hero-scroll-hint-sub {
+    font-size: 0.7rem;
+    opacity: 0.75;
+    font-weight: 500;
+    text-transform: none;
+}
+.hero-video-layout .hero-scroll-hint-arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* 白底 + logo + 视频同一区域：无 overlay 整层隐藏，仅隐藏 logo；视频在 white-area 内循环播 */
+/* 满屏白色圆角背景：在三栏底层，与 logo 同步由外向内推进至视频区域 */
+.hero-white-round-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: #ffffff;
+    border-radius: var(--radius-4xl, 1.5rem);
+    pointer-events: none;
+    backface-visibility: hidden;
+    transition: left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out;
+}
+[data-theme="dark"] .hero-video-layout .hero-white-round-bg {
+    display: none;
+}
+.hero-video-layout > #hero-logo-white-area {
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    pointer-events: none;
+}
+.hero-video-layout > #hero-logo-white-area #hero-sequencer { pointer-events: auto; }
+/* 白底区：透明背景；初始铺满全屏、圆角，随 logo 变大在 1.5s 内缩小到视频区；logo 到视频大小时突然消失 */
+.hero-logo-white-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-4xl, 1.5rem);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transition: left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out;
+}
+[data-theme="light"] .hero-video-layout .hero-logo-white-area,
+[data-theme="dark"] .hero-video-layout .hero-logo-white-area { background: transparent; }
+.hero-overlay-logo-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Logo 仅从小到大，无变小过程；到 100% 后由 JS 直接隐藏，中间无其他效果与动画 */
+.hero-overlay-logo-img {
+    width: 90%;
+    max-width: 28rem;
+    height: auto;
+    max-height: 90%;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(0);
+    animation: hero-logoScale 1.5s ease-out forwards;
+    transition: none;
+}
+/* 浅色模式：首页开始后 10ms logo 开始变大，与背景缩小同步 */
+[data-theme="light"] .hero-video-layout .hero-overlay-logo-img {
+    animation-delay: 10ms;
+}
+
+/* 浅色模式：第一屏底层黑色，面板白底深字，顶部留足空间避免被导航遮住 */
+[data-theme="light"] .hero-video-layout {
+    background: #000;
+    padding-top: 72px;
+}
+/* 浅色模式：模块间隙缩小为 1/4（3px） */
+[data-theme="light"] .hero-video-layout .hero-inner {
+    background: #000;
+    gap: 3px;
+    margin: 3px;
+    max-width: calc(100% - 6px);
+    min-height: calc(100vh - 72px - 6px);
+}
+/* 首页浅色模式：视频区域右下角圆角 ×5（1.5rem → 7.5rem） */
+[data-theme="light"] .hero-video-layout #hero-sequencer,
+[data-theme="light"] .hero-video-layout #hero-sequencer.mounted {
+    clip-path: inset(0 0 0 0 round 1.5rem 1.5rem 7.5rem 1.5rem);
+}
+[data-theme="light"] .hero-video-layout .hero-white-round-bg {
+    border-radius: 1.5rem 1.5rem 7.5rem 1.5rem;
+}
+[data-theme="light"] .hero-video-layout .hero-logo-white-area {
+    border-radius: 1.5rem 1.5rem 7.5rem 1.5rem;
+}
+[data-theme="light"] .hero-video-layout .hero-left { gap: 3px; }
+[data-theme="light"] .hero-video-layout .hero-left-card,
+[data-theme="light"] .hero-video-layout .hero-right-card {
+    background: #ffffff;
+    color: #0f172a;
+    border: none;
+}
+[data-theme="light"] .hero-video-layout .hero-left .hero-mount-left.hero-left-card {
+    background: #ffffff;
+}
+[data-theme="light"] .hero-video-layout .hero-left .hero-mount-left .hero-subtitle-line {
+    color: var(--accent-blue) !important;
+    -webkit-text-fill-color: var(--accent-blue) !important;
+    background: none !important;
+}
+[data-theme="light"] .hero-video-layout .hero-left .hero-main-title,
+[data-theme="light"] .hero-video-layout .hero-right-title {
+    color: #fff !important;
+    -webkit-text-fill-color: unset !important;
+    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-coral) 100%) !important;
+    box-shadow: 0 2px 12px rgba(0, 97, 226, 0.35);
+}
+[data-theme="light"] .hero-video-layout .hero-left-card-bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+[data-theme="light"] .hero-video-layout .hero-center-wrap,
+[data-theme="light"] .hero-video-layout #hero-sequencer,
+[data-theme="light"] .hero-video-layout .hero-center-inner,
+[data-theme="light"] .hero-video-layout .hero-sequencer-inner,
+[data-theme="light"] .hero-video-layout .hero-sequencer-inner .video-layer-inner,
+[data-theme="light"] .hero-video-layout .hero-sequencer-inner .video-layer { background: transparent; border: none; min-height: 0; }
+[data-theme="light"] .hero-video-layout .hero-logo-white-area { box-shadow: none; border: none; }
+[data-theme="light"] .hero-video-layout .hero-main-title { color: #fff !important; }
+[data-theme="light"] .hero-video-layout .hero-left .hero-mount-powered .hero-main-title,
+[data-theme="light"] .hero-video-layout .hero-left .hero-mount-powered .hero-subtitle-line { color: #0f172a !important; -webkit-text-fill-color: #0f172a !important; }
+[data-theme="light"] .hero-video-layout .hero-subtitle-line { color: #0f172a; -webkit-text-fill-color: #0f172a; }
+[data-theme="light"] .hero-video-layout .hero-description,
+[data-theme="light"] .hero-video-layout .hero-right-time,
+[data-theme="light"] .hero-video-layout .hero-right-day,
+[data-theme="light"] .hero-video-layout .hero-scroll-hint-sub { color: #334155; }
+[data-theme="light"] .hero-video-layout .hero-scroll-hint-text { color: #0f172a; }
+[data-theme="light"] .hero-video-layout .hero-description .hero-desc-tag { color: #0f172a; }
+[data-theme="light"] .hero-video-layout .hero-description .hero-desc-flow { color: #0f172a; }
+
+/* 深色模式：第一屏背景全黑，蓝色统一 #1964FE（PowerVerse Chain、AI驱动的超级公链、导航等） */
+[data-theme="dark"] .hero-video-layout { background: #000000; }
+[data-theme="dark"] .hero-video-layout .hero-inner { background: #000000; }
+[data-theme="dark"] .hero-video-layout .hero-left-card,
+[data-theme="dark"] .hero-video-layout .hero-right-card {
+    background: #000000;
+    color: var(--text-primary);
+    border: none;
+}
+[data-theme="dark"] .hero-video-layout .hero-left-card-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .hero-video-layout .hero-center-wrap,
+[data-theme="dark"] .hero-video-layout #hero-sequencer { background: transparent; border: none; }
+[data-theme="dark"] .hero-video-layout .hero-center-inner,
+[data-theme="dark"] .hero-video-layout .hero-sequencer-inner .video-layer-inner,
+[data-theme="dark"] .hero-video-layout .hero-sequencer-inner .video-layer { background: transparent !important; }
+[data-theme="dark"] .hero-video-layout .hero-logo-white-area { border: none; box-shadow: none; }
+[data-theme="dark"] .hero-video-layout .hero-subtitle-line { color: #1964FE !important; -webkit-text-fill-color: #1964FE !important; }
+[data-theme="dark"] .hero-video-layout .hero-left .hero-main-title,
+[data-theme="dark"] .hero-video-layout .hero-right-title {
+    color: #fff !important;
+    -webkit-text-fill-color: unset !important;
+    background: linear-gradient(135deg, #1964FE 0%, var(--accent-coral) 100%) !important;
+    box-shadow: 0 2px 12px rgba(25, 100, 254, 0.4);
+}
+[data-theme="dark"] .hero-video-layout .hero-right-time,
+[data-theme="dark"] .hero-video-layout .hero-right-day { color: var(--text-primary); }
+[data-theme="dark"] .hero-video-layout .hero-scroll-hint span { color: var(--text-secondary); }
+[data-theme="dark"] .hero-video-layout .hero-description .hero-desc-highlight { color: #1964FE; }
+
+/* 两侧内容与 logo/背景同步推进：1.5s ease-out，脚本在开始时加 panels-in */
+/* 首页点击 Learn more 跳转：当前页向上滑出 */
+body.page-transition-out .hero-video-layout,
+body.page-transition-out #home {
+    transform: translateY(-100vh);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.page-transition-out { overflow: hidden; }
+
+/* 从首页 Learn more 进入的页面：从下往上推动入场（云游戏等） */
+#page-enter-wrap { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+body.page-enter-from-bottom #page-enter-wrap { transform: translateY(100vh); }
+body.page-enter-from-bottom { overflow: hidden; }
+
+.hero-video-layout #hero-left { transform: translateX(-100%); backface-visibility: hidden; transition: transform 1.5s ease-out; }
+.hero-video-layout #hero-right { transform: translateX(100%); backface-visibility: hidden; transition: transform 1.5s ease-out; }
+.hero-video-layout.panels-in #hero-left { transform: translateX(0); }
+.hero-video-layout.panels-in #hero-right { transform: translateX(0); }
+
+/* hero-mount 入场：随两侧滑入稍错开 */
+.hero-video-layout .hero-mount {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.8s var(--hero-ease-out-cubic), transform 0.8s var(--hero-ease-in-out-quart);
+}
+.hero-video-layout.panels-in .hero-mount { opacity: 1; transform: translateY(0); }
+.hero-video-layout.panels-in .hero-mount-left { transition-delay: 0s; }
+.hero-video-layout.panels-in .hero-mount-powered { transition-delay: 0.3s; }
+.hero-video-layout.panels-in .hero-mount-right { transition-delay: 0.15s; }
+
+.hero-video-layout .scroll-indicator { z-index: 5; }
+
+@media (max-width: 1024px) {
+    .hero-video-layout .hero-inner { grid-template-columns: repeat(12, 1fr); grid-template-rows: auto 1fr; }
+    .hero-video-layout .hero-left { grid-column: 1 / span 6; grid-row: 1; }
+    .hero-video-layout .hero-center-wrap { grid-column: 1 / -1; grid-row: 2; min-height: 0; }
+    .hero-video-layout .hero-right { grid-column: 7 / span 6; grid-row: 1; }
+    .hero-video-layout #hero-sequencer-inner .video-layer:nth-child(n+6) { display: none !important; }
+}
+@media (max-width: 768px) {
+    .hero-video-layout .hero-inner { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+    .hero-video-layout .hero-left { grid-column: 1; grid-row: 1; }
+    .hero-video-layout .hero-center-wrap { grid-column: 1; grid-row: 2; min-height: 0; }
+    .hero-video-layout .hero-right { grid-column: 1; grid-row: 3; }
+}
+
 /* 3D 画布容器：relative 避免遮挡左侧内容，overflow 防止 3D 溢出 */
+.hero-video-layout .hero-canvas-container { display: none !important; }
 #hero-canvas-container,
 .hero-canvas-container {
     position: relative;
@@ -938,9 +1562,10 @@ body {
 }
 
 /* 中文、繁体首页描述一行显示 */
+/* 英雄区描述：自然换行，不强制单行 */
 html[lang="zh-CN"] .hero-description,
 html[lang="zh-TW"] .hero-description {
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .hero-buttons {

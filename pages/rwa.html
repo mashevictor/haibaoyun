@@ -5,31 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="scenarios.rwa.title">钱包RWA - PowerVerse Chain</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?v=20250210">
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 第一屏底图：与 cloudgaming/算力交易 同款高度与表现 */
         .page-header {
             padding: 140px 0 80px;
+            min-height: 520px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            background-image: url('../images/backgrounds/1x/RWA钱包.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
         }
-
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            pointer-events: none;
+        }
+        .page-header h1,
+        .page-header .section-description {
+            position: relative;
+            z-index: 1;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            background: none !important;
+            background-clip: unset !important;
+        }
         .page-header h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             font-weight: 700;
         }
-
+        .page-header .section-description {
+            color: #ffffff !important;
+        }
+        .page-header .container {
+            color: #ffffff;
+        }
+        .product-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .product-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .product-hero .section-description {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
 
         .scenario-content {
             padding: 5rem 0;
@@ -191,6 +235,10 @@
         }
 
         @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 60px;
+                min-height: 420px;
+            }
             .scenario-stats {
                 grid-template-columns: 1fr;
             }
@@ -233,14 +281,14 @@
                         <a href="../index.html#product" data-i18n="nav.product">产品</a>
                         <div class="product-dropdown">
                             <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
                             <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
                             <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
                             <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
-                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
                         </div>
                     </li>
                     <li>
-                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <a href="javascript:void(0)" data-i18n="nav.scenario.title" aria-haspopup="true">应用场景</a>
                         <div class="product-dropdown">
                             <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
                             <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
@@ -270,20 +318,17 @@
 
     <div class="page-header">
         <div class="container">
-            <h1 data-i18n="scenarios.rwa.title">RWA钱包</h1>
-            <p class="section-description" data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+            <div class="product-hero">
+                <div class="product-icon">💰</div>
+                <h1 data-i18n="scenarios.rwa.title">RWA钱包</h1>
+                <p class="section-description" data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+            </div>
         </div>
     </div>
 
     <div class="container">
         <section class="scenario-content">
             <div class="scenario-card-large">
-                <div class="scenario-image">
-                    <img src="../images/compressed/scenarios/walletrwa.jpg" alt="钱包RWA" 
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div style="display:none; width:100%; height:100%; background:linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(0,102,255,0.15) 100%); align-items:center; justify-content:center; font-size:5rem; color:var(--primary-color); opacity:0.6;">💼</div>
-                </div>
-
                 <div class="scenario-content-section">
                     <div class="scenario-stats">
                         <div class="scenario-stat">
@@ -366,10 +411,10 @@
                         <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
                         <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
                         <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
                         <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
                         <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
                         <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
-                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

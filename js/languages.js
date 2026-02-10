@@ -1,4 +1,5 @@
 // 多语言支持系统
+// 部署缓存版本：HTML 中请使用 ?v=20250210 确保部署后浏览器拉取最新 CSS/JS/语言包
 const translations = {
     'zh-CN': {
         // 导航
@@ -25,7 +26,8 @@ const translations = {
             subtitle: 'AI驱动的超级公链',
             description: '融合<span class="highlight">RWA</span>、<span class="highlight">DePIN</span>、<span class="highlight">GameFi</span>与<span class="highlight">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span>与智慧，激活智能生态，开启数字文明新纪元',
             ios: 'iOS',
-            android: 'Android'
+            android: 'Android',
+            scrollExplore: '探索更多'
         },
         // 技术架构
         architecture: {
@@ -1613,7 +1615,8 @@ const translations = {
             copy: '复制',
             copied: '已复制!',
             copyFailed: '复制失败，请手动复制: ',
-            videoNotSupported: '您的浏览器不支持视频播放。'
+            videoNotSupported: '您的浏览器不支持视频播放。',
+            scrollDown: '向下滚动'
         },
         // 硬件工厂
         hardwareFactory: {
@@ -3316,7 +3319,8 @@ const translations = {
             copy: '複製',
             copied: '已複製!',
             copyFailed: '複製失敗，請手動複製: ',
-            videoNotSupported: '您的瀏覽器不支持視頻播放。'
+            videoNotSupported: '您的瀏覽器不支持視頻播放。',
+            scrollDown: '向下滾動'
         },
             hardwareFactory: {
             pageTitle: '硬件工廠 - PowerVerse Chain',
@@ -5097,7 +5101,8 @@ const translations = {
             copy: 'Copy',
             copied: 'Copied!',
             copyFailed: 'Copy failed, please copy manually: ',
-            videoNotSupported: 'Your browser does not support video playback.'
+            videoNotSupported: 'Your browser does not support video playback.',
+            scrollDown: 'Scroll down'
         },
         hardwareFactory: {
             pageTitle: 'Hardware Factory - PowerVerse Chain',
@@ -6840,7 +6845,8 @@ const translations = {
             copy: 'コピー',
             copied: 'コピーしました!',
             copyFailed: 'コピーに失敗しました。手動でコピーしてください: ',
-            videoNotSupported: 'お使いのブラウザは動画再生をサポートしていません。'
+            videoNotSupported: 'お使いのブラウザは動画再生をサポートしていません。',
+            scrollDown: '下にスクロール'
         },
         hardwareFactory: {
             pageTitle: 'ハードウェア工場 - PowerVerse Chain',
@@ -8581,7 +8587,8 @@ const translations = {
             copy: '복사',
             copied: '복사되었습니다!',
             copyFailed: '복사 실패, 수동으로 복사하세요: ',
-            videoNotSupported: '브라우저가 비디오 재생을 지원하지 않습니다.'
+            videoNotSupported: '브라우저가 비디오 재생을 지원하지 않습니다.',
+            scrollDown: '아래로 스크롤'
         },
         hardwareFactory: {
             pageTitle: '하드웨어 공장 - PowerVerse Chain',

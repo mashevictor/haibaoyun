@@ -133,10 +133,10 @@ function updateNavbarBackground() {
     var theme = document.documentElement.getAttribute('data-theme') || 'light';
     var isScrolled = window.pageYOffset > 100;
     if (theme === 'light') {
-        navbar.style.background = isScrolled ? 'rgba(240, 244, 248, 0.98)' : 'rgba(240, 244, 248, 0.92)';
+        navbar.style.background = '#ffffff';
         navbar.style.boxShadow = isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.08)' : 'none';
     } else {
-        navbar.style.background = isScrolled ? 'rgba(10, 14, 39, 0.95)' : 'rgba(10, 14, 39, 0.8)';
+        navbar.style.background = '#000000';
         navbar.style.boxShadow = isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.3)' : 'none';
     }
 }

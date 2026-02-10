@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="scenarios.cloudgaming.title">云游戏 - PowerVerse Chain</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?v=20250210">
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,18 +16,39 @@
             padding: 140px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 102, 255, 0.05) 100%);
+            background-image: url('../images/backgrounds/1x/云游戏.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
         }
-
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            pointer-events: none;
+        }
+        .page-header h1,
+        .page-header .section-description {
+            position: relative;
+            z-index: 1;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            background: none !important;
+            background-clip: unset !important;
+        }
         .page-header h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             font-weight: 700;
+        }
+        .page-header .section-description {
+            color: #ffffff !important;
+        }
+        .page-header .container {
+            color: #ffffff;
         }
 
         .scenario-content {
@@ -120,6 +141,9 @@
             }
         }
 
+        .content-module .scenario-stats {
+            margin: 0;
+        }
         .scenario-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -156,6 +180,14 @@
             font-weight: 500;
         }
 
+        /* 页面内所有标题居中 */
+        .scenario-content-section h4,
+        .scenario-details h4,
+        .video-section h4,
+        .game-image-section h4 {
+            text-align: center;
+        }
+
         .scenario-details h4 {
             color: var(--primary-color);
             font-size: 1.5rem;
@@ -185,7 +217,7 @@
         }
 
         .video-section {
-            margin: 3rem 0;
+            margin: 0;
         }
 
         .video-section h4 {
@@ -193,6 +225,24 @@
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             font-weight: 600;
+        }
+
+        /* 内容模块区分：每个模块独立成块，带边框与内边距 */
+        .content-module {
+            margin-bottom: 2.5rem;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02) 0%, rgba(0, 102, 255, 0.02) 100%);
+        }
+        .content-module:last-child {
+            margin-bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .content-module {
+                padding: 1.5rem 1.25rem;
+                margin-bottom: 2rem;
+            }
         }
 
         .video-grid {
@@ -370,10 +420,63 @@
                 font-size: 2rem;
             }
         }
+
+        /* 游戏内PEC支付模块 */
+        .pec-pay-module {
+            margin-bottom: 0;
+        }
+        .pec-pay-module .pec-pay-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+        .pec-pay-module .pec-pay-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .pec-pay-module .pec-pay-image-wrap {
+            margin: 2rem auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            max-width: 300px;
+        }
+        .pec-pay-module .pec-pay-image-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .pec-pay-module .pec-pay-points {
+            list-style: none;
+            margin: 1.5rem 0 0;
+            padding: 0;
+        }
+        .pec-pay-module .pec-pay-points li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
+        }
+        .pec-pay-module .pec-pay-points li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 
-<body>
+<body class="page-enter-from-bottom">
+    <div id="page-enter-wrap">
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">
@@ -397,14 +500,14 @@
                         <a href="../index.html#product" data-i18n="nav.product">产品</a>
                         <div class="product-dropdown">
                             <a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
                             <a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
                             <a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
                             <a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a>
-                            <a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a>
                         </div>
                     </li>
                     <li>
-                        <a href="scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <a href="javascript:void(0)" data-i18n="nav.scenario.title" aria-haspopup="true">应用场景</a>
                         <div class="product-dropdown">
                             <a href="cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
                             <a href="computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
@@ -475,40 +578,42 @@
             <div class="scenario-card-large">
                 <div class="scenario-image">
                     <video controls autoplay muted loop>
-                        <source src="../video/compressed/300千米测试.mp4" type="video/mp4">
+                        <source src="../video/compressed/300千米测试_compressed.mp4" type="video/mp4">
                         <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
                     </video>
                 </div>
 
                 <div class="scenario-content-section">
-                    <div class="scenario-stats">
-                        <div class="scenario-stat">
-                            <div class="scenario-stat-value">&lt;20ms</div>
-                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.lowLatency">超低延迟</div>
-                        </div>
-                        <div class="scenario-stat">
-                            <div class="scenario-stat-value">4K/8K</div>
-                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.hdSupport">高清支持</div>
-                        </div>
-                        <div class="scenario-stat">
-                            <div class="scenario-stat-value">24/7</div>
-                            <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.availability">全天候服务</div>
+                    <div class="content-module">
+                        <div class="scenario-stats">
+                            <div class="scenario-stat">
+                                <div class="scenario-stat-value">&lt;20ms</div>
+                                <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.lowLatency">超低延迟</div>
+                            </div>
+                            <div class="scenario-stat">
+                                <div class="scenario-stat-value">4K/8K</div>
+                                <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.hdSupport">高清支持</div>
+                            </div>
+                            <div class="scenario-stat">
+                                <div class="scenario-stat-value">24/7</div>
+                                <div class="scenario-stat-label" data-i18n="scenarios.cloudgaming.stats.availability">全天候服务</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="video-section">
+                    <div class="content-module video-section">
                         <h4 data-i18n="scenarios.cloudgaming.videos.title">产品演示视频</h4>
                         <div class="video-grid">
                             <div class="video-item">
                                 <video controls>
-                                    <source src="../video/compressed/1300千米测试.mp4" type="video/mp4">
+                                    <source src="../video/compressed/1300千米测试_compressed.mp4" type="video/mp4">
                                     <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
                                 </video>
                                 <div class="video-item-title" data-i18n="scenarios.cloudgaming.videos.video1">云游戏平台演示</div>
                             </div>
                             <div class="video-item">
                                 <video controls>
-                                    <source src="../video/compressed/1800千米测试.mp4" type="video/mp4">
+                                    <source src="../video/compressed/1800千米测试_compressed.mp4" type="video/mp4">
                                     <span data-i18n="common.videoNotSupported">您的浏览器不支持视频播放。</span>
                                 </video>
                                 <div class="video-item-title" data-i18n="scenarios.cloudgaming.videos.video2">游戏体验展示</div>
@@ -517,7 +622,7 @@
                     </div>
 
                     <!-- 游戏图片网格展示 -->
-                    <div class="game-image-section">
+                    <div class="content-module game-image-section">
                         <h4 data-i18n="scenarios.cloudgaming.gameImages.title">支持1000+款游戏在线游玩</h4>
                         <div class="game-img-container">
                             <div class="game-img-slider">
@@ -598,7 +703,22 @@
                         </div>
                     </div>
 
-                    <div class="scenario-details">
+                    <!-- 游戏内PEC支付 模块 -->
+                    <div class="content-module pec-pay-module">
+                        <h3 class="pec-pay-title">游戏内PEC支付</h3>
+                        <p class="pec-pay-desc">在云游戏过程中，您可以直接使用 PEC 钱包中的代币完成付费——购买游戏时长、道具或会员服务，无需跳出游戏，支付即确认，安全便捷。</p>
+                        <div class="pec-pay-image-wrap">
+                            <img src="../images/PowerVerse Chain与PEC Wallet宣传图解析.jpg" alt="PowerVerse Chain 与 PEC Wallet 游戏内支付">
+                        </div>
+                        <p class="pec-pay-desc">PowerVerse Chain 与 PEC Wallet 深度整合：云游戏流式体验与链上支付无缝衔接，从「开玩」到「付费」全在链上完成，真正实现「即玩即付、即付即到」。</p>
+                        <ul class="pec-pay-points">
+                            <li>游戏内一键调起 PEC 钱包，使用 PEC 代币支付游戏时长或内购。</li>
+                            <li>支付记录上链可查，透明可追溯，保障玩家与平台双方权益。</li>
+                            <li>支持按分钟/按局等多种计费方式，用多少付多少，灵活省心。</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-module scenario-details">
                         <h4 data-i18n="scenarios.cloudgaming.images.title">功能特性展示</h4>
                         <div class="image-gallery">
                             <div class="image-item">
@@ -632,7 +752,9 @@
                                 <div class="image-item-caption" data-i18n="scenarios.cloudgaming.images.item6">智能资源调度，优化体验</div>
                             </div>
                         </div>
-                        
+                    </div>
+
+                    <div class="content-module scenario-details">
                         <h4 data-i18n="scenarios.cloudgaming.esports.title">电竞酒店</h4>
                         <p style="color: var(--text-secondary);" data-i18n="scenarios.cloudgaming.esports.item1">电竞酒店：年轻人社交聚会热门选择，PowerVerse Chain提供全新运营模式，无需高端PC，大幅降低硬件成本。</p>
                         <p style="color: var(--text-secondary);" data-i18n="scenarios.cloudgaming.esports.item2">部署云游戏终端，全平台游戏体验，从3A大作到竞技游戏，一键即玩无需等待，低延迟高画质，支持多人联机对战。</p>
@@ -655,7 +777,9 @@
                                 <div class="image-item-caption">沉浸式游戏体验</div>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="content-module scenario-details">
                         <h4 data-i18n="scenarios.cloudgaming.workflow.title">完整链路闭环</h4>
                         <ul>
                             <li data-i18n="scenarios.cloudgaming.workflow.step1">用户注册登录：通过PowerVerse Chain钱包连接，实现去中心化身份认证</li>
@@ -666,7 +790,9 @@
                             <li data-i18n="scenarios.cloudgaming.workflow.step6">支付结算：使用PowerVerse代币（PEC）按使用时长付费，智能合约自动结算</li>
                             <li data-i18n="scenarios.cloudgaming.workflow.step7">资源释放：游戏结束后，GPU资源自动释放回资源池，供其他用户使用</li>
                         </ul>
+                    </div>
 
+                    <div class="content-module scenario-details">
                         <h4 data-i18n="scenarios.cloudgaming.coreAdvantages.title">核心优势</h4>
                         <ul>
                             <li data-i18n="scenarios.cloudgaming.coreAdvantages.item1">去中心化架构：无需中心化服务器，利用全球分布式GPU资源</li>
@@ -675,7 +801,9 @@
                             <li data-i18n="scenarios.cloudgaming.coreAdvantages.item4">高质量渲染：支持4K/8K超高清画质，流畅游戏体验</li>
                             <li data-i18n="scenarios.cloudgaming.coreAdvantages.item5">跨平台支持：支持PC、手机、平板等多种设备，随时随地畅玩</li>
                         </ul>
+                    </div>
 
+                    <div class="content-module scenario-details">
                         <h4 data-i18n="scenarios.cloudgaming.scenarios.title">应用场景</h4>
                         <ul>
                             <li data-i18n="scenarios.cloudgaming.scenarios.item1">3A大作云游戏：无需下载，即开即玩，享受顶级游戏体验</li>
@@ -700,10 +828,10 @@
                         <li><a href="market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
                         <li><a href="dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
                         <li><a href="wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
                         <li><a href="scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
                         <li><a href="xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
                         <li><a href="decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
-                        <li><a href="computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -748,6 +876,10 @@
             });
         });
     </script>
+    <script>
+        (function(){ document.body.classList.add('page-enter-from-bottom'); setTimeout(function(){ document.body.classList.remove('page-enter-from-bottom'); }, 50); })();
+    </script>
+</div>
 </body>
 
 </html>

@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="home.title">PowerVerse Chain - AI驱动的超级公链</title>
+    <link rel="stylesheet" href="styles.css?v=20250210">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {"imports":{"three":"https://threejs.org/build/three.module.js","three/addons/":"https://threejs.org/examples/jsm/"}}
+    </script>
+    <script>
+    (function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='dark'?t:'light');})();
+    </script>
+</head>
+<body>
+    <!-- 修改后导航栏：新增首页导航+拆分产品子项+Logo可跳转+子菜单粗边框变亮 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="#home" style="cursor: pointer;">
+                        <img src="images/logo/logo/1.png" alt="PowerVerse Chain" class="logo-icon">
+                        <span>PowerVerse Chain</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <!-- 首页导航（含前4个子项） -->
+                    <li>
+                        <a href="#home" data-i18n="nav.home">首页</a>
+                        <div class="product-dropdown">
+                            <a href="pages/chain.html" data-i18n="products.chain.name">PowerVerse Chain</a>
+                            <a href="pages/infra.html" data-i18n="products.infra.name">PowerVerse Infra</a>
+                            <a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a>
+                            <a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a>
+                        </div>
+                    </li>
+                    <!-- 产品导航（含后5个子项） -->
+                    <li>
+                        <a href="#product" data-i18n="nav.product">产品</a>
+                        <div class="product-dropdown">
+                            <a href="pages/wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a>
+                            <a href="pages/scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
+                            <a href="pages/xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
+                            <a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="pages/scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <div class="product-dropdown">
+                            <a href="pages/cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
+                            <a href="pages/computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
+                            <a href="pages/rwa.html" data-i18n="nav.scenario.rwa">RWA钱包场景</a>
+                            <a href="pages/workflow.html" data-i18n="nav.scenario.workflow">全链路场景</a>
+                        </div>
+                    </li>
+                    <li><a href="pages/developer.html" data-i18n="nav.developer">开发者中心</a></li>
+                    <li><a href="pages/token.html" data-i18n="nav.token">代币</a></li>
+                    <li><a href="pages/hardware-factory.html" data-i18n="nav.hardwareFactory">硬件工厂</a></li>
+                    <li><a href="pages/research-strength.html" data-i18n="nav.researchStrength">研发实力</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav.about">关于我们</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button type="button" class="theme-toggle" id="themeToggle" aria-label="深色/浅色模式切换" title="深色/浅色模式">
+                        <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
+                        <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
+                    </button>
+                    <button class="lang-switch">English</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页第一屏：hero.html 三栏布局 + 视频序列 + index 文案与动效，适配浅色/深色 -->
+    <section id="home" class="hero hero-video-layout">
+        <!-- 白底内：logo + 视频容器；视频在 logo 消失、两侧进入时开始循环播，无 overlay 整层隐藏 -->
+        <div id="hero-logo-white-area" class="hero-logo-white-area">
+            <div class="hero-overlay-logo-wrap" id="hero-logo-wrap">
+                <img id="hero-overlay-logo" src="images/logo/logo/1.png" alt="PowerVerse Chain" class="hero-overlay-logo-img">
+            </div>
+            <div id="hero-sequencer" class="hero-sequencer">
+                <div class="hero-center-inner">
+                    <div id="hero-sequencer-inner" class="hero-sequencer-inner">
+                        <div id="layer-1" class="video-layer">
+                            <div class="video-layer-inner">
+                                <video playsinline preload="auto" muted class="hero-center-video" data-is-reveal><source></source></video>
+                            </div>
+                        </div>
+                        <div id="layer-2" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-3" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-4" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-5" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-6" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-7" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-8" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-9" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                    </div>
+                    <div class="hud-layer hud-layer-light" aria-hidden="true">
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-left"></video>
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-right"></video>
+                    </div>
+                    <div class="hud-layer hud-layer-dark" aria-hidden="true">
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-left"></video>
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-right"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="hero-inner" class="hero-inner">
+            <div id="hero-left" class="hero-left">
+                <div class="hero-left-card hero-mount hero-mount-left">
+                    <div class="hero-content-left" id="heroContentLeft">
+                        <div class="hero-content">
+                            <h1 class="hero-title">
+                                <span class="title-line hero-main-title hero-brand" data-i18n="home.title">PowerVerse Chain</span>
+                                <span class="title-line highlight hero-subtitle-line" data-i18n="home.subtitle">AI驱动的超级公链</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-left-card hero-left-card-bottom hero-mount hero-mount-powered">
+                    <div class="hero-desc-visual" aria-hidden="true">
+                        <img src="images/backgrounds/PowerVerse%20Chain%204.svg" alt="" class="hero-desc-visual-img">
+                    </div>
+                    <p class="hero-description" data-i18n="home.description" data-i18n-html>融合<span class="hero-desc-tag">RWA</span>、<span class="hero-desc-tag">DePIN</span>、<span class="hero-desc-tag">GameFi</span>与<span class="hero-desc-tag">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span><span class="hero-desc-flow">与智慧</span>，<span class="hero-desc-flow">激活智能生态</span>，<span class="hero-desc-flow">开启数字文明新纪元</span></p>
+                </div>
+            </div>
+
+            <div class="hero-center-wrap" aria-hidden="true"></div>
+
+            <div id="hero-right" class="hero-right">
+                <div class="hero-mount hero-mount-right hero-right-card">
+                    <h2 class="hero-right-title" data-i18n="home.title">PowerVerse Chain</h2>
+                    <p id="hero-current-time" class="hero-right-time">--:-- --</p>
+                    <p id="hero-current-day" class="hero-right-day">...</p>
+                    <div class="hero-scroll-hint" onclick="document.getElementById('architecture')&&document.getElementById('architecture').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0">
+                        <div class="hero-scroll-hint-text-wrap">
+                            <span class="hero-scroll-hint-text" data-i18n="common.scrollDown">向下滚动</span>
+                            <span class="hero-scroll-hint-sub" data-i18n="home.scrollExplore">探索更多</span>
+                        </div>
+                        <svg class="hero-scroll-hint-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator" id="heroScrollIndicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- 技术框架 + 产品生态 + 开发者 + 应用场景：统一 3D 粒子底图 -->
+    <div class="main-3d-wrap" id="main3dWrap">
+        <canvas id="products-three" class="products-three-canvas" aria-hidden="true"></canvas>
+
+    <!-- 技术框架：三层堆叠，交互与产品生态/开发者中心一致 -->
+    <section id="architecture" class="architecture architecture-stack-section reveal-section">
+        <div class="architecture-stack-header">
+            <h2 class="section-title">
+                <span class="title-main" data-i18n="architecture.title">技术框架</span>
+                <span class="title-sub" data-i18n="architecture.subtitle">Architecture</span>
+            </h2>
+            <p class="architecture-stack-hint">向下滚动探索</p>
+        </div>
+        <div class="architecture-scroll-container">
+            <div class="architecture-stack">
+                <!-- 应用层 -->
+                <div class="architecture-stack-item" data-layer="1">
+                    <div class="architecture-card-title-bar">
+                        <p class="architecture-card-headline">
+                            <strong data-i18n="architecture.appLayer">应用层</strong>
+                            <span data-i18n="architecture.appLayerDesc">DApp、API 与 RPC 服务，面向用户与生态的接入层。</span>
+                        </p>
+                    </div>
+                    <div class="architecture-stack-inner architecture-card">
+                        <div class="architecture-card-text">
+                            <ul class="architecture-stack-list">
+                                <li data-i18n="architecture.dapp">DApp应用</li>
+                                <li data-i18n="architecture.api">API接口</li>
+                                <li data-i18n="architecture.rpc">RPC服务</li>
+                            </ul>
+                        </div>
+                        <div class="architecture-card-icon" aria-hidden="true">
+                            <span class="architecture-card-icon-symbol">📱</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 协议层 -->
+                <div class="architecture-stack-item" data-layer="2">
+                    <div class="architecture-card-title-bar">
+                        <p class="architecture-card-headline">
+                            <strong data-i18n="architecture.protocolLayer">协议层</strong>
+                            <span data-i18n="architecture.protocolLayerDesc">共识、智能合约与跨链协议，支撑链上逻辑与互操作。</span>
+                        </p>
+                    </div>
+                    <div class="architecture-stack-inner architecture-card">
+                        <div class="architecture-card-text">
+                            <ul class="architecture-stack-list">
+                                <li data-i18n="architecture.consensus">共识机制</li>
+                                <li data-i18n="architecture.smartContract">智能合约</li>
+                                <li data-i18n="architecture.crossChain">跨链协议</li>
+                            </ul>
+                        </div>
+                        <div class="architecture-card-icon" aria-hidden="true">
+                            <span class="architecture-card-icon-symbol">🤝</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 网络层 -->
+                <div class="architecture-stack-item" data-layer="3">
+                    <div class="architecture-card-title-bar">
+                        <p class="architecture-card-headline">
+                            <strong data-i18n="architecture.networkLayer">网络层</strong>
+                            <span data-i18n="architecture.networkLayerDesc">P2P 网络、节点与数据存储，保障去中心化与安全。</span>
+                        </p>
+                    </div>
+                    <div class="architecture-stack-inner architecture-card">
+                        <div class="architecture-card-text">
+                            <ul class="architecture-stack-list">
+                                <li data-i18n="architecture.p2p">P2P网络</li>
+                                <li data-i18n="architecture.nodeManagement">节点管理</li>
+                                <li data-i18n="architecture.dataStorage">数据存储</li>
+                            </ul>
+                        </div>
+                        <div class="architecture-card-icon" aria-hidden="true">
+                            <span class="architecture-card-icon-symbol">🌐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品生态 + 开发者中心 + 应用场景：统一背景与 3D 底图，浅色模式下滑动堆叠 -->
+    <div class="stack-modules-wrap" id="stackModulesWrap">
+        <section id="product" class="products reveal-section stack-module-item" data-stack="1">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="products.title">产品生态</h2>
+                <p class="section-description" data-i18n="products.description">构建完整的去中心化计算生态系统</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseChain.svg"/>
+                    </div>
+                    <div class="product-card-text">
+                        <h3 class="product-name" data-i18n="products.chain.name">PowerVerse Chain</h3>
+                        <p class="product-description" data-i18n="products.chain.description">高性能区块链底层网络，支持大规模分布式计算任务处理</p>
+                        <a href="pages/chain.html" class="product-link" data-i18n="products.chain.learnMore">了解更多 →</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseInfra.svg"/>
+                    </div>
+                    <div class="product-card-text">
+                        <h3 class="product-name" data-i18n="products.infra.name">PowerVerse Infra</h3>
+                        <p class="product-description" data-i18n="products.infra.description">基础设施服务，提供稳定可靠的计算资源调度与管理</p>
+                        <a href="pages/infra.html" class="product-link" data-i18n="products.infra.learnMore">了解更多 →</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseMarket.svg"/>
+                    </div>
+                    <div class="product-card-text">
+                        <h3 class="product-name" data-i18n="products.market.name">PowerVerse Market</h3>
+                        <p class="product-description" data-i18n="products.market.description">去中心化市场，连接计算资源供需双方，实现价值流转</p>
+                        <a href="pages/market.html" class="product-link" data-i18n="products.market.learnMore">了解更多 →</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/PowerVerseDAO.svg"/>
+                    </div>
+                    <div class="product-card-text">
+                        <h3 class="product-name" data-i18n="products.dao.name">PowerVerse DAO</h3>
+                        <p class="product-description" data-i18n="products.dao.description">去中心化自治组织，社区治理与生态发展决策平台</p>
+                        <a href="pages/dao.html" class="product-link" data-i18n="products.dao.learnMore">了解更多 →</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">
+                        <img src="./images/svg/Decloud.svg"/>
+                    </div>
+                    <div class="product-card-text">
+                        <h3 class="product-name" data-i18n="products.decloud.name">DeCloud</h3>
+                        <p class="product-description" data-i18n="products.decloud.description">去中心化云服务，提供安全、隐私、高效的计算云解决方案</p>
+                        <a href="pages/decloud.html" class="product-link" data-i18n="products.decloud.learnMore">了解更多 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 开发者中心 -->
+        <section id="developer" class="developer reveal-section stack-module-item" data-stack="2">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="developer.title">开发者中心</h2>
+                <p class="section-description" data-i18n="developer.description">丰富的开发工具和文档，助力开发者快速构建应用</p>
+            </div>
+            <div class="developer-content">
+                <div class="developer-resources">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/技术文档.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.docs.title">技术文档</h3>
+                        <p data-i18n="developer.docs.description">完整的技术文档和API参考，帮助开发者快速上手</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.docs.link">查看文档 →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/SDK工具包.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.sdk.title">SDK工具包</h3>
+                        <p data-i18n="developer.sdk.description">多语言SDK支持，简化开发流程，提高开发效率</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.sdk.link">下载SDK →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/开发工具.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.tools.title">开发工具</h3>
+                        <p data-i18n="developer.tools.description">测试网络、调试工具、部署脚本等一站式开发工具</p>
+                        <a href="pages/developer.html" class="resource-link" data-i18n="developer.tools.link">使用工具 →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <img src="./images/svg/社区支持.svg"/>
+                        </div>
+                        <h3 data-i18n="developer.community.title">社区支持</h3>
+                        <p data-i18n="developer.community.description">活跃的开发者社区，技术交流与问题解答</p>
+                        <a href="https://t.me/PowerVerseChain_Offical" target="_blank" rel="noopener noreferrer" class="resource-link" data-i18n="developer.community.link">加入社区 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 应用场景 -->
+        <section id="scenario" class="scenarios reveal-section stack-module-item" data-stack="3">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="scenarios.title">应用场景</h2>
+                <p class="section-description" data-i18n="scenarios.description">PowerVerse Chain赋能多元化的应用场景</p>
+            </div>
+            <div class="scenarios-grid">
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/cloudgaming.html'">
+                    <div class="scenario-number">01</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.cloudgaming">云游戏场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.cloudgaming.description">基于PowerVerse Chain的去中心化云游戏平台，提供低延迟、高质量的游戏体验</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/computingpowerexchange.html'">
+                    <div class="scenario-number">02</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.computingexchange">算力交易场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.computingexchange.description">去中心化算力交易市场，连接算力供需双方，实现算力资源的自由流转</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/rwa.html'">
+                    <div class="scenario-number">03</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.rwa">RWA钱包场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.rwa.description">合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。</p>
+                </div>
+                <div class="scenario-item" style="cursor: pointer;" onclick="window.location.href='pages/workflow.html'">
+                    <div class="scenario-number">04</div>
+                    <h3 class="scenario-title" data-i18n="nav.scenario.workflow">全链路场景</h3>
+                    <p class="scenario-description" data-i18n="scenarios.workflow.description">PowerVerse Chain生态系统中的云游戏、算力交易和代币支付的完整闭环流程</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">05</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.ai.title">AI模型训练</h3>
+                    <p class="scenario-description" data-i18n="scenarios.ai.description">分布式GPU资源池，支持大规模AI模型训练与推理，降低计算成本</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">05</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.science.title">科学计算</h3>
+                    <p class="scenario-description" data-i18n="scenarios.science.description">高性能计算集群，为科研机构提供强大的计算能力支持</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">06</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.render.title">渲染服务</h3>
+                    <p class="scenario-description" data-i18n="scenarios.render.description">分布式渲染网络，加速3D动画、影视特效等渲染任务</p>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-number">07</div>
+                    <h3 class="scenario-title" data-i18n="scenarios.edge.title">边缘计算</h3>
+                    <p class="scenario-description" data-i18n="scenarios.edge.description">边缘节点网络，提供低延迟、高可用的边缘计算服务</p>
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+    </div>
+
+    <!-- 页脚：3D 粒子背景 + 链接悬浮/点击高亮 -->
+    <footer class="footer">
+        <div class="footer-background">
+            <canvas id="footer-three"></canvas>
+            <div class="footer-three-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="container footer-inner">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="nav.product">产品</h4>
+                    <ul>
+                        <li><a href="pages/chain.html" data-i18n="products.chain.name">PowerVerse Chain</a></li>
+                        <li><a href="pages/infra.html" data-i18n="products.infra.name">PowerVerse Infra</a></li>
+                        <li><a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
+                        <li><a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
+                        <li><a href="pages/wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
+                        <li><a href="pages/scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
+                        <li><a href="pages/xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
+                        <li><a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="hardwareFactory.footerResources">资源</h4>
+                    <ul>
+                        <li><a href="pages/whitepaper.html" data-i18n="nav.whitepaper">白皮书</a></li>
+                        <li><a href="pages/developer.html" data-i18n="nav.developer">技术文档</a></li>
+                        <li><a href="#" data-i18n="common.github" title="GitHub repository (Coming soon)">GitHub</a></li>
+                        <li><a href="#" data-i18n="common.blog" title="Blog (Coming soon)">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="nav.about">关于</h4>
+                    <ul>
+                        <li><a href="pages/about.html#about" data-i18n="nav.about">关于我们</a></li>
+                        <li><a href="pages/about.html#contact" data-i18n="common.contact">联系我们</a></li>
+                        <li><a href="pages/about.html#contact" data-i18n="common.join">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 PowerVerse Chain. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- iOS/Android 二维码弹框：悬浮或点击按钮出现，关闭按钮在弹框右上角 -->
+    <div class="qr-modal" id="qrModal">
+        <div class="qr-modal-content">
+            <button type="button" class="qr-modal-close" id="qrModalClose" aria-label="关闭">&times;</button>
+            <h3 class="qr-modal-title" id="qrModalTitle">扫码下载</h3>
+            <img id="qrModalImg" src="./images/ewm/IOS.png" alt="二维码" class="qr-img">
+            <p class="qr-modal-desc" id="qrModalDesc">扫码下载 App</p>
+        </div>
+    </div>
+
+    <script src="js/languages.js?v=20250210"></script>
+    <script src="script.js?v=20250210"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script>
+        // 第一屏 hero.html 风格：Logo 揭示 + 三栏 + 视频序列，适配浅色/深色，文案沿用 index 动效
+        (function () {
+            var heroSection = document.querySelector('.hero-video-layout');
+            var whiteArea = document.getElementById('hero-logo-white-area');
+            var logoEl = document.getElementById('hero-overlay-logo');
+            var heroLogoWrap = document.getElementById('hero-logo-wrap');
+            var heroSequencerWrap = document.getElementById('hero-sequencer');
+            var heroSequencer = document.getElementById('hero-sequencer-inner');
+            var contentLeft = document.getElementById('heroContentLeft');
+            var scrollIndicator = document.getElementById('heroScrollIndicator');
+            var timeEl = document.getElementById('hero-current-time');
+            var dayEl = document.getElementById('hero-current-day');
+            if (!heroSection || !whiteArea || !logoEl) return;
+
+            // 配置：HUD 延迟 4 秒
+            var hud_delay = 4000;
+            // Hero 视频：Layer-1 reveal.mp4/reveal.webm，Layer-2~9 为 1.mp4~8.mp4 及对应 .webm；videos3 下英文文件名
+            var HERO_VIDEOS = [
+                { light: 'videos3/reveal.mp4', dark: 'videos3/reveal.webm' },
+                { light: 'videos3/1.mp4', dark: 'videos3/1.webm' },
+                { light: 'videos3/2.mp4', dark: 'videos3/2.webm' },
+                { light: 'videos3/3.mp4', dark: 'videos3/3.webm' },
+                { light: 'videos3/4.mp4', dark: 'videos3/4.webm' },
+                { light: 'videos3/5.mp4', dark: 'videos3/5.webm' },
+                { light: 'videos3/6.mp4', dark: 'videos3/6.webm' },
+                { light: 'videos3/7.mp4', dark: 'videos3/7.webm' },
+                { light: 'videos3/8.mp4', dark: 'videos3/8.webm' }
+            ];
+            var theme = document.documentElement.getAttribute('data-theme') || 'light';
+            var isLight = theme === 'light';
+            var useFetch = window.location.protocol !== 'file:';
+            var safari = /Safari\//.test(navigator.userAgent) && !/Chrome\//.test(navigator.userAgent);
+            document.querySelectorAll('#hero-sequencer-inner .hero-center-video').forEach(function(v, i) {
+                var cfg = HERO_VIDEOS[i];
+                if (!cfg) return;
+                var url = isLight ? cfg.light : cfg.dark;
+                var s = v.querySelector('source');
+                if (!s || !url) return;
+                var type = url.indexOf('.webm') !== -1 ? 'video/webm' : 'video/mp4';
+                if (useFetch) {
+                    fetch(url).then(function(res) { return res.ok ? res.blob() : Promise.reject(new Error('fetch ' + res.status)); }).then(function(blob) {
+                        s.src = URL.createObjectURL(blob);
+                        s.type = type;
+                        if (v.load) v.load();
+                    }).catch(function() {});
+                } else {
+                    s.src = url;
+                    s.type = type;
+                    if (v.load) v.load();
+                }
+            });
+
+            // 根据视口选择 layers：小屏前 5 层，大屏全部 9 层
+            var allLayers = Array.from(document.querySelectorAll('#hero-sequencer-inner [id^="layer-"]'));
+            var layers = window.innerWidth < 1025
+                ? allLayers.filter(function(_, i) { return i < 5; })
+                : allLayers;
+            var currentIndex = 0;
+
+            function updateTime() {
+                var now = new Date();
+                if (timeEl) timeEl.textContent = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+                if (dayEl) dayEl.textContent = now.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            function switchLayer() {
+                var layer = layers[currentIndex];
+                var video = layer ? layer.querySelector('video') : null;
+                if (layer && video) {
+                    layer.classList.add('invisible');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+                currentIndex = (currentIndex + 1) % layers.length;
+                var nextLayer = layers[currentIndex];
+                var nextVideo = nextLayer ? nextLayer.querySelector('video') : null;
+                if (nextLayer && nextVideo) {
+                    nextVideo.currentTime = 0;
+                    nextVideo.play().catch(function() {});
+                    nextLayer.classList.remove('invisible');
+                    var nextIdx = (currentIndex + 1) % layers.length;
+                    var preloadLayer = layers[nextIdx];
+                    var preloadVideo = preloadLayer ? preloadLayer.querySelector('video') : null;
+                    if (preloadVideo && !safari && preloadVideo.readyState < 2) preloadVideo.load();
+                }
+            }
+
+            function startVideoSequencer() {
+                if (!heroSequencer) return;
+                layers.forEach(function(layer) {
+                    var vid = layer.querySelector('video');
+                    if (vid) {
+                        vid.addEventListener('ended', switchLayer);
+                        vid.addEventListener('error', function() { switchLayer(); });
+                    }
+                });
+                var first = layers[0] ? layers[0].querySelector('video') : null;
+                if (!first) return;
+                first.addEventListener('ended', switchLayer);
+                var maxAttempts = 5;
+                function tryPlay(attempt) {
+                    if (attempt >= maxAttempts) return;
+                    if (!first.currentSrc) {
+                        if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                        return;
+                    }
+                    first.currentTime = 0;
+                    var p = first.play();
+                    if (p && typeof p.then === 'function') {
+                        p.then(function() {
+                            if (first.paused && attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                        }).catch(function() {
+                            if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                        });
+                    } else {
+                        if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                    }
+                }
+                function startPlay() { tryPlay(0); }
+                if (first.readyState >= 2 && first.currentSrc) startPlay();
+                else first.addEventListener('canplay', startPlay, { once: true });
+            }
+
+            var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reducedMotion) {
+                heroSection.classList.add('panels-in');
+                if (contentLeft) contentLeft.classList.add('active');
+                if (scrollIndicator) scrollIndicator.style.opacity = '1';
+                if (heroSequencerWrap) heroSequencerWrap.classList.add('mounted');
+                if (heroLogoWrap) { heroLogoWrap.style.visibility = 'hidden'; heroLogoWrap.style.opacity = '0'; }
+                setTimeout(startVideoSequencer, 100);
+            } else {
+                /* 浅色：满屏白色圆角背景 → 10ms 后 logo 逐渐变大、背景逐渐缩小（同一块背景）；logo 消失时无动画 */
+                function startHeroReveal() {
+                    heroSection.classList.add('panels-in');
+                    if (contentLeft) contentLeft.classList.add('active');
+                    if (scrollIndicator) scrollIndicator.style.opacity = '1';
+                    if (whiteArea && heroSequencerWrap && heroSection) {
+                        setTimeout(function() {
+                            var heroRect = heroSection.getBoundingClientRect();
+                            var videoArea = heroSequencerWrap.querySelector('.video-layer-inner');
+                            var targetRect = videoArea ? videoArea.getBoundingClientRect() : heroSequencerWrap.getBoundingClientRect();
+                            var radius = window.getComputedStyle(heroSequencerWrap).borderRadius || '1.5rem';
+                            whiteArea.style.transition = 'left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out';
+                            whiteArea.style.left = (targetRect.left - heroRect.left) + 'px';
+                            whiteArea.style.top = (targetRect.top - heroRect.top) + 'px';
+                            whiteArea.style.width = targetRect.width + 'px';
+                            whiteArea.style.height = targetRect.height + 'px';
+                            whiteArea.style.borderRadius = radius;
+                        }, 10);
+                    }
+                }
+                if (typeof requestAnimationFrame !== 'undefined') {
+                    requestAnimationFrame(function() { requestAnimationFrame(startHeroReveal); });
+                } else {
+                    setTimeout(startHeroReveal, 0);
+                }
+                /* Logo 消失、两侧进入同时：只隐藏 logo 层，视频在 hero-logo-white-area 内开始循环播 */
+                setTimeout(function() {
+                    if (heroSequencerWrap) heroSequencerWrap.classList.add('mounted');
+                    if (whiteArea) whiteArea.style.transition = 'none';
+                    if (heroLogoWrap) {
+                        heroLogoWrap.style.transition = 'none';
+                        heroLogoWrap.style.opacity = '0';
+                        heroLogoWrap.style.visibility = 'hidden';
+                        heroLogoWrap.style.pointerEvents = 'none';
+                    }
+                    if (logoEl) logoEl.style.transition = 'none';
+                    startVideoSequencer();
+                    /* 保活：若当前视频被暂停则重新 play；浅色/深色都保证序列循环 */
+                    setInterval(function() {
+                        if (!heroSequencerWrap || !heroSequencerWrap.classList.contains('mounted')) return;
+                        var curLayer = layers[currentIndex];
+                        var v = curLayer ? curLayer.querySelector('video') : null;
+                        if (v && v.paused && v.readyState >= 2) {
+                            v.play().catch(function() {});
+                        }
+                        /* 浅色区域视频一定循环：若已播完但 ended 未触发则强制切下一段 */
+                        if (v && v.ended && v.readyState >= 2) {
+                            switchLayer();
+                        }
+                    }, 800);
+                }, 1510);
+            }
+            setTimeout(function() {
+                document.querySelectorAll('.hero-video-layout .hud-layer video').forEach(function(v) {
+                    if (v.src || v.currentSrc) { v.currentTime = 0; v.play().catch(function() {}); }
+                });
+                document.querySelectorAll('.hero-video-layout .hud-layer').forEach(function(el) { el.classList.add('loaded'); });
+            }, hud_delay);
+        })();
+    </script>
+    <script>
+        // 页脚 3D 粒子背景（轻量，与首页风格一致）
+        (function () {
+            var footer = document.querySelector('.footer');
+            var canvas = document.getElementById('footer-three');
+            if (!footer || !canvas || typeof THREE === 'undefined') return;
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            camera.position.z = 28;
+            var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            var width = footer.offsetWidth;
+            var height = footer.offsetHeight;
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setClearColor(0x0a0e17, 0);
+
+            var count = 400;
+            var positions = new Float32Array(count * 3);
+            var radius = 42;
+            for (var i = 0; i < count; i++) {
+                var theta = Math.random() * Math.PI * 2;
+                var phi = Math.acos(2 * Math.random() - 1);
+                var r = radius * Math.cbrt(Math.random());
+                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = r * Math.cos(phi);
+            }
+            var geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            var material = new THREE.PointsMaterial({
+                color: 0x7dd3fc,
+                size: 0.65,
+                transparent: true,
+                opacity: 0.6,
+                sizeAttenuation: true
+            });
+            var points = new THREE.Points(geometry, material);
+            scene.add(points);
+
+            var clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                var t = clock.getElapsedTime();
+                points.rotation.y = t * 0.06;
+                points.rotation.x = t * 0.02;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            function resize() {
+                width = footer.offsetWidth;
+                height = footer.offsetHeight;
+                if (width && height) {
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(width, height);
+                }
+            }
+            window.addEventListener('resize', resize);
+            var ro = new ResizeObserver(resize);
+            ro.observe(footer);
+        })();
+    </script>
+    <script>
+        // 技术框架 + 产品生态 + 开发者中心 + 应用场景 - Three.js 波浪粒子 3D 底图（覆盖四块区域）
+        (function () {
+            var wrap = document.getElementById('main3dWrap');
+            var canvas = document.getElementById('products-three');
+            var sizeEl = wrap;
+            if (!sizeEl || !canvas || typeof THREE === 'undefined') return;
+
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 500);
+            camera.position.set(0, 20, 100);
+            camera.lookAt(0, 0, 0);
+
+            var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setClearColor(0x000000, 0);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // 粒子网格：XZ 平面，顶点数用于波浪计算
+            var cols = 100;
+            var rows = 65;
+            var count = cols * rows;
+            var spacing = 2.4;
+            var positions = new Float32Array(count * 3);
+            var baseX = [];
+            var baseZ = [];
+            for (var i = 0; i < rows; i++) {
+                for (var j = 0; j < cols; j++) {
+                    var idx = (i * cols + j) * 3;
+                    var x = (j - cols * 0.5) * spacing;
+                    var z = (i - rows * 0.5) * spacing;
+                    baseX.push(x);
+                    baseZ.push(z);
+                    positions[idx] = x;
+                    positions[idx + 1] = 0;
+                    positions[idx + 2] = z;
+                }
+            }
+            var geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            var positionAttr = geometry.getAttribute('position');
+            var material = new THREE.PointsMaterial({
+                color: 0x9dc9f0,
+                size: 0.4,
+                transparent: true,
+                opacity: 0.75,
+                sizeAttenuation: true,
+                depthWrite: false
+            });
+            var points = new THREE.Points(geometry, material);
+            points.rotation.x = -0.35;
+            scene.add(points);
+
+            var animId = null;
+            var clock = new THREE.Clock();
+            var waveAmp1 = 8;
+            var waveAmp2 = 5;
+            var waveFreq1 = 0.08;
+            var waveFreq2 = 0.06;
+            function animate() {
+                animId = requestAnimationFrame(animate);
+                var t = clock.getElapsedTime();
+                for (var i = 0; i < count; i++) {
+                    var x = baseX[i];
+                    var z = baseZ[i];
+                    var y = waveAmp1 * Math.sin(x * waveFreq1 + t * 1.2) + waveAmp2 * Math.sin(z * waveFreq2 + t * 0.9);
+                    positionAttr.array[i * 3 + 1] = y;
+                }
+                positionAttr.needsUpdate = true;
+                points.rotation.y = t * 0.03;
+                renderer.render(scene, camera);
+            }
+
+            function resize() {
+                var w = sizeEl.offsetWidth;
+                var h = sizeEl.offsetHeight;
+                if (!w || !h) return;
+                renderer.setSize(w, h);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.render(scene, camera);
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) {
+                        if (!animId) animate();
+                    } else {
+                        if (animId) {
+                            cancelAnimationFrame(animId);
+                            animId = null;
+                        }
+                    }
+                });
+            }, { rootMargin: '80px', threshold: 0 });
+            io.observe(sizeEl);
+
+            resize();
+            window.addEventListener('resize', resize);
+            var ro = new ResizeObserver(resize);
+            ro.observe(sizeEl);
+        })();
+    </script>
+    <!-- 测试系统 -->
+    <script>
+        // 快捷键打开测试 (Ctrl+Shift+T)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                window.open('test_complete.html', '_blank');
+            }
+        });
+
+        // iOS/Android 二维码弹框：悬浮与点击均显示，关闭在右上角，二维码来自 images/ewm
+        (function () {
+            var iosBtn = document.getElementById('qr-ios');
+            var androidBtn = document.getElementById('qr-android');
+            var qrModal = document.getElementById('qrModal');
+            var qrModalClose = document.getElementById('qrModalClose');
+            var qrModalTitle = document.getElementById('qrModalTitle');
+            var qrModalImg = document.getElementById('qrModalImg');
+            var qrModalDesc = document.getElementById('qrModalDesc');
+            if (!qrModal || !qrModalClose) return;
+
+            var hoverTimer = null;
+            var hideTimer = null;
+            var HOVER_DELAY = 200;
+            var HIDE_DELAY = 300;
+
+            function openModal(type) {
+                if (qrModalTitle && qrModalImg && qrModalDesc) {
+                    if (type === 'ios') {
+                        qrModalTitle.textContent = 'iOS 下载';
+                        qrModalImg.src = 'images/ewm/IOS.png';
+                        qrModalImg.alt = 'iOS 下载二维码';
+                        qrModalDesc.textContent = '使用 iPhone 扫码下载';
+                    } else {
+                        qrModalTitle.textContent = 'Android 下载';
+                        qrModalImg.src = 'images/ewm/Anroid.png';
+                        qrModalImg.alt = 'Android 下载二维码';
+                        qrModalDesc.textContent = '使用 Android 扫码下载';
+                    }
+                }
+                qrModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (hideTimer) clearTimeout(hideTimer);
+            }
+
+            function closeModal() {
+                qrModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            function scheduleHide() {
+                if (hideTimer) clearTimeout(hideTimer);
+                hideTimer = setTimeout(closeModal, HIDE_DELAY);
+            }
+
+            function cancelHide() {
+                if (hideTimer) clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+
+            if (iosBtn) {
+                iosBtn.addEventListener('mouseenter', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = setTimeout(function () { openModal('ios'); }, HOVER_DELAY);
+                });
+                iosBtn.addEventListener('mouseleave', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = null;
+                    scheduleHide();
+                });
+                iosBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    openModal('ios');
+                });
+            }
+            if (androidBtn) {
+                androidBtn.addEventListener('mouseenter', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = setTimeout(function () { openModal('android'); }, HOVER_DELAY);
+                });
+                androidBtn.addEventListener('mouseleave', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = null;
+                    scheduleHide();
+                });
+                androidBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    openModal('android');
+                });
+            }
+
+            qrModal.addEventListener('mouseenter', cancelHide);
+            qrModal.addEventListener('mouseleave', scheduleHide);
+            qrModalClose.addEventListener('click', function () {
+                cancelHide();
+                closeModal();
+            });
+            qrModal.addEventListener('click', function (e) {
+                if (e.target === qrModal) {
+                    cancelHide();
+                    closeModal();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

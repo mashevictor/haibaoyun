@@ -13,7 +13,7 @@
     {"imports":{"three":"https://threejs.org/build/three.module.js","three/addons/":"https://threejs.org/examples/jsm/"}}
     </script>
     <script>
-    (function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='dark'?t:'light');})();
+    (function(){var t=localStorage.getItem('theme');if(!t)t='light';document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');})();
     </script>
 </head>
 <body>
@@ -43,14 +43,14 @@
                         <a href="#product" data-i18n="nav.product">产品</a>
                         <div class="product-dropdown">
                             <a href="pages/wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a>
+                            <a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a>
                             <a href="pages/scan.html" data-i18n="products.scan.name">PowerVerse Scan</a>
                             <a href="pages/xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a>
                             <a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a>
-                            <a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a>
                         </div>
                     </li>
                     <li>
-                        <a href="pages/scenarios.html" data-i18n="nav.scenario.title">应用场景</a>
+                        <a href="javascript:void(0)" data-i18n="nav.scenario.title" aria-haspopup="true">应用场景</a>
                         <div class="product-dropdown">
                             <a href="pages/cloudgaming.html" data-i18n="nav.scenario.cloudgaming">云游戏场景</a>
                             <a href="pages/computingpowerexchange.html" data-i18n="nav.scenario.computingexchange">算力交易场景</a>
@@ -80,32 +80,85 @@
         </div>
     </nav>
 
-    <!-- 首页第一屏：fps-standalone 风格 3D 场景 + 左侧文字滑入加载 -->
-    <section id="home" class="hero">
-        <div class="hero-content-left" id="heroContentLeft">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-line hero-main-title hero-brand" data-i18n="home.title">PowerVerse Chain</span>
-                    <span class="title-line highlight hero-subtitle-line" data-i18n="home.subtitle">AI驱动的超级公链</span>
-                </h1>
-                <p class="hero-description" data-i18n="home.description" data-i18n-html>融合<span class="hero-desc-tag">RWA</span>、<span class="hero-desc-tag">DePIN</span>、<span class="hero-desc-tag">GameFi</span>与<span class="hero-desc-tag">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span><span class="hero-desc-flow">与智慧</span>，<span class="hero-desc-flow">激活智能生态</span>，<span class="hero-desc-flow">开启数字文明新纪元</span></p>
-                <div class="hero-buttons">
-                    <a href="javascript:void(0);" id="qr-ios" class="btn btn-primary" data-i18n="home.ios" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <span data-i18n="home.ios">iOS</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M10 2L12 7H17L13 10L15 15L10 12L5 15L7 10L3 7H8L10 2Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="javascript:void(0);" id="qr-android" class="btn btn-secondary" data-i18n="home.android" onclick="return false;" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <span data-i18n="home.android">Android</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M10 2L12 7H17L13 10L15 15L10 12L5 15L7 10L3 7H8L10 2Z" fill="currentColor"/>
-                        </svg>
-                    </a>
+    <!-- 首页第一屏：hero.html 三栏布局 + 视频序列 + index 文案与动效，适配浅色/深色 -->
+    <section id="home" class="hero hero-video-layout">
+        <!-- 满屏白色圆角背景：在三栏底层，跟随 logo 变大由外向内推进，最终与视频区域一致 -->
+        <div id="hero-white-round-bg" class="hero-white-round-bg" aria-hidden="true"></div>
+        <!-- 白底内：logo + 视频容器；视频在 logo 消失、两侧进入时开始循环播，无 overlay 整层隐藏 -->
+        <div id="hero-logo-white-area" class="hero-logo-white-area">
+            <div class="hero-overlay-logo-wrap" id="hero-logo-wrap">
+                <img id="hero-overlay-logo" src="images/logo/logo/1.png" alt="PowerVerse Chain" class="hero-overlay-logo-img">
+            </div>
+            <div id="hero-sequencer" class="hero-sequencer">
+                <div class="hero-center-inner">
+                    <div id="hero-sequencer-inner" class="hero-sequencer-inner">
+                        <div id="layer-1" class="video-layer">
+                            <div class="video-layer-inner">
+                                <video playsinline preload="auto" muted class="hero-center-video" data-is-reveal><source></source></video>
+                            </div>
+                        </div>
+                        <div id="layer-2" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-3" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-4" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-5" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-6" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-7" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-8" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                        <div id="layer-9" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
+                    </div>
+                    <div class="hud-layer hud-layer-light" aria-hidden="true">
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-left"></video>
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-right"></video>
+                    </div>
+                    <div class="hud-layer hud-layer-dark" aria-hidden="true">
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-left"></video>
+                        <video playsinline preload="none" loop muted class="hud-video hud-video-right"></video>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="hero-canvas-container" class="hero-canvas-container"></div>
+
+        <div id="hero-inner" class="hero-inner">
+            <div id="hero-left" class="hero-left">
+                <div class="hero-left-card hero-mount hero-mount-left">
+                    <div class="hero-content-left" id="heroContentLeft">
+                        <div class="hero-content">
+                            <h1 class="hero-title">
+                                <span class="title-line hero-main-title hero-brand" data-i18n="home.title">PowerVerse Chain</span>
+                                <span class="title-line highlight hero-subtitle-line" data-i18n="home.subtitle">AI驱动的超级公链</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-left-card hero-left-card-bottom hero-mount hero-mount-powered">
+                    <div class="hero-left-card-bottom-inner">
+                        <div class="hero-desc-visual" aria-hidden="true">
+                            <img src="images/backgrounds/PowerVerse%20Chain%204.svg" alt="" class="hero-desc-visual-img">
+                        </div>
+                        <p class="hero-description" data-i18n="home.description" data-i18n-html>融合<span class="hero-desc-tag">RWA</span>、<span class="hero-desc-tag">DePIN</span>、<span class="hero-desc-tag">GameFi</span>与<span class="hero-desc-tag">DeFi</span>，汇聚<span class="hero-desc-highlight">全球算力</span><span class="hero-desc-flow">与智慧</span>，<span class="hero-desc-flow">激活智能生态</span>，<span class="hero-desc-flow">开启数字文明新纪元</span></p>
+                        <a href="pages/cloudgaming.html" class="hero-learn-more-btn hero-learn-more-link" data-i18n="common.learnMore">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-center-wrap" aria-hidden="true"></div>
+
+            <div id="hero-right" class="hero-right">
+                <div class="hero-mount hero-mount-right hero-right-card">
+                    <h2 class="hero-right-title" data-i18n="home.title">PowerVerse Chain</h2>
+                    <p id="hero-current-time" class="hero-right-time">--:-- --</p>
+                    <p id="hero-current-day" class="hero-right-day">...</p>
+                    <div class="hero-scroll-hint" onclick="document.getElementById('architecture')&&document.getElementById('architecture').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0">
+                        <div class="hero-scroll-hint-text-wrap">
+                            <span class="hero-scroll-hint-text" data-i18n="common.scrollDown">向下滚动</span>
+                            <span class="hero-scroll-hint-sub" data-i18n="home.scrollExplore">探索更多</span>
+                        </div>
+                        <svg class="hero-scroll-hint-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="scroll-indicator" id="heroScrollIndicator">
             <div class="mouse"></div>
         </div>
@@ -372,10 +425,10 @@
                         <li><a href="pages/market.html" data-i18n="products.market.name">PowerVerse Market</a></li>
                         <li><a href="pages/dao.html" data-i18n="products.dao.name">PowerVerse DAO</a></li>
                         <li><a href="pages/wallet.html" data-i18n="products.wallet.name">PowerVerse Wallet</a></li>
+                        <li><a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
                         <li><a href="pages/scan.html" data-i18n="products.scan.name">PowerVerse Scan</a></li>
                         <li><a href="pages/xai-token.html" data-i18n="products.xaiToken.name">RWA代币 XAI</a></li>
                         <li><a href="pages/decloud.html" data-i18n="products.decloud.name">DeCloud</a></li>
-                        <li><a href="pages/computing-port.html" data-i18n="products.computingPort.name">算力港</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -417,171 +470,243 @@
     <script src="js/languages.js?v=20250210"></script>
     <script src="script.js?v=20250210"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script type="module">
-        // 第一屏 3D 效果与加载方式（来自 fps-standalone：场景 + 左侧文字滑入）
-        (async function () {
-            const canvasContainer = document.getElementById('hero-canvas-container');
-            const contentLeft = document.getElementById('heroContentLeft');
-            const scrollIndicator = document.getElementById('heroScrollIndicator');
-            if (!canvasContainer || !contentLeft) return;
+    <script>
+        // 第一屏 hero.html 风格：Logo 揭示 + 三栏 + 视频序列，适配浅色/深色，文案沿用 index 动效
+        (function () {
+            var heroSection = document.querySelector('.hero-video-layout');
+            var whiteArea = document.getElementById('hero-logo-white-area');
+            var logoEl = document.getElementById('hero-overlay-logo');
+            var heroLogoWrap = document.getElementById('hero-logo-wrap');
+            var heroSequencerWrap = document.getElementById('hero-sequencer');
+            var heroSequencer = document.getElementById('hero-sequencer-inner');
+            var contentLeft = document.getElementById('heroContentLeft');
+            var scrollIndicator = document.getElementById('heroScrollIndicator');
+            var timeEl = document.getElementById('hero-current-time');
+            var dayEl = document.getElementById('hero-current-day');
+            if (!heroSection || !whiteArea || !logoEl) return;
 
-            const THREE = await import('https://threejs.org/build/three.module.js');
-            const { OrbitControls } = await import('https://threejs.org/examples/jsm/controls/OrbitControls.js');
-            const { GLTFLoader } = await import('https://threejs.org/examples/jsm/loaders/GLTFLoader.js');
-            const { Octree } = await import('https://threejs.org/examples/jsm/math/Octree.js');
-            const gsap = (await import('https://esm.sh/gsap@3.12.5')).default;
-
-            let W = window.innerWidth, H = window.innerHeight;
-            const GRAVITY = 30, NUM_SPHERES = 80, SPHERE_RADIUS = 0.2, IMPULSE = 18;
-            const playerDirection = new THREE.Vector3();
-
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x0a1628);
-            scene.fog = new THREE.Fog(0x0a1628, 0, 50);
-
-            const camera = new THREE.PerspectiveCamera(70, W / H, 0.1, 1000);
-            camera.position.set(0, 2, 8);
-
-            const fillLight = new THREE.HemisphereLight(0x4a6fa5, 0x0a1628, 1.2);
-            scene.add(fillLight);
-            const dirLight = new THREE.DirectionalLight(0xffffff, 2);
-            dirLight.position.set(-5, 25, -1);
-            dirLight.castShadow = true;
-            dirLight.shadow.mapSize.width = dirLight.shadow.mapSize.height = 1024;
-            scene.add(dirLight);
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setSize(W, H);
-            renderer.shadowMap.enabled = true;
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            canvasContainer.appendChild(renderer.domElement);
-
-            const controls = new OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.minDistance = 2;
-            controls.maxDistance = 50;
-            controls.target.set(0, 1, 0);
-
-            const worldOctree = new Octree();
-            const sphereGeometry = new THREE.IcosahedronGeometry(SPHERE_RADIUS, 5);
-            const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0x00d4ff });
-            const spheres = [];
-            let sphereIdx = 0;
-            for (let i = 0; i < NUM_SPHERES; i++) {
-                const mesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
-                mesh.castShadow = true;
-                mesh.visible = false;
-                mesh.position.set(0, -100, 0);
-                scene.add(mesh);
-                spheres.push({
-                    mesh,
-                    collider: new THREE.Sphere(new THREE.Vector3(0, -100, 0), SPHERE_RADIUS),
-                    velocity: new THREE.Vector3(0, 0, 0)
+            // 配置：HUD 延迟 4 秒
+            var hud_delay = 4000;
+            // Hero 视频：Layer-1 reveal.mp4/reveal.webm，Layer-2~9 为 1.mp4~8.mp4 及对应 .webm；videos3 下英文文件名
+            var HERO_VIDEOS = [
+                { light: 'videos3/reveal.mp4', dark: 'videos3/reveal.webm' },
+                { light: 'videos3/1.mp4', dark: 'videos3/1.webm' },
+                { light: 'videos3/2.mp4', dark: 'videos3/2.webm' },
+                { light: 'videos3/3.mp4', dark: 'videos3/3.webm' },
+                { light: 'videos3/4.mp4', dark: 'videos3/4.webm' },
+                { light: 'videos3/5.mp4', dark: 'videos3/5.webm' },
+                { light: 'videos3/6.mp4', dark: 'videos3/6.webm' },
+                { light: 'videos3/7.mp4', dark: 'videos3/7.webm' },
+                { light: 'videos3/8.mp4', dark: 'videos3/8.webm' }
+            ];
+            // 备用视频：videos3 缺失时使用 video/compressed 下三个视频循环
+            var FALLBACK_VIDEOS = [
+                'video/compressed/300千米测试_compressed.mp4',
+                'video/compressed/1300千米测试_compressed.mp4',
+                'video/compressed/1800千米测试_compressed.mp4'
+            ];
+            function setVideoSource(v, s, url, type) {
+                s.src = url;
+                s.type = type || (url.indexOf('.webm') !== -1 ? 'video/webm' : 'video/mp4');
+                if (v.load) v.load();
+            }
+            var theme = document.documentElement.getAttribute('data-theme') || 'light';
+            var isLight = theme === 'light';
+            var useFetch = window.location.protocol !== 'file:';
+            var safari = /Safari\//.test(navigator.userAgent) && !/Chrome\//.test(navigator.userAgent);
+            document.querySelectorAll('#hero-sequencer-inner .hero-center-video').forEach(function(v, i) {
+                var cfg = HERO_VIDEOS[i];
+                if (!cfg) return;
+                var url = isLight ? cfg.light : cfg.dark;
+                var s = v.querySelector('source');
+                if (!s) return;
+                var type = url.indexOf('.webm') !== -1 ? 'video/webm' : 'video/mp4';
+                var fallbackUrl = FALLBACK_VIDEOS[i % FALLBACK_VIDEOS.length];
+                var fallbackType = 'video/mp4';
+                if (useFetch && url) {
+                    fetch(url).then(function(res) { return res.ok ? res.blob() : Promise.reject(new Error('fetch ' + res.status)); }).then(function(blob) {
+                        s.src = URL.createObjectURL(blob);
+                        s.type = type;
+                        if (v.load) v.load();
+                    }).catch(function() {
+                        setVideoSource(v, s, fallbackUrl, fallbackType);
+                    });
+                } else {
+                    setVideoSource(v, s, url || fallbackUrl, type || fallbackType);
+                }
+                v.addEventListener('error', function onErr() {
+                    if (s.src && s.src.indexOf('compressed') === -1) {
+                        setVideoSource(v, s, fallbackUrl, fallbackType);
+                        v.removeEventListener('error', onErr);
+                    }
                 });
+            });
+
+            // 根据视口选择 layers：小屏前 5 层，大屏全部 9 层
+            var allLayers = Array.from(document.querySelectorAll('#hero-sequencer-inner [id^="layer-"]'));
+            var layers = window.innerWidth < 1025
+                ? allLayers.filter(function(_, i) { return i < 5; })
+                : allLayers;
+            var currentIndex = 0;
+
+            function updateTime() {
+                var now = new Date();
+                if (timeEl) timeEl.textContent = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+                if (dayEl) dayEl.textContent = now.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            function switchLayer() {
+                var layer = layers[currentIndex];
+                var video = layer ? layer.querySelector('video') : null;
+                if (layer && video) {
+                    layer.classList.add('invisible');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+                currentIndex = (currentIndex + 1) % layers.length;
+                var nextLayer = layers[currentIndex];
+                var nextVideo = nextLayer ? nextLayer.querySelector('video') : null;
+                if (nextLayer && nextVideo) {
+                    nextVideo.currentTime = 0;
+                    nextVideo.play().catch(function() {});
+                    nextLayer.classList.remove('invisible');
+                    var nextIdx = (currentIndex + 1) % layers.length;
+                    var preloadLayer = layers[nextIdx];
+                    var preloadVideo = preloadLayer ? preloadLayer.querySelector('video') : null;
+                    if (preloadVideo && !safari && preloadVideo.readyState < 2) preloadVideo.load();
+                }
             }
 
-            function throwBall() {
-                camera.getWorldDirection(playerDirection);
-                const sphere = spheres[sphereIdx];
-                sphere.collider.center.copy(camera.position).addScaledVector(playerDirection, 1.2);
-                sphere.velocity.copy(playerDirection).multiplyScalar(IMPULSE);
-                sphere.mesh.visible = true;
-                sphereIdx = (sphereIdx + 1) % NUM_SPHERES;
-            }
-            function updateSpheres(deltaTime) {
-                const damping = Math.exp(-1.5 * deltaTime) - 1;
-                for (const s of spheres) {
-                    if (!s.mesh.visible) continue;
-                    s.collider.center.addScaledVector(s.velocity, deltaTime);
-                    const result = worldOctree.sphereIntersect(s.collider);
-                    if (result) {
-                        const n = result.normal.clone();
-                        s.collider.center.add(n.multiplyScalar(result.depth));
-                        s.velocity.addScaledVector(n.normalize(), -n.dot(s.velocity) * 1.5);
+            function startVideoSequencer() {
+                if (!heroSequencer) return;
+                layers.forEach(function(layer) {
+                    var vid = layer.querySelector('video');
+                    if (vid) {
+                        vid.addEventListener('ended', switchLayer);
+                        vid.addEventListener('error', function() { switchLayer(); });
+                    }
+                });
+                var first = layers[0] ? layers[0].querySelector('video') : null;
+                if (!first) return;
+                first.addEventListener('ended', switchLayer);
+                var maxAttempts = 5;
+                function tryPlay(attempt) {
+                    if (attempt >= maxAttempts) return;
+                    if (!first.currentSrc) {
+                        if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                        return;
+                    }
+                    first.currentTime = 0;
+                    var p = first.play();
+                    if (p && typeof p.then === 'function') {
+                        p.then(function() {
+                            if (first.paused && attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                        }).catch(function() {
+                            if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
+                        });
                     } else {
-                        s.velocity.y -= GRAVITY * deltaTime;
+                        if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
                     }
-                    s.velocity.addScaledVector(s.velocity, damping);
-                    s.mesh.position.copy(s.collider.center);
                 }
+                function startPlay() { tryPlay(0); }
+                if (first.readyState >= 2 && first.currentSrc) startPlay();
+                else first.addEventListener('canplay', startPlay, { once: true });
             }
 
-            canvasContainer.addEventListener('click', function(e) {
-                if (e.target === canvasContainer || e.target === renderer.domElement) throwBall();
-            });
-            renderer.domElement.addEventListener('click', throwBall);
-
-            const loader = new GLTFLoader().setPath('https://threejs.org/examples/models/gltf/');
-            loader.load('collision-world.glb', function(gltf) {
-                scene.add(gltf.scene);
-                worldOctree.fromGraphNode(gltf.scene);
-                gltf.scene.traverse(function(child) {
-                    if (child.isMesh) {
-                        child.castShadow = true;
-                        child.receiveShadow = true;
-                    }
-                });
-            });
-
-            let lastTime = performance.now() / 1000;
-            let animId = null;
-            function animate() {
-                animId = requestAnimationFrame(animate);
-                const now = performance.now() / 1000;
-                const deltaTime = Math.min(0.05, now - lastTime);
-                lastTime = now;
-                if (worldOctree.box) updateSpheres(deltaTime);
-                controls.update();
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            function triggerTransition() {
-                canvasContainer.classList.add('active');
-                contentLeft.classList.add('active');
+            var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reducedMotion) {
+                heroSection.classList.add('panels-in');
+                if (contentLeft) contentLeft.classList.add('active');
                 if (scrollIndicator) scrollIndicator.style.opacity = '1';
-                const finalAspect = (W * 0.333) / H;
-                const cam = { aspect: camera.aspect, fov: camera.fov };
-                gsap.to(cam, {
-                    aspect: finalAspect,
-                    fov: 70,
-                    duration: 0.9,
-                    ease: 'power2.out',
-                    onUpdate: function() {
-                        camera.aspect = cam.aspect;
-                        camera.fov = cam.fov;
-                        camera.updateProjectionMatrix();
+                if (heroSequencerWrap) heroSequencerWrap.classList.add('mounted');
+                if (heroLogoWrap) { heroLogoWrap.style.visibility = 'hidden'; heroLogoWrap.style.opacity = '0'; }
+                setTimeout(startVideoSequencer, 100);
+            } else {
+                /* 浅色：满屏白色圆角背景 → 10ms 后 logo 逐渐变大、背景逐渐缩小（同一块背景）；logo 消失时无动画 */
+                function startHeroReveal() {
+                    heroSection.classList.add('panels-in');
+                    if (contentLeft) contentLeft.classList.add('active');
+                    if (scrollIndicator) scrollIndicator.style.opacity = '1';
+                    if (whiteArea && heroSequencerWrap && heroSection) {
+                        var whiteBg = document.getElementById('hero-white-round-bg');
+                        setTimeout(function() {
+                            var heroRect = heroSection.getBoundingClientRect();
+                            var centerColumn = heroSection.querySelector('.hero-center-wrap');
+                            var targetRect = centerColumn ? centerColumn.getBoundingClientRect() : (heroSequencerWrap.querySelector('.video-layer-inner') || heroSequencerWrap).getBoundingClientRect();
+                            var radius = window.getComputedStyle(heroSequencerWrap).borderRadius || '1.5rem';
+                            var trans = 'left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out';
+                            whiteArea.style.transition = trans;
+                            whiteArea.style.left = (targetRect.left - heroRect.left) + 'px';
+                            whiteArea.style.top = (targetRect.top - heroRect.top) + 'px';
+                            whiteArea.style.width = targetRect.width + 'px';
+                            whiteArea.style.height = targetRect.height + 'px';
+                            whiteArea.style.borderRadius = radius;
+                            if (whiteBg) {
+                                whiteBg.style.transition = trans;
+                                whiteBg.style.left = (targetRect.left - heroRect.left) + 'px';
+                                whiteBg.style.top = (targetRect.top - heroRect.top) + 'px';
+                                whiteBg.style.width = targetRect.width + 'px';
+                                whiteBg.style.height = targetRect.height + 'px';
+                                whiteBg.style.borderRadius = radius;
+                            }
+                        }, 10);
                     }
-                });
-                gsap.delayedCall(0.95, resize);
-            }
-
-            function resize() {
-                W = window.innerWidth;
-                H = window.innerHeight;
-                const isActive = canvasContainer.classList.contains('active');
-                let w = W, h = H;
-                if (isActive) {
-                    w = canvasContainer.clientWidth || (W <= 768 ? W : Math.floor(W * 0.333));
-                    h = canvasContainer.clientHeight || (W <= 768 ? Math.floor(H * 0.45) : H);
                 }
-                camera.aspect = w / h;
-                camera.updateProjectionMatrix();
-                renderer.setSize(w, h);
+                if (typeof requestAnimationFrame !== 'undefined') {
+                    requestAnimationFrame(function() { requestAnimationFrame(startHeroReveal); });
+                } else {
+                    setTimeout(startHeroReveal, 0);
+                }
+                /* Logo 消失、两侧进入同时：只隐藏 logo 层，视频在 hero-logo-white-area 内开始循环播 */
+                setTimeout(function() {
+                    if (heroSequencerWrap) heroSequencerWrap.classList.add('mounted');
+                    if (whiteArea) whiteArea.style.transition = 'none';
+                    var whiteBg = document.getElementById('hero-white-round-bg');
+                    if (whiteBg) whiteBg.style.transition = 'none';
+                    if (heroLogoWrap) {
+                        heroLogoWrap.style.transition = 'none';
+                        heroLogoWrap.style.opacity = '0';
+                        heroLogoWrap.style.visibility = 'hidden';
+                        heroLogoWrap.style.pointerEvents = 'none';
+                    }
+                    if (logoEl) logoEl.style.transition = 'none';
+                    startVideoSequencer();
+                    /* 保活：若当前视频被暂停则重新 play；浅色/深色都保证序列循环 */
+                    setInterval(function() {
+                        if (!heroSequencerWrap || !heroSequencerWrap.classList.contains('mounted')) return;
+                        var curLayer = layers[currentIndex];
+                        var v = curLayer ? curLayer.querySelector('video') : null;
+                        if (v && v.paused && v.readyState >= 2) {
+                            v.play().catch(function() {});
+                        }
+                        /* 浅色区域视频一定循环：若已播完但 ended 未触发则强制切下一段 */
+                        if (v && v.ended && v.readyState >= 2) {
+                            switchLayer();
+                        }
+                    }, 800);
+                }, 1510);
             }
-            window.addEventListener('resize', resize);
-
-            window.addEventListener('beforeunload', function () {
-                if (animId) cancelAnimationFrame(animId);
-                controls.dispose();
-                renderer.dispose();
-                if (renderer.domElement && renderer.domElement.parentNode)
-                    renderer.domElement.parentNode.removeChild(renderer.domElement);
+            setTimeout(function() {
+                document.querySelectorAll('.hero-video-layout .hud-layer video').forEach(function(v) {
+                    if (v.src || v.currentSrc) { v.currentTime = 0; v.play().catch(function() {}); }
+                });
+                document.querySelectorAll('.hero-video-layout .hud-layer').forEach(function(el) { el.classList.add('loaded'); });
+            }, hud_delay);
+        })();
+    </script>
+    <script>
+        // 左下角 Learn more：当前页向上滑出后跳转云游戏，目标页从下往上推动由 cloudgaming 页面脚本配合
+        (function () {
+            var link = document.querySelector('.hero-learn-more-link');
+            if (!link) return;
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var href = link.getAttribute('href');
+                document.body.classList.add('page-transition-out');
+                setTimeout(function () { window.location.href = href; }, 420);
             });
-
-            setTimeout(triggerTransition, 2500);
         })();
     </script>
     <script>
@@ -768,6 +893,7 @@
             var qrModalTitle = document.getElementById('qrModalTitle');
             var qrModalImg = document.getElementById('qrModalImg');
             var qrModalDesc = document.getElementById('qrModalDesc');
+            if (!qrModal || !qrModalClose) return;
 
             var hoverTimer = null;
             var hideTimer = null;
@@ -775,16 +901,18 @@
             var HIDE_DELAY = 300;
 
             function openModal(type) {
-                if (type === 'ios') {
-                    qrModalTitle.textContent = 'iOS 下载';
-                    qrModalImg.src = 'images/ewm/IOS.png';
-                    qrModalImg.alt = 'iOS 下载二维码';
-                    qrModalDesc.textContent = '使用 iPhone 扫码下载';
-                } else {
-                    qrModalTitle.textContent = 'Android 下载';
-                    qrModalImg.src = 'images/ewm/Anroid.png';
-                    qrModalImg.alt = 'Android 下载二维码';
-                    qrModalDesc.textContent = '使用 Android 扫码下载';
+                if (qrModalTitle && qrModalImg && qrModalDesc) {
+                    if (type === 'ios') {
+                        qrModalTitle.textContent = 'iOS 下载';
+                        qrModalImg.src = 'images/ewm/IOS.png';
+                        qrModalImg.alt = 'iOS 下载二维码';
+                        qrModalDesc.textContent = '使用 iPhone 扫码下载';
+                    } else {
+                        qrModalTitle.textContent = 'Android 下载';
+                        qrModalImg.src = 'images/ewm/Anroid.png';
+                        qrModalImg.alt = 'Android 下载二维码';
+                        qrModalDesc.textContent = '使用 Android 扫码下载';
+                    }
                 }
                 qrModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -806,49 +934,45 @@
                 hideTimer = null;
             }
 
-            // iOS：悬浮延迟显示
-            iosBtn.addEventListener('mouseenter', function () {
-                if (hoverTimer) clearTimeout(hoverTimer);
-                hoverTimer = setTimeout(function () { openModal('ios'); }, HOVER_DELAY);
-            });
-            iosBtn.addEventListener('mouseleave', function () {
-                if (hoverTimer) clearTimeout(hoverTimer);
-                hoverTimer = null;
-                scheduleHide();
-            });
-            iosBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (hoverTimer) clearTimeout(hoverTimer);
-                openModal('ios');
-            });
+            if (iosBtn) {
+                iosBtn.addEventListener('mouseenter', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = setTimeout(function () { openModal('ios'); }, HOVER_DELAY);
+                });
+                iosBtn.addEventListener('mouseleave', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = null;
+                    scheduleHide();
+                });
+                iosBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    openModal('ios');
+                });
+            }
+            if (androidBtn) {
+                androidBtn.addEventListener('mouseenter', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = setTimeout(function () { openModal('android'); }, HOVER_DELAY);
+                });
+                androidBtn.addEventListener('mouseleave', function () {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = null;
+                    scheduleHide();
+                });
+                androidBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    openModal('android');
+                });
+            }
 
-            // Android：悬浮延迟显示
-            androidBtn.addEventListener('mouseenter', function () {
-                if (hoverTimer) clearTimeout(hoverTimer);
-                hoverTimer = setTimeout(function () { openModal('android'); }, HOVER_DELAY);
-            });
-            androidBtn.addEventListener('mouseleave', function () {
-                if (hoverTimer) clearTimeout(hoverTimer);
-                hoverTimer = null;
-                scheduleHide();
-            });
-            androidBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (hoverTimer) clearTimeout(hoverTimer);
-                openModal('android');
-            });
-
-            // 鼠标进入弹框时不关闭，离开弹框时延迟关闭
             qrModal.addEventListener('mouseenter', cancelHide);
             qrModal.addEventListener('mouseleave', scheduleHide);
-
-            // 右上角关闭按钮
             qrModalClose.addEventListener('click', function () {
                 cancelHide();
                 closeModal();
             });
-
-            // 点击弹框之外的遮罩区域也可关闭
             qrModal.addEventListener('click', function (e) {
                 if (e.target === qrModal) {
                     cancelHide();
