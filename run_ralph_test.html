@@ -106,6 +106,7 @@
             <button class="test-btn" onclick="startRalphTest()">🚀 开始全量测试</button>
             <button class="test-btn" onclick="testLanguageCycle()">🔄 循环测试语言切换</button>
             <button class="test-btn" onclick="testButtonClick()">🔘 测试按钮点击</button>
+            <button class="test-btn" onclick="showPageSpeedHelp()">📊 页面打开速度测试</button>
             <button class="test-btn" onclick="clearTestLog()">🗑️ 清空日志</button>
         </div>
         
@@ -306,6 +307,27 @@
         
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        function showPageSpeedHelp() {
+            var t = performance.timing;
+            var loadMs = t.loadEventEnd - t.navigationStart;
+            var domMs = t.domContentLoadedEventEnd - t.navigationStart;
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '【页面打开速度】当前页: load=' + loadMs + 'ms, DOMContentLoaded=' + domMs + 'ms',
+                type: 'info'
+            });
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '首页及各页面速度测试请运行: run_ralph_speed_test.bat（需先启动 HTTP 服务，如 python -m http.server 8000）',
+                type: 'info'
+            });
+            updateTestLog({
+                time: new Date().toLocaleTimeString(),
+                message: '或运行 run_performance_test.bat 进行完整性能+多语言测试，结果见 playwright-report-performance 与 ralph_speed_results.json',
+                type: 'info'
+            });
         }
         
         // 页面加载完成后初始化

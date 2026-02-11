@@ -102,9 +102,6 @@
                         <div id="layer-4" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
                         <div id="layer-5" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
                         <div id="layer-6" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
-                        <div id="layer-7" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
-                        <div id="layer-8" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
-                        <div id="layer-9" class="video-layer invisible"><div class="video-layer-inner"><video preload="auto" playsinline muted class="hero-center-video"><source></source></video></div></div>
                     </div>
                     <div class="hud-layer hud-layer-light" aria-hidden="true">
                         <video playsinline preload="none" loop muted class="hud-video hud-video-left"></video>
@@ -487,17 +484,14 @@
 
             // 配置：HUD 延迟 4 秒
             var hud_delay = 4000;
-            // Hero 视频：Layer-1 reveal.mp4/reveal.webm，Layer-2~9 为 1.mp4~8.mp4 及对应 .webm；videos3 下英文文件名
+            // Hero 视频：共 6 层，目录 videos；浅色模式用 mp4，深色模式用 webm
             var HERO_VIDEOS = [
-                { light: 'videos3/reveal.mp4', dark: 'videos3/reveal.webm' },
-                { light: 'videos3/1.mp4', dark: 'videos3/1.webm' },
-                { light: 'videos3/2.mp4', dark: 'videos3/2.webm' },
-                { light: 'videos3/3.mp4', dark: 'videos3/3.webm' },
-                { light: 'videos3/4.mp4', dark: 'videos3/4.webm' },
-                { light: 'videos3/5.mp4', dark: 'videos3/5.webm' },
-                { light: 'videos3/6.mp4', dark: 'videos3/6.webm' },
-                { light: 'videos3/7.mp4', dark: 'videos3/7.webm' },
-                { light: 'videos3/8.mp4', dark: 'videos3/8.webm' }
+                { light: 'videos/1.mp4', dark: 'videos/1.webm' },
+                { light: 'videos/2.mp4', dark: 'videos/2.webm' },
+                { light: 'videos/3.mp4', dark: 'videos/3.webm' },
+                { light: 'videos/4.mp4', dark: 'videos/4.webm' },
+                { light: 'videos/5.mp4', dark: 'videos/5.webm' },
+                { light: 'videos/6.mp4', dark: 'videos/6.webm' }
             ];
             // 备用视频：videos3 缺失时使用 video/compressed 下三个视频循环
             var FALLBACK_VIDEOS = [
@@ -520,7 +514,7 @@
                 var url = isLight ? cfg.light : cfg.dark;
                 var s = v.querySelector('source');
                 if (!s) return;
-                var type = url.indexOf('.webm') !== -1 ? 'video/webm' : 'video/mp4';
+                var type = (url && url.indexOf('.webm') !== -1) ? 'video/webm' : 'video/mp4';
                 var fallbackUrl = FALLBACK_VIDEOS[i % FALLBACK_VIDEOS.length];
                 var fallbackType = 'video/mp4';
                 if (useFetch && url) {
@@ -542,11 +536,55 @@
                 });
             });
 
-            // 根据视口选择 layers：小屏前 5 层，大屏全部 9 层
+            // 主题切换时立即更新英雄区视频源（浅色 mp4 / 深色 webm）并恢复当前层播放
+            document.addEventListener('themechange', function(e) {
+                var newTheme = (e.detail && e.detail.theme) ? e.detail.theme : document.documentElement.getAttribute('data-theme');
+                if (!newTheme) return;
+                var isLight = newTheme === 'light';
+                var videos = document.querySelectorAll('#hero-sequencer-inner .hero-center-video');
+                var curLayer = layers[currentIndex];
+                var curVideo = curLayer ? curLayer.querySelector('video') : null;
+                function applyOne(v, i, whenCurrentReady) {
+                    var cfg = HERO_VIDEOS[i];
+                    if (!cfg) return;
+                    var url = isLight ? cfg.light : cfg.dark;
+                    var s = v.querySelector('source');
+                    if (!s) return;
+                    var type = (url && url.indexOf('.webm') !== -1) ? 'video/webm' : 'video/mp4';
+                    var fallbackUrl = FALLBACK_VIDEOS[i % FALLBACK_VIDEOS.length];
+                    var fallbackType = 'video/mp4';
+                    var isCurrent = (v === curVideo);
+                    if (isCurrent) { v.pause(); }
+                    if (useFetch && url) {
+                        fetch(url).then(function(res) { return res.ok ? res.blob() : Promise.reject(new Error('fetch')); }).then(function(blob) {
+                            if (s.src && s.src.indexOf('blob:') === 0) try { URL.revokeObjectURL(s.src); } catch (err) {}
+                            s.src = URL.createObjectURL(blob);
+                            s.type = type;
+                            v.load();
+                            if (isCurrent && whenCurrentReady) whenCurrentReady(v);
+                        }).catch(function() {
+                            setVideoSource(v, s, fallbackUrl, fallbackType);
+                            if (isCurrent && whenCurrentReady) whenCurrentReady(v);
+                        });
+                    } else {
+                        setVideoSource(v, s, url || fallbackUrl, type || fallbackType);
+                        if (isCurrent && whenCurrentReady) whenCurrentReady(v);
+                    }
+                }
+                var currentReady = false;
+                function whenCurrentReady(v) {
+                    if (currentReady) return;
+                    currentReady = true;
+                    v.currentTime = 0;
+                    if (v.readyState >= 2) v.play().catch(function(){});
+                    else v.addEventListener('canplay', function onCan() { v.currentTime = 0; v.play().catch(function(){}); }, { once: true });
+                }
+                videos.forEach(function(v, i) { applyOne(v, i, whenCurrentReady); });
+            });
+
+            // 共 6 个视频层，小屏与大屏均使用全部 6 层
             var allLayers = Array.from(document.querySelectorAll('#hero-sequencer-inner [id^="layer-"]'));
-            var layers = window.innerWidth < 1025
-                ? allLayers.filter(function(_, i) { return i < 5; })
-                : allLayers;
+            var layers = allLayers;
             var currentIndex = 0;
 
             function updateTime() {
@@ -579,6 +617,7 @@
                 }
             }
 
+            var leftBottomPullDownScheduled = false;
             function startVideoSequencer() {
                 if (!heroSequencer) return;
                 layers.forEach(function(layer) {
@@ -602,6 +641,15 @@
                     var p = first.play();
                     if (p && typeof p.then === 'function') {
                         p.then(function() {
+                            if (!leftBottomPullDownScheduled) {
+                                leftBottomPullDownScheduled = true;
+                                var heroLeft = document.getElementById('hero-left');
+                                var bottomCard = document.querySelector('.hero-left-card-bottom');
+                                var inner = document.querySelector('.hero-left-card-bottom-inner');
+                                if (heroLeft) heroLeft.classList.add('hero-left-split');
+                                if (bottomCard) bottomCard.classList.add('hero-bottom-reveal');
+                                if (inner) inner.classList.add('hero-pull-down-start');
+                            }
                             if (first.paused && attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
                         }).catch(function() {
                             if (attempt + 1 < maxAttempts) setTimeout(function() { tryPlay(attempt + 1); }, 300);
@@ -636,7 +684,7 @@
                             var centerColumn = heroSection.querySelector('.hero-center-wrap');
                             var targetRect = centerColumn ? centerColumn.getBoundingClientRect() : (heroSequencerWrap.querySelector('.video-layer-inner') || heroSequencerWrap).getBoundingClientRect();
                             var radius = window.getComputedStyle(heroSequencerWrap).borderRadius || '1.5rem';
-                            var trans = 'left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out';
+                            var trans = 'left 1.5s cubic-bezier(0.42, 0, 1, 1), top 1.5s cubic-bezier(0.42, 0, 1, 1), width 1.5s cubic-bezier(0.42, 0, 1, 1), height 1.5s cubic-bezier(0.42, 0, 1, 1), border-radius 1.5s cubic-bezier(0.42, 0, 1, 1)';
                             whiteArea.style.transition = trans;
                             whiteArea.style.left = (targetRect.left - heroRect.left) + 'px';
                             whiteArea.style.top = (targetRect.top - heroRect.top) + 'px';

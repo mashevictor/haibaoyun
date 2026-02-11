@@ -15,6 +15,7 @@ if (themeToggle) {
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         if (typeof updateNavbarBackground === 'function') updateNavbarBackground();
+        document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
     });
 }
 

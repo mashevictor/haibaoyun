@@ -708,7 +708,7 @@ body {
 }
 
 /* ========== hero 动画：仅 logo 放大 + 背景往中间推进 + 两侧推进 ========== */
-/* Logo 缩放：0 → 1，1.5s ease-out */
+/* Logo 缩放：0 → 1，刚开始慢、往中间推进时加快（ease-in） */
 @keyframes hero-logoScale {
     0% { transform: scale(0); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
@@ -718,12 +718,15 @@ body {
     --hero-reveal-duration: 1000ms;
     --hero-ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
     --hero-ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-    --hero-gap: 6px;
+    --hero-gap: 2px;
+    /* hero 圆角与 Avalanche 一致：外框 20px，内卡 12px */
+    --hero-radius-outer: 1.25rem;
+    --hero-radius-card: 0.75rem;
     /* hero-sequencer 动画体系（与文档逻辑一致） */
     --navbar-height: 72px;
     --hero-left-height: 338px;
     --hero-right-height: 338px;
-    --radius-4xl: 1.5rem;
+    --radius-4xl: 1.25rem;
     --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
     --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -748,11 +751,11 @@ body {
     max-width: calc(100% - var(--hero-gap) * 2);
     box-sizing: border-box;
     align-items: stretch;
-    border-radius: 1rem;
+    border-radius: var(--hero-radius-outer);
 }
 @media (min-width: 1024px) {
     .hero-video-layout .hero-inner {
-        border-radius: 1.5rem;
+        border-radius: var(--hero-radius-outer);
         grid-template-rows: 1fr;
         height: calc(100vh - 72px - var(--hero-gap) * 2);
         min-height: calc(100vh - 72px - var(--hero-gap) * 2);
@@ -765,40 +768,59 @@ body {
     gap: var(--hero-gap);
     min-height: 0;
     height: 100%;
+    box-sizing: border-box;
 }
 .hero-video-layout .hero-left-card {
     padding: 1.5rem;
-    border-radius: 1rem;
+    border-radius: var(--hero-radius-card);
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
 }
-/* 左上卡片缩小高度，把更多空间留给左下 */
+/* 左侧 AVAX 式：最先出现时为一整块（左上填满），视频开始后左上往上缩进、左下作为一块区域出现 */
 .hero-video-layout .hero-left .hero-mount-left.hero-left-card {
+    flex: 1 1 0;
+    max-height: none;
+    min-height: 0;
+    transition: flex 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94), max-height 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hero-video-layout .hero-left.hero-left-split .hero-mount-left.hero-left-card {
     flex: 0 1 auto;
     max-height: 32%;
-    min-height: 0;
 }
+/* 左下：初始不占位，视频开始后作为「一块区域」平滑出现（节奏放慢、无跳动） */
 .hero-video-layout .hero-left-card-bottom {
-    flex: 1 1 0;
+    flex: 0 0 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     min-height: 0;
-    overflow: visible;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    transition: flex 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94), max-height 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.85s ease;
+}
+.hero-video-layout .hero-left-card-bottom.hero-bottom-reveal {
+    flex: 1 1 0;
+    max-height: 80vh;
+    opacity: 1;
 }
 .hero-video-layout .hero-left-card-bottom-inner {
     display: flex;
     flex-direction: column;
     min-height: 0;
-    animation: hero-pull-down 0.7s var(--hero-ease-out-cubic) 0.35s backwards;
+    opacity: 0;
+    transform: translateY(-12%);
+}
+.hero-video-layout .hero-left-card-bottom-inner.hero-pull-down-start {
+    animation: hero-pull-down 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
 }
 @keyframes hero-pull-down {
-    from { opacity: 0; transform: translateY(-100%); }
-    to { opacity: 1; transform: translateY(0); }
+    0% { opacity: 0; transform: translateY(-12%); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 .hero-video-layout .hero-learn-more-btn {
     display: inline-flex;
@@ -955,13 +977,10 @@ body {
 #hero-sequencer.mounted .hero-sequencer-inner #layer-4 { transition-delay: 150ms; }
 #hero-sequencer.mounted .hero-sequencer-inner #layer-5 { transition-delay: 200ms; }
 #hero-sequencer.mounted .hero-sequencer-inner #layer-6 { transition-delay: 250ms; }
-#hero-sequencer.mounted .hero-sequencer-inner #layer-7 { transition-delay: 300ms; }
-#hero-sequencer.mounted .hero-sequencer-inner #layer-8 { transition-delay: 350ms; }
-#hero-sequencer.mounted .hero-sequencer-inner #layer-9 { transition-delay: 400ms; }
 .hero-video-layout .hero-sequencer-inner .video-layer-inner {
     aspect-ratio: 16/9;
-    width: 85%;
-    max-width: 32rem;
+    width: 100%;
+    max-width: 53.76rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1000,10 +1019,11 @@ body {
     flex-direction: column;
     min-height: 0;
     height: 100%;
+    box-sizing: border-box;
 }
 .hero-video-layout .hero-right-card {
     padding: 1.5rem;
-    border-radius: 1rem;
+    border-radius: var(--hero-radius-card);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1088,7 +1108,7 @@ body {
     border-radius: var(--radius-4xl, 1.5rem);
     pointer-events: none;
     backface-visibility: hidden;
-    transition: left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out;
+    transition: left 1.5s cubic-bezier(0.42, 0, 1, 1), top 1.5s cubic-bezier(0.42, 0, 1, 1), width 1.5s cubic-bezier(0.42, 0, 1, 1), height 1.5s cubic-bezier(0.42, 0, 1, 1), border-radius 1.5s cubic-bezier(0.42, 0, 1, 1);
 }
 [data-theme="dark"] .hero-video-layout .hero-white-round-bg {
     display: none;
@@ -1100,7 +1120,7 @@ body {
     pointer-events: none;
 }
 .hero-video-layout > #hero-logo-white-area #hero-sequencer { pointer-events: auto; }
-/* 白底区：透明背景；初始铺满全屏、圆角，随 logo 变大在 1.5s 内缩小到视频区；logo 到视频大小时突然消失 */
+/* 白底区：透明背景；初始铺满全屏，随 logo 变大往中间推进（开始慢、推进快），1.5s 内缩小到视频区 */
 .hero-logo-white-area {
     position: absolute;
     left: 0;
@@ -1116,7 +1136,7 @@ body {
     background: transparent;
     border: none;
     box-shadow: none;
-    transition: left 1.5s ease-out, top 1.5s ease-out, width 1.5s ease-out, height 1.5s ease-out, border-radius 1.5s ease-out;
+    transition: left 1.5s cubic-bezier(0.42, 0, 1, 1), top 1.5s cubic-bezier(0.42, 0, 1, 1), width 1.5s cubic-bezier(0.42, 0, 1, 1), height 1.5s cubic-bezier(0.42, 0, 1, 1), border-radius 1.5s cubic-bezier(0.42, 0, 1, 1);
 }
 [data-theme="light"] .hero-video-layout .hero-logo-white-area,
 [data-theme="dark"] .hero-video-layout .hero-logo-white-area { background: transparent; }
@@ -1127,7 +1147,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-/* Logo 仅从小到大，无变小过程；到 100% 后由 JS 直接隐藏，中间无其他效果与动画 */
+/* Logo 仅从小到大；开始慢、往中间推进快（ease-in），到 100% 后由 JS 直接隐藏 */
 .hero-overlay-logo-img {
     width: 90%;
     max-width: 28rem;
@@ -1136,7 +1156,7 @@ body {
     object-fit: contain;
     opacity: 0;
     transform: scale(0);
-    animation: hero-logoScale 1.5s ease-out forwards;
+    animation: hero-logoScale 1.5s cubic-bezier(0.42, 0, 1, 1) forwards;
     transition: none;
 }
 /* 浅色模式：首页开始后 10ms logo 开始变大，与背景缩小同步 */
@@ -1153,16 +1173,16 @@ body {
 [data-theme="light"] .hero-video-layout .hero-inner {
     background: #000;
 }
-/* 首页浅色模式：视频区域右下角圆角 ×5（1.5rem → 7.5rem） */
+/* 首页浅色模式：视频区域右下角圆角 ×5（与 --hero-radius-outer 一致） */
 [data-theme="light"] .hero-video-layout #hero-sequencer,
 [data-theme="light"] .hero-video-layout #hero-sequencer.mounted {
-    clip-path: inset(0 0 0 0 round 1.5rem 1.5rem 7.5rem 1.5rem);
+    clip-path: inset(0 0 0 0 round var(--hero-radius-outer) var(--hero-radius-outer) 6.25rem var(--hero-radius-outer));
 }
 [data-theme="light"] .hero-video-layout .hero-white-round-bg {
-    border-radius: 1.5rem 1.5rem 7.5rem 1.5rem;
+    border-radius: var(--hero-radius-outer) var(--hero-radius-outer) 6.25rem var(--hero-radius-outer);
 }
 [data-theme="light"] .hero-video-layout .hero-logo-white-area {
-    border-radius: 1.5rem 1.5rem 7.5rem 1.5rem;
+    border-radius: var(--hero-radius-outer) var(--hero-radius-outer) 6.25rem var(--hero-radius-outer);
 }
 [data-theme="light"] .hero-video-layout .hero-left { gap: var(--hero-gap); }
 [data-theme="light"] .hero-video-layout .hero-left-card,
@@ -1212,7 +1232,7 @@ body {
 [data-theme="dark"] .hero-video-layout { background: #383838; }
 [data-theme="dark"] .hero-video-layout .hero-inner {
     background: #383838;
-    border-radius: 1.25rem;
+    border-radius: var(--hero-radius-outer);
     overflow: hidden;
     gap: var(--hero-gap);
     margin: var(--hero-gap);
@@ -1222,23 +1242,23 @@ body {
 [data-theme="dark"] .hero-video-layout .hero-left { gap: var(--hero-gap); }
 [data-theme="dark"] .hero-video-layout .hero-left-card,
 [data-theme="dark"] .hero-video-layout .hero-right-card {
-    background: #000000;
+    background: #111111;
     color: var(--text-primary);
     border: none;
-    border-radius: 1rem;
+    border-radius: var(--hero-radius-card);
     overflow: hidden;
 }
 [data-theme="dark"] .hero-video-layout .hero-left-card-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
+    border-radius: var(--hero-radius-card);
 }
 [data-theme="dark"] .hero-video-layout .hero-center-wrap {
-    border-radius: 1rem;
+    border-radius: var(--hero-radius-card);
     overflow: hidden;
 }
 [data-theme="dark"] .hero-video-layout #hero-sequencer {
-    background: #000000;
-    border-radius: 1rem;
+    background: #111111;
+    border-radius: var(--hero-radius-card);
     overflow: hidden;
 }
 [data-theme="dark"] .hero-video-layout .hero-center-inner,
@@ -1279,7 +1299,7 @@ body {
 [data-theme="dark"] .hero-video-layout .hero-scroll-hint span { color: var(--text-secondary); }
 [data-theme="dark"] .hero-video-layout .hero-description .hero-desc-highlight { color: #1964FE; }
 
-/* 两侧内容与 logo/背景同步推进：1.5s ease-out，脚本在开始时加 panels-in */
+/* 两侧内容与 logo/背景同步推进：1.8s 与 Avalanche 节奏接近，脚本在开始时加 panels-in */
 /* 首页点击 Learn more 跳转：当前页向上滑出 */
 body.page-transition-out .hero-video-layout,
 body.page-transition-out #home {
@@ -1293,8 +1313,9 @@ body.page-transition-out { overflow: hidden; }
 body.page-enter-from-bottom #page-enter-wrap { transform: translateY(100vh); }
 body.page-enter-from-bottom { overflow: hidden; }
 
-.hero-video-layout #hero-left { transform: translateX(-100%); backface-visibility: hidden; transition: transform 1.5s ease-out; }
-.hero-video-layout #hero-right { transform: translateX(100%); backface-visibility: hidden; transition: transform 1.5s ease-out; }
+/* 两侧推进：先慢后快（ease-in）、与中间贴合丝滑、无跳动 */
+.hero-video-layout #hero-left { transform: translateX(-100%); backface-visibility: hidden; will-change: transform; transition: transform 1.8s cubic-bezier(0.42, 0, 1, 1); }
+.hero-video-layout #hero-right { transform: translateX(100%); backface-visibility: hidden; will-change: transform; transition: transform 1.8s cubic-bezier(0.42, 0, 1, 1); }
 .hero-video-layout.panels-in #hero-left { transform: translateX(0); }
 .hero-video-layout.panels-in #hero-right { transform: translateX(0); }
 
@@ -1316,7 +1337,7 @@ body.page-enter-from-bottom { overflow: hidden; }
     .hero-video-layout .hero-left { grid-column: 1 / span 6; grid-row: 1; }
     .hero-video-layout .hero-center-wrap { grid-column: 1 / -1; grid-row: 2; min-height: 0; }
     .hero-video-layout .hero-right { grid-column: 7 / span 6; grid-row: 1; }
-    .hero-video-layout #hero-sequencer-inner .video-layer:nth-child(n+6) { display: none !important; }
+    .hero-video-layout #hero-sequencer-inner .video-layer:nth-child(n+7) { display: none !important; }
 }
 @media (max-width: 768px) {
     .hero-video-layout .hero-inner { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }

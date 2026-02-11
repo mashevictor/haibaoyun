@@ -45,18 +45,19 @@ def check_dependencies():
     return True
 
 def compress_media():
-    """压缩媒体文件"""
+    """压缩媒体文件：先全量图片压缩（不改变分辨率），再可选视频压缩"""
     print("\n" + "=" * 60)
-    print("压缩图片和视频...")
+    print("压缩图片（不改变分辨率）...")
     print("=" * 60)
-    
+    script_no_resize = Path('compress_images_no_resize.py')
+    if script_no_resize.exists():
+        subprocess.run([sys.executable, str(script_no_resize)])
     script_path = Path('compress_media.py')
     if script_path.exists():
+        print("\n压缩视频/其他媒体...")
         result = subprocess.run([sys.executable, str(script_path)])
         return result.returncode == 0
-    else:
-        print("警告: compress_media.py 不存在")
-        return False
+    return True
 
 def start_server():
     """启动测试服务器"""
