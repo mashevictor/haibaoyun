@@ -3,7 +3,7 @@ chcp 65001 > nul
 cd /d "%~dp0"
 
 echo.
-echo 使用 Node 启动本地服务器（端口 8080）...
+echo 使用 Node 启动本地服务器（端口 5500）...
 echo 若未安装 Node，请先安装 https://nodejs.org
 echo.
 
@@ -22,12 +22,12 @@ if not exist "index.html" (
 )
 
 echo 启动后请在浏览器访问：
-echo   http://localhost:8080
-echo   http://localhost:8080/index.html
+echo   http://localhost:5500
+echo   http://localhost:5500/index.html
 echo.
 echo 按 Ctrl+C 可停止服务器
 echo.
 
-npx -y serve -l 8080
+npx -y serve -l 5500
 
 pause

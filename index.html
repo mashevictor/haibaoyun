@@ -88,7 +88,7 @@
         <!-- 白底内：logo + 视频容器；视频在 logo 消失、两侧进入时开始循环播，无 overlay 整层隐藏 -->
         <div id="hero-logo-white-area" class="hero-logo-white-area">
             <div class="hero-overlay-logo-wrap" id="hero-logo-wrap">
-                <img id="hero-overlay-logo" src="images/logo/logo/1.png" alt="PowerVerse Chain" class="hero-overlay-logo-img">
+                <img id="hero-overlay-logo" src="images/logo/logo/Vector2.png" alt="PowerVerse Chain" class="hero-overlay-logo-img">
             </div>
             <div id="hero-sequencer" class="hero-sequencer">
                 <div class="hero-center-inner">
@@ -483,6 +483,8 @@
             var dayEl = document.getElementById('hero-current-day');
             if (!heroSection || !whiteArea || !logoEl) return;
 
+            var debugRect = (typeof location !== 'undefined' && location.search.indexOf('debug=rect') !== -1);
+
             // 配置：HUD 延迟 4 秒
             var hud_delay = 4000;
             // Hero 视频：共 6 层，目录 videos；浅色模式用 mp4，深色模式用 webm
@@ -708,9 +710,54 @@
                 } else {
                     setTimeout(startHeroReveal, 0);
                 }
-                /* Logo 消失、两侧进入同时：只隐藏 logo 层，视频在 hero-logo-white-area 内开始循环播 */
+                /* 调试：1479ms 记录 logo 消失前的像素位置与大小 */
+                if (debugRect) {
+                    setTimeout(function() {
+                        if (heroLogoWrap) window.__logoRect = heroLogoWrap.getBoundingClientRect();
+                    }, 1479);
+                }
+                /* 视频在 logo 消失前 500ms 开始播放：1480 - 500 = 980ms 播视频，1480ms 隐藏 logo */
                 setTimeout(function() {
                     if (heroSequencerWrap) heroSequencerWrap.classList.add('mounted');
+                    startVideoSequencer();
+                    setInterval(function() {
+                        if (!heroSequencerWrap || !heroSequencerWrap.classList.contains('mounted')) return;
+                        var curLayer = layers[currentIndex];
+                        var v = curLayer ? curLayer.querySelector('video') : null;
+                        if (v && v.paused && v.readyState >= 2) {
+                            v.play().catch(function() {});
+                        }
+                        if (v && v.ended && v.readyState >= 2) {
+                            switchLayer();
+                        }
+                    }, 800);
+                }, 980);
+                setTimeout(function() {
+                    if (debugRect) {
+                        var videoEl = heroSequencerWrap ? heroSequencerWrap.querySelector('.video-layer-inner') : null;
+                        if (videoEl) window.__videoRect = videoEl.getBoundingClientRect();
+                        (function showRectNumbers() {
+                            var L = window.__logoRect, V = window.__videoRect;
+                            function line(title, r) {
+                                if (!r) return title + ': 未采集到';
+                                return title + ': left=' + Math.round(r.left) + ' top=' + Math.round(r.top) + ' width=' + Math.round(r.width) + ' height=' + Math.round(r.height) + ' (px)';
+                            }
+                            var t1 = line('Logo消失时', L), t2 = line('视频播放时', V);
+                            if (typeof console !== 'undefined') { console.log(t1); console.log(t2); }
+                            var box = document.createElement('div');
+                            box.id = 'debug-rect-box';
+                            box.style.cssText = 'position:fixed;bottom:16px;left:16px;right:16px;max-width:800px;margin:0 auto;background:#1a1a1a;color:#eee;font-family:monospace;font-size:14px;padding:16px 20px;border-radius:8px;z-index:99999;line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0,0.5);';
+                            box.innerHTML = '<div style="margin-bottom:8px;font-weight:bold;">像素位置与大小（debug=rect）</div><div>' + t1 + '</div><div>' + t2 + '</div><button id="debug-rect-copy" style="margin-top:12px;padding:8px 16px;cursor:pointer;">复制到剪贴板</button> <button id="debug-rect-close" style="margin-left:8px;padding:8px 16px;cursor:pointer;">关闭</button>';
+                            document.body.appendChild(box);
+                            document.getElementById('debug-rect-copy').onclick = function() {
+                                var text = t1 + '\n' + t2;
+                                if (navigator.clipboard && navigator.clipboard.writeText) {
+                                    navigator.clipboard.writeText(text).then(function() { alert('已复制到剪贴板'); }).catch(function() { prompt('复制下面内容：', text); });
+                                } else { prompt('复制下面内容：', text); }
+                            };
+                            document.getElementById('debug-rect-close').onclick = function() { box.remove(); };
+                        })();
+                    }
                     if (whiteArea) whiteArea.style.transition = 'none';
                     var whiteBg = document.getElementById('hero-white-round-bg');
                     if (whiteBg) whiteBg.style.transition = 'none';
@@ -721,21 +768,7 @@
                         heroLogoWrap.style.pointerEvents = 'none';
                     }
                     if (logoEl) logoEl.style.transition = 'none';
-                    startVideoSequencer();
-                    /* 保活：若当前视频被暂停则重新 play；浅色/深色都保证序列循环 */
-                    setInterval(function() {
-                        if (!heroSequencerWrap || !heroSequencerWrap.classList.contains('mounted')) return;
-                        var curLayer = layers[currentIndex];
-                        var v = curLayer ? curLayer.querySelector('video') : null;
-                        if (v && v.paused && v.readyState >= 2) {
-                            v.play().catch(function() {});
-                        }
-                        /* 浅色区域视频一定循环：若已播完但 ended 未触发则强制切下一段 */
-                        if (v && v.ended && v.readyState >= 2) {
-                            switchLayer();
-                        }
-                    }, 800);
-                }, 1510);
+                }, 1480);
             }
             setTimeout(function() {
                 document.querySelectorAll('.hero-video-layout .hud-layer video').forEach(function(v) {

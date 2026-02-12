@@ -32,12 +32,12 @@
 
 重要：不能只输入 localhost 或 http://localhost
 必须输入完整地址（带端口和页面），例如：
-  http://localhost:8000/index.html
+  http://localhost:5500/index.html
 
-若 8000 打不开，可试：
-  http://localhost:8001/index.html
-或双击运行：使用Node启动.bat（会使用 8080 端口）
-  http://localhost:8080
+若 5500 打不开，可试：
+  http://localhost:5501/index.html
+或双击运行：使用Node启动.bat（会使用 5500 端口）
+  http://localhost:5500
 
 其他排查：
 
@@ -47,28 +47,28 @@
 2. 检查：
    □ Python 是否已安装？（若没有可改用 使用Node启动.bat）
    □ index.html 是否在本目录？
-   □ 端口 8000/8001 是否被占用？
+   □ 端口 5500/5501 是否被占用？
    □ 防火墙是否阻止？
 
 3. 手动访问（复制到浏览器地址栏）
-   http://localhost:8000/index.html
+   http://localhost:5500/index.html
 
 
 📍 网站地址
 ═══════════════════════════════════════════════
 
 首页：
-  http://localhost:8000/index.html
+  http://localhost:5500/index.html
 
 视频测试页面：
-  http://localhost:8000/测试视频加载.html
+  http://localhost:5500/测试视频加载.html
 
 
 💡 提示
 ═══════════════════════════════════════════════
 
 • 确保服务器窗口保持打开状态
-• 如果端口 8000 被占用，试试 8001
+• 如果端口 5500 被占用，试试 5501
 • 服务器运行时，请勿关闭命令行窗口
 • 按 Ctrl+C 可以停止服务器
 

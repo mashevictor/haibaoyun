@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实际视频元素 - 像素大小</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: sans-serif; padding: 24px; margin: 0; background: #1a1a1a; color: #eee; min-height: 100vh; }
+        h1 { font-size: 1.25rem; margin-bottom: 16px; }
+        .out { margin-top: 20px; padding: 16px; background: #222; border-radius: 8px; font-family: monospace; font-size: 14px; line-height: 1.8; }
+        .out strong { color: #0dc; }
+        .tip { margin-top: 24px; padding: 12px; background: #333; border-radius: 6px; font-size: 13px; color: #aaa; }
+        code { background: #333; padding: 4px 8px; display: inline-block; margin: 6px 0; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>首页「实际视频」像素大小</h1>
+    <p>这里要的是<strong>正在播放的 &lt;video&gt; 元素</strong>在页面上的显示尺寸（不是外层容器），以及视频文件本身的分辨率。</p>
+    <div class="out" id="result">—</div>
+    <div class="tip">
+        <strong>操作：</strong>在浏览器中打开<strong>首页</strong>，等第一段视频开始播放后，按 <strong>F12</strong> 打开开发者工具，切到 <strong>Console（控制台）</strong>，粘贴下面整段代码后回车：
+        <pre style="background:#333;padding:12px;border-radius:6px;overflow:auto;margin:8px 0;"><code id="snippet">(function(){
+  var v = document.querySelector('#hero-sequencer-inner .video-layer:not(.invisible) .hero-center-video') || document.querySelector('#hero-sequencer-inner .hero-center-video');
+  if (!v) { console.log('未找到视频元素'); return; }
+  var r = v.getBoundingClientRect();
+  console.log('--- 实际 video 元素在页面上的像素 ---');
+  console.log('width: ' + Math.round(r.width) + ' px, height: ' + Math.round(r.height) + ' px');
+  console.log('left: ' + Math.round(r.left) + ' px, top: ' + Math.round(r.top) + ' px');
+  if (v.videoWidth) {
+    console.log('--- 视频文件本身分辨率 ---');
+    console.log('videoWidth: ' + v.videoWidth + ' px, videoHeight: ' + v.videoHeight + ' px');
+  }
+  return { display: { width: r.width, height: r.height, left: r.left, top: r.top }, source: v.videoWidth ? { width: v.videoWidth, height: v.videoHeight } : null };
+})();</code></pre>
+        控制台会打印：① 实际视频在页面上的宽高、位置；② 视频源分辨率（videoWidth / videoHeight）。
+    </div>
+    <script>
+        document.getElementById('result').innerHTML = '请在<strong>首页</strong>打开并播放视频后，按 F12 在控制台运行上方代码，即可得到实际视频的像素大小。';
+    </script>
+</body>
+</html>
