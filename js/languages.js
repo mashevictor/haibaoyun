@@ -1,5 +1,5 @@
 // 多语言支持系统
-// 部署缓存版本：HTML 中请使用 ?v=20250210 确保部署后浏览器拉取最新 CSS/JS/语言包
+// 部署缓存版本：HTML 中请使用 ?v=20250211 确保部署后浏览器拉取最新 CSS/JS/语言包
 const translations = {
     'zh-CN': {
         // 导航
@@ -788,7 +788,7 @@ const translations = {
                 features: {
                     title: '核心特性',
                     item1: '多链支持',
-                    item1Desc: '支持 PowerVerse Chain、Ethereum、BSC 等多条主流公链',
+                    item1Desc: '支持 PowerVerse Chain、Ethereum、BSC 等 30+ 条主流公链',
                     item2: '安全可靠',
                     item2Desc: '硬件加密、多重签名、助记词备份，全方位保障资产安全',
                     item3: 'DeFi集成',
@@ -1067,7 +1067,7 @@ const translations = {
                     title: '核心优势',
                     item1: '分布式渲染架构：将渲染任务分配到多个节点并行处理，大幅缩短渲染时间',
                     item2: '多格式支持：支持Blender、Maya、3ds Max、Cinema 4D等主流3D软件',
-                    item3: '高质量输出：支持4K、8K超高清渲染，满足影视级制作需求',
+                    item3: '高质量输出：支持4K超高清渲染，满足影视级制作需求',
                     item4: '实时预览：提供实时渲染预览功能，快速迭代优化',
                     item5: '智能调度：自动分配最优渲染节点，最大化渲染效率'
                 },
@@ -1198,9 +1198,9 @@ const translations = {
                 },
                 images: {
                     title: '功能特性展示',
-                    item1: '超低延迟，延迟低至20ms',
-                    item2: '支持4K/8K超高清渲染',
-                    item3: '支持PC、手机、平板等多种设备',
+                    item1: '公网300公里延迟低至5ms',
+                    item2: '支持4K超高清渲染',
+                    item3: '支持PC、手机、平板、电视机等多种设备',
                     item4: '丰富的游戏库，即开即玩',
                     item5: '去中心化架构，安全可靠',
                     item6: '智能资源调度，优化体验'
@@ -1219,6 +1219,7 @@ const translations = {
                     hdSupport: '高清支持',
                     availability: '全天候服务'
                 },
+                computingPowerDefinition: '计算能力是一个点对点的 GPU 计算网络，它允许在 P2P 网络上分发和处理基于 GPU 的复杂渲染，使游戏玩家可以更简单地渲染和串流传输 3D 环境及模型处理。',
                 workflow: {
                     title: '完整链路闭环',
                     step1: '用户注册登录：通过PowerVerse Chain钱包连接，实现去中心化身份认证',
@@ -1232,10 +1233,10 @@ const translations = {
                 coreAdvantages: {
                     title: '核心优势',
                     item1: '去中心化架构：无需中心化服务器，利用全球分布式GPU资源',
-                    item2: '低延迟体验：边缘计算节点就近服务，延迟低至20ms以下',
+                    item2: '低延迟体验：边缘计算节点就近服务，延迟低至5ms以下',
                     item3: '成本优势：按需付费，无需购买昂贵硬件，降低游戏门槛',
-                    item4: '高质量渲染：支持4K/8K超高清画质，流畅游戏体验',
-                    item5: '跨平台支持：支持PC、手机、平板等多种设备，随时随地畅玩'
+                    item4: '高质量渲染：支持4K超高清画质，流畅游戏体验',
+                    item5: '跨平台支持：支持PC、手机、平板、电视机等多种设备，随时随地畅玩'
                 },
                 scenarios: {
                     title: '应用场景',
@@ -1247,11 +1248,11 @@ const translations = {
                 features: {
                     lowLatency: {
                         title: '超低延迟',
-                        desc: '边缘节点就近服务，延迟低至20ms'
+                        desc: '边缘节点就近服务，延迟低至5ms'
                     },
                     hdQuality: {
                         title: '高清画质',
-                        desc: '支持4K/8K超高清渲染'
+                        desc: '支持4K超高清渲染'
                     },
                     costEffective: {
                         title: '成本优势',
@@ -2587,7 +2588,7 @@ const translations = {
                 features: {
                     title: '核心特性',
                     item1: '多鏈支持',
-                    item1Desc: '支持 PowerVerse Chain、Ethereum、BSC 等多條主流公鏈',
+                    item1Desc: '支持 PowerVerse Chain、Ethereum、BSC 等 30+ 條主流公鏈',
                     item2: '安全可靠',
                     item2Desc: '硬件加密、多重簽名、助記詞備份，全方位保障資產安全',
                     item3: 'DeFi集成',
@@ -2865,7 +2866,7 @@ const translations = {
                     title: '核心優勢',
                     item1: '分布式渲染架構：將渲染任務分配到多個節點並行處理，大幅縮短渲染時間',
                     item2: '多格式支持：支持Blender、Maya、3ds Max、Cinema 4D等主流3D軟件',
-                    item3: '高質量輸出：支持4K、8K超高清晰渲染，滿足影視級製作需求',
+                    item3: '高質量輸出：支持4K超高清晰渲染，滿足影視級製作需求',
                     item4: '實時預覽：提供實時渲染預覽功能，快速迭代優化',
                     item5: '智能調度：自動分配最優渲染節點，最大化渲染效率'
                 },
@@ -2999,9 +3000,9 @@ const translations = {
                 },
                 images: {
                     title: '功能特性展示',
-                    item1: '超低延遲，延遲低至20ms',
-                    item2: '支持4K/8K超高清渲染',
-                    item3: '支持PC、手機、平板等多種設備',
+                    item1: '公網300公里延遲低至5ms',
+                    item2: '支持4K超高清渲染',
+                    item3: '支持PC、手機、平板、電視機等多種設備',
                     item4: '豐富的遊戲庫，即開即玩',
                     item5: '去中心化架構，安全可靠',
                     item6: '智能資源調度，優化體驗'
@@ -3017,6 +3018,7 @@ const translations = {
                     hdSupport: '高清支持',
                     availability: '全天候服務'
                 },
+                computingPowerDefinition: '計算能力是一個點對點的 GPU 計算網絡，它允許在 P2P 網絡上分發和處理基於 GPU 的複雜渲染，使遊戲玩家可以更簡單地渲染和串流傳輸 3D 環境及模型處理。',
                 workflow: {
                     title: '完整鏈路閉環',
                     step1: '用戶註冊登錄：通過PowerVerse Chain錢包連接，實現去中心化身份認證',
@@ -3030,10 +3032,10 @@ const translations = {
                 coreAdvantages: {
                     title: '核心優勢',
                     item1: '去中心化架構：無需中心化服務器，利用全球分布式GPU資源',
-                    item2: '低延遲體驗：邊緣計算節點就近服務，延遲低至20ms以下',
+                    item2: '低延遲體驗：邊緣計算節點就近服務，延遲低至5ms以下',
                     item3: '成本優勢：按需付費，無需購買昂貴硬件，降低遊戲門檻',
-                    item4: '高質量渲染：支持4K/8K超高清畫質，流暢遊戲體驗',
-                    item5: '跨平台支持：支持PC、手機、平板等多種設備，隨時隨地暢玩'
+                    item4: '高質量渲染：支持4K超高清畫質，流暢遊戲體驗',
+                    item5: '跨平台支持：支持PC、手機、平板、電視機等多種設備，隨時隨地暢玩'
                 },
                 scenarios: {
                     title: '應用場景',
@@ -3045,11 +3047,11 @@ const translations = {
                 features: {
                     lowLatency: {
                         title: '超低延遲',
-                        desc: '邊緣節點就近服務，延遲低至20ms'
+                        desc: '邊緣節點就近服務，延遲低至5ms'
                     },
                     hdQuality: {
                         title: '高清畫質',
-                        desc: '支持4K/8K超高清渲染'
+                        desc: '支持4K超高清渲染'
                     },
                     costEffective: {
                         title: '成本優勢',
@@ -4280,7 +4282,7 @@ const translations = {
                 features: {
                     title: 'Core Features',
                     item1: 'Multi-Chain Support',
-                    item1Desc: 'Support for PowerVerse Chain, Ethereum, BSC and other mainstream public chains',
+                    item1Desc: 'Support for 30+ public chains including PowerVerse Chain, Ethereum, BSC and other mainstream chains',
                     item2: 'Secure and Reliable',
                     item2Desc: 'Hardware encryption, multi-signature, mnemonic backup for comprehensive asset security',
                     item3: 'DeFi Integration',
@@ -4558,7 +4560,7 @@ const translations = {
                     title: 'Core Advantages',
                     item1: 'Distributed Rendering Architecture: Distributes rendering tasks across multiple nodes for parallel processing, significantly reducing rendering time',
                     item2: 'Multi-Format Support: Supports mainstream 3D software including Blender, Maya, 3ds Max, and Cinema 4D',
-                    item3: 'High-Quality Output: Supports 4K and 8K ultra-high-definition rendering meeting film-grade production requirements',
+                    item3: 'High-Quality Output: Supports 4K ultra-high-definition rendering meeting film-grade production requirements',
                     item4: 'Real-Time Preview: Provides real-time rendering preview functionality for rapid iteration and optimization',
                     item5: 'Intelligent Scheduling: Automatically allocates optimal rendering nodes to maximize rendering efficiency'
                 },
@@ -4692,9 +4694,9 @@ const translations = {
                 },
                 images: {
                     title: 'Feature Showcase',
-                    item1: 'Ultra-low latency, latency as low as 20ms',
-                    item2: 'Support 4K/8K ultra-high definition rendering',
-                    item3: 'Support PC, mobile, tablet and other devices',
+                    item1: 'Public network 300km latency as low as 5ms',
+                    item2: 'Support 4K ultra-high definition rendering',
+                    item3: 'Support PC, mobile, tablet, TV and other devices',
                     item4: 'Rich game library, play instantly',
                     item5: 'Decentralized architecture, secure and reliable',
                     item6: 'Intelligent resource scheduling, optimized experience'
@@ -4710,6 +4712,7 @@ const translations = {
                     hdSupport: 'HD Support',
                     availability: '24/7 Service'
                 },
+                computingPowerDefinition: 'Computing power is a peer-to-peer GPU computing network that enables distribution and processing of GPU-based complex rendering on the P2P network, making it easier for gamers to render and stream 3D environments and model processing.',
                 workflow: {
                     title: 'Complete Workflow Loop',
                     step1: 'User Registration: Connect via PowerVerse Chain wallet for decentralized identity authentication',
@@ -4723,10 +4726,10 @@ const translations = {
                 coreAdvantages: {
                     title: 'Core Advantages',
                     item1: 'Decentralized Architecture: No centralized servers, utilizing global distributed GPU resources',
-                    item2: 'Low-Latency Experience: Edge computing nodes serve nearby, latency below 20ms',
+                    item2: 'Low-Latency Experience: Edge computing nodes serve nearby, latency below 5ms',
                     item3: 'Cost Advantage: Pay-as-you-go, no need to purchase expensive hardware, lowering gaming barriers',
-                    item4: 'High-Quality Rendering: Support 4K/8K ultra-high definition graphics, smooth gaming experience',
-                    item5: 'Cross-Platform Support: Support PC, mobile, tablet and other devices, play anywhere anytime'
+                    item4: 'High-Quality Rendering: Support 4K ultra-high definition graphics, smooth gaming experience',
+                    item5: 'Cross-Platform Support: Support PC, mobile, tablet, TV and other devices, play anywhere anytime'
                 },
                 scenarios: {
                     title: 'Application Scenarios',
@@ -4738,11 +4741,11 @@ const translations = {
                 features: {
                     lowLatency: {
                         title: 'Ultra-Low Latency',
-                        desc: 'Edge nodes serve nearby, latency below 20ms'
+                        desc: 'Edge nodes serve nearby, latency below 5ms'
                     },
                     hdQuality: {
                         title: 'HD Quality',
-                        desc: 'Support 4K/8K ultra-high definition rendering'
+                        desc: 'Support 4K ultra-high definition rendering'
                     },
                     costEffective: {
                         title: 'Cost Advantage',
@@ -6051,7 +6054,7 @@ const translations = {
                 features: {
                     title: 'コア特性',
                     item1: 'マルチチェーンサポート',
-                    item1Desc: 'PowerVerse Chain、Ethereum、BSCなどの主要パブリックチェーンをサポート',
+                    item1Desc: 'PowerVerse Chain、Ethereum、BSCなど30本以上の主要パブリックチェーンをサポート',
                     item2: '安全で信頼できる',
                     item2Desc: 'ハードウェア暗号化、マルチシグネチャ、ニーモニックバックアップで資産を全面的に保護',
                     item3: 'DeFi統合',
@@ -6329,7 +6332,7 @@ const translations = {
                     title: 'コアアドバンテージ',
                     item1: '分散レンダリングアーキテクチャ：レンダリングタスクを複数のノードに分散して並列処理し、レンダリング時間を大幅に短縮',
                     item2: 'マルチフォーマットサポート：Blender、Maya、3ds Max、Cinema 4Dなどの主流3Dソフトウェアをサポート',
-                    item3: '高品質出力：4K、8K超高精細レンダリングをサポートし、映画級制作要件を満たす',
+                    item3: '高品質出力：4K超高精細レンダリングをサポートし、映画級制作要件を満たす',
                     item4: 'リアルタイムプレビュー：リアルタイムレンダリングプレビュー機能を提供し、迅速な反復と最適化を実現',
                     item5: 'インテリジェントスケジューリング：最適なレンダリングノードを自動的に割り当て、レンダリング効率を最大化'
                 },
@@ -6463,9 +6466,9 @@ const translations = {
                 },
                 images: {
                     title: '機能特性展示',
-                    item1: '超低遅延、遅延は20ms以下',
-                    item2: '4K/8K超高清レンダリングをサポート',
-                    item3: 'PC、スマートフォン、タブレットなど複数のデバイスをサポート',
+                    item1: '公網300km遅延5ms以下',
+                    item2: '4K超高清レンダリングをサポート',
+                    item3: 'PC、スマートフォン、タブレット、テレビなど複数のデバイスをサポート',
                     item4: '豊富なゲームライブラリ、即座にプレイ可能',
                     item5: '分散型アーキテクチャ、安全で信頼性が高い',
                     item6: 'インテリジェントリソーススケジューリング、最適化された体験'
@@ -6481,6 +6484,7 @@ const translations = {
                     hdSupport: '高清サポート',
                     availability: '24時間365日サービス'
                 },
+                computingPowerDefinition: '計算能力はピアツーピアのGPU計算ネットワークであり、P2Pネットワーク上でGPUベースの複雑なレンダリングを配信・処理し、ゲーマーが3D環境やモデル処理をより簡単にレンダリング・ストリーミングできるようにします。',
                 workflow: {
                     title: '完全なワークフローループ',
                     step1: 'ユーザー登録ログイン：PowerVerse Chainウォレットを接続し、分散型アイデンティティ認証を実現',
@@ -6494,10 +6498,10 @@ const translations = {
                 coreAdvantages: {
                     title: 'コアアドバンテージ',
                     item1: '分散型アーキテクチャ：中央集約型サーバー不要、グローバル分散GPUリソースを活用',
-                    item2: '低遅延体験：エッジコンピューティングノードが近くでサービスを提供、遅延は20ms以下',
+                    item2: '低遅延体験：エッジコンピューティングノードが近くでサービスを提供、遅延は5ms以下',
                     item3: 'コスト優位性：従量課金、高価なハードウェア購入不要、ゲームの障壁を下げる',
-                    item4: '高品質レンダリング：4K/8K超高清画質をサポート、スムーズなゲーム体験',
-                    item5: 'クロスプラットフォームサポート：PC、スマートフォン、タブレットなど複数のデバイスをサポート、いつでもどこでもプレイ可能'
+                    item4: '高品質レンダリング：4K超高清画質をサポート、スムーズなゲーム体験',
+                    item5: 'クロスプラットフォームサポート：PC、スマートフォン、タブレット、テレビなど複数のデバイスをサポート、いつでもどこでもプレイ可能'
                 },
                 scenarios: {
                     title: '応用シナリオ',
@@ -6509,11 +6513,11 @@ const translations = {
                 features: {
                     lowLatency: {
                         title: '超低遅延',
-                        desc: 'エッジノードが近くでサービスを提供、遅延は20ms以下'
+                        desc: 'エッジノードが近くでサービスを提供、遅延は5ms以下'
                     },
                     hdQuality: {
                         title: '高清画質',
-                        desc: '4K/8K超高清レンダリングをサポート'
+                        desc: '4K超高清レンダリングをサポート'
                     },
                     costEffective: {
                         title: 'コスト優位性',
@@ -7793,7 +7797,7 @@ const translations = {
                 features: {
                     title: '핵심 특성',
                     item1: '멀티 체인 지원',
-                    item1Desc: 'PowerVerse Chain, Ethereum, BSC 등 여러 주요 퍼블릭 체인 지원',
+                    item1Desc: 'PowerVerse Chain, Ethereum, BSC 등 30개 이상의 주요 퍼블릭 체인 지원',
                     item2: '안전하고 신뢰할 수 있음',
                     item2Desc: '하드웨어 암호화, 다중 서명, 니모닉 백업으로 자산을 전면적으로 보호',
                     item3: 'DeFi 통합',
@@ -8071,7 +8075,7 @@ const translations = {
                     title: '핵심 장점',
                     item1: '분산 렌더링 아키텍처: 렌더링 작업을 여러 노드에 분산하여 병렬 처리, 렌더링 시간 대폭 단축',
                     item2: '다양한 형식 지원: Blender, Maya, 3ds Max, Cinema 4D 등 주요 3D 소프트웨어 지원',
-                    item3: '고품질 출력: 4K, 8K 초고해상도 렌더링 지원, 영화급 제작 요구사항 충족',
+                    item3: '고품질 출력: 4K 초고해상도 렌더링 지원, 영화급 제작 요구사항 충족',
                     item4: '실시간 미리보기: 실시간 렌더링 미리보기 기능 제공, 빠른 반복 및 최적화',
                     item5: '지능형 스케줄링: 최적의 렌더링 노드를 자동으로 할당하여 렌더링 효율 극대화'
                 },
@@ -8205,9 +8209,9 @@ const translations = {
                 },
                 images: {
                     title: '기능 특성 쇼케이스',
-                    item1: '초저지연, 지연 시간 20ms 이하',
-                    item2: '4K/8K 초고해상도 렌더링 지원',
-                    item3: 'PC, 스마트폰, 태블릿 등 다양한 기기 지원',
+                    item1: '공인망 300km 지연 5ms 이하',
+                    item2: '4K 초고해상도 렌더링 지원',
+                    item3: 'PC, 스마트폰, 태블릿, TV 등 다양한 기기 지원',
                     item4: '풍부한 게임 라이브러리, 즉시 플레이 가능',
                     item5: '분산형 아키텍처, 안전하고 신뢰할 수 있음',
                     item6: '지능형 리소스 스케줄링, 최적화된 경험'
@@ -8223,6 +8227,7 @@ const translations = {
                     hdSupport: '고해상도 지원',
                     availability: '24시간 서비스'
                 },
+                computingPowerDefinition: '계산 능력은 P2P GPU 컴퓨팅 네트워크로, P2P 네트워크에서 GPU 기반 복잡한 렌더링을 배포 및 처리하여 게이머가 3D 환경 및 모델 처리를 더 쉽게 렌더링하고 스트리밍할 수 있게 합니다.',
                 workflow: {
                     title: '완전한 워크플로우 루프',
                     step1: '사용자 등록 로그인: PowerVerse Chain 지갑을 연결하여 분산형 신원 인증 실현',
@@ -8236,10 +8241,10 @@ const translations = {
                 coreAdvantages: {
                     title: '핵심 장점',
                     item1: '분산형 아키텍처: 중앙 집중식 서버 불필요, 전 세계 분산 GPU 리소스 활용',
-                    item2: '낮은 지연 시간 경험: 엣지 컴퓨팅 노드가 가까운 곳에서 서비스 제공, 지연 시간 20ms 이하',
+                    item2: '낮은 지연 시간 경험: 엣지 컴퓨팅 노드가 가까운 곳에서 서비스 제공, 지연 시간 5ms 이하',
                     item3: '비용 우위: 사용량 기반 결제, 고가 하드웨어 구매 불필요, 게임 진입 장벽 낮춤',
-                    item4: '고품질 렌더링: 4K/8K 초고해상도 화질 지원, 부드러운 게임 경험',
-                    item5: '크로스 플랫폼 지원: PC, 모바일, 태블릿 등 다양한 기기 지원, 언제 어디서나 플레이 가능'
+                    item4: '고품질 렌더링: 4K 초고해상도 화질 지원, 부드러운 게임 경험',
+                    item5: '크로스 플랫폼 지원: PC, 모바일, 태블릿, TV 등 다양한 기기 지원, 언제 어디서나 플레이 가능'
                 },
                 scenarios: {
                     title: '응용 시나리오',
@@ -8251,11 +8256,11 @@ const translations = {
                 features: {
                     lowLatency: {
                         title: '초저지연',
-                        desc: '엣지 노드가 가까운 곳에서 서비스 제공, 지연 시간 20ms 이하'
+                        desc: '엣지 노드가 가까운 곳에서 서비스 제공, 지연 시간 5ms 이하'
                     },
                     hdQuality: {
                         title: '고해상도 화질',
-                        desc: '4K/8K 초고해상도 렌더링 지원'
+                        desc: '4K 초고해상도 렌더링 지원'
                     },
                     costEffective: {
                         title: '비용 우위',
