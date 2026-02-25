@@ -1,5 +1,5 @@
 // 多语言支持系统
-// 部署缓存版本：HTML 中请使用 ?v=20250212 确保部署后浏览器拉取最新 CSS/JS/语言包
+// 部署缓存版本：HTML 中请使用 ?v=20250213 确保部署后浏览器拉取最新 CSS/JS/语言包
 const translations = {
     'zh-CN': {
         // 导航
@@ -10,6 +10,7 @@ const translations = {
                 title: '应用场景',
                 cloudgaming: '云游戏场景',
                 computingexchange: '算力交易场景',
+                mining: '算力挖矿场景',
                 rwa: 'RWA钱包场景',
                 workflow: '全链路场景'
             },
@@ -33,6 +34,7 @@ const translations = {
         architecture: {
             title: '技术框架',
             subtitle: 'Architecture',
+            scrollHint: '向下滚动探索',
             appLayer: '应用层',
             protocolLayer: '协议层',
             networkLayer: '网络层',
@@ -237,30 +239,37 @@ const translations = {
                 intro: 'PowerVerse Infra 是一个虚拟化软件平台，基于软件定义理念，整合并虚拟化管理多种芯片算力（包括 CPU、GPU、AI 芯片及量子芯片），将闲置算力转化为可共享、可交易的数字资产，为用户提供高效、多样的算力获取途径。',
                 section1: {
                     title: '核心设计：五大组件',
+                    diagramTitle: '五大组件架构与交互',
                     components: {
                         title: '五大核心组件',
+                        detailsTitle: '组件详情',
                         table: {
                             component: '组件',
                             function: '核心功能'
                         },
                         control: {
                             name: '控制组件',
+                            shortDesc: '架构核心，资源分配与系统监控',
                             desc: '架构核心，负责接收请求、资源分配与系统监控，包含虚拟化、网络、镜像等服务。'
                         },
                         compute: {
                             name: '计算组件',
+                            shortDesc: '运行虚拟机实例',
                             desc: '计算资源提供者，运行虚拟机实例并处理计算任务。'
                         },
                         storage: {
                             name: '存储组件',
+                            shortDesc: '数据与镜像存储',
                             desc: '支持块存储与对象存储，负责数据与镜像的存储。'
                         },
                         network: {
                             name: '网络组件',
+                            shortDesc: '虚拟网络管理',
                             desc: '管理虚拟网络、子网、路由等，实现虚拟机通信、网络隔离与安全。'
                         },
                         interface: {
                             name: '接口服务',
+                            shortDesc: 'RESTful API 通信',
                             desc: '提供 RESTful API，实现各组件间的通信与交互。'
                         }
                     },
@@ -1320,6 +1329,10 @@ const translations = {
                     }
                 }
             },
+            mining: {
+                title: '算力挖矿场景',
+                description: '全国一体化算力网运营服务与撮合交易，助力算力资源高效流通与价值释放'
+            },
             rwa: {
                 title: 'RWA钱包',
                 description: '合规上链，算力生金。RWA钱包通过ERC-3643合规协议，将全国50+矿场、超10万台高性能GPU实体算力资产化于PowerVerse链上，构建安全、可信、可自由交易的去中心化算力基础设施。',
@@ -1512,6 +1525,24 @@ const translations = {
             symbol: 'Symbol:',
             decimals: 'Decimals:',
             distributionChart: '代币分配可视化',
+            totalSupplyLine: '总发行量: 1,400,000,000 枚',
+            allocationDetail: '分配详情',
+            allocationLabels: {
+                item1: '区块验证奖励',
+                item2: '基金会生态',
+                item3: '团队',
+                item4: '天使轮',
+                item5: '种子轮',
+                item6: 'A轮',
+                item7: 'IDO',
+                item8: '市场营销',
+                item9: '合规',
+                item10: '社区奖励'
+            },
+            allocationTableHeaderItem: '分配项',
+            allocationTableHeaderPct: '占比',
+            allocationTableHeaderAmount: '数量',
+            amountUnit: '枚',
             usage: {
                 title: '代币用途',
                 items: [
@@ -1814,6 +1845,7 @@ const translations = {
                 title: '應用場景',
                 cloudgaming: '雲遊戲場景',
                 computingexchange: '算力交易場景',
+                mining: '算力挖礦場景',
                 rwa: 'RWA錢包場景',
                 workflow: '全鏈路場景'
             },
@@ -1834,6 +1866,7 @@ const translations = {
         architecture: {
             title: '技術框架',
             subtitle: '技術架構',
+            scrollHint: '向下滾動探索',
             appLayer: '應用層',
             protocolLayer: '協議層',
             networkLayer: '網絡層',
@@ -2044,30 +2077,37 @@ const translations = {
                 intro: 'PowerVerse Infra 是一個虛擬化軟件平台，基於軟件定義理念，整合並虛擬化管理多種芯片算力（包括 CPU、GPU、AI 芯片及量子芯片），將閒置算力轉化為可共享、可交易的數字資產，為用戶提供高效、多樣的算力獲取途徑。',
                 section1: {
                     title: '核心設計：五大組件',
+                    diagramTitle: '五大組件架構與交互',
                     components: {
                         title: '五大核心組件',
+                        detailsTitle: '組件詳情',
                         table: {
                             component: '組件',
                             function: '核心功能'
                         },
                         control: {
                             name: '控制組件',
+                            shortDesc: '架構核心，資源分配與系統監控',
                             desc: '架構核心，負責接收請求、資源分配與系統監控，包含虛擬化、網絡、鏡像等服務。'
                         },
                         compute: {
                             name: '計算組件',
+                            shortDesc: '運行虛擬機實例',
                             desc: '計算資源提供者，運行虛擬機實例並處理計算任務。'
                         },
                         storage: {
                             name: '存儲組件',
+                            shortDesc: '數據與鏡像存儲',
                             desc: '支持塊存儲與對象存儲，負責數據與鏡像的存儲。'
                         },
                         network: {
                             name: '網絡組件',
+                            shortDesc: '虛擬網絡管理',
                             desc: '管理虛擬網絡、子網、路由等，實現虛擬機通信、網絡隔離與安全。'
                         },
                         interface: {
                             name: '接口服務',
+                            shortDesc: 'RESTful API 通信',
                             desc: '提供 RESTful API，實現各組件間的通信與交互。'
                         }
                     },
@@ -3119,6 +3159,10 @@ const translations = {
                     }
                 }
             },
+            mining: {
+                title: '算力挖礦場景',
+                description: '全國一體化算力網運營服務與撮合交易，助力算力資源高效流通與價值釋放'
+            },
             rwa: {
                 title: 'RWA錢包',
                 description: '合規上鏈，算力生金。RWA錢包通過ERC-3643合規協議，將全國50+礦場、超10萬台高性能GPU實體算力資產化於PowerVerse鏈上，構建安全、可信、可自由交易的去中心化算力基礎設施。',
@@ -3220,6 +3264,24 @@ const translations = {
             symbol: 'Symbol:',
             decimals: 'Decimals:',
             distributionChart: '代幣分配可視化',
+            totalSupplyLine: '總發行量: 1,400,000,000 枚',
+            allocationDetail: '分配詳情',
+            allocationLabels: {
+                item1: '區塊驗證獎勵',
+                item2: '基金會生態',
+                item3: '團隊',
+                item4: '天使輪',
+                item5: '種子輪',
+                item6: 'A輪',
+                item7: 'IDO',
+                item8: '市場營銷',
+                item9: '合規',
+                item10: '社區獎勵'
+            },
+            allocationTableHeaderItem: '分配項',
+            allocationTableHeaderPct: '佔比',
+            allocationTableHeaderAmount: '數量',
+            amountUnit: '枚',
             usage: {
                 title: '代幣用途',
                 items: [
@@ -3346,7 +3408,7 @@ const translations = {
             productCenter: '產品中心',
             productCenterDesc: '我們提供全系列的服務器機箱、存儲服務器機箱、工業控制機箱和嵌入式機箱產品，滿足不同應用場景的需求。',
             serverChassis: '服務器機箱',
-            serverChassisDesc: '提供1U到8U及塔式服務器機箱',
+            serverChassisDesc: '提供全系列服務器機箱產品',
             storageChassis: '存儲服務器機箱',
             storageChassisDesc: '高密度存儲解決方案',
             industrialChassis: '工控機箱',
@@ -3508,6 +3570,7 @@ const translations = {
                 title: 'Application Scenario',
                 cloudgaming: 'Cloud Gaming Scenario',
                 computingexchange: 'Computing Power Exchange Scenario',
+                mining: 'Computing Power Mining Scenario',
                 rwa: 'RWA Wallet Scenario',
                 workflow: 'Full Workflow Scenario'
             },
@@ -3528,6 +3591,7 @@ const translations = {
         architecture: {
             title: 'Technical Framework',
             subtitle: 'Architecture',
+            scrollHint: 'Scroll down to explore',
             appLayer: 'Application Layer',
             protocolLayer: 'Protocol Layer',
             networkLayer: 'Network Layer',
@@ -3738,30 +3802,37 @@ const translations = {
                 intro: 'PowerVerse Infra is a virtualization software platform based on software-defined concepts, integrating and virtualizing management of various chip computing power (including CPU, GPU, AI chips, and quantum chips), transforming idle computing power into shareable and tradable digital assets, providing users with efficient and diverse computing power acquisition methods.',
                 section1: {
                     title: 'Core Design: Five Components',
+                    diagramTitle: 'Five Components Architecture & Interaction',
                     components: {
                         title: 'Five Core Components',
+                        detailsTitle: 'Component Details',
                         table: {
                             component: 'Component',
                             function: 'Core Function'
                         },
                         control: {
                             name: 'Control Component',
+                            shortDesc: 'Architecture core, resource allocation & monitoring',
                             desc: 'Architecture core, responsible for receiving requests, resource allocation, and system monitoring, including virtualization, network, image, and other services.'
                         },
                         compute: {
                             name: 'Compute Component',
+                            shortDesc: 'Runs VM instances',
                             desc: 'Computing resource provider, running virtual machine instances and processing computing tasks.'
                         },
                         storage: {
                             name: 'Storage Component',
+                            shortDesc: 'Data & image storage',
                             desc: 'Supports block storage and object storage, responsible for data and image storage.'
                         },
                         network: {
                             name: 'Network Component',
+                            shortDesc: 'Virtual network management',
                             desc: 'Manages virtual networks, subnets, routing, etc., enabling virtual machine communication, network isolation, and security.'
                         },
                         interface: {
                             name: 'Interface Service',
+                            shortDesc: 'RESTful API communication',
                             desc: 'Provides RESTful API, enabling communication and interaction between components.'
                         }
                     },
@@ -4813,6 +4884,10 @@ const translations = {
                     }
                 }
             },
+            mining: {
+                title: 'Computing Power Mining Scenario',
+                description: 'National integrated computing network operation and matching services for efficient computing resource circulation and value release'
+            },
             workflow: {
                 title: 'Full Workflow Scenario',
                 description: 'Complete closed-loop process for cloud gaming, computing power transactions, and PEC token payments',
@@ -5003,6 +5078,24 @@ const translations = {
             symbol: 'Symbol:',
             decimals: 'Decimals:',
             distributionChart: 'Token Distribution Visualization',
+            totalSupplyLine: 'Total Supply: 1,400,000,000',
+            allocationDetail: 'Allocation Details',
+            allocationLabels: {
+                item1: 'Block Verification Rewards',
+                item2: 'Foundation & Ecosystem',
+                item3: 'Team',
+                item4: 'Angel Round',
+                item5: 'Seed Round',
+                item6: 'Series A',
+                item7: 'IDO',
+                item8: 'Marketing',
+                item9: 'Compliance',
+                item10: 'Community Rewards'
+            },
+            allocationTableHeaderItem: 'Item',
+            allocationTableHeaderPct: 'Share',
+            allocationTableHeaderAmount: 'Amount',
+            amountUnit: '',
             usage: {
                 title: 'Token Usage',
                 items: [
@@ -5294,6 +5387,7 @@ const translations = {
                 title: '応用シナリオ',
                 cloudgaming: 'クラウドゲームシナリオ',
                 computingexchange: 'コンピューティングパワー取引シナリオ',
+                mining: 'コンピューティングパワー採掘シナリオ',
                 rwa: 'RWAウォレットシナリオ',
                 workflow: 'フルワークフローシナリオ'
             },
@@ -5314,6 +5408,7 @@ const translations = {
         architecture: {
             title: '技術フレームワーク',
             subtitle: 'アーキテクチャ',
+            scrollHint: '下にスクロールして探索',
             appLayer: 'アプリケーション層',
             protocolLayer: 'プロトコル層',
             networkLayer: 'ネットワーク層',
@@ -5517,30 +5612,37 @@ const translations = {
                 intro: 'PowerVerse Infraは、ソフトウェア定義の概念に基づく仮想化ソフトウェアプラットフォームで、複数のチップコンピューティングパワー（CPU、GPU、AIチップ、量子チップを含む）を統合し、仮想化管理を行い、アイドルコンピューティングパワーを共有可能で取引可能なデジタル資産に変換し、ユーザーに効率的で多様なコンピューティングパワー取得方法を提供します。',
                 section1: {
                     title: '一、コア設計：5つのコンポーネントと9つのサービス',
+                    diagramTitle: '5大コンポーネントアーキテクチャと連携',
                     components: {
                         title: '5つのコアコンポーネント',
+                        detailsTitle: 'コンポーネント詳細',
                         table: {
                             component: 'コンポーネント',
                             function: 'コア機能'
                         },
                         control: {
                             name: '制御コンポーネント',
+                            shortDesc: 'アーキテクチャコア、リソース割当・監視',
                             desc: 'アーキテクチャのコアで、リクエストの受信、リソース割り当て、システム監視を担当し、仮想化、ネットワーク、イメージなどのサービスを含む。'
                         },
                         compute: {
                             name: '計算コンポーネント',
+                            shortDesc: 'VMインスタンスの実行',
                             desc: 'コンピューティングリソースプロバイダーで、仮想マシンインスタンスを実行し、コンピューティングタスクを処理する。'
                         },
                         storage: {
                             name: 'ストレージコンポーネント',
+                            shortDesc: 'データ・イメージストレージ',
                             desc: 'ブロックストレージとオブジェクトストレージをサポートし、データとイメージのストレージを担当する。'
                         },
                         network: {
                             name: 'ネットワークコンポーネント',
+                            shortDesc: '仮想ネットワーク管理',
                             desc: '仮想ネットワーク、サブネット、ルーティングなどを管理し、仮想マシン通信、ネットワーク分離、セキュリティを実現する。'
                         },
                         interface: {
                             name: 'インターフェースサービス',
+                            shortDesc: 'RESTful API通信',
                             desc: 'RESTful APIを提供し、コンポーネント間の通信と相互作用を実現する。'
                         }
                     },
@@ -6748,6 +6850,24 @@ const translations = {
             symbol: 'Symbol:',
             decimals: 'Decimals:',
             distributionChart: 'トークン分配の可視化',
+            totalSupplyLine: '総発行量: 1,400,000,000',
+            allocationDetail: '分配詳細',
+            allocationLabels: {
+                item1: 'ブロック検証報酬',
+                item2: '財団・エコシステム',
+                item3: 'チーム',
+                item4: 'エンジェルラウンド',
+                item5: 'シードラウンド',
+                item6: 'シリーズA',
+                item7: 'IDO',
+                item8: 'マーケティング',
+                item9: 'コンプライアンス',
+                item10: 'コミュニティ報酬'
+            },
+            allocationTableHeaderItem: '分配項目',
+            allocationTableHeaderPct: '割合',
+            allocationTableHeaderAmount: '数量',
+            amountUnit: '枚',
             usage: {
                 title: 'トークンの用途',
                 items: [
@@ -7037,6 +7157,7 @@ const translations = {
                 title: '응용 시나리오',
                 cloudgaming: '클라우드 게임 시나리오',
                 computingexchange: '컴퓨팅 파워 거래 시나리오',
+                mining: '컴퓨팅 파워 채굴 시나리오',
                 rwa: 'RWA 지갑 시나리오',
                 workflow: '전체 워크플로우 시나리오'
             },
@@ -7057,6 +7178,7 @@ const translations = {
         architecture: {
             title: '기술 프레임워크',
             subtitle: 'Architecture',
+            scrollHint: '아래로 스크롤하여 탐색',
             appLayer: '애플리케이션 레이어',
             protocolLayer: '프로토콜 레이어',
             networkLayer: '네트워크 레이어',
@@ -7260,30 +7382,37 @@ const translations = {
                 intro: 'PowerVerse Infra는 소프트웨어 정의 개념을 기반으로 한 가상화 소프트웨어 플랫폼으로, 다양한 칩 컴퓨팅 파워(CPU, GPU, AI 칩 및 양자 칩 포함)를 통합하고 가상화 관리하여 유휴 컴퓨팅 파워를 공유 가능하고 거래 가능한 디지털 자산으로 전환하며, 사용자에게 효율적이고 다양한 컴퓨팅 파워 획득 방법을 제공합니다.',
                 section1: {
                     title: 'I. 핵심 설계: 5가지 컴포넌트와 9가지 서비스',
+                    diagramTitle: '5대 컴포넌트 아키텍처 및 상호작용',
                     components: {
                         title: '5가지 핵심 컴포넌트',
+                        detailsTitle: '컴포넌트 세부정보',
                         table: {
                             component: '컴포넌트',
                             function: '핵심 기능'
                         },
                         control: {
                             name: '제어 컴포넌트',
+                            shortDesc: '아키텍처 핵심, 리소스 할당 및 모니터링',
                             desc: '아키텍처 핵심으로 요청 수신, 리소스 할당 및 시스템 모니터링을 담당하며 가상화, 네트워크, 이미지 등의 서비스를 포함합니다.'
                         },
                         compute: {
                             name: '계산 컴포넌트',
+                            shortDesc: 'VM 인스턴스 실행',
                             desc: '컴퓨팅 리소스 제공자로 가상 머신 인스턴스를 실행하고 컴퓨팅 작업을 처리합니다.'
                         },
                         storage: {
                             name: '저장 컴포넌트',
+                            shortDesc: '데이터 및 이미지 저장',
                             desc: '블록 저장소 및 객체 저장소를 지원하며 데이터 및 이미지 저장을 담당합니다.'
                         },
                         network: {
                             name: '네트워크 컴포넌트',
+                            shortDesc: '가상 네트워크 관리',
                             desc: '가상 네트워크, 서브넷, 라우팅 등을 관리하여 가상 머신 통신, 네트워크 격리 및 보안을 구현합니다.'
                         },
                         interface: {
                             name: '인터페이스 서비스',
+                            shortDesc: 'RESTful API 통신',
                             desc: 'RESTful API를 제공하여 컴포넌트 간 통신 및 상호작용을 구현합니다.'
                         }
                     },
@@ -8491,6 +8620,24 @@ const translations = {
             symbol: 'Symbol:',
             decimals: 'Decimals:',
             distributionChart: '토큰 배분 시각화',
+            totalSupplyLine: '총 발행량: 1,400,000,000',
+            allocationDetail: '배분 상세',
+            allocationLabels: {
+                item1: '블록 검증 보상',
+                item2: '재단 및 생태계',
+                item3: '팀',
+                item4: '엔젤 라운드',
+                item5: '시드 라운드',
+                item6: '시리즈 A',
+                item7: 'IDO',
+                item8: '마케팅',
+                item9: '컴플라이언스',
+                item10: '커뮤니티 보상'
+            },
+            allocationTableHeaderItem: '배분 항목',
+            allocationTableHeaderPct: '비중',
+            allocationTableHeaderAmount: '수량',
+            amountUnit: '개',
             usage: {
                 title: '토큰 용도',
                 items: [

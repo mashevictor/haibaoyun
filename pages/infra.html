@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="products.infra.pageTitle">PowerVerse Infra - DePIN 起点</title>
-    <link rel="stylesheet" href="../styles.css?v=20250212">
+    <link rel="stylesheet" href="../styles.css?v=20250213">
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -495,7 +495,7 @@
                 <h2 class="section-title" data-i18n="products.infra.section1.title">核心设计：五大组件</h2>
                 <!-- 五大组件架构图 -->
                 <div class="architecture-container">
-                    <h3>五大组件架构与交互</h3>
+                    <h3 data-i18n="products.infra.section1.diagramTitle">五大组件架构与交互</h3>
                     <div class="architecture-wrapper">
                         <div class="architecture-diagram">
                             <!-- 架构布局 -->
@@ -505,8 +505,8 @@
                                     <!-- 计算组件 -->
                                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
                                         <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">💻</div>
-                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">计算组件</h4>
-                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">运行虚拟机实例</p>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;" data-i18n="products.infra.section1.components.compute.name">计算组件</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;" data-i18n="products.infra.section1.components.compute.shortDesc">运行虚拟机实例</p>
                                     </div>
                                 </div>
                                 
@@ -514,16 +514,16 @@
                                     <!-- 存储组件 -->
                                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
                                         <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">💾</div>
-                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">存储组件</h4>
-                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">数据与镜像存储</p>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;" data-i18n="products.infra.section1.components.storage.name">存储组件</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;" data-i18n="products.infra.section1.components.storage.shortDesc">数据与镜像存储</p>
                                     </div>
                                 </div>
                                 
                                 <!-- 控制组件 - 中心位置 -->
                                 <div class="component-box" style="top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,212,255,0.15); border: 2px solid var(--primary-color); border-radius: 16px; padding: 2.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 0 20px rgba(0,212,255,0.3); z-index: 10;">
                                     <div style="font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--primary-color);">⚙️</div>
-                                    <h4 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.3rem; font-weight: 600;">控制组件</h4>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; max-width: 250px;">架构核心<br>资源分配与系统监控</p>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.3rem; font-weight: 600;" data-i18n="products.infra.section1.components.control.name">控制组件</h4>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; max-width: 250px;" data-i18n="products.infra.section1.components.control.shortDesc">架构核心，资源分配与系统监控</p>
                                 </div>
                                 
                                 <!-- 右侧组件组 -->
@@ -531,8 +531,8 @@
                                     <!-- 网络组件 -->
                                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
                                         <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">🌐</div>
-                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">网络组件</h4>
-                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">虚拟网络管理</p>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;" data-i18n="products.infra.section1.components.network.name">网络组件</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;" data-i18n="products.infra.section1.components.network.shortDesc">虚拟网络管理</p>
                                     </div>
                                 </div>
                                 
@@ -540,8 +540,8 @@
                                     <!-- 接口服务 -->
                                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
                                         <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--primary-color);">🔌</div>
-                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">接口服务</h4>
-                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;">RESTful API 通信</p>
+                                        <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;" data-i18n="products.infra.section1.components.interface.name">接口服务</h4>
+                                        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; margin: 0; padding: 0.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; width: 100%; text-align: center;" data-i18n="products.infra.section1.components.interface.shortDesc">RESTful API 通信</p>
                                     </div>
                                 </div>
                                 
@@ -559,27 +559,27 @@
                             </div>
                         </div>
                         <div class="component-details">
-                            <h4>组件详情</h4>
+                            <h4 data-i18n="products.infra.section1.components.detailsTitle">组件详情</h4>
                             <div class="component-cards">
                                 <div class="component-card">
-                                    <h5>控制组件</h5>
-                                    <p>架构核心，负责接收请求、资源分配与系统监控，包含虚拟化、网络、镜像等服务。</p>
+                                    <h5 data-i18n="products.infra.section1.components.control.name">控制组件</h5>
+                                    <p data-i18n="products.infra.section1.components.control.desc">架构核心，负责接收请求、资源分配与系统监控，包含虚拟化、网络、镜像等服务。</p>
                                 </div>
                                 <div class="component-card">
-                                    <h5>计算组件</h5>
-                                    <p>计算资源提供者，运行虚拟机实例并处理计算任务。</p>
+                                    <h5 data-i18n="products.infra.section1.components.compute.name">计算组件</h5>
+                                    <p data-i18n="products.infra.section1.components.compute.desc">计算资源提供者，运行虚拟机实例并处理计算任务。</p>
                                 </div>
                                 <div class="component-card">
-                                    <h5>存储组件</h5>
-                                    <p>支持块存储与对象存储，负责数据与镜像的存储。</p>
+                                    <h5 data-i18n="products.infra.section1.components.storage.name">存储组件</h5>
+                                    <p data-i18n="products.infra.section1.components.storage.desc">支持块存储与对象存储，负责数据与镜像的存储。</p>
                                 </div>
                                 <div class="component-card">
-                                    <h5>网络组件</h5>
-                                    <p>管理虚拟网络、子网、路由等，实现虚拟机通信、网络隔离与安全。</p>
+                                    <h5 data-i18n="products.infra.section1.components.network.name">网络组件</h5>
+                                    <p data-i18n="products.infra.section1.components.network.desc">管理虚拟网络、子网、路由等，实现虚拟机通信、网络隔离与安全。</p>
                                 </div>
                                 <div class="component-card">
-                                    <h5>接口服务</h5>
-                                    <p>提供 RESTful API，实现各组件间的通信与交互。</p>
+                                    <h5 data-i18n="products.infra.section1.components.interface.name">接口服务</h5>
+                                    <p data-i18n="products.infra.section1.components.interface.desc">提供 RESTful API，实现各组件间的通信与交互。</p>
                                 </div>
                             </div>
                         </div>
@@ -655,8 +655,8 @@
         </div>
     </footer>
 
-    <script src="../js/languages.js?v=20250212"></script>
-    <script src="../script.js?v=20250212"></script>
+    <script src="../js/languages.js?v=20250213"></script>
+    <script src="../script.js?v=20250213"></script>
     <script>
         // 鼠标跟随光效
         document.addEventListener('mousemove', function(e) {

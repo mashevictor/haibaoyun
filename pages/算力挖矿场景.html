@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>算力挖矿场景 - 全国一体化算力网运营服务与撮合交易</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #0a0e17;
+      color: #e2e8f0;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ========== 首屏 Hero ========== */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 80px;
+      position: relative;
+      background: linear-gradient(180deg, #0a0e17 0%, #0f172a 50%, #0a0e17 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920') center/cover no-repeat;
+      opacity: 0.12;
+      z-index: 0;
+    }
+    .hero .inner { position: relative; z-index: 1; max-width: 800px; }
+    .hero h1 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin-bottom: 20px; color: #f1f5f9; letter-spacing: 0.02em; font-weight: 600; }
+    .hero .tagline { font-size: 1.05rem; color: #94a3b8; margin-bottom: 20px; max-width: 640px; line-height: 1.7; }
+    .hero .scroll-hint { margin-top: 48px; color: #64748b; font-size: 0.85rem; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(8px); } }
+
+    /* ========== 通用区块 ========== */
+    section { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 1.5rem; margin-bottom: 12px; color: #38bdf8; padding-left: 12px; border-left: 4px solid #0ea5e9; }
+    .section-desc { color: #94a3b8; margin-bottom: 32px; font-size: 1rem; }
+
+    /* ========== 场景概述 ========== */
+    .overview { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    @media (max-width: 900px) { .overview { grid-template-columns: 1fr; } }
+    .overview .text h3 { font-size: 1.2rem; color: #f1f5f9; margin-bottom: 16px; }
+    .overview .text p { color: #94a3b8; margin-bottom: 12px; }
+    .overview .img-wrap { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .overview .img-wrap img { width: 100%; height: 280px; object-fit: cover; display: block; }
+
+    /* ========== 全流程 ========== */
+    .flow-section { background: linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(10,14,23,0.9) 100%); }
+    .flow-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 32px; }
+    .flow-step {
+      flex: 1 1 160px;
+      max-width: 180px;
+      text-align: center;
+      padding: 24px 16px;
+      background: rgba(30,41,59,0.8);
+      border: 1px solid rgba(56,189,248,0.2);
+      border-radius: 12px;
+      position: relative;
+    }
+    .flow-step::after { content: ''; position: absolute; right: -20px; top: 50%; width: 16px; height: 2px; background: #334155; }
+    .flow-step:last-child::after { display: none; }
+    @media (max-width: 900px) { .flow-step::after { display: none; } }
+    .flow-step .num { font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin-bottom: 8px; }
+    .flow-step .label { font-size: 0.95rem; color: #f1f5f9; margin-bottom: 4px; }
+    .flow-step .sub { font-size: 0.8rem; color: #64748b; }
+    .flow-step .thumb { width: 64px; height: 64px; margin: 0 auto 12px; border-radius: 8px; overflow: hidden; background: #1e293b; }
+    .flow-step .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ========== 核心能力 ========== */
+    .caps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 24px; }
+    .cap-card {
+      background: rgba(30,41,59,0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cap-card:hover { border-color: rgba(56,189,248,0.4); transform: translateY(-2px); }
+    .cap-card .icon { width: 48px; height: 48px; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+    .cap-card .icon img { width: 100%; height: 100%; object-fit: cover; }
+    .cap-card h4 { font-size: 1.1rem; color: #f1f5f9; margin-bottom: 8px; }
+    .cap-card p { font-size: 0.9rem; color: #94a3b8; }
+
+    /* ========== 重点突出 ========== */
+    .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+    @media (max-width: 768px) { .highlights { grid-template-columns: 1fr; } }
+    .highlight {
+      text-align: center;
+      padding: 32px 20px;
+      background: linear-gradient(145deg, rgba(14,165,233,0.1) 0%, rgba(30,41,59,0.9) 100%);
+      border: 1px solid rgba(56,189,248,0.25);
+      border-radius: 12px;
+    }
+    .highlight .icon-svg { width: 56px; height: 56px; margin: 0 auto 16px; }
+    .highlight h4 { font-size: 1.05rem; color: #38bdf8; margin-bottom: 8px; }
+    .highlight p { font-size: 0.9rem; color: #94a3b8; }
+
+    /* ========== 安全与存证 ========== */
+    .security-section { background: rgba(15,23,42,0.5); border-radius: 16px; padding: 48px 32px; border: 1px solid rgba(255,255,255,0.06); }
+    .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 24px; }
+    @media (max-width: 900px) { .security-grid { grid-template-columns: 1fr; } }
+    .security-grid .img-wrap { border-radius: 12px; overflow: hidden; }
+    .security-grid .img-wrap img { width: 100%; height: 260px; object-fit: cover; }
+    .security-list { list-style: none; }
+    .security-list li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-start; gap: 12px; }
+    .security-list li:last-child { border-bottom: none; }
+    .security-list .dot { width: 8px; height: 8px; border-radius: 50%; background: #38bdf8; flex-shrink: 0; margin-top: 8px; }
+
+    /* ========== 产品形态 ========== */
+    .product-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .product-tabs button {
+      padding: 10px 20px;
+      border: 1px solid #334155;
+      background: rgba(30,41,59,0.8);
+      color: #94a3b8;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .product-tabs button.active { background: rgba(56,189,248,0.2); color: #38bdf8; border-color: #38bdf8; }
+    .product-tabs button:hover:not(.active) { color: #e2e8f0; border-color: #475569; }
+    .product-content { padding: 24px; background: rgba(30,41,59,0.6); border-radius: 12px; min-height: 160px; }
+    .product-content p { color: #94a3b8; margin-bottom: 12px; }
+    .product-content strong { color: #f1f5f9; }
+
+    /* ========== 页脚 ========== */
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid rgba(255,255,255,0.06); color: #64748b; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="inner">
+      <h1>算力挖矿场景</h1>
+      <p class="tagline">面向算力供需的一体化运营与撮合交易，选品下单、调度开通、计量结算全流程打通。<br>关键环节上链存证与审计追溯，合规、透明、可信。</p>
+    </div>
+    <p class="scroll-hint">↓ 向下滚动 探索全流程</p>
+  </header>
+
+  <section id="overview">
+    <h2 class="section-title">场景概述</h2>
+    <p class="section-desc">算力挖矿场景下，算力使用方在运营服务平台完成统一认证、选品与下单；订单经开放接口同步至算力服务方调度平台，调度平台开通资源并完成计量计费，账单回传运营平台，形成交易闭环。</p>
+    <div class="overview">
+      <div class="text">
+        <h3>为什么需要一体化运营与撮合？</h3>
+        <p>算力运营即围绕算力的市场化所开展的活动：算力使用方选择算力、实施交付并完成商业化交易。挖矿场景中，矿机/GPU 等算力以<strong>算力产品</strong>形式在<strong>算力店铺</strong>中上架，使用方通过<strong>订单账单中心</strong>完成采购与结算，通过<strong>需求定制中心</strong>发布定制需求、由服务方响应撮合，全流程支持<strong>订单与账单同步</strong>及<strong>区块链存证</strong>，降低使用方操作复杂度，提升透明与可信。</p>
+      </div>
+      <div class="img-wrap">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800" alt="数据中心与算力基础设施">
+      </div>
+    </div>
+  </section>
+
+  <section id="flow" class="flow-section">
+    <h2 class="section-title">算力挖矿全流程</h2>
+    <p class="section-desc">从注册认证到选品、下单、开通、挖矿运行、计量计费与账单同步，突出运营平台与调度平台的数据协同。</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=128" alt=""></div>
+        <span class="num">01</span>
+        <div class="label">统一认证</div>
+        <div class="sub">运营平台登录，生成 token，下行同步至调度平台</div>
+      </div>
+      <div class="flow-step">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=128" alt=""></div>
+        <span class="num">02</span>
+        <div class="label">选矿机/算力产品</div>
+        <div class="sub">算力产品中心、店铺检索，IaaS/PaaS/SaaS 规格化展示</div>
+      </div>
+      <div class="flow-step">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=128" alt=""></div>
+        <span class="num">03</span>
+        <div class="label">下单与订单同步</div>
+        <div class="sub">运营平台生成订单，OpenAPI 同步至调度平台，一致订单视图</div>
+      </div>
+      <div class="flow-step">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=128" alt=""></div>
+        <span class="num">04</span>
+        <div class="label">支付与开通</div>
+        <div class="sub">用户支付，调度平台开通/激活算力资源，失败则回滚退款</div>
+      </div>
+      <div class="flow-step">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=128" alt=""></div>
+        <span class="num">05</span>
+        <div class="label">挖矿运行与计量</div>
+        <div class="sub">调度平台提供算力服务工具，计量计费，使用信息可监控</div>
+      </div>
+      <div class="flow-step">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=128" alt=""></div>
+        <span class="num">06</span>
+        <div class="label">账单同步与结算</div>
+        <div class="sub">调度平台生成账单并推送运营平台，支付结果确认，对账闭环</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="caps">
+    <h2 class="section-title">全流程闭环能力建设</h2>
+    <p class="section-desc">用户中心、算力产品中心、算力店铺中心、订单账单中心、需求定制中心，确保算力使用方与算力服务方在统一门户完成业务操作。</p>
+    <div class="caps-grid">
+      <div class="cap-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=96" alt=""></div>
+        <h4>用户中心</h4>
+        <p>统一认证、权限控制、操作记录、信息维护；token 经开放接口分发至调度平台，实现单点登录与无缝访问算力服务工具。</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=96" alt=""></div>
+        <h4>算力产品中心</h4>
+        <p>IaaS/PaaS/SaaS 目录规范、上下架操作、采购与使用支持；算力产品规格化展示，按需交付与标准化访问。</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=96" alt=""></div>
+        <h4>算力店铺中心</h4>
+        <p>服务方接入、店铺管理、店铺检索、店铺服务；算力服务方以店铺形式上架产品，使用方可检索、浏览、采购。</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=96" alt=""></div>
+        <h4>订单账单中心</h4>
+        <p>订单生成同步、账单生成同步、交易记录、发票管理；运营平台与调度平台订单/账单双向同步，一致视图与审计追溯。</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=96" alt=""></div>
+        <h4>需求定制中心</h4>
+        <p>需求设置、需求发布、需求响应、方案选择；使用方发布定制需求，服务方或平台自动组合响应，撮合交易可上链存证。</p>
+      </div>
+    </div>
+    <h3 style="font-size:1.15rem;color:#f1f5f9;margin:40px 0 16px;">核心技术</h3>
+    <div class="highlights">
+      <div class="highlight">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h4>订单账单同步</h4>
+        <p>订单由运营平台生成并同步至调度平台；账单由调度平台生成并推送至运营平台，实时同步与回调机制，审计追溯。</p>
+      </div>
+      <div class="highlight">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h4>全流程可追溯</h4>
+        <p>用户及操作存证、订单账单存证、撮合交易存证，关键节点上链，时间戳与防篡改，满足合规申报。</p>
+      </div>
+      <div class="highlight">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h4>撮合交易</h4>
+        <p>需求与多方算力服务能力综合匹配，服务方响应或平台自动组合推荐，降低使用方操作复杂性，透明无感获取算力服务。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="security" class="security-section">
+    <h2 class="section-title">安全可信与存证</h2>
+    <p class="section-desc">能力支撑层安全可信机制：用户及操作存证、订单账单存证、撮合交易存证，与开放接口层结合，保障全链路可追溯。</p>
+    <div class="security-grid">
+      <div class="img-wrap">
+        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800" alt="区块链与可信存证">
+      </div>
+      <ul class="security-list">
+        <li><span class="dot"></span><span><strong>用户操作存证</strong>：用户认证后数据上链，用户可查看存证及操作记录。</span></li>
+        <li><span class="dot"></span><span><strong>订单账单存证</strong>：订单状态变更上链；支付凭证、结算结果同步可溯。</span></li>
+        <li><span class="dot"></span><span><strong>撮合交易存证</strong>：定制需求匹配及最终分配方案上链，调度时序可验证。</span></li>
+        <li><span class="dot"></span><span><strong>密码应用要求</strong>：数据全生命周期安全、区块链安全与电子签章规范。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="product">
+    <h2 class="section-title">挖矿场景下的算力产品形态</h2>
+    <p class="section-desc">按政策文档 IaaS/PaaS/SaaS 规范，算力产品在挖矿场景中的对应关系。</p>
+    <div class="product-tabs">
+      <button type="button" class="active" data-tab="iaas">IaaS</button>
+      <button type="button" data-tab="paas">PaaS</button>
+      <button type="button" data-tab="saas">SaaS</button>
+    </div>
+    <div class="product-content" id="product-content">
+      <p><strong>IaaS（基础设施即服务）</strong>：挖矿场景下对应物理算力资源产品，如 GPU 云主机、矿机托管、云硬盘与网络等。算力服务方按规范上架规格参数（如核数、内存、GPU 型号与数量），使用方采购后由调度平台实例化交付，通过算力服务工具（如虚拟机控制台）进行操作与监控。</p>
+      <p>产品规范覆盖计算、存储、网络等各类资源，支持按量付费、预留实例等计费策略。</p>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.product-tabs button').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.product-tabs button').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        var content = document.getElementById('product-content');
+        var t = this.getAttribute('data-tab');
+        if (t === 'iaas') {
+          content.innerHTML = '<p><strong>IaaS（基础设施即服务）</strong>：挖矿场景下对应物理算力资源产品，如 GPU 云主机、矿机托管、云硬盘与网络等。算力服务方按规范上架规格参数（如核数、内存、GPU 型号与数量），使用方采购后由调度平台实例化交付，通过算力服务工具（如虚拟机控制台）进行操作与监控。</p><p>产品规范覆盖计算、存储、网络等各类资源，支持按量付费、预留实例等计费策略。</p>';
+        } else if (t === 'paas') {
+          content.innerHTML = '<p><strong>PaaS（平台即服务）</strong>：挖矿场景下对应平台级算力服务，如容器集群、矿池接入、中间件与数据库等。支持服务吞吐、集群规模等技术参数规范化，使用方按平台能力采购算力或接入矿池，由调度平台提供计量与计费。</p><p>平台级服务标准覆盖容器、中间件、数据库、人工智能等关键技术产品。</p>';
+        } else {
+          content.innerHTML = '<p><strong>SaaS（软件即服务）</strong>：挖矿场景下对应应用层服务，如挖矿监控面板、收益统计、告警与运维工具等。定义应用 SLA，提供在线访问服务规范，使用方通过运营平台或调度平台提供的工具使用算力服务与查看运行状态。</p><p>覆盖多样化关键服务产品，实现在线访问与使用闭环。</p>';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

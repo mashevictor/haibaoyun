@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="token.pageTitle">代币 - PowerVerse Chain</title>
-    <link rel="stylesheet" href="../styles.css?v=20250212">
+    <link rel="stylesheet" href="../styles.css?v=20250213">
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -523,7 +523,7 @@
 
 
             <div class="distribution-chart">
-                <h2 style="font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1rem; text-align: center;">总发行量: 1,400,000,000 枚</h2>
+                <h2 data-i18n="token.totalSupplyLine" style="font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1rem; text-align: center;">总发行量: 1,400,000,000 枚</h2>
                 <h3 data-i18n="token.distributionChart" style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; text-align: center;">代币分配可视化</h3>
                 <div class="chart-container" style="display: flex; flex-direction: column; gap: 30px; margin-top: 20px;">
                     <div class="chart-wrapper" style="width: 100%; max-width: 500px; margin: 0 auto; position: relative; height: 400px;">
@@ -531,7 +531,7 @@
                     </div>
                     
                     <div class="details-panel" style="width: 100%; background-color: var(--bg-darker); border-radius: 10px; padding: 20px; border-left: 4px solid var(--primary-color);">
-                        <h2 style="color: var(--primary-color); margin: 0 0 15px 0; font-size: 1.2rem;">分配详情</h2>
+                        <h2 data-i18n="token.allocationDetail" style="color: var(--primary-color); margin: 0 0 15px 0; font-size: 1.2rem;">分配详情</h2>
                         <div class="allocation-table" id="allocationTable" style="font-size: 0.9rem;">
                             <!-- 表格将通过JavaScript动态生成 -->
                         </div>
@@ -584,8 +584,8 @@
         </div>
     </footer>
 
-    <script src="../js/languages.js?v=20250212"></script>
-    <script src="../script.js?v=20250212"></script>
+    <script src="../js/languages.js?v=20250213"></script>
+    <script src="../script.js?v=20250213"></script>
     <script>
         // 复制功能
         function setupCopyButtons() {
@@ -670,79 +670,25 @@
             }
         });
 
-        // 分配数据
-        const allocationData = [
-            { 
-                label: "区块验证奖励", 
-                shortLabel: "区块奖励",
-                percentage: 20, 
-                amount: 280000000, 
-                color: "#5da0d6"
-            },
-            { 
-                label: "基金会生态", 
-                shortLabel: "基金会",
-                percentage: 20, 
-                amount: 280000000, 
-                color: "#4a6fa5"
-            },
-            { 
-                label: "团队", 
-                shortLabel: "团队",
-                percentage: 15, 
-                amount: 210000000, 
-                color: "#36d1dc"
-            },
-            { 
-                label: "天使轮", 
-                shortLabel: "天使轮",
-                percentage: 10, 
-                amount: 140000000, 
-                color: "#f5a623"
-            },
-            { 
-                label: "种子轮", 
-                shortLabel: "种子轮",
-                percentage: 10, 
-                amount: 140000000, 
-                color: "#6dc5b8"
-            },
-            { 
-                label: "A轮", 
-                shortLabel: "A轮",
-                percentage: 10, 
-                amount: 140000000, 
-                color: "#c56cf0"
-            },
-            { 
-                label: "IDO", 
-                shortLabel: "IDO",
-                percentage: 5, 
-                amount: 70000000, 
-                color: "#ff6b6b"
-            },
-            { 
-                label: "市场营销", 
-                shortLabel: "市场营销",
-                percentage: 5, 
-                amount: 70000000, 
-                color: "#9ad46c"
-            },
-            { 
-                label: "合规", 
-                shortLabel: "合规",
-                percentage: 3, 
-                amount: 42000000, 
-                color: "#4a6fa5"
-            },
-            { 
-                label: "社区奖励", 
-                shortLabel: "社区奖励",
-                percentage: 2, 
-                amount: 28000000, 
-                color: "#5da0d6"
-            }
+        // 分配数据（标签从多语言 token.allocationLabels 读取）
+        const allocationDataBase = [
+            { key: 'item1', percentage: 20, amount: 280000000, color: "#5da0d6" },
+            { key: 'item2', percentage: 20, amount: 280000000, color: "#4a6fa5" },
+            { key: 'item3', percentage: 15, amount: 210000000, color: "#36d1dc" },
+            { key: 'item4', percentage: 10, amount: 140000000, color: "#f5a623" },
+            { key: 'item5', percentage: 10, amount: 140000000, color: "#6dc5b8" },
+            { key: 'item6', percentage: 10, amount: 140000000, color: "#c56cf0" },
+            { key: 'item7', percentage: 5, amount: 70000000, color: "#ff6b6b" },
+            { key: 'item8', percentage: 5, amount: 70000000, color: "#9ad46c" },
+            { key: 'item9', percentage: 3, amount: 42000000, color: "#4a6fa5" },
+            { key: 'item10', percentage: 2, amount: 28000000, color: "#5da0d6" }
         ];
+        function getAllocationData() {
+            var t = window.languageManager ? function(k) { return window.languageManager.getTranslation(k) || k; } : function(k) { return k; };
+            return allocationDataBase.map(function(d) {
+                return { label: t('token.allocationLabels.' + d.key), percentage: d.percentage, amount: d.amount, color: d.color };
+            });
+        }
 
         // 初始化代币分配饼图
         function initDistributionChart() {
@@ -754,14 +700,15 @@
                 window.distributionChart.destroy();
             }
 
+            var allocationData = getAllocationData();
             // 创建新图表
             window.distributionChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: allocationData.map(item => item.label),
+                    labels: allocationData.map(function(item) { return item.label; }),
                     datasets: [{
-                        data: allocationData.map(item => item.percentage),
-                        backgroundColor: allocationData.map(item => item.color),
+                        data: allocationData.map(function(item) { return item.percentage; }),
+                        backgroundColor: allocationData.map(function(item) { return item.color; }),
                         borderColor: '#fff',
                         borderWidth: 2,
                         hoverOffset: 15
@@ -788,15 +735,15 @@
                                     const data = chart.data;
                                     var isLight = document.documentElement.getAttribute('data-theme') === 'light';
                                     var textColor = isLight ? '#111' : '#fff';
+                                    var alloc = getAllocationData();
                                     if (data.labels.length && data.datasets.length) {
-                                        return data.labels.map((label, i) => {
+                                        return data.labels.map(function(label, i) {
                                             const dataset = data.datasets[0];
                                             const value = dataset.data[i];
-                                            const amount = allocationData[i].amount.toLocaleString();
+                                            const amount = alloc[i].amount.toLocaleString();
                                             const color = dataset.backgroundColor[i];
-                                            
                                             return {
-                                                text: `${label} (${value}%)`,
+                                                text: label + ' (' + value + '%)',
                                                 fillStyle: color,
                                                 fontColor: textColor,
                                                 hidden: false,
@@ -813,9 +760,11 @@
                                 label: function(context) {
                                     const label = context.label || '';
                                     const percentage = context.raw || 0;
-                                    const item = allocationData.find(d => d.label === label);
+                                    var alloc = getAllocationData();
+                                    var item = alloc[context.dataIndex];
                                     const amount = item ? item.amount.toLocaleString() : '0';
-                                    return `${label}: ${percentage}% (${amount} 枚)`;
+                                    var u = window.languageManager ? (window.languageManager.getTranslation('token.amountUnit') || '') : '';
+                                    return label + ': ' + percentage + '% (' + amount + (u ? ' ' + u + ')' : ')');
                                 }
                             }
                         }
@@ -834,41 +783,31 @@
 
         // 生成分配表格
         function generateAllocationTable() {
-            const tableContainer = document.getElementById('allocationTable');
+            var tableContainer = document.getElementById('allocationTable');
             if (!tableContainer) return;
-            
-            let tableHTML = `
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
-                    <thead>
-                        <tr style="background-color: rgba(0, 212, 255, 0.1);">
-                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">分配项</th>
-                            <th style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">占比</th>
-                            <th style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">数量</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            
-            allocationData.forEach((item, index) => {
-                tableHTML += `
-                    <tr style="cursor: pointer; transition: all 0.2s;" data-index="${index}">
-                        <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div style="width: 12px; height: 12px; background-color: ${item.color}; border-radius: 50%;"></div>
-                                <span style="color: var(--text-secondary);">${item.label}</span>
-                            </div>
-                        </td>
-                        <td style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color); font-weight: bold;">${item.percentage}%</td>
-                        <td style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; min-width: 120px;">${item.amount.toLocaleString()} 枚</td>
-                    </tr>
-                `;
+            var t = window.languageManager ? function(k) { return window.languageManager.getTranslation(k) || k; } : function(k) { return k; };
+            var allocationData = getAllocationData();
+            var hItem = t('token.allocationTableHeaderItem');
+            var hPct = t('token.allocationTableHeaderPct');
+            var hAmount = t('token.allocationTableHeaderAmount');
+            var unit = t('token.amountUnit');
+            var unitSuffix = unit ? ' ' + unit : '';
+            var tableHTML = '<table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">' +
+                '<thead><tr style="background-color: rgba(0, 212, 255, 0.1);">' +
+                '<th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">' + hItem + '</th>' +
+                '<th style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">' + hPct + '</th>' +
+                '<th style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">' + hAmount + '</th>' +
+                '</tr></thead><tbody>';
+            allocationData.forEach(function(item, index) {
+                tableHTML += '<tr style="cursor: pointer; transition: all 0.2s;" data-index="' + index + '">' +
+                    '<td style="padding: 10px; border-bottom: 1px solid var(--border-color);">' +
+                    '<div style="display: flex; align-items: center; gap: 8px;">' +
+                    '<div style="width: 12px; height: 12px; background-color: ' + item.color + '; border-radius: 50%;"></div>' +
+                    '<span style="color: var(--text-secondary);">' + item.label + '</span></div></td>' +
+                    '<td style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--primary-color); font-weight: bold;">' + item.percentage + '%</td>' +
+                    '<td style="padding: 10px; text-align: right; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; min-width: 120px;">' + item.amount.toLocaleString() + unitSuffix + '</td></tr>';
             });
-            
-            tableHTML += `
-                    </tbody>
-                </table>
-            `;
-            
+            tableHTML += '</tbody></table>';
             tableContainer.innerHTML = tableHTML;
             
             // 添加点击事件
