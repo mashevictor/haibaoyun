@@ -1,5 +1,5 @@
 // 多语言支持系统
-// 部署缓存版本：HTML 中请使用 ?v=20250211 确保部署后浏览器拉取最新 CSS/JS/语言包
+// 部署缓存版本：HTML 中请使用 ?v=20250212 确保部署后浏览器拉取最新 CSS/JS/语言包
 const translations = {
     'zh-CN': {
         // 导航
@@ -1642,7 +1642,7 @@ const translations = {
             productCenter: '产品中心',
             productCenterDesc: '我们提供全系列的服务器机箱、存储服务器机箱、工业控制机箱和嵌入式机箱产品，满足不同应用场景的需求。',
             serverChassis: '服务器机箱',
-            serverChassisDesc: '提供1U到8U及塔式服务器机箱',
+            serverChassisDesc: '提供全系列服务器机箱产品',
             storageChassis: '存储服务器机箱',
             storageChassisDesc: '高密度存储解决方案',
             industrialChassis: '工控机箱',

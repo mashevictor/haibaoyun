@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="token.pageTitle">代币 - PowerVerse Chain</title>
-    <link rel="stylesheet" href="../styles.css?v=20250211">
+    <link rel="stylesheet" href="../styles.css?v=20250212">
     <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?t:'dark');})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -584,8 +584,8 @@
         </div>
     </footer>
 
-    <script src="../js/languages.js?v=20250211"></script>
-    <script src="../script.js?v=20250211"></script>
+    <script src="../js/languages.js?v=20250212"></script>
+    <script src="../script.js?v=20250212"></script>
     <script>
         // 复制功能
         function setupCopyButtons() {
@@ -652,6 +652,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             setupCopyButtons();
             initDistributionChart();
+            // 浅色/深色切换时重绘饼图，使图例文字颜色正确（浅色为黑、深色为白）
+            document.addEventListener('themechange', function() {
+                initDistributionChart();
+            });
             
             // 监听语言切换事件，重新设置复制按钮
             if (window.languageManager) {
@@ -776,9 +780,14 @@
                                 font: {
                                     size: 10
                                 },
-                                color: '#fff',
+                                color: (function() {
+                                    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                                    return isLight ? '#111' : '#fff';
+                                })(),
                                 generateLabels: function(chart) {
                                     const data = chart.data;
+                                    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                                    var textColor = isLight ? '#111' : '#fff';
                                     if (data.labels.length && data.datasets.length) {
                                         return data.labels.map((label, i) => {
                                             const dataset = data.datasets[0];
@@ -789,7 +798,7 @@
                                             return {
                                                 text: `${label} (${value}%)`,
                                                 fillStyle: color,
-                				fontColor: '#fff', // 添加这行，确保文字颜色为白色
+                                                fontColor: textColor,
                                                 hidden: false,
                                                 index: i
                                             };
